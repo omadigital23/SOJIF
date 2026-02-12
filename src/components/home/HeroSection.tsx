@@ -93,8 +93,8 @@ export default function HeroSection() {
                     >
                         {[
                             { value: '6', label: 'Départements' },
-                            { value: '150+', label: 'Clients' },
-                            { value: '10+', label: 'Années' },
+                            { value: '15+', label: 'Clients' },
+                            { value: '1', label: 'Année' },
                         ].map((stat) => (
                             <div key={stat.label}>
                                 <div className="text-3xl font-black text-white">{stat.value}</div>

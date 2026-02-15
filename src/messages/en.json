@@ -115,7 +115,38 @@
         "companyStep3": "Shortlist of qualified candidates",
         "companyStep4": "Interviews and assessment",
         "companyStep5": "Contract signing and placement",
-        "companyCta": "Submit a need"
+        "companyCta": "Submit a need",
+        "form": {
+            "title": "Apply Now",
+            "fullName": "Full Name",
+            "email": "Email",
+            "phone": "Phone",
+            "domain": "Area of Expertise",
+            "experience": "Years of Experience",
+            "cv": "CV (PDF only)",
+            "message": "Message / Cover Letter",
+            "submit": "Submit Application",
+            "sending": "Sending...",
+            "success": "Application sent successfully!",
+            "error": "An error occurred. Please try again.",
+            "selectDomain": "Select your domain",
+            "selectExperience": "Select your experience",
+            "domains": {
+                "legal": "Legal & Tax",
+                "finance": "Finance & Accounting",
+                "hr": "Human Resources",
+                "it": "IT & Digital",
+                "management": "Management & Strategy",
+                "sales": "Sales & Marketing",
+                "other": "Other"
+            },
+            "experiences": {
+                "junior": "Junior (0-2 years)",
+                "mid": "Mid-level (3-5 years)",
+                "senior": "Senior (5-10 years)",
+                "expert": "Expert (+10 years)"
+            }
+        }
     },
     "resources": {
         "title": "Resources",

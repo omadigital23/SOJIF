@@ -114,7 +114,38 @@
         "companyStep3": "Shortlist de candidats qualifiés",
         "companyStep4": "Entretiens et évaluation",
         "companyStep5": "Signature du contrat et placement",
-        "companyCta": "Soumettre un besoin"
+        "companyCta": "Soumettre un besoin",
+        "form": {
+            "title": "Postulez maintenant",
+            "fullName": "Nom complet",
+            "email": "Email",
+            "phone": "Téléphone",
+            "domain": "Domaine d'expertise",
+            "experience": "Années d'expérience",
+            "cv": "CV (PDF uniquement)",
+            "message": "Message / Lettre de motivation",
+            "submit": "Envoyer ma candidature",
+            "sending": "Envoi en cours...",
+            "success": "Candidature envoyée avec succès !",
+            "error": "Une erreur est survenue. Veuillez réessayer.",
+            "selectDomain": "Sélectionnez votre domaine",
+            "selectExperience": "Sélectionnez votre expérience",
+            "domains": {
+                "legal": "Juridique & Fiscal",
+                "finance": "Finance & Comptabilité",
+                "hr": "Ressources Humaines",
+                "it": "Informatique & Digital",
+                "management": "Management & Stratégie",
+                "sales": "Commercial & Marketing",
+                "other": "Autre"
+            },
+            "experiences": {
+                "junior": "Débutant (0-2 ans)",
+                "mid": "Intermédiaire (3-5 ans)",
+                "senior": "Confirmé (5-10 ans)",
+                "expert": "Expert (+10 ans)"
+            }
+        }
     },
     "resources": {
         "title": "Ressources",

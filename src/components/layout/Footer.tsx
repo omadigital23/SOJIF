@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
@@ -15,8 +16,14 @@ export default function Footer({ locale }: { locale: string }) {
                     {/* Brand */}
                     <div className="lg:col-span-1">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white font-black text-lg">
-                                S
+                            <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-white flex-shrink-0">
+                                <NextImage
+                                    src="/images/logo.jpg"
+                                    alt={COMPANY.name}
+                                    fill
+                                    className="object-contain p-1"
+                                    sizes="48px"
+                                />
                             </div>
                             <div>
                                 <div className="font-bold text-lg">{COMPANY.name}</div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -81,8 +82,15 @@ export default function Header() {
                     <div className="flex items-center justify-between h-16 lg:h-20">
                         {/* Logo */}
                         <Link href={`/${locale}`} className="flex items-center gap-3 group">
-                            <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center text-white font-black text-lg transition-transform group-hover:scale-105">
-                                S
+                            <div className="relative w-12 h-12 rounded-lg overflow-hidden transition-transform group-hover:scale-105 bg-white">
+                                <NextImage
+                                    src="/images/logo.jpg"
+                                    alt={COMPANY.name}
+                                    fill
+                                    className="object-contain p-1"
+                                    sizes="48px"
+                                    priority
+                                />
                             </div>
                             <div className="hidden sm:block">
                                 <div className={cn(

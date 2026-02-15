@@ -110,6 +110,27 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                 </div>
             </section>
 
+            {/* Pricing */}
+            {department.pricing && (
+                <section className="section-padding bg-white">
+                    <div className="container-custom max-w-4xl">
+                        <h2 className="text-2xl font-bold text-dark mb-8">Tarifs Indicatifs</h2>
+                        <div className="bg-light-gray rounded-2xl p-8 border border-neutral-khaki/20">
+                            <ul className="space-y-4">
+                                {department.pricing.map((price, i) => (
+                                    <li key={i} className="flex items-start gap-3">
+                                        <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                            <span className="text-primary font-bold text-sm">$</span>
+                                        </div>
+                                        <span className="text-dark font-medium">{price}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            )}
+
             {/* Case studies */}
             <section className="section-padding bg-white">
                 <div className="container-custom max-w-4xl">

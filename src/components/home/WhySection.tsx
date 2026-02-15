@@ -13,7 +13,6 @@ export default function WhySection() {
         { titleKey: 'why1Title', descKey: 'why1Desc' },
         { titleKey: 'why2Title', descKey: 'why2Desc' },
         { titleKey: 'why3Title', descKey: 'why3Desc' },
-        { titleKey: 'why4Title', descKey: 'why4Desc' },
     ];
 
     return (
@@ -39,7 +38,7 @@ export default function WhySection() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {reasons.map((reason, i) => {
                         const Icon = icons[i];
                         return (

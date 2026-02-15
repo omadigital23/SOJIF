@@ -18,6 +18,11 @@ export const departments: Department[] = [
             'Propriété intellectuelle et protection des marques',
             'Droit OHADA et droit communautaire',
         ],
+        pricing: [
+            'Constitution de SASU/SAS : À partir de 350 000 FCFA (hors frais de notaire)',
+            'Audit de conformité : Sur devis',
+            'Abonnement conseil : Sur devis selon besoins',
+        ],
         cases: [
             {
                 title: 'Restructuration d\'un groupe industriel',
@@ -49,6 +54,11 @@ export const departments: Department[] = [
             'Évaluation d\'entreprise',
             'Gestion de la paie et charges sociales',
             'Assistance contrôle fiscal',
+        ],
+        pricing: [
+            'Abonnement conseil mensuel : À partir de 150 000 FCFA / mois',
+            'Diagnostic fiscal complet : À partir de 500 000 FCFA',
+            'Gestion de la paie : À partir de 15 000 FCFA par bulletin',
         ],
         cases: [
             {
@@ -82,6 +92,12 @@ export const departments: Department[] = [
             'Mise en place de SIRH',
             'Accompagnement au changement organisationnel',
         ],
+        pricing: [
+            'Gestion de la paie : À partir de 15 000 FCFA par bulletin',
+            'Audit Social : À partir de 400 000 FCFA',
+            'Recrutement (profil cadre) : 15% à 20% du salaire annuel brut',
+            'Frais de dossier par recrutement cadre : 50 000 FCFA par salarié',
+        ],
         cases: [
             {
                 title: 'Transformation RH d\'une banque régionale',
@@ -113,6 +129,10 @@ export const departments: Department[] = [
             'Stratégie de développement et diversification',
             'Gouvernance d\'entreprise',
             'Accompagnement à la certification (ISO, etc.)',
+        ],
+        pricing: [
+            'Consultation stratégique : Sur devis',
+            'Élaboration de Business Plan : Sur devis',
         ],
         cases: [
             {
@@ -146,6 +166,11 @@ export const departments: Department[] = [
             'Hébergement et maintenance',
             'Formation aux outils digitaux',
         ],
+        pricing: [
+            'Plateformes comptabilité, fiscalité et RH : À partir de 150 000 FCFA / mois',
+            'Site vitrine : Sur devis',
+            'Application sur mesure : Sur devis',
+        ],
         cases: [
             {
                 title: 'Plateforme e-commerce B2B',
@@ -177,6 +202,11 @@ export const departments: Department[] = [
             'Gestion d\'une base de talents qualifiés',
             'Conseil en marque employeur',
             'Outplacement et transition de carrière',
+        ],
+        pricing: [
+            'Recrutement (profil cadre) : 15% à 20% du salaire annuel brut',
+            'Frais de dossier par salarié (Cadres) : 50 000 FCFA',
+            'Intérim : Commission 1 mois de salaire + 20 000 FCFA frais de dossier',
         ],
         cases: [
             {

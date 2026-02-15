@@ -29,9 +29,17 @@ export default function OffersPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-neutral-gray text-lg max-w-2xl mx-auto"
+                        className="text-neutral-gray text-lg max-w-2xl mx-auto mb-6"
                     >
                         {t('subtitle')}
+                    </motion.p>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-primary font-medium text-sm bg-primary/5 inline-block px-4 py-2 rounded-full"
+                    >
+                        {tHome('pricingTerms')}
                     </motion.p>
                 </div>
             </section>
@@ -48,8 +56,8 @@ export default function OffersPage() {
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.15 }}
                                 className={`relative rounded-2xl p-8 flex flex-col ${pack.highlighted
-                                        ? 'bg-primary text-white shadow-2xl shadow-primary/25 scale-105 z-10'
-                                        : 'bg-white border-2 border-gray-100 card-hover'
+                                    ? 'bg-primary text-white shadow-2xl shadow-primary/25 scale-105 z-10'
+                                    : 'bg-white border-2 border-gray-100 card-hover'
                                     }`}
                             >
                                 {pack.highlighted && (

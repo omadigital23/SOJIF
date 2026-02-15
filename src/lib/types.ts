@@ -6,6 +6,7 @@ export interface Department {
     description: string;
     mission: string;
     services: string[];
+    pricing?: string[];
     cases: { title: string; description: string }[];
 }
 

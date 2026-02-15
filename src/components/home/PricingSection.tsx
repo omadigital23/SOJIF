@@ -30,9 +30,18 @@ export default function PricingSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-neutral-gray text-lg"
+                        className="text-neutral-gray text-lg mb-4"
                     >
                         {t('pricingSubtitle')}
+                    </motion.p>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="text-primary font-medium text-sm bg-primary/5 inline-block px-4 py-2 rounded-full"
+                    >
+                        {t('pricingTerms')}
                     </motion.p>
                 </div>
 
@@ -46,8 +55,8 @@ export default function PricingSection() {
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.15 }}
                             className={`relative rounded-2xl p-8 flex flex-col ${pack.highlighted
-                                    ? 'bg-primary text-white shadow-2xl shadow-primary/25 scale-105 z-10'
-                                    : 'bg-white border-2 border-gray-100 card-hover'
+                                ? 'bg-primary text-white shadow-2xl shadow-primary/25 scale-105 z-10'
+                                : 'bg-white border-2 border-gray-100 card-hover'
                                 }`}
                         >
                             {pack.highlighted && (
@@ -106,8 +115,8 @@ export default function PricingSection() {
                             <Link
                                 href={`/${locale}/contact`}
                                 className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${pack.highlighted
-                                        ? 'bg-white text-primary hover:bg-white/90'
-                                        : 'btn-primary'
+                                    ? 'bg-white text-primary hover:bg-white/90'
+                                    : 'btn-primary'
                                     }`}
                             >
                                 {pack.cta}

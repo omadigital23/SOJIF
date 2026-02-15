@@ -24,7 +24,14 @@ const contactSchema = z.object({
     lastName: z.string().min(2, 'Minimum 2 caractères'),
     email: z.string().email('Email invalide'),
     phone: z.string().min(8, 'Numéro invalide'),
-    company: z.string().optional(),
+    company: z.string().min(2, 'Nom de l\'entreprise requis'),
+    domain: z.string().min(2, 'Domaine requis'),
+    turnover: z.string().min(1, 'Chiffre d\'affaires requis'),
+    employees: z.string().min(1, 'Nombre de salariés requis'),
+    challenge: z.enum(['tax', 'accounting', 'hr', 'other']),
+    phase: z.enum(['creation', 'growth', 'restructuring']),
+    budget: z.string().min(1, 'Budget requis'),
+    meetingPref: z.enum(['video', 'inPerson']),
     subject: z.string().min(1, 'Sélectionnez un sujet'),
     message: z.string().min(10, 'Minimum 10 caractères'),
 });
@@ -66,6 +73,24 @@ export default function ContactPage() {
         { value: 'digitalization', label: t('subjects.digitalization') },
         { value: 'recruitment', label: t('subjects.recruitment') },
         { value: 'other', label: t('subjects.other') },
+    ];
+
+    const challenges = [
+        { value: 'tax', label: t('challengeOptions.tax') },
+        { value: 'accounting', label: t('challengeOptions.accounting') },
+        { value: 'hr', label: t('challengeOptions.hr') },
+        { value: 'other', label: t('challengeOptions.other') },
+    ];
+
+    const phases = [
+        { value: 'creation', label: t('phaseOptions.creation') },
+        { value: 'growth', label: t('phaseOptions.growth') },
+        { value: 'restructuring', label: t('phaseOptions.restructuring') },
+    ];
+
+    const meetingPrefs = [
+        { value: 'video', label: t('meetingOptions.video') },
+        { value: 'inPerson', label: t('meetingOptions.inPerson') },
     ];
 
     return (
@@ -167,107 +192,191 @@ export default function ContactPage() {
                             <div className="bg-light-gray rounded-2xl p-8 lg:p-10">
                                 <h2 className="text-2xl font-bold text-dark mb-8">{t('formTitle')}</h2>
 
-                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                        {/* First name */}
-                                        <div>
-                                            <label className="block text-sm font-medium text-dark mb-2">{t('firstName')}</label>
-                                            <input
-                                                {...register('firstName')}
-                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                                placeholder={t('firstName')}
-                                            />
-                                            {errors.firstName && (
-                                                <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>
-                                            )}
+                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+                                    {/* Section: Director & Contact */}
+                                    <div className="space-y-6">
+                                        <h3 className="text-lg font-semibold text-dark border-b border-gray-100 pb-2">
+                                            Informations du Directeur
+                                        </h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('firstName')}</label>
+                                                <input
+                                                    {...register('firstName')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder={t('firstName')}
+                                                />
+                                                {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>}
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('lastName')}</label>
+                                                <input
+                                                    {...register('lastName')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder={t('lastName')}
+                                                />
+                                                {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>}
+                                            </div>
                                         </div>
-
-                                        {/* Last name */}
-                                        <div>
-                                            <label className="block text-sm font-medium text-dark mb-2">{t('lastName')}</label>
-                                            <input
-                                                {...register('lastName')}
-                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                                placeholder={t('lastName')}
-                                            />
-                                            {errors.lastName && (
-                                                <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                        {/* Email */}
-                                        <div>
-                                            <label className="block text-sm font-medium text-dark mb-2">{t('email')}</label>
-                                            <input
-                                                type="email"
-                                                {...register('email')}
-                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                                placeholder={t('email')}
-                                            />
-                                            {errors.email && (
-                                                <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
-                                            )}
-                                        </div>
-
-                                        {/* Phone */}
-                                        <div>
-                                            <label className="block text-sm font-medium text-dark mb-2">{t('phone')}</label>
-                                            <input
-                                                type="tel"
-                                                {...register('phone')}
-                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                                placeholder={t('phone')}
-                                            />
-                                            {errors.phone && (
-                                                <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
-                                            )}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('email')}</label>
+                                                <input
+                                                    type="email"
+                                                    {...register('email')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder={t('email')}
+                                                />
+                                                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('phone')}</label>
+                                                <input
+                                                    type="tel"
+                                                    {...register('phone')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder={t('phone')}
+                                                />
+                                                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                                            </div>
                                         </div>
                                     </div>
 
-                                    {/* Company */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-dark mb-2">{t('company')}</label>
-                                        <input
-                                            {...register('company')}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                            placeholder={t('company')}
-                                        />
+                                    {/* Section: Company Info */}
+                                    <div className="space-y-6">
+                                        <h3 className="text-lg font-semibold text-dark border-b border-gray-100 pb-2">
+                                            Informations Entreprise
+                                        </h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('company')}</label>
+                                                <input
+                                                    {...register('company')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder={t('company')}
+                                                />
+                                                {errors.company && <p className="text-red-500 text-xs mt-1">{errors.company.message}</p>}
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('domainLabel')}</label>
+                                                <input
+                                                    {...register('domain')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder="Ex: Commerce, BTP, Services..."
+                                                />
+                                                {errors.domain && <p className="text-red-500 text-xs mt-1">{errors.domain.message}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('turnoverLabel')}</label>
+                                                <input
+                                                    {...register('turnover')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder="Ex: 50M FCFA"
+                                                />
+                                                {errors.turnover && <p className="text-red-500 text-xs mt-1">{errors.turnover.message}</p>}
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('employeesLabel')}</label>
+                                                <input
+                                                    {...register('employees')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder="Ex: 10 salariés"
+                                                />
+                                                {errors.employees && <p className="text-red-500 text-xs mt-1">{errors.employees.message}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('phaseLabel')}</label>
+                                                <select
+                                                    {...register('phase')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                >
+                                                    <option value="">Sélectionnez...</option>
+                                                    {phases.map((p) => (
+                                                        <option key={p.value} value={p.value}>{p.label}</option>
+                                                    ))}
+                                                </select>
+                                                {errors.phase && <p className="text-red-500 text-xs mt-1">{errors.phase.message}</p>}
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('budgetLabel')}</label>
+                                                <input
+                                                    {...register('budget')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                    placeholder="Ex: 5M FCFA"
+                                                />
+                                                {errors.budget && <p className="text-red-500 text-xs mt-1">{errors.budget.message}</p>}
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    {/* Subject */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-dark mb-2">{t('subject')}</label>
-                                        <select
-                                            {...register('subject')}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                        >
-                                            <option value="">{t('subject')}</option>
-                                            {subjects.map((s) => (
-                                                <option key={s.value} value={s.value}>{s.label}</option>
-                                            ))}
-                                        </select>
-                                        {errors.subject && (
-                                            <p className="text-red-500 text-xs mt-1">{errors.subject.message}</p>
-                                        )}
+                                    {/* Section: Challenge & Project */}
+                                    <div className="space-y-6">
+                                        <h3 className="text-lg font-semibold text-dark border-b border-gray-100 pb-2">
+                                            Votre Challenge & Projet
+                                        </h3>
+                                        <div>
+                                            <label className="block text-sm font-medium text-dark mb-3">{t('challengeLabel')}</label>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                {challenges.map((c) => (
+                                                    <label key={c.value} className="flex items-center gap-3 p-3 border border-gray-100 rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
+                                                        <input
+                                                            type="radio"
+                                                            value={c.value}
+                                                            {...register('challenge')}
+                                                            className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
+                                                        />
+                                                        <span className="text-sm text-dark">{c.label}</span>
+                                                    </label>
+                                                ))}
+                                            </div>
+                                            {errors.challenge && <p className="text-red-500 text-xs mt-1">{errors.challenge.message}</p>}
+                                        </div>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('subject')}</label>
+                                                <select
+                                                    {...register('subject')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                >
+                                                    <option value="">{t('subject')}</option>
+                                                    {subjects.map((s) => (
+                                                        <option key={s.value} value={s.value}>{s.label}</option>
+                                                    ))}
+                                                </select>
+                                                {errors.subject && <p className="text-red-500 text-xs mt-1">{errors.subject.message}</p>}
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-dark mb-2">{t('meetingLabel')}</label>
+                                                <select
+                                                    {...register('meetingPref')}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
+                                                >
+                                                    <option value="">Sélectionnez...</option>
+                                                    {meetingPrefs.map((m) => (
+                                                        <option key={m.value} value={m.value}>{m.label}</option>
+                                                    ))}
+                                                </select>
+                                                {errors.meetingPref && <p className="text-red-500 text-xs mt-1">{errors.meetingPref.message}</p>}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-sm font-medium text-dark mb-2">{t('message')}</label>
+                                            <textarea
+                                                {...register('message')}
+                                                rows={4}
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white resize-none"
+                                                placeholder={t('message')}
+                                            />
+                                            {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
+                                        </div>
                                     </div>
 
-                                    {/* Message */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-dark mb-2">{t('message')}</label>
-                                        <textarea
-                                            {...register('message')}
-                                            rows={5}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white resize-none"
-                                            placeholder={t('message')}
-                                        />
-                                        {errors.message && (
-                                            <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
-                                        )}
-                                    </div>
-
-                                    {/* Submit */}
                                     <button
                                         type="submit"
                                         disabled={status === 'sending'}
@@ -286,7 +395,6 @@ export default function ContactPage() {
                                         )}
                                     </button>
 
-                                    {/* Status messages */}
                                     {status === 'success' && (
                                         <div className="flex items-center gap-2 text-green-600 bg-green-50 px-4 py-3 rounded-lg">
                                             <CheckCircle className="w-5 h-5" />

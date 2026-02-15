@@ -1,7 +1,8 @@
 {
     "metadata": {
-        "title": "SOJIF Consulting | Cabinet de Structuration & Performance des Entreprises",
-        "description": "SOJIF Consulting - Cabinet de conseil en droit des affaires, fiscalité, ressources humaines, conseil stratégique, digitalisation et recrutement à Dakar, Sénégal."
+        "title": "SOJIF Consulting | Cabinet de Conseil Dakar, Sénégal",
+        "description": "Cabinet de conseil en stratégie, finance, comptabilité, RH, juridique et fiscalité basé à Dakar, Sénégal. Accompagnement des PME et grandes entreprises en Afrique de l'Ouest.",
+        "keywords": "cabinet de conseil Sénégal, audit Dakar, fiscalité Sénégal, juridique Dakar, recrutement Sénégal, SOJIF Consulting, expertise comptable Dakar, gestion entreprise Sénégal, investissement Sénégal"
     },
     "nav": {
         "home": "Accueil",
@@ -149,6 +150,29 @@
             "digitalization": "Projet de digitalisation",
             "recruitment": "Recrutement & placement",
             "other": "Autre"
+        },
+        "directorLabel": "Nom et prénom du directeur",
+        "domainLabel": "Domaine d'activité",
+        "turnoverLabel": "Chiffres d'affaires annuels",
+        "employeesLabel": "Nombre de salariés ou free-lance",
+        "challengeLabel": "Quel est votre plus gros défi actuel ?",
+        "challengeOptions": {
+            "tax": "Fiscalité",
+            "accounting": "Gestion Comptable",
+            "hr": "Structure RH",
+            "other": "Autre"
+        },
+        "phaseLabel": "Phase actuelle de l'entreprise",
+        "phaseOptions": {
+            "creation": "Création",
+            "growth": "Croissance",
+            "restructuring": "Restructuration"
+        },
+        "budgetLabel": "Budget annuel pour la sécurisation de votre gestion",
+        "meetingLabel": "Moyen de contact préféré",
+        "meetingOptions": {
+            "video": "Appel Visio",
+            "inPerson": "Présentiel"
         }
     },
     "footer": {

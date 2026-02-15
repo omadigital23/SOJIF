@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             template: `%s | SOJIF Consulting`,
         },
         description: t('description'),
+        keywords: t('keywords'),
         openGraph: {
             title: t('title'),
             description: t('description'),

@@ -23,7 +23,25 @@
         "subtitle": "Droit • Finance • Développement",
         "description": "Nous accompagnons les entreprises africaines dans leur structuration juridique, leur performance financière et leur transformation digitale.",
         "cta1": "Découvrir nos services",
-        "cta2": "Diagnostic gratuit"
+        "cta2": "Diagnostic gratuit",
+        "slider": {
+            "0": "Accompagnement juridique sur mesure pour sécuriser vos affaires.",
+            "1": "Optimisation fiscale et audit rigoureux pour votre croissance.",
+            "2": "Gestion stratégique des talents et conformité RH.",
+            "3": "Conseils avisés pour structurer et développer votre entreprise.",
+            "4": "Solutions digitales innovantes pour moderniser vos processus.",
+            "5": "Recrutement de profils qualifiés pour renforcer vos équipes."
+        },
+        "labels": {
+            "legal": "Expertise Juridique",
+            "audit": "Audit Fiscal",
+            "hr": "Gestion RH"
+        },
+        "stats": {
+            "departments": "Départements",
+            "clients": "Clients Satisfaits",
+            "support": "Support"
+        }
     },
     "home": {
         "departmentsTitle": "Nos 6 Départements d'Excellence",

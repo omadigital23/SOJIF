@@ -23,7 +23,25 @@
         "subtitle": "Law • Finance • Development",
         "description": "We support African businesses in their legal structuring, financial performance and digital transformation.",
         "cta1": "Discover our services",
-        "cta2": "Free diagnostic"
+        "cta2": "Free diagnostic",
+        "slider": {
+            "0": "Custom legal support to secure your business.",
+            "1": "Tax optimization and rigorous audit for your growth.",
+            "2": "Strategic talent management and HR compliance.",
+            "3": "Expert advice to structure and develop your company.",
+            "4": "Innovative digital solutions to modernize your processes.",
+            "5": "Recruitment of qualified profiles to strengthen your teams."
+        },
+        "labels": {
+            "legal": "Legal Expertise",
+            "audit": "Tax Audit",
+            "hr": "HR Management"
+        },
+        "stats": {
+            "departments": "Departments",
+            "clients": "Satisfied Clients",
+            "support": "Support"
+        }
     },
     "home": {
         "departmentsTitle": "Our 6 Departments of Excellence",

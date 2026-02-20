@@ -12,12 +12,12 @@ export default function HeroSection() {
     const { locale } = useParams();
 
     const sliderTexts = [
-        'hero.slider.0',
-        'hero.slider.1',
-        'hero.slider.2',
-        'hero.slider.3',
-        'hero.slider.4',
-        'hero.slider.5',
+        'slider.0',
+        'slider.1',
+        'slider.2',
+        'slider.3',
+        'slider.4',
+        'slider.5',
     ];
 
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -111,13 +111,13 @@ export default function HeroSection() {
                         className="mt-16 flex flex-wrap gap-12 border-t border-white/10 pt-8"
                     >
                         {[
-                            { value: '6', label: 'Départements' },
-                            { value: '15+', label: 'Clients Satisfaits' },
-                            { value: '24/7', label: 'Support' },
+                            { value: '6', labelKey: 'stats.departments' },
+                            { value: '15+', labelKey: 'stats.clients' },
+                            { value: '24/7', labelKey: 'stats.support' },
                         ].map((stat) => (
-                            <div key={stat.label} className="flex flex-col">
+                            <div key={stat.labelKey} className="flex flex-col">
                                 <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                                <div className="text-sm text-gray-400 font-medium">{stat.label}</div>
+                                <div className="text-sm text-gray-400 font-medium">{t(stat.labelKey)}</div>
                             </div>
                         ))}
                     </motion.div>
@@ -136,7 +136,7 @@ export default function HeroSection() {
                     <div className="relative z-10 w-full pl-12 border-l-2 border-white/10 py-12">
                         {/* Static Department Labels - Fixed Position */}
                         <div className="space-y-6 mb-12">
-                            {['Expertise Juridique', 'Audit Fiscal', 'Gestion RH'].map((item, i) => (
+                            {['legal', 'audit', 'hr'].map((item, i) => (
                                 <motion.div
                                     key={item}
                                     initial={{ x: -20, opacity: 0 }}
@@ -147,7 +147,9 @@ export default function HeroSection() {
                                     <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-colors">
                                         <CheckCircle className="w-5 h-5 text-emerald-400" />
                                     </div>
-                                    <span className="text-white font-bold text-xl tracking-wide">{item}</span>
+                                    <span className="text-white font-bold text-xl tracking-wide">
+                                        {t(`labels.${item}`)}
+                                    </span>
                                 </motion.div>
                             ))}
                         </div>

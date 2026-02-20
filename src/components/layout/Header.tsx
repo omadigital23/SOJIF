@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -52,24 +52,27 @@ export default function Header() {
         <>
             <header
                 className={cn(
-                    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+                    'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent',
                     scrolled
-                        ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-black/5'
-                        : 'bg-transparent'
+                        ? 'glass-header py-2'
+                        : 'bg-transparent py-4'
                 )}
             >
-                {/* Top bar */}
-                <div className="hidden lg:block bg-dark text-white/80 text-xs">
-                    <div className="max-w-[95%] mx-auto px-4 flex justify-between items-center py-2">
+                {/* Top bar - Hide on scroll for cleaner look */}
+                <div className={cn(
+                    "hidden lg:block transition-all duration-300 overflow-hidden",
+                    scrolled ? "h-0 opacity-0" : "h-auto opacity-100 bg-dark/95 text-white/80 text-xs py-2"
+                )}>
+                    <div className="max-w-[95%] mx-auto px-4 flex justify-between items-center">
                         <div className="flex items-center gap-6">
-                            <span>{COMPANY.email}</span>
-                            <span>{COMPANY.phoneDisplay}</span>
-                            <span>{COMPANY.address}</span>
+                            <span className="hover:text-white transition-colors cursor-default">{COMPANY.email}</span>
+                            <span className="hover:text-white transition-colors cursor-default">{COMPANY.phoneDisplay}</span>
+                            <span className="hover:text-white transition-colors cursor-default">{COMPANY.address}</span>
                         </div>
                         <div className="flex items-center gap-4">
                             <Link
                                 href={`/${locale === 'fr' ? 'en' : 'fr'}`}
-                                className="hover:text-white transition-colors"
+                                className="hover:text-white transition-colors font-medium"
                             >
                                 {locale === 'fr' ? 'EN' : 'FR'}
                             </Link>
@@ -79,10 +82,10 @@ export default function Header() {
 
                 {/* Main nav */}
                 <div className="max-w-[95%] mx-auto px-4">
-                    <div className="flex items-center justify-between h-16 lg:h-20">
+                    <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <Link href={`/${locale}`} className="flex items-center gap-3 group">
-                            <div className="relative w-12 h-12 rounded-lg overflow-hidden transition-transform group-hover:scale-105 bg-white">
+                            <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:shadow-md bg-white">
                                 <NextImage
                                     src="/images/logo.jpg"
                                     alt={COMPANY.name}
@@ -94,14 +97,14 @@ export default function Header() {
                             </div>
                             <div className="hidden sm:block">
                                 <div className={cn(
-                                    'font-bold text-lg leading-tight transition-colors',
-                                    scrolled ? 'text-dark' : 'text-white'
+                                    'font-bold text-lg leading-tight transition-colors duration-300',
+                                    scrolled ? 'text-dark' : 'text-white drop-shadow-md'
                                 )}>
                                     {COMPANY.name}
                                 </div>
                                 <div className={cn(
-                                    'text-[10px] tracking-wider uppercase transition-colors',
-                                    scrolled ? 'text-neutral-gray' : 'text-white/70'
+                                    'text-[10px] tracking-wider uppercase transition-colors duration-300',
+                                    scrolled ? 'text-primary font-semibold' : 'text-white/90 drop-shadow-sm'
                                 )}>
                                     {COMPANY.signature}
                                 </div>
@@ -120,16 +123,15 @@ export default function Header() {
                                     <Link
                                         href={`/${locale}${item.href}`}
                                         className={cn(
-                                            'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap',
+                                            'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-1',
                                             scrolled
                                                 ? 'text-dark/80 hover:text-primary hover:bg-primary/5'
-                                                : 'text-white/90 hover:text-white hover:bg-white/10',
-                                            'flex items-center gap-1'
+                                                : 'text-white/90 hover:text-white hover:bg-white/10'
                                         )}
                                     >
                                         {t(item.label)}
                                         {item.children && (
-                                            <ChevronDown className="w-3.5 h-3.5 transition-transform" />
+                                            <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180" />
                                         )}
                                     </Link>
 
@@ -137,17 +139,17 @@ export default function Header() {
                                     <AnimatePresence>
                                         {item.children && openDropdown === item.label && (
                                             <motion.div
-                                                initial={{ opacity: 0, y: 8 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 8 }}
-                                                transition={{ duration: 0.15 }}
-                                                className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-xl shadow-black/10 border border-gray-100 py-2 z-50"
+                                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                transition={{ duration: 0.2, ease: "easeOut" }}
+                                                className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl shadow-black/10 border border-white/50 py-2 z-50 overflow-hidden ring-1 ring-black/5"
                                             >
                                                 {item.children.map((child) => (
                                                     <Link
                                                         key={child.href}
                                                         href={`/${locale}${child.href}`}
-                                                        className="block px-4 py-2.5 text-sm text-dark/70 hover:text-primary hover:bg-primary/5 transition-colors"
+                                                        className="block px-4 py-3 text-sm text-dark/70 hover:text-primary hover:bg-primary/5 transition-colors border-l-2 border-transparent hover:border-primary"
                                                     >
                                                         {child.label}
                                                     </Link>
@@ -161,14 +163,22 @@ export default function Header() {
 
                         {/* CTA + Mobile toggle */}
                         <div className="flex items-center gap-3">
-                            <Link href={`/${locale}/contact`} className="hidden lg:inline-flex btn-primary">
+                            <Link
+                                href={`/${locale}/contact`}
+                                className={cn(
+                                    "hidden lg:inline-flex btn-primary !py-2.5 !px-5 shadow-lg shadow-primary/20",
+                                    !scrolled && "bg-white text-primary hover:bg-white/90 hover:text-primary-dark shadow-none"
+                                )}
+                            >
                                 {t('nav.requestDemo')}
                             </Link>
                             <button
                                 onClick={() => setMobileOpen(true)}
                                 className={cn(
-                                    "lg:hidden p-2 rounded-lg transition-colors",
-                                    scrolled ? "hover:bg-gray-100 text-dark" : "hover:bg-white/10 text-white"
+                                    "lg:hidden p-2 rounded-lg transition-all duration-300",
+                                    scrolled
+                                        ? "hover:bg-gray-100 text-dark"
+                                        : "hover:bg-white/10 text-white backdrop-blur-sm bg-white/5"
                                 )}
                                 aria-label="Menu"
                             >

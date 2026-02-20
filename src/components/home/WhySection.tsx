@@ -16,14 +16,26 @@ export default function WhySection() {
     ];
 
     return (
-        <section className="section-padding bg-light-gray">
-            <div className="container-custom">
-                <div className="text-center max-w-2xl mx-auto mb-16">
+        <section className="section-padding bg-gradient-to-b from-white to-light-gray relative overflow-hidden">
+            {/* Decorative background */}
+            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
+
+            <div className="container-custom relative z-10">
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-block mb-4 px-4 py-1.5 rounded-full bg-primary/5 text-primary text-sm font-semibold tracking-wide uppercase"
+                    >
+                        {t('whyLabel')}
+                    </motion.div>
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-3xl sm:text-4xl font-bold text-dark mb-4"
+                        transition={{ delay: 0.1 }}
+                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-6 tracking-tight"
                     >
                         {t('whyTitle')}
                     </motion.h2>
@@ -31,14 +43,14 @@ export default function WhySection() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-neutral-gray text-lg"
+                        transition={{ delay: 0.2 }}
+                        className="text-neutral-gray text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto"
                     >
                         {t('whySubtitle')}
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                     {reasons.map((reason, i) => {
                         const Icon = icons[i];
                         return (
@@ -47,16 +59,16 @@ export default function WhySection() {
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="text-center"
+                                transition={{ delay: i * 0.15 }}
+                                className="text-center group p-6 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
                             >
-                                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                                    <Icon className="w-8 h-8 text-primary" />
+                                <div className="w-20 h-20 rounded-2xl bg-white shadow-soft flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 border border-gray-100">
+                                    <Icon className="w-10 h-10 text-primary-400 group-hover:text-primary transition-colors duration-300" />
                                 </div>
-                                <h3 className="text-lg font-bold text-dark mb-3">
+                                <h3 className="text-xl font-bold text-dark mb-4 group-hover:text-primary transition-colors">
                                     {t(reason.titleKey)}
                                 </h3>
-                                <p className="text-neutral-gray text-sm leading-relaxed">
+                                <p className="text-neutral-gray leading-relaxed text-balance">
                                     {t(reason.descKey)}
                                 </p>
                             </motion.div>

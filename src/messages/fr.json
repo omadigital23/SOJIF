@@ -14,7 +14,9 @@
         "resources": "Ressources",
         "contact": "Contact",
         "clientArea": "Espace Client",
-        "requestDemo": "Demandez une démo"
+        "requestDemo": "Demandez une démo",
+        "services": "Services",
+        "company": "Entreprise"
     },
     "hero": {
         "title": "Cabinet de Structuration & Performance des Entreprises",
@@ -25,11 +27,14 @@
     },
     "home": {
         "departmentsTitle": "Nos 6 Départements d'Excellence",
+        "departmentsLabel": "Nos Pôles d'Expertise",
         "departmentsSubtitle": "Une expertise pluridisciplinaire au service de votre réussite",
         "pricingTitle": "OFFRES D'ABONNEMENT ANNUEL",
+        "pricingLabel": "Nos Offres",
         "pricingSubtitle": "Accompagnement 360° : Juridique, Fiscal, Comptabilité & RH",
         "pricingTerms": "Engagement : 12 mois | Condition : 50% d'acompte à la signature.",
         "whyTitle": "Services Transversaux",
+        "whyLabel": "Nos Atouts",
         "whySubtitle": "Inclus dans tous les Packs pour votre sérénité",
         "why1Title": "Guichet Unique",
         "why1Desc": "Un seul interlocuteur pour tous vos besoins administratifs.",
@@ -38,6 +43,7 @@
         "why3Title": "Réactivité",
         "why3Desc": "Réponse sous 24h à toutes vos sollicitations.",
         "testimonialsTitle": "Ce que disent nos clients",
+        "testimonialsLabel": "Témoignages",
         "testimonialsSubtitle": "Des entreprises qui nous font confiance",
         "ctaTitle": "Prêt à structurer votre croissance ?",
         "ctaDesc": "Bénéficiez d'un diagnostic gratuit de votre entreprise par nos experts.",

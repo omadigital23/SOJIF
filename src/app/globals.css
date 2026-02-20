@@ -5,12 +5,18 @@
 @tailwind utilities;
 
 :root {
-  --primary: #1E3A8A;
-  --primary-light: #3B82F6;
+  --primary: #1E40AF;
+  /* Deeper blue for better contrast */
+  --primary-light: #60A5FA;
+  --primary-dark: #1E3A8A;
+  --secondary: #F59E0B;
+  /* Amber for accents */
   --dark: #0F172A;
-  --light-gray: #F5F7FA;
-  --neutral-gray: #6B7280;
+  --dark-lighter: #1E293B;
+  --light-gray: #F8FAFC;
+  --neutral-gray: #64748B;
   --white: #FFFFFF;
+  --success: #10B981;
 }
 
 * {
@@ -31,63 +37,61 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
 @layer components {
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-20 md:py-32;
   }
 
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  .glass-header {
+    @apply bg-white/80 backdrop-blur-md border-b border-white/20;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+
   .gradient-primary {
-    @apply bg-gradient-to-r from-primary to-accent;
+    @apply bg-gradient-to-r from-primary to-primary-light;
   }
 
   .gradient-dark {
-    @apply bg-gradient-to-br from-dark to-primary;
+    @apply bg-gradient-to-br from-dark to-dark-lighter;
   }
 
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-600 to-indigo-600;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-primary/20;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg
-           bg-primary text-white font-semibold text-sm
-           transition-all duration-300
-           hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25
-           focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2
-           active:scale-[0.98];
+    @apply inline-flex items-center justify-center px-8 py-4 rounded-full bg-primary text-white font-semibold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-primary/25 hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg
-           bg-white text-primary font-semibold text-sm
-           border-2 border-primary
-           transition-all duration-300
-           hover:bg-primary hover:text-white
-           focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2
-           active:scale-[0.98];
+    @apply inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-primary font-semibold text-sm tracking-wide border border-gray-200 shadow-sm transition-all duration-300 hover:border-primary hover:text-primary-dark hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 active:scale-[0.98];
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg
-           bg-accent text-white font-semibold text-sm
-           transition-all duration-300
-           hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/25
-           focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2
-           active:scale-[0.98];
+    @apply inline-flex items-center justify-center px-8 py-4 rounded-full bg-secondary text-white font-semibold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-secondary/25 hover:bg-amber-600 hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:ring-offset-2 active:scale-[0.98];
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -95,12 +99,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--neutral-gray);
-  border-radius: 4px;
+  background: #CBD5E1;
+  border-radius: 5px;
+  border: 2px solid var(--light-gray);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+  background: #94A3B8;
 }
 
 /* Selection */

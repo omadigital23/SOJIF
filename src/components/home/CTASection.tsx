@@ -11,44 +11,57 @@ export default function CTASection() {
     const { locale } = useParams();
 
     return (
-        <section className="relative py-20 overflow-hidden">
-            <div className="absolute inset-0 gradient-primary" />
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-white blur-[80px]" />
-                <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full bg-white blur-[60px]" />
+        <section className="relative py-24 lg:py-32 overflow-hidden">
+            {/* Dynamic Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-primary-light" />
+
+            {/* Animated Shapes */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 animate-pulse-slow" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 animate-float" />
             </div>
 
+            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
+
             <div className="container-custom relative z-10 text-center">
-                <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
-                >
-                    {t('ctaTitle')}
-                </motion.h2>
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                    className="text-white/80 text-lg max-w-xl mx-auto mb-10"
-                >
-                    {t('ctaDesc')}
-                </motion.p>
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
+                    className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl"
                 >
-                    <Link
-                        href={`/${locale}/contact`}
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary rounded-lg font-bold text-lg transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:scale-105"
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 tracking-tight leading-tight"
                     >
-                        {t('ctaButton')}
-                        <ArrowRight className="w-5 h-5" />
-                    </Link>
+                        {t('ctaTitle')}
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="text-white/80 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+                    >
+                        {t('ctaDesc')}
+                    </motion.p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                    >
+                        <Link
+                            href={`/${locale}/contact`}
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-primary rounded-full font-bold text-lg transition-all duration-300 hover:shadow-xl hover:shadow-white/20 hover:-translate-y-1 active:scale-[0.98] group"
+                        >
+                            {t('ctaButton')}
+                            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                    </motion.div>
                 </motion.div>
             </div>
         </section>

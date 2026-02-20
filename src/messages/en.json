@@ -14,7 +14,9 @@
         "resources": "Resources",
         "contact": "Contact",
         "clientArea": "Client Area",
-        "requestDemo": "Request a demo"
+        "requestDemo": "Request a demo",
+        "services": "Services",
+        "company": "Company"
     },
     "hero": {
         "title": "Business Structuring & Performance Firm",
@@ -25,10 +27,13 @@
     },
     "home": {
         "departmentsTitle": "Our 6 Departments of Excellence",
+        "departmentsLabel": "Our Areas of Expertise",
         "departmentsSubtitle": "Multidisciplinary expertise serving your success",
         "pricingTitle": "Our Subscription Offers",
+        "pricingLabel": "Our Offers",
         "pricingSubtitle": "Packages tailored to every stage of your development",
         "whyTitle": "Why SOJIF Consulting?",
+        "whyLabel": "Key Benefits",
         "whySubtitle": "A structured firm to support your growth",
         "why1Title": "Multidisciplinary Expertise",
         "why1Desc": "6 complementary departments for a 360° view of your business.",
@@ -39,6 +44,7 @@
         "why4Title": "African Roots",
         "why4Desc": "Deep knowledge of the African legal and economic environment.",
         "testimonialsTitle": "What our clients say",
+        "testimonialsLabel": "Testimonials",
         "testimonialsSubtitle": "Companies that trust us",
         "ctaTitle": "Ready to structure your growth?",
         "ctaDesc": "Get a free diagnostic of your business from our experts.",

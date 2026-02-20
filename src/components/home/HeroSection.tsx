@@ -1,7 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { ArrowRight, Shield, CheckCircle } from 'lucide-react';
@@ -9,6 +10,24 @@ import { ArrowRight, Shield, CheckCircle } from 'lucide-react';
 export default function HeroSection() {
     const t = useTranslations('hero');
     const { locale } = useParams();
+
+    const sliderTexts = [
+        'hero.slider.0',
+        'hero.slider.1',
+        'hero.slider.2',
+        'hero.slider.3',
+        'hero.slider.4',
+        'hero.slider.5',
+    ];
+
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % sliderTexts.length);
+        }, 6000);
+        return () => clearInterval(timer);
+    }, [sliderTexts.length]);
 
     return (
         <section className="relative min-h-[95vh] flex items-center overflow-hidden pt-20 lg:pt-32 bg-dark">
@@ -104,32 +123,60 @@ export default function HeroSection() {
                     </motion.div>
                 </div>
 
-                {/* Right Visual (Abstract) */}
+                {/* Right Visual (Text Slider) */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="hidden lg:block relative h-[600px] w-full"
+                    className="hidden lg:flex flex-col justify-center h-[600px] w-full relative"
                 >
-                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/10 rounded-2xl blur-3xl" />
-                    {/* We can add a more concrete image or 3D element here later */}
-                    <div className="relative z-10 h-full w-full rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 shadow-2xl overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-30 transition-opacity">
-                            <Shield className="w-64 h-64 text-white" />
-                        </div>
-                        <div className="absolute bottom-10 left-10 space-y-4">
+                    <div className="absolute inset-0 bg-gradient-to-l from-primary/5 to-transparent rounded-2xl blur-3xl pointer-events-none" />
+
+                    {/* Fixed content block container */}
+                    <div className="relative z-10 w-full pl-12 border-l-2 border-white/10 py-12">
+                        {/* Static Department Labels - Fixed Position */}
+                        <div className="space-y-6 mb-12">
                             {['Expertise Juridique', 'Audit Fiscal', 'Gestion RH'].map((item, i) => (
                                 <motion.div
                                     key={item}
                                     initial={{ x: -20, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: 0.8 + i * 0.2 }}
-                                    className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-4 rounded-xl border border-white/10"
+                                    transition={{ delay: 0.4 + i * 0.1 }}
+                                    className="flex items-center gap-4 group"
                                 >
-                                    <CheckCircle className="w-6 h-6 text-emerald-400" />
-                                    <span className="text-white font-medium text-lg">{item}</span>
+                                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-colors">
+                                        <CheckCircle className="w-5 h-5 text-emerald-400" />
+                                    </div>
+                                    <span className="text-white font-bold text-xl tracking-wide">{item}</span>
                                 </motion.div>
                             ))}
+                        </div>
+
+                        {/* Animated Slider Text */}
+                        <div className="h-32 relative overflow-hidden">
+                            <AnimatePresence mode="wait">
+                                <motion.p
+                                    key={currentSlide}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="text-2xl text-white/80 font-light leading-relaxed italic"
+                                >
+                                    "{t(sliderTexts[currentSlide])}"
+                                </motion.p>
+                            </AnimatePresence>
+
+                            {/* Progress Indicators */}
+                            <div className="flex gap-2 mt-6">
+                                {sliderTexts.map((_, idx) => (
+                                    <div
+                                        key={idx}
+                                        className={`h-1 rounded-full transition-all duration-500 ${idx === currentSlide ? 'w-8 bg-primary' : 'w-2 bg-white/20'
+                                            }`}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </motion.div>

@@ -13,9 +13,20 @@ export default function ResourcesPage() {
     const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!email) return;
-        await new Promise((resolve) => setTimeout(resolve, 800));
-        setSubscribed(true);
-        setEmail('');
+        try {
+            const res = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const result = await res.json();
+            if (result.success) {
+                setSubscribed(true);
+                setEmail('');
+            }
+        } catch {
+            // Silently fail
+        }
     };
 
     return (

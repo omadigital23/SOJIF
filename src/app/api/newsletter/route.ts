@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { supabaseAdmin } from '@/lib/supabase-server';
 
 const newsletterSchema = z.object({
     email: z.string().email(),
@@ -10,9 +11,25 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { email } = newsletterSchema.parse(body);
 
-        // TODO: Rate limiting with Upstash
-        // TODO: Store in Supabase newsletter_subscribers table
-        // TODO: Send welcome email via Resend
+        const { error } = await supabaseAdmin
+            .from('newsletter_subscribers')
+            .upsert(
+                {
+                    email,
+                    source: 'website',
+                    is_active: true,
+                    subscribed_at: new Date().toISOString(),
+                },
+                { onConflict: 'email' }
+            );
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return NextResponse.json(
+                { success: false, message: 'Erreur lors de l\'inscription.' },
+                { status: 500 }
+            );
+        }
 
         return NextResponse.json(
             { success: true, message: 'Inscription réussie.' },
@@ -25,6 +42,7 @@ export async function POST(request: Request) {
                 { status: 400 }
             );
         }
+        console.error('Newsletter API error:', error);
         return NextResponse.json(
             { success: false, message: 'Erreur interne.' },
             { status: 500 }

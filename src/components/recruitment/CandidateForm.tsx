@@ -51,42 +51,46 @@ export default function CandidateForm() {
         setFileName(cvFiles[0].name);
     }
 
-    const onSubmit = (data: CandidateFormData) => {
+    const onSubmit = async (data: CandidateFormData) => {
         setStatus('sending');
 
         try {
-            const subject = `Candidature: ${data.fullName} - ${t(`domains.${data.domain}`) || data.domain}`;
-            const body = `
-Bonjour,
+            // 1. Register the candidate
+            const signupRes = await fetch('/api/candidates/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    firstName: data.fullName.split(' ')[0] || data.fullName,
+                    lastName: data.fullName.split(' ').slice(1).join(' ') || data.fullName,
+                    email: data.email,
+                    phone: data.phone,
+                    password: data.phone + data.email.slice(0, 4), // Temp password
+                    domain: data.domain,
+                    experience: data.experience,
+                    message: data.message,
+                }),
+            });
+            const signupResult = await signupRes.json();
 
-Je souhaite postuler au sein de SOJIF Consulting.
+            // 2. Upload CV if signup succeeded
+            if (signupResult.success && data.cv?.length > 0) {
+                const formData = new FormData();
+                formData.append('cv', data.cv[0]);
+                formData.append('candidateId', signupResult.candidateId || '');
 
-Voici mes informations :
-- Nom complet : ${data.fullName}
-- Email : ${data.email}
-- Téléphone : ${data.phone}
-- Domaine d'expertise : ${t(`domains.${data.domain}`) || data.domain}
-- Expérience : ${t(`experiences.${data.experience}`) || data.experience}
+                await fetch('/api/candidates/upload-cv', {
+                    method: 'POST',
+                    body: formData,
+                });
+            }
 
-Message :
-${data.message || 'Aucun message particulier.'}
-
-Cordialement,
-${data.fullName}
-
-(Veuillez trouver mon CV en pièce jointe de cet email)
-            `;
-
-            const mailtoLink = `mailto:contact@sojifconsulting.sn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-            // Open user's email client
-            window.location.href = mailtoLink;
-
-            setStatus('success');
-            // Don't reset form immediately so user can see their input if mail client fails to open
-            // reset(); 
-            // setFileName(null);
-
+            if (signupResult.success) {
+                setStatus('success');
+                reset();
+                setFileName(null);
+            } else {
+                setStatus('error');
+            }
             setTimeout(() => setStatus('idle'), 8000);
         } catch (error) {
             console.error(error);
@@ -273,7 +277,7 @@ ${data.fullName}
                                 <span className="text-sm font-medium">{t('success')}</span>
                             </div>
                             <p className="text-xs text-green-700 ml-7">
-                                Votre client mail a dû s'ouvrir. <strong>N'oubliez pas d'attacher votre CV avant d'envoyer !</strong>
+                                Votre candidature a été enregistrée avec succès. Notre équipe vous contactera dans les 48h.
                             </p>
                         </motion.div>
                     )}

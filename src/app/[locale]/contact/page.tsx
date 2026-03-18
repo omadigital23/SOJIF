@@ -55,10 +55,18 @@ export default function ContactPage() {
     const onSubmit = async (data: ContactFormData) => {
         setStatus('sending');
         try {
-            // API call will be implemented in Phase 4
-            await new Promise((resolve) => setTimeout(resolve, 1500));
-            setStatus('success');
-            reset();
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            const result = await res.json();
+            if (result.success) {
+                setStatus('success');
+                reset();
+            } else {
+                setStatus('error');
+            }
             setTimeout(() => setStatus('idle'), 5000);
         } catch {
             setStatus('error');

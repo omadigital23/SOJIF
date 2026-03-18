@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
+import { supabaseAdmin } from '@/lib/supabase-server';
 
 export async function POST(request: Request) {
     try {
         const formData = await request.formData();
         const file = formData.get('cv') as File | null;
+        const candidateId = formData.get('candidateId') as string | null;
 
         if (!file) {
             return NextResponse.json({ success: false, message: 'Aucun fichier fourni.' }, { status: 400 });
@@ -26,15 +28,63 @@ export async function POST(request: Request) {
             );
         }
 
-        // TODO: Upload to Supabase Storage
-        // TODO: Update candidate_documents table
-        // TODO: Rate limiting with Upstash
+        // Generate unique file path
+        const timestamp = Date.now();
+        const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const filePath = `cvs/${candidateId || 'anonymous'}/${timestamp}-${cleanName}`;
+
+        // Upload to Supabase Storage
+        const arrayBuffer = await file.arrayBuffer();
+        const fileBuffer = new Uint8Array(arrayBuffer);
+
+        const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
+            .from('candidate-cvs')
+            .upload(filePath, fileBuffer, {
+                contentType: 'application/pdf',
+                upsert: false,
+            });
+
+        if (uploadError) {
+            console.error('Storage upload error:', uploadError);
+            return NextResponse.json(
+                { success: false, message: 'Erreur lors de l\'upload du fichier.' },
+                { status: 500 }
+            );
+        }
+
+        // Get public URL
+        const { data: urlData } = supabaseAdmin.storage
+            .from('candidate-cvs')
+            .getPublicUrl(uploadData.path);
+
+        // Insert document record if candidateId provided
+        if (candidateId) {
+            const { error: docError } = await supabaseAdmin
+                .from('candidate_documents')
+                .insert({
+                    candidate_id: candidateId,
+                    type: 'cv',
+                    file_url: urlData.publicUrl,
+                    file_name: file.name,
+                    file_size: file.size,
+                    mime_type: 'application/pdf',
+                });
+
+            if (docError) {
+                console.error('Document record error:', docError);
+            }
+        }
 
         return NextResponse.json(
-            { success: true, message: 'CV uploadé avec succès.' },
+            {
+                success: true,
+                message: 'CV uploadé avec succès.',
+                fileUrl: urlData.publicUrl,
+            },
             { status: 200 }
         );
-    } catch {
+    } catch (error) {
+        console.error('Upload CV API error:', error);
         return NextResponse.json({ success: false, message: 'Erreur lors de l\'upload.' }, { status: 500 });
     }
 }

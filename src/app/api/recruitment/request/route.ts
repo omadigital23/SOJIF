@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { supabaseAdmin } from '@/lib/supabase-server';
 
 const recruitmentSchema = z.object({
     companyName: z.string().min(2),
@@ -20,8 +21,30 @@ export async function POST(request: Request) {
         const body = await request.json();
         const validated = recruitmentSchema.parse(body);
 
-        // TODO: Store in Supabase recruitment_requests table
-        // TODO: Send notification to SOJIF team via Resend
+        const { error } = await supabaseAdmin
+            .from('recruitment_requests')
+            .insert({
+                company_name: validated.companyName,
+                contact_name: validated.contactName,
+                email: validated.email,
+                phone: validated.phone,
+                position_title: validated.positionTitle,
+                department: validated.department || null,
+                description: validated.description,
+                requirements: validated.requirements || null,
+                salary: validated.salary || null,
+                location: validated.location || null,
+                urgency: validated.urgency || 'medium',
+                status: 'new',
+            });
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return NextResponse.json(
+                { success: false, message: 'Erreur lors de l\'enregistrement.' },
+                { status: 500 }
+            );
+        }
 
         return NextResponse.json(
             { success: true, message: 'Demande de recrutement enregistrée.' },
@@ -31,6 +54,7 @@ export async function POST(request: Request) {
         if (error instanceof z.ZodError) {
             return NextResponse.json({ success: false, errors: error.errors }, { status: 400 });
         }
+        console.error('Recruitment request API error:', error);
         return NextResponse.json({ success: false, message: 'Erreur interne.' }, { status: 500 });
     }
 }

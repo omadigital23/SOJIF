@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
+import { initializeFlutterwavePayment } from '@/lib/flutterwave';
+import { rateLimiters, getClientIP } from '@/lib/rate-limit';
+import { captureException, addBreadcrumb } from '@/lib/sentry';
 
 const paymentSchema = z.object({
-    packName: z.string(),
+    packName: z.string().min(1),
     amount: z.number().positive(),
     currency: z.literal('XOF'),
     customerEmail: z.string().email(),
@@ -12,9 +15,29 @@ const paymentSchema = z.object({
 });
 
 export async function POST(request: Request) {
+    const clientIP = getClientIP(request);
+
     try {
+        // Apply rate limiting
+        const rateLimit = await rateLimiters.payment(clientIP);
+        if (!rateLimit.success) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: 'Trop de tentatives de paiement. Veuillez réessayer plus tard.',
+                    retryAfter: rateLimit.resetTime,
+                },
+                { status: 429, headers: { 'Retry-After': rateLimit.resetTime.toString() } }
+            );
+        }
+
         const body = await request.json();
         const validated = paymentSchema.parse(body);
+
+        addBreadcrumb('Payment initialization started', {
+            email: validated.customerEmail,
+            packName: validated.packName,
+        });
 
         // Find user by email (if exists)
         const { data: userData } = await supabaseAdmin
@@ -42,22 +65,48 @@ export async function POST(request: Request) {
 
         if (paymentError) {
             console.error('Payment record error:', paymentError);
+            captureException(paymentError as Error, { source: 'payments/initialize' });
             return NextResponse.json(
                 { success: false, message: 'Erreur lors de l\'initialisation du paiement.' },
                 { status: 500 }
             );
         }
 
-        // TODO: Initialize Flutterwave payment when API keys are configured
-        // For now, return a reference for manual processing
-        const paymentRef = `SOJIF-${paymentData.id.slice(0, 8).toUpperCase()}`;
+        // Initialize Flutterwave payment
+        const flutterwaveResponse = await initializeFlutterwavePayment(
+            validated.amount,
+            validated.customerEmail,
+            validated.customerName,
+            validated.customerPhone,
+            paymentData.id,
+            `Abonnement ${validated.packName}`
+        );
+
+        // Update payment record with Flutterwave details
+        const { error: updateError } = await supabaseAdmin
+            .from('payments')
+            .update({
+                external_id: flutterwaveResponse.txRef,
+                flutterwave_id: flutterwaveResponse.flutterwaveId,
+            })
+            .eq('id', paymentData.id);
+
+        if (updateError) {
+            console.warn('Payment update error:', updateError);
+        }
+
+        addBreadcrumb('Payment initialized successfully', {
+            paymentId: paymentData.id,
+            flutterwaveId: flutterwaveResponse.flutterwaveId,
+        });
 
         return NextResponse.json(
             {
                 success: true,
                 paymentId: paymentData.id,
-                paymentRef,
-                message: 'Paiement initialisé. Notre équipe vous contactera pour finaliser.',
+                checkoutUrl: flutterwaveResponse.checkoutUrl,
+                txRef: flutterwaveResponse.txRef,
+                message: 'Paiement initialisé avec succès. Veuillez compléter le paiement.',
             },
             { status: 200 }
         );
@@ -68,6 +117,14 @@ export async function POST(request: Request) {
                 { status: 400 }
             );
         }
+        
+        if (error instanceof Error) {
+            captureException(error, {
+                source: 'payments/initialize',
+                ip: clientIP,
+            });
+        }
+        
         console.error('Payment API error:', error);
         return NextResponse.json(
             { success: false, message: 'Erreur d\'initialisation du paiement.' },

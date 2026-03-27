@@ -165,7 +165,7 @@ export default function HeroSection() {
                                     transition={{ duration: 0.5 }}
                                     className="text-2xl text-white/80 font-light leading-relaxed italic"
                                 >
-                                    "{t(sliderTexts[currentSlide])}"
+                                    &quot;{t(sliderTexts[currentSlide])}&quot;
                                 </motion.p>
                             </AnimatePresence>
 

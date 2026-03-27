@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
+import { sendContactConfirmation } from '@/lib/email';
+import { rateLimiters, getClientIP } from '@/lib/rate-limit';
+import { captureException, addBreadcrumb } from '@/lib/sentry';
 
 const contactSchema = z.object({
     firstName: z.string().min(2).max(50),
@@ -21,9 +24,29 @@ const contactSchema = z.object({
 });
 
 export async function POST(request: Request) {
+    const clientIP = getClientIP(request);
+
     try {
+        // Apply rate limiting
+        const rateLimit = await rateLimiters.contact(clientIP);
+        if (!rateLimit.success) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: 'Trop de demandes. Veuillez réessayer plus tard.',
+                    retryAfter: rateLimit.resetTime,
+                },
+                { status: 429, headers: { 'Retry-After': rateLimit.resetTime.toString() } }
+            );
+        }
+
         const body = await request.json();
         const validated = contactSchema.parse(body);
+
+        addBreadcrumb('Contact form submitted', {
+            email: validated.email,
+            subject: validated.subject,
+        });
 
         // Build full message with extra info
         let fullMessage = validated.message;
@@ -50,14 +73,32 @@ export async function POST(request: Request) {
                 subject: validated.subject,
                 message: fullMessage,
                 status: 'new',
-            });
+            })
+            .select('id')
+            .single();
 
         if (error) {
             console.error('Supabase error:', error);
+            captureException(error as Error, { source: 'contact/insert' });
             return NextResponse.json(
                 { success: false, message: 'Erreur lors de l\'enregistrement.' },
                 { status: 500 }
             );
+        }
+
+        // Send confirmation email to user
+        try {
+            await sendContactConfirmation(
+                validated.email,
+                validated.firstName,
+                validated.subject
+            );
+            addBreadcrumb('Contact confirmation email sent', {
+                email: validated.email,
+            });
+        } catch (emailError) {
+            console.warn('Failed to send contact confirmation email:', emailError);
+            // Don't fail the request, continue normally
         }
 
         return NextResponse.json(
@@ -71,6 +112,14 @@ export async function POST(request: Request) {
                 { status: 400 }
             );
         }
+        
+        if (error instanceof Error) {
+            captureException(error, {
+                source: 'contact/post',
+                ip: clientIP,
+            });
+        }
+        
         console.error('Contact API error:', error);
         return NextResponse.json(
             { success: false, message: 'Erreur interne du serveur.' },

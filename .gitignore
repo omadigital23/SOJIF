@@ -5,6 +5,9 @@
 
 # testing
 /coverage
+/tests/e2e/test-results
+/playwright-report
+/.playwright
 
 # next.js
 /.next/
@@ -12,15 +15,20 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
 *.pem
+.vscode/*
+!.vscode/extensions.json
+.idea/
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.env.*.local
 
 # local env files
 .env
@@ -35,3 +43,26 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sentry
+.sentryclirc
+
+# Test results
+test-results/
+playwright-report/
+
+# Build artifacts
+*.tgz
+*.zip
+

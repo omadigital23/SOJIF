@@ -1,33 +1,19 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
-    UserPlus,
     Building2,
-    Upload,
     CheckCircle,
     Users,
     FileText,
     Search,
     Handshake,
-    ArrowRight,
 } from 'lucide-react';
 import CandidateForm from '@/components/recruitment/CandidateForm';
 
 export default function RecruitmentPage() {
     const t = useTranslations('recruitment');
-    const { locale } = useParams();
-
-    const candidateSteps = [
-        { icon: UserPlus, text: t('candidateStep1') },
-        { icon: Upload, text: t('candidateStep2') },
-        { icon: FileText, text: t('candidateStep3') },
-        { icon: CheckCircle, text: t('candidateStep4') },
-        { icon: Users, text: t('candidateStep5') },
-    ];
 
     const companySteps = [
         { icon: FileText, text: t('companyStep1') },

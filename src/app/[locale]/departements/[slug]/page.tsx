@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
 import { departments, getDepartmentBySlug } from '@/data/departments';
 import DepartmentPageClient from './DepartmentPageClient';
 import type { Metadata } from 'next';

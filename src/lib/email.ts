@@ -1,14 +1,11 @@
 import { Resend } from 'resend';
+import { env } from './env';
 
-export const FROM_EMAIL = 'noreply@sojif-consulting.com';
-export const SUPPORT_EMAIL = 'support@sojif-consulting.com';
+export const FROM_EMAIL = 'noreply@sojifconsulting.com';
+export const SUPPORT_EMAIL = 'support@sojifconsulting.com';
 
 function getResendClient() {
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-        throw new Error('RESEND_API_KEY environment variable is not set');
-    }
-    return new Resend(apiKey);
+    return new Resend(env.RESEND_API_KEY);
 }
 
 /**
@@ -121,7 +118,7 @@ export async function sendPasswordReset(email: string, name: string, resetLink: 
 /**
  * Send newsletter subscription confirmation
  */
-export async function sendNewsletterConfirmation(email: string) {
+export async function sendNewsletterConfirmation(email: string, unsubscribeUrl: string) {
     try {
         const result = await getResendClient().emails.send({
             from: FROM_EMAIL,
@@ -157,7 +154,7 @@ export async function sendNewsletterConfirmation(email: string) {
             <p>À très bientôt !</p>
             <div class="footer">
                 <p>© 2026 SOJIF Consulting. Tous droits réservés.</p>
-                <p><a href="[UNSUBSCRIBE_LINK]">Se désabonner de cette liste</a></p>
+                <p><a href="${unsubscribeUrl}">Se désabonner de cette liste</a></p>
             </div>
         </div>
     </div>

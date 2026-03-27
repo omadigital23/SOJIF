@@ -1,8 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
+
+import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import {
     Scale,
@@ -26,7 +26,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function DepartmentsGrid() {
     const t = useTranslations('home');
-    const { locale } = useParams();
+    const tCommon = useTranslations('common');
 
     return (
         <section className="section-padding bg-light-gray relative">
@@ -76,7 +76,7 @@ export default function DepartmentsGrid() {
                                 transition={{ delay: i * 0.1 }}
                             >
                                 <Link
-                                    href={`/${locale}/departements/${dept.slug}`}
+                                    href={`/departements/${dept.slug}`}
                                     className="group block bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full border border-transparent hover:border-primary/10 relative overflow-hidden"
                                 >
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-8 -mt-8 transition-transform duration-500 group-hover:scale-150 group-hover:bg-primary/10" />
@@ -94,7 +94,7 @@ export default function DepartmentsGrid() {
                                     </p>
 
                                     <span className="inline-flex items-center gap-2 text-primary text-sm font-semibold relative z-10 group/link">
-                                        En savoir plus
+                                        {tCommon('learnMore')}
                                         <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
                                     </span>
                                 </Link>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import NextImage from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
@@ -71,7 +71,8 @@ export default function Header() {
                         </div>
                         <div className="flex items-center gap-4">
                             <Link
-                                href={`/${locale === 'fr' ? 'en' : 'fr'}`}
+                                href={'/'}
+                                locale={locale === 'fr' ? 'en' : 'fr'}
                                 className="hover:text-white transition-colors font-medium"
                             >
                                 {locale === 'fr' ? 'EN' : 'FR'}
@@ -84,7 +85,7 @@ export default function Header() {
                 <div className="max-w-[95%] mx-auto px-4">
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
-                        <Link href={`/${locale}`} className="flex items-center gap-3 group">
+                        <Link href={'/'} className="flex items-center gap-3 group">
                             <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:shadow-md bg-white">
                                 <NextImage
                                     src="/images/logo.jpg"
@@ -121,7 +122,7 @@ export default function Header() {
                                     onMouseLeave={() => setOpenDropdown(null)}
                                 >
                                     <Link
-                                        href={`/${locale}${item.href}`}
+                                        href={item.href}
                                         className={cn(
                                             'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-1',
                                             scrolled
@@ -148,7 +149,7 @@ export default function Header() {
                                                 {item.children.map((child) => (
                                                     <Link
                                                         key={child.href}
-                                                        href={`/${locale}${child.href}`}
+                                                        href={child.href}
                                                         className="block px-4 py-3 text-sm text-dark/70 hover:text-primary hover:bg-primary/5 transition-colors border-l-2 border-transparent hover:border-primary"
                                                     >
                                                         {child.label}
@@ -164,7 +165,7 @@ export default function Header() {
                         {/* CTA + Mobile toggle */}
                         <div className="flex items-center gap-3">
                             <Link
-                                href={`/${locale}/contact`}
+                                href={'/contact'}
                                 className={cn(
                                     "hidden lg:inline-flex btn-primary !py-2.5 !px-5 shadow-lg shadow-primary/20",
                                     !scrolled && "bg-white text-primary hover:bg-white/90 hover:text-primary-dark shadow-none"

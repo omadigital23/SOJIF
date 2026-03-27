@@ -15,7 +15,7 @@ export function initializeSentry() {
             replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
             replaysOnErrorSampleRate: 1.0,
             // Send client-side errors
-            allowUrls: [/https?:\/\/(localhost|127\.0\.0\.1|.*\.sojif-consulting\.com)/],
+            allowUrls: [/https?:\/\/(localhost|127\.0\.0\.1|.*\.sojifconsulting\.com)/],
         });
     }
 }

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { verifyFlutterwavePayment } from '@/lib/flutterwave';
 import { captureException, addBreadcrumb } from '@/lib/sentry';
+import { env } from '@/lib/env';
 
 /**
  * Webhook handler for Flutterwave payment notifications
@@ -13,7 +14,7 @@ export async function POST(request: Request) {
 
         // Verify webhook secret
         const signature = request.headers.get('verif-hash');
-        const webhookSecret = process.env.FLUTTERWAVE_WEBHOOK_SECRET || '';
+        const webhookSecret = env.FLUTTERWAVE_WEBHOOK_SECRET;
 
         if (signature !== webhookSecret) {
             console.warn('Invalid webhook signature');
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
             // Find payment record by transaction reference
             const { data: paymentRecord, error: paymentError } = await supabaseAdmin
                 .from('payments')
-                .select('id, user_id')
+                .select('id, user_id, pack_id')
                 .eq('external_id', data.tx_ref)
                 .single();
 
@@ -62,13 +63,14 @@ export async function POST(request: Request) {
                 );
             }
 
-            // Update payment status to completed
+            // Update payment status to success
             const { error: updateError } = await supabaseAdmin
                 .from('payments')
                 .update({
-                    status: 'completed',
-                    completed_at: new Date().toISOString(),
-                    flutterwave_response: verification.transactionData,
+                    status: 'success',
+                    updated_at: new Date().toISOString(),
+                    provider_ref: data.tx_ref,
+                    provider_response: verification.transactionData,
                 })
                 .eq('id', paymentRecord.id);
 
@@ -84,15 +86,17 @@ export async function POST(request: Request) {
                 );
             }
 
-            // If user exists, update their subscription
-            if (paymentRecord.user_id) {
+            // If user exists, create or activate their subscription
+            if (paymentRecord.user_id && paymentRecord.pack_id) {
                 const { error: subscriptionError } = await supabaseAdmin
-                    .from('users')
-                    .update({
-                        subscription_status: 'active',
-                        last_payment_date: new Date().toISOString(),
-                    })
-                    .eq('id', paymentRecord.user_id);
+                    .from('subscriptions')
+                    .upsert({
+                        user_id: paymentRecord.user_id,
+                        pack_id: paymentRecord.pack_id,
+                        status: 'active',
+                        start_date: new Date().toISOString(),
+                        updated_at: new Date().toISOString()
+                    }, { onConflict: 'user_id' }); 
 
                 if (subscriptionError) {
                     console.warn('Subscription update error:', subscriptionError);

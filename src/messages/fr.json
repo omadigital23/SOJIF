@@ -38,6 +38,9 @@
             "hr": "Gestion RH"
         },
         "stats": {
+            "departmentsValue": "6",
+            "clientsValue": "15+",
+            "supportValue": "24/7",
             "departments": "Départements",
             "clients": "Clients Satisfaits",
             "support": "Support"

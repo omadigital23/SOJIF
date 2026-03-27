@@ -1,18 +1,23 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
+import { createClient } from '@supabase/supabase-js';
+import { env } from '@/lib/env';
 
 const loginSchema = z.object({
     email: z.string().email(),
     password: z.string().min(1),
 });
 
+// Créer le client public pour l'authentification
+const supabaseAnon = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
 export async function POST(request: Request) {
     try {
         const body = await request.json();
         const validated = loginSchema.parse(body);
 
-        const { data, error } = await supabaseAdmin.auth.signInWithPassword({
+        const { data, error } = await supabaseAnon.auth.signInWithPassword({
             email: validated.email,
             password: validated.password,
         });
@@ -55,7 +60,7 @@ export async function POST(request: Request) {
     } catch (error) {
         if (error instanceof z.ZodError) {
             return NextResponse.json(
-                { success: false, errors: error.errors },
+                { success: false, message: 'Données invalides.' },
                 { status: 400 }
             );
         }

@@ -38,6 +38,9 @@
             "hr": "HR Management"
         },
         "stats": {
+            "departmentsValue": "6",
+            "clientsValue": "15+",
+            "supportValue": "24/7",
             "departments": "Departments",
             "clients": "Satisfied Clients",
             "support": "Support"

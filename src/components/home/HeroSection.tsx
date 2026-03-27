@@ -111,12 +111,12 @@ export default function HeroSection() {
                         className="mt-16 flex flex-wrap gap-12 border-t border-white/10 pt-8"
                     >
                         {[
-                            { value: '6', labelKey: 'stats.departments' },
-                            { value: '15+', labelKey: 'stats.clients' },
-                            { value: '24/7', labelKey: 'stats.support' },
+                            { valueKey: 'stats.departmentsValue', labelKey: 'stats.departments' },
+                            { valueKey: 'stats.clientsValue', labelKey: 'stats.clients' },
+                            { valueKey: 'stats.supportValue', labelKey: 'stats.support' },
                         ].map((stat) => (
                             <div key={stat.labelKey} className="flex flex-col">
-                                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+                                <div className="text-3xl font-bold text-white mb-1">{t(stat.valueKey)}</div>
                                 <div className="text-sm text-gray-400 font-medium">{t(stat.labelKey)}</div>
                             </div>
                         ))}

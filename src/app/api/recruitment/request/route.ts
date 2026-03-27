@@ -14,6 +14,7 @@ const recruitmentSchema = z.object({
     salary: z.string().optional(),
     location: z.string().optional(),
     urgency: z.enum(['low', 'medium', 'high']).optional(),
+    contractType: z.enum(['cdi', 'cdd', 'interim', 'freelance', 'stage']).optional(),
 });
 
 export async function POST(request: Request) {
@@ -35,6 +36,7 @@ export async function POST(request: Request) {
                 salary: validated.salary || null,
                 location: validated.location || null,
                 urgency: validated.urgency || 'medium',
+                contract_type: validated.contractType || null,
                 status: 'new',
             });
 
@@ -52,7 +54,7 @@ export async function POST(request: Request) {
         );
     } catch (error) {
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ success: false, errors: error.errors }, { status: 400 });
+            return NextResponse.json({ success: false, message: 'Données invalides.' }, { status: 400 });
         }
         console.error('Recruitment request API error:', error);
         return NextResponse.json({ success: false, message: 'Erreur interne.' }, { status: 500 });

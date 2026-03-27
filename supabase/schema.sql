@@ -759,9 +759,9 @@ INSERT INTO comparison_features (feature, essentiel, croissance, prestige, sort_
 -- DONNÉES DE SEED : Paramètres système
 -- =============================================
 INSERT INTO settings (key, value, description) VALUES
-('company_info', '{"name": "SOJIF Consulting", "signature": "Droit • Finance • Développement", "tagline": "Cabinet de Structuration & Performance des Entreprises", "email": "contact@sojifconsulting.sn", "phone": "+221711615476", "whatsapp": "221711615476", "address": "Dakar, Sénégal", "website": "www.sojifconsulting.sn", "director": "Fatou Guewel MBAYE", "directorTitle": "Directrice Générale"}', 'Informations générales de l''entreprise'),
+('company_info', '{"name": "SOJIF Consulting", "signature": "Droit • Finance • Développement", "tagline": "Cabinet de Structuration & Performance des Entreprises", "email": "contact@sojifconsulting.com", "phone": "+221711615476", "whatsapp": "221711615476", "address": "Dakar, Sénégal", "website": "www.sojifconsulting.com", "director": "Fatou Guewel MBAYE", "directorTitle": "Directrice Générale"}', 'Informations générales de l''entreprise'),
 ('payment_config', '{"provider": "flutterwave", "currency": "XOF", "test_mode": true}', 'Configuration du paiement'),
-('email_config', '{"provider": "resend", "from_name": "SOJIF Consulting", "from_email": "noreply@sojifconsulting.sn"}', 'Configuration des emails')
+('email_config', '{"provider": "resend", "from_name": "SOJIF Consulting", "from_email": "noreply@sojifconsulting.com"}', 'Configuration des emails')
 ON CONFLICT (key) DO NOTHING;
 
 -- =============================================

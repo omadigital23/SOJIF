@@ -1,18 +1,12 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
+import { env } from './env';
 
 // Lazy initialize Redis
 function getRedisClient() {
-    const url = process.env.UPSTASH_REDIS_REST_URL;
-    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-
-    if (!url || !token) {
-        throw new Error('Upstash Redis credentials are not configured');
-    }
-
     return new Redis({
-        url,
-        token,
+        url: env.UPSTASH_REDIS_REST_URL,
+        token: env.UPSTASH_REDIS_REST_TOKEN,
     });
 }
 

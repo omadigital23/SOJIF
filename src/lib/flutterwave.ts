@@ -1,14 +1,8 @@
 import Flutterwave from 'flutterwave-node-v3';
+import { env } from './env';
 
 function getFlutterwaveClient() {
-    const publicKey = process.env.FLUTTERWAVE_PUBLIC_KEY;
-    const secretKey = process.env.FLUTTERWAVE_SECRET_KEY;
-
-    if (!publicKey || !secretKey) {
-        throw new Error('Flutterwave keys are not configured');
-    }
-
-    return new Flutterwave(publicKey, secretKey);
+    return new Flutterwave(env.FLUTTERWAVE_PUBLIC_KEY, env.FLUTTERWAVE_SECRET_KEY);
 }
 
 /**
@@ -43,9 +37,9 @@ export async function initializeFlutterwavePayment(
             customizations: {
                 title: 'SOJIF Consulting',
                 description: description,
-                logo: `${process.env.NEXT_PUBLIC_APP_URL}/images/logo.png`,
+                logo: `${env.NEXT_PUBLIC_APP_URL}/images/logo.png`,
             },
-            redirect_url: `${process.env.NEXT_PUBLIC_APP_URL}/payment-callback`,
+            redirect_url: `${env.NEXT_PUBLIC_APP_URL}/payment-callback`,
             meta: {
                 paymentId,
                 service: 'consulting',

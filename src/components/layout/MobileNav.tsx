@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -60,7 +60,7 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
                                 {items.map((item) => (
                                     <div key={item.label}>
                                         <Link
-                                            href={`/${locale}${item.href}`}
+                                            href={item.href}
                                             onClick={onClose}
                                             className="block px-6 py-3 text-dark/80 hover:text-primary hover:bg-primary/5 font-medium transition-colors"
                                         >
@@ -71,7 +71,7 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
                                                 {item.children.map((child) => (
                                                     <Link
                                                         key={child.href}
-                                                        href={`/${locale}${child.href}`}
+                                                        href={child.href}
                                                         onClick={onClose}
                                                         className="block px-6 py-2 text-sm text-neutral-gray hover:text-primary hover:bg-primary/5 transition-colors"
                                                     >
@@ -87,7 +87,7 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
                             {/* CTA */}
                             <div className="p-4 border-t border-gray-100">
                                 <Link
-                                    href={`/${locale}/contact`}
+                                    href={'/contact'}
                                     onClick={onClose}
                                     className="btn-primary w-full text-center"
                                 >
@@ -95,7 +95,7 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
                                 </Link>
                                 <div className="mt-3 flex justify-center gap-4 text-sm">
                                     <Link
-                                        href={`/fr`}
+                                        href={'/'} locale="fr"
                                         onClick={onClose}
                                         className={`${locale === 'fr' ? 'text-primary font-semibold' : 'text-neutral-gray'}`}
                                     >
@@ -103,7 +103,7 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
                                     </Link>
                                     <span className="text-gray-300">|</span>
                                     <Link
-                                        href={`/en`}
+                                        href={'/'} locale="en"
                                         onClick={onClose}
                                         className={`${locale === 'en' ? 'text-primary font-semibold' : 'text-neutral-gray'}`}
                                     >

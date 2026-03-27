@@ -13,17 +13,22 @@ export async function POST(request: Request) {
     const clientIP = getClientIP(request);
 
     try {
-        // Apply rate limiting
-        const rateLimit = await rateLimiters.newsletter(clientIP);
-        if (!rateLimit.success) {
-            return NextResponse.json(
-                {
-                    success: false,
-                    message: 'Trop de tentatives. Veuillez réessayer plus tard.',
-                    retryAfter: rateLimit.resetTime,
-                },
-                { status: 429, headers: { 'Retry-After': rateLimit.resetTime.toString() } }
-            );
+        // Apply rate limiting (fail open if not configured)
+        try {
+            const rateLimit = await rateLimiters.newsletter(clientIP);
+            if (!rateLimit.success) {
+                return NextResponse.json(
+                    {
+                        success: false,
+                        message: 'Trop de tentatives. Veuillez réessayer plus tard.',
+                        retryAfter: rateLimit.resetTime,
+                    },
+                    { status: 429, headers: { 'Retry-After': rateLimit.resetTime.toString() } }
+                );
+            }
+        } catch (rateLimitError) {
+            console.warn('Rate limiting unavailable, continuing:', rateLimitError);
+            // Continue without rate limiting
         }
 
         const body = await request.json();
@@ -77,6 +82,7 @@ export async function POST(request: Request) {
         );
     } catch (error) {
         if (error instanceof z.ZodError) {
+            console.error('Validation error:', error);
             return NextResponse.json(
                 { success: false, errors: error.errors },
                 { status: 400 }
@@ -84,13 +90,18 @@ export async function POST(request: Request) {
         }
 
         if (error instanceof Error) {
+            console.error('Newsletter API error details:', {
+                message: error.message,
+                stack: error.stack,
+            });
             captureException(error, {
                 source: 'newsletter/post',
                 ip: clientIP,
             });
+        } else {
+            console.error('Unknown error in newsletter API:', error);
         }
 
-        console.error('Newsletter API error:', error);
         return NextResponse.json(
             { success: false, message: 'Erreur interne.' },
             { status: 500 }

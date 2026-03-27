@@ -27,17 +27,22 @@ export async function POST(request: Request) {
     const clientIP = getClientIP(request);
 
     try {
-        // Apply rate limiting
-        const rateLimit = await rateLimiters.contact(clientIP);
-        if (!rateLimit.success) {
-            return NextResponse.json(
-                {
-                    success: false,
-                    message: 'Trop de demandes. Veuillez réessayer plus tard.',
-                    retryAfter: rateLimit.resetTime,
-                },
-                { status: 429, headers: { 'Retry-After': rateLimit.resetTime.toString() } }
-            );
+        // Apply rate limiting (fail open if not configured)
+        try {
+            const rateLimit = await rateLimiters.contact(clientIP);
+            if (!rateLimit.success) {
+                return NextResponse.json(
+                    {
+                        success: false,
+                        message: 'Trop de demandes. Veuillez réessayer plus tard.',
+                        retryAfter: rateLimit.resetTime,
+                    },
+                    { status: 429, headers: { 'Retry-After': rateLimit.resetTime.toString() } }
+                );
+            }
+        } catch (rateLimitError) {
+            console.warn('Rate limiting unavailable, continuing:', rateLimitError);
+            // Continue without rate limiting
         }
 
         const body = await request.json();
@@ -79,7 +84,10 @@ export async function POST(request: Request) {
 
         if (error) {
             console.error('Supabase error:', error);
-            captureException(error as Error, { source: 'contact/insert' });
+            captureException(error as Error, {
+                source: 'contact/insert',
+                email: validated.email,
+            });
             return NextResponse.json(
                 { success: false, message: 'Erreur lors de l\'enregistrement.' },
                 { status: 500 }
@@ -107,20 +115,27 @@ export async function POST(request: Request) {
         );
     } catch (error) {
         if (error instanceof z.ZodError) {
+            console.error('Validation error:', error);
             return NextResponse.json(
                 { success: false, errors: error.errors },
                 { status: 400 }
             );
         }
-        
+
         if (error instanceof Error) {
+            console.error('Contact API error details:', {
+                message: error.message,
+                stack: error.stack,
+                name: error.name,
+            });
             captureException(error, {
                 source: 'contact/post',
                 ip: clientIP,
             });
+        } else {
+            console.error('Unknown error in contact API:', error);
         }
-        
-        console.error('Contact API error:', error);
+
         return NextResponse.json(
             { success: false, message: 'Erreur interne du serveur.' },
             { status: 500 }

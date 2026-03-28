@@ -18,28 +18,29 @@ import {
 } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 
-const contactSchema = z.object({
-    firstName: z.string().min(2, 'Minimum 2 caractères'),
-    lastName: z.string().min(2, 'Minimum 2 caractères'),
-    email: z.string().email('Email invalide'),
-    phone: z.string().min(8, 'Numéro invalide'),
-    company: z.string().min(2, 'Nom de l\'entreprise requis'),
-    domain: z.string().min(2, 'Domaine requis'),
-    turnover: z.string().min(1, 'Chiffre d\'affaires requis'),
-    employees: z.string().min(1, 'Nombre de salariés requis'),
+const getContactSchema = (t: any) => z.object({
+    firstName: z.string().min(2, t('errors.min2')),
+    lastName: z.string().min(2, t('errors.min2')),
+    email: z.string().email(t('errors.invalidEmail')),
+    phone: z.string().min(8, t('errors.invalidPhone')),
+    company: z.string().min(2, t('errors.companyRequired')),
+    domain: z.string().min(2, t('errors.domainRequired')),
+    turnover: z.string().min(1, t('errors.turnoverRequired')),
+    employees: z.string().min(1, t('errors.employeesRequired')),
     challenge: z.enum(['tax', 'accounting', 'hr', 'other']),
     phase: z.enum(['creation', 'growth', 'restructuring']),
-    budget: z.string().min(1, 'Budget requis'),
+    budget: z.string().min(1, t('errors.budgetRequired')),
     meetingPref: z.enum(['video', 'inPerson']),
-    subject: z.string().min(1, 'Sélectionnez un sujet'),
-    message: z.string().min(10, 'Minimum 10 caractères'),
+    subject: z.string().min(1, t('errors.selectSubject')),
+    message: z.string().min(10, t('errors.min10')),
 });
 
-type ContactFormData = z.infer<typeof contactSchema>;
+type ContactFormData = z.infer<ReturnType<typeof getContactSchema>>;
 
 export default function ContactPage() {
     const t = useTranslations('contact');
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+    const contactSchema = getContactSchema(t);
 
     const {
         register,
@@ -202,7 +203,7 @@ export default function ContactPage() {
                                     {/* Section: Director & Contact */}
                                     <div className="space-y-6">
                                         <h3 className="text-lg font-semibold text-dark border-b border-gray-100 pb-2">
-                                            Informations du Directeur
+                                            {t('sectionDirector')}
                                         </h3>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>
@@ -251,7 +252,7 @@ export default function ContactPage() {
                                     {/* Section: Company Info */}
                                     <div className="space-y-6">
                                         <h3 className="text-lg font-semibold text-dark border-b border-gray-100 pb-2">
-                                            Informations Entreprise
+                                            {t('sectionCompany')}
                                         </h3>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>
@@ -268,7 +269,7 @@ export default function ContactPage() {
                                                 <input
                                                     {...register('domain')}
                                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                                    placeholder="Ex: Commerce, BTP, Services..."
+                                                    placeholder={t('placeholders.domain')}
                                                 />
                                                 {errors.domain && <p className="text-red-500 text-xs mt-1">{errors.domain.message}</p>}
                                             </div>
@@ -279,7 +280,7 @@ export default function ContactPage() {
                                                 <input
                                                     {...register('turnover')}
                                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                                    placeholder="Ex: 50M FCFA"
+                                                    placeholder={t('placeholders.turnover')}
                                                 />
                                                 {errors.turnover && <p className="text-red-500 text-xs mt-1">{errors.turnover.message}</p>}
                                             </div>
@@ -288,7 +289,7 @@ export default function ContactPage() {
                                                 <input
                                                     {...register('employees')}
                                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                                    placeholder="Ex: 10 salariés"
+                                                    placeholder={t('placeholders.employees')}
                                                 />
                                                 {errors.employees && <p className="text-red-500 text-xs mt-1">{errors.employees.message}</p>}
                                             </div>
@@ -300,7 +301,7 @@ export default function ContactPage() {
                                                     {...register('phase')}
                                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
                                                 >
-                                                    <option value="">Sélectionnez...</option>
+                                                    <option value="">{t('placeholders.select')}</option>
                                                     {phases.map((p) => (
                                                         <option key={p.value} value={p.value}>{p.label}</option>
                                                     ))}
@@ -312,7 +313,7 @@ export default function ContactPage() {
                                                 <input
                                                     {...register('budget')}
                                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
-                                                    placeholder="Ex: 5M FCFA"
+                                                    placeholder={t('placeholders.budget')}
                                                 />
                                                 {errors.budget && <p className="text-red-500 text-xs mt-1">{errors.budget.message}</p>}
                                             </div>
@@ -322,7 +323,7 @@ export default function ContactPage() {
                                     {/* Section: Challenge & Project */}
                                     <div className="space-y-6">
                                         <h3 className="text-lg font-semibold text-dark border-b border-gray-100 pb-2">
-                                            Votre Challenge & Projet
+                                            {t('sectionChallenge')}
                                         </h3>
                                         <div>
                                             <label className="block text-sm font-medium text-dark mb-3">{t('challengeLabel')}</label>
@@ -362,7 +363,7 @@ export default function ContactPage() {
                                                     {...register('meetingPref')}
                                                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white"
                                                 >
-                                                    <option value="">Sélectionnez...</option>
+                                                    <option value="">{t('placeholders.select')}</option>
                                                     {meetingPrefs.map((m) => (
                                                         <option key={m.value} value={m.value}>{m.label}</option>
                                                     ))}

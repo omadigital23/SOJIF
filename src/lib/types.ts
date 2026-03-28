@@ -1,23 +1,30 @@
 export interface Department {
     slug: string;
     icon: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    mission: string;
-    services: string[];
-    pricing?: string[];
-    cases: { title: string; description: string }[];
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    mission?: string;
+    services?: any[];
+    pricing?: any[];
+    cases?: { title?: string; description?: string }[];
+    titleKey?: string;
+    subtitleKey?: string;
+    descriptionKey?: string;
+    missionKey?: string;
 }
 
 export interface PricingPack {
-    name: string;
+    name?: string;
     price: number;
     period: string;
-    description: string;
-    features: string[];
+    description?: string;
+    features?: any[];
     highlighted?: boolean;
-    cta: string;
+    cta?: string;
+    nameKey?: string;
+    descriptionKey?: string;
+    ctaKey?: string;
 }
 
 export interface Testimonial {

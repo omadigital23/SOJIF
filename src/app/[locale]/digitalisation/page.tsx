@@ -66,17 +66,17 @@ export default function DigitalizationPage() {
                                         <Icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
                                     </div>
                                     <h3 className="text-xl font-bold text-dark group-hover:text-white mb-3 transition-colors">
-                                        {service.title}
+                                        {t(`servicesList.${i}.title`)}
                                     </h3>
                                     <p className="text-neutral-gray group-hover:text-white/70 text-sm leading-relaxed mb-5 transition-colors">
-                                        {service.description}
+                                        {t(`servicesList.${i}.description`)}
                                     </p>
                                     <ul className="space-y-2">
-                                        {service.features.map((f) => (
+                                        {service.features.map((f, j) => (
                                             <li key={f} className="flex items-center gap-2">
                                                 <Check className="w-4 h-4 text-primary group-hover:text-accent flex-shrink-0 transition-colors" />
                                                 <span className="text-dark/70 group-hover:text-white/80 text-sm transition-colors">
-                                                    {f}
+                                                    {t(`servicesList.${i}.features.${j}`)}
                                                 </span>
                                             </li>
                                         ))}

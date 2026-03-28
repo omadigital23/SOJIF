@@ -18,12 +18,12 @@ const navItems = [
         label: 'nav.departments',
         href: '/departements/droit',
         children: [
-            { label: 'Droit des Affaires', href: '/departements/droit' },
-            { label: 'Fiscalité & Comptabilité', href: '/departements/fiscalite' },
-            { label: 'Ressources Humaines', href: '/departements/rh' },
-            { label: 'Conseil Stratégique', href: '/departements/conseil' },
-            { label: 'Digitalisation', href: '/departements/digitalisation' },
-            { label: 'Recrutement', href: '/departements/recrutement' },
+            { label: 'departments.departmentsList.droit.title', href: '/departements/droit' },
+            { label: 'departments.departmentsList.fiscalite.title', href: '/departements/fiscalite' },
+            { label: 'departments.departmentsList.rh.title', href: '/departements/rh' },
+            { label: 'departments.departmentsList.conseil.title', href: '/departements/conseil' },
+            { label: 'departments.departmentsList.digitalisation.title', href: '/departements/digitalisation' },
+            { label: 'departments.departmentsList.recrutement.title', href: '/departements/recrutement' },
         ],
     },
     { label: 'nav.offers', href: '/offres' },
@@ -152,7 +152,7 @@ export default function Header() {
                                                         href={child.href}
                                                         className="block px-4 py-3 text-sm text-dark/70 hover:text-primary hover:bg-primary/5 transition-colors border-l-2 border-transparent hover:border-primary"
                                                     >
-                                                        {child.label}
+                                                        {t(child.label)}
                                                     </Link>
                                                 ))}
                                             </motion.div>

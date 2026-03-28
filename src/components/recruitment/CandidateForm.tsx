@@ -219,15 +219,15 @@ export default function CandidateForm() {
                             <span className="text-sm font-medium text-center break-all">
                                 {fileName || t('cv')}
                             </span>
-                            <span className="text-xs opacity-70 mt-1">PDF, max 5MB</span>
+                            <span className="text-xs opacity-70 mt-1">{t('pdfMax5mb')}</span>
                         </label>
                     </div>
                     {errors.cv && (
                         <p className="text-red-500 text-xs mt-1">
                             {errors.cv.message === 'max_size'
-                                ? 'Fichier trop volumineux (max 5MB)'
+                                ? t('fileTooLarge')
                                 : errors.cv.message === 'invalid_type'
-                                    ? 'Format PDF uniquement'
+                                    ? t('formatPdfOnly')
                                     : t('error')}
                         </p>
                     )}
@@ -277,7 +277,7 @@ export default function CandidateForm() {
                                 <span className="text-sm font-medium">{t('success')}</span>
                             </div>
                             <p className="text-xs text-green-700 ml-7">
-                                Votre candidature a été enregistrée avec succès. Notre équipe vous contactera dans les 48h.
+                                {t('successMsg')}
                             </p>
                         </motion.div>
                     )}

@@ -20,10 +20,10 @@ export default function Footer() {
         {
             title: 'nav.services',
             items: [
-                { label: 'Droit des Affaires', href: '/departements/droit' },
-                { label: 'Fiscalité', href: '/departements/fiscalite' },
-                { label: 'Ressources Humaines', href: '/departements/rh' },
-                { label: 'Conseil Stratégique', href: '/departements/conseil' },
+                { label: 'departments.departmentsList.droit.title', href: '/departements/droit' },
+                { label: 'departments.departmentsList.fiscalite.title', href: '/departements/fiscalite' },
+                { label: 'departments.departmentsList.rh.title', href: '/departements/rh' },
+                { label: 'departments.departmentsList.conseil.title', href: '/departements/conseil' },
             ],
         },
         {
@@ -86,8 +86,7 @@ export default function Footer() {
                                             href={item.href}
                                             className="text-gray-400 hover:text-primary-light transition-colors flex items-center gap-2 group text-sm"
                                         >
-                                            <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-                                            <span className="transition-transform duration-300 group-hover:translate-x-1">{item.label.startsWith('nav.') ? t(item.label) : item.label}</span>
+                                            <span className="transition-transform duration-300 group-hover:translate-x-1">{t(item.label)}</span>
                                         </Link>
                                     </li>
                                 ))}
@@ -107,7 +106,7 @@ export default function Footer() {
                                         <Mail className="w-4 h-4 text-primary-light" />
                                     </div>
                                     <div className="space-y-0.5">
-                                        <span className="text-xs text-gray-500 uppercase tracking-wider block">Email</span>
+                                        <span className="text-xs text-gray-500 uppercase tracking-wider block">{t('contact.emailLabel')}</span>
                                         <span className="text-sm text-gray-300 group-hover:text-white transition-colors">{COMPANY.email}</span>
                                     </div>
                                 </a>
@@ -118,7 +117,7 @@ export default function Footer() {
                                         <Phone className="w-4 h-4 text-primary-light" />
                                     </div>
                                     <div className="space-y-0.5">
-                                        <span className="text-xs text-gray-500 uppercase tracking-wider block">Téléphone</span>
+                                        <span className="text-xs text-gray-500 uppercase tracking-wider block">{t('contact.phoneLabel')}</span>
                                         <span className="text-sm text-gray-300 group-hover:text-white transition-colors">{COMPANY.phoneDisplay}</span>
                                     </div>
                                 </a>
@@ -129,7 +128,7 @@ export default function Footer() {
                                         <MapPin className="w-4 h-4 text-primary-light" />
                                     </div>
                                     <div className="space-y-0.5">
-                                        <span className="text-xs text-gray-500 uppercase tracking-wider block">Adresse</span>
+                                        <span className="text-xs text-gray-500 uppercase tracking-wider block">{t('contact.addressLabel')}</span>
                                         <span className="text-sm text-gray-300">{COMPANY.address}</span>
                                     </div>
                                 </div>

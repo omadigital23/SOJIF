@@ -75,7 +75,7 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
                                                         onClick={onClose}
                                                         className="block px-6 py-2 text-sm text-neutral-gray hover:text-primary hover:bg-primary/5 transition-colors"
                                                     >
-                                                        {child.label}
+                                                        {t(child.label)}
                                                     </Link>
                                                 ))}
                                             </div>

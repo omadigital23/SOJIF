@@ -59,7 +59,7 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-4xl sm:text-5xl font-bold text-white mb-3"
                             >
-                                {department.title}
+                                {t(`departmentsList.${department.slug}.title`)}
                             </motion.h1>
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
@@ -67,7 +67,7 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                                 transition={{ delay: 0.1 }}
                                 className="text-white/70 text-lg max-w-2xl"
                             >
-                                {department.subtitle}
+                                {t(`departmentsList.${department.slug}.subtitle`)}
                             </motion.p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-2xl font-bold text-dark mb-4">{t('missionLabel')}</h2>
-                        <p className="text-dark/70 text-lg leading-relaxed">{department.mission}</p>
+                        <p className="text-dark/70 text-lg leading-relaxed">{t(`departmentsList.${department.slug}.mission`)}</p>
                     </motion.div>
                 </div>
             </section>
@@ -103,7 +103,7 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                                 className="flex items-start gap-3 bg-white rounded-xl p-5"
                             >
                                 <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                                <span className="text-dark/80 text-sm">{service}</span>
+                                <span className="text-dark/80 text-sm">{t(`departmentsList.${department.slug}.services.${i}`)}</span>
                             </motion.div>
                         ))}
                     </div>
@@ -122,7 +122,7 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                                         <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                                             <span className="text-primary font-bold text-sm">$</span>
                                         </div>
-                                        <span className="text-dark font-medium">{price}</span>
+                                        <span className="text-dark font-medium">{t(`departmentsList.${department.slug}.pricing.${i}`)}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -145,8 +145,8 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                                 transition={{ delay: i * 0.1 }}
                                 className="bg-light-gray rounded-2xl p-8"
                             >
-                                <h3 className="text-lg font-bold text-dark mb-3">{cs.title}</h3>
-                                <p className="text-dark/70 text-sm leading-relaxed">{cs.description}</p>
+                                <h3 className="text-lg font-bold text-dark mb-3">{t(`departmentsList.${department.slug}.cases.${i}.title`)}</h3>
+                                <p className="text-dark/70 text-sm leading-relaxed">{t(`departmentsList.${department.slug}.cases.${i}.description`)}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -184,9 +184,9 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                                         <DeptIcon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
                                     </div>
                                     <h3 className="font-bold text-dark group-hover:text-primary transition-colors">
-                                        {dept.title}
+                                        {t(`departmentsList.${dept.slug}.title`)}
                                     </h3>
-                                    <p className="text-neutral-gray text-sm mt-1">{dept.subtitle}</p>
+                                    <p className="text-neutral-gray text-sm mt-1">{t(`departmentsList.${dept.slug}.subtitle`)}</p>
                                 </Link>
                             );
                         })}

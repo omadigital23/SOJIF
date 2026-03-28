@@ -11,6 +11,7 @@ import { formatPrice } from '@/lib/utils';
 export default function OffersPage() {
     const t = useTranslations('offers');
     const tHome = useTranslations('home');
+    const tCommon = useTranslations('common');
     const { locale } = useParams();
 
     return (
@@ -63,28 +64,28 @@ export default function OffersPage() {
                                 {pack.highlighted && (
                                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent rounded-full text-white text-xs font-bold flex items-center gap-1">
                                         <Star className="w-3 h-3" />
-                                        Recommandé
+                                        {tCommon('recommended')}
                                     </div>
                                 )}
                                 <h3 className={`text-xl font-bold mb-2 ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
-                                    {pack.name}
+                                    {tHome(`packs.${i}.name`)}
                                 </h3>
                                 <p className={`text-sm mb-6 ${pack.highlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
-                                    {pack.description}
+                                    {tHome(`packs.${i}.description`)}
                                 </p>
                                 <div className="mb-6">
                                     <span className={`text-3xl font-black ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
                                         {formatPrice(pack.price)}
                                     </span>
                                     <span className={`text-sm ${pack.highlighted ? 'text-white/60' : 'text-neutral-gray'}`}>
-                                        {t('perYear')}
+                                        {tHome('perYear')}
                                     </span>
                                 </div>
                                 <ul className="space-y-3 mb-8 flex-1">
-                                    {pack.features.map((f) => (
-                                        <li key={f} className="flex items-start gap-2.5">
+                                    {pack.features.map((_, featureIndex) => (
+                                        <li key={featureIndex} className="flex items-start gap-2.5">
                                             <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${pack.highlighted ? 'text-accent' : 'text-primary'}`} />
-                                            <span className={`text-sm ${pack.highlighted ? 'text-white/80' : 'text-dark/70'}`}>{f}</span>
+                                            <span className={`text-sm ${pack.highlighted ? 'text-white/80' : 'text-dark/70'}`}>{tHome(`packs.${i}.features.${featureIndex}`)}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -93,7 +94,7 @@ export default function OffersPage() {
                                     className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${pack.highlighted ? 'bg-white text-primary hover:bg-white/90' : 'btn-primary'
                                         }`}
                                 >
-                                    {pack.cta}
+                                    {tHome(`packs.${i}.cta`)}
                                 </Link>
                             </motion.div>
                         ))}
@@ -118,9 +119,9 @@ export default function OffersPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {comparisonFeatures.map((row) => (
+                                {comparisonFeatures.map((row, i) => (
                                     <tr key={row.feature} className="border-b border-gray-50 last:border-0">
-                                        <td className="p-4 text-sm text-dark/70">{row.feature}</td>
+                                        <td className="p-4 text-sm text-dark/70">{t(`comparisonList.${i}.feature`)}</td>
                                         {(['essentiel', 'croissance', 'prestige'] as const).map((plan) => (
                                             <td
                                                 key={plan}
@@ -133,7 +134,7 @@ export default function OffersPage() {
                                                         <X className="w-5 h-5 text-gray-300 mx-auto" />
                                                     )
                                                 ) : (
-                                                    <span className="text-sm font-medium text-dark">{row[plan]}</span>
+                                                    <span className="text-sm font-medium text-dark">{t(`comparisonList.${i}.${plan}`)}</span>
                                                 )}
                                             </td>
                                         ))}

@@ -10,6 +10,7 @@ import { formatPrice } from '@/lib/utils';
 
 export default function PricingSection() {
     const t = useTranslations('home');
+    const tCommon = useTranslations('common');
     const { locale } = useParams();
 
     return (
@@ -65,7 +66,7 @@ export default function PricingSection() {
                             {pack.highlighted && (
                                 <div className="absolute -top-5 left-1/2 -translate-x-1/2 px-6 py-2 bg-gradient-to-r from-primary to-primary-light rounded-full text-white text-sm font-bold shadow-lg shadow-primary/30 flex items-center gap-2 whitespace-nowrap">
                                     <Star className="w-4 h-4 fill-current" />
-                                    Recommandé
+                                    {tCommon('recommended')}
                                 </div>
                             )}
 
@@ -74,13 +75,13 @@ export default function PricingSection() {
                                     className={`text-xl font-bold mb-3 ${pack.highlighted ? 'text-white' : 'text-dark'
                                         }`}
                                 >
-                                    {pack.name}
+                                    {t(`packs.${i}.name`)}
                                 </h3>
                                 <p
                                     className={`text-sm leading-relaxed ${pack.highlighted ? 'text-gray-300' : 'text-neutral-gray'
                                         }`}
                                 >
-                                    {pack.description}
+                                    {t(`packs.${i}.description`)}
                                 </p>
                             </div>
 
@@ -102,8 +103,8 @@ export default function PricingSection() {
                             </div>
 
                             <ul className="space-y-4 mb-10 flex-1">
-                                {pack.features.map((feature) => (
-                                    <li key={feature} className="flex items-start gap-3">
+                                {pack.features.map((_, featureIndex) => (
+                                    <li key={featureIndex} className="flex items-start gap-3">
                                         <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${pack.highlighted ? 'bg-primary text-white' : 'bg-primary/10 text-primary'
                                             }`}>
                                             <Check className="w-3 h-3" />
@@ -112,7 +113,7 @@ export default function PricingSection() {
                                             className={`text-sm font-medium ${pack.highlighted ? 'text-gray-300' : 'text-dark/80'
                                                 }`}
                                         >
-                                            {feature}
+                                            {t(`packs.${i}.features.${featureIndex}`)}
                                         </span>
                                     </li>
                                 ))}
@@ -125,7 +126,7 @@ export default function PricingSection() {
                                     : 'bg-dark text-white hover:bg-dark/90 hover:shadow-lg'
                                     }`}
                             >
-                                {pack.cta}
+                                {t(`packs.${i}.cta`)}
                             </Link>
                         </motion.div>
                     ))}

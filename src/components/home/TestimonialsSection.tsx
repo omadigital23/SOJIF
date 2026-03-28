@@ -67,19 +67,19 @@ export default function TestimonialsSection() {
                             </div>
 
                             <p className="text-dark/80 leading-relaxed mb-8 italic relative z-10">
-                                &ldquo;{review.content}&rdquo;
+                                &ldquo;{t(`testimonialsList.${i}.content`)}&rdquo;
                             </p>
 
                             <div className="flex items-center gap-4 border-t border-gray-50 pt-6 mt-auto">
                                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary/20">
-                                    {review.name.charAt(0)}
+                                    {t(`testimonialsList.${i}.name`).charAt(0)}
                                 </div>
                                 <div>
                                     <div className="font-bold text-dark">
-                                        {review.name}
+                                        {t(`testimonialsList.${i}.name`)}
                                     </div>
                                     <div className="text-sm text-neutral-gray font-medium">
-                                        {review.role}, <span className="text-primary">{review.company}</span>
+                                        {t(`testimonialsList.${i}.role`)}, <span className="text-primary">{t(`testimonialsList.${i}.company`)}</span>
                                     </div>
                                 </div>
                             </div>

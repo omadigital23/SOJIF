@@ -3,6 +3,12 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
+interface Activity {
+    description: string;
+    createdAt: string;
+    type: string;
+}
+
 interface Stats {
     totalClients: number;
     activeSubscriptions: number;
@@ -10,7 +16,7 @@ interface Stats {
     pendingPayments: number;
     candidates: number;
     messages: number;
-    recentActivity: Record<string, unknown>[];
+    recentActivity: Activity[];
 }
 
 export default function AdminStats() {

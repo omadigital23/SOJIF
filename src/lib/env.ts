@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const envSchema = z.object({
+const envShape = {
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
@@ -12,18 +12,51 @@ const envSchema = z.object({
   FLUTTERWAVE_WEBHOOK_SECRET: z.string().min(1),
   NEXT_PUBLIC_APP_URL: z.string().url(),
   SENTRY_DSN: z.string().optional(),
+} as const;
+
+type EnvKey = keyof typeof envShape;
+type Env = {
+  [K in EnvKey]: z.infer<(typeof envShape)[K]>;
+};
+
+const envCache: Partial<Env> = {};
+
+function readEnv<K extends EnvKey>(key: K): Env[K] {
+  if (key in envCache) {
+    return envCache[key] as Env[K];
+  }
+
+  const value = envShape[key].parse(process.env[key]) as Env[K];
+  envCache[key] = value;
+  return value;
+}
+
+export const env = new Proxy({} as Env, {
+  get(_target, prop) {
+    if (typeof prop !== 'string' || !(prop in envShape)) {
+      return undefined;
+    }
+
+    return readEnv(prop as EnvKey);
+  },
+  has(_target, prop) {
+    return typeof prop === 'string' && prop in envShape;
+  },
+  ownKeys() {
+    return Object.keys(envShape);
+  },
+  getOwnPropertyDescriptor(_target, prop) {
+    if (typeof prop !== 'string' || !(prop in envShape)) {
+      return undefined;
+    }
+
+    return {
+      enumerable: true,
+      configurable: true,
+    };
+  },
 });
 
-export const env = envSchema.parse({
-  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
-  RESEND_API_KEY: process.env.RESEND_API_KEY,
-  UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
-  UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
-  FLUTTERWAVE_PUBLIC_KEY: process.env.FLUTTERWAVE_PUBLIC_KEY,
-  FLUTTERWAVE_SECRET_KEY: process.env.FLUTTERWAVE_SECRET_KEY,
-  FLUTTERWAVE_WEBHOOK_SECRET: process.env.FLUTTERWAVE_WEBHOOK_SECRET,
-  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-  SENTRY_DSN: process.env.SENTRY_DSN,
-});
+export function getEnv<K extends EnvKey>(key: K): Env[K] {
+  return readEnv(key);
+}

@@ -1,5 +1,4 @@
-import { rateLimiters, getClientIP, checkRateLimit } from '../lib/rate-limit';
-import { Ratelimit } from '@upstash/ratelimit';
+import { getClientIP } from '../lib/rate-limit';
 
 // Mock Upstash
 jest.mock('@upstash/ratelimit', () => {

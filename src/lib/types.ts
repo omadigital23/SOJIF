@@ -20,7 +20,7 @@ export interface PricingPack {
     // Champs optionnels gardés pour compatibilité
     name?: string;
     description?: string;
-    features?: any[];
+    features?: string[];
     cta?: string;
     nameKey?: string;
     descriptionKey?: string;

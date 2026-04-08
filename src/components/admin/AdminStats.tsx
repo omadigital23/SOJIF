@@ -10,7 +10,7 @@ interface Stats {
     pendingPayments: number;
     candidates: number;
     messages: number;
-    recentActivity: any[];
+    recentActivity: Record<string, unknown>[];
 }
 
 export default function AdminStats() {

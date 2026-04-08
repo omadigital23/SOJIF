@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 
-const getContactSchema = (t: any) => z.object({
+const getContactSchema = (t: (key: string) => string) => z.object({
     firstName: z.string().min(2, t('errors.min2')),
     lastName: z.string().min(2, t('errors.min2')),
     email: z.string().email(t('errors.invalidEmail')),

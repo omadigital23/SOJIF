@@ -58,7 +58,7 @@ export async function GET(request: Request) {
             .eq('user_id', user.id)
             .maybeSingle();
 
-        let documents: any[] = [];
+        let documents: unknown[] = [];
         if (candidateData?.id) {
             const { data: docs } = await adminSupabase
                 .from('candidate_documents')

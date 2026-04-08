@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
 import ClientDashboard from '@/components/client/ClientDashboard';
 import ClientAuth from '@/components/client/ClientAuth';
 
 export default function ClientPortalPage() {
     const t = useTranslations('client');
-    const router = useRouter();
     const [isAuthorized, setIsAuthorized] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -16,7 +14,6 @@ export default function ClientPortalPage() {
         const checkAuth = async () => {
             try {
                 const token = localStorage.getItem('accessToken');
-                const userRole = localStorage.getItem('userRole');
 
                 if (!token) {
                     setIsAuthorized(false);

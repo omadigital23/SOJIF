@@ -29,8 +29,8 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        // Get user profile from database
-        const { data: userProfile } = await supabaseAdmin
+        // Get user profile from database (fetched for side effects / future use)
+        await supabaseAdmin
             .from('users')
             .select('*')
             .eq('id', user.id)

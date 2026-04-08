@@ -17,7 +17,6 @@ import {
     ArrowRight,
     ExternalLink,
 } from 'lucide-react';
-import { COMPANY } from '@/lib/constants';
 
 interface UserData {
     id: string;

@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
         // Send notification email to admin
         try {
-            await sendRecruitmentNotificationToAdmin({
+            const adminNotification = await sendRecruitmentNotificationToAdmin({
                 companyName: validated.companyName,
                 contactName: validated.contactName,
                 email: validated.email,
@@ -65,8 +65,17 @@ export async function POST(request: Request) {
                 urgency: validated.urgency || null,
                 contractType: validated.contractType || null,
             });
+            console.info('Admin recruitment notification email sent', {
+                emailId: adminNotification.id,
+                to: 'contact@sojifconsulting.com',
+                replyTo: validated.email,
+            });
         } catch (emailError) {
-            console.warn('Failed to send admin recruitment notification email:', emailError);
+            console.warn('Failed to send admin recruitment notification email:', {
+                error: emailError,
+                to: 'contact@sojifconsulting.com',
+                replyTo: validated.email,
+            });
             // Don't fail the request, continue normally
         }
 

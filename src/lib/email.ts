@@ -9,9 +9,34 @@ function getResendClient() {
     return new Resend(env.RESEND_API_KEY);
 }
 
+type SendEmailOptions = {
+    from: string;
+    to: string | string[];
+    subject: string;
+    html: string;
+    replyTo?: string | string[];
+};
+
+async function sendEmail(options: SendEmailOptions) {
+    const { data, error } = await getResendClient().emails.send(options);
+
+    if (error) {
+        const details = typeof error === 'object' && error !== null
+            ? JSON.stringify(error)
+            : String(error);
+        throw new Error(`Resend send failed: ${details}`);
+    }
+
+    if (!data?.id) {
+        throw new Error('Resend send failed: missing email id in response');
+    }
+
+    return data;
+}
+
 export async function sendSignupConfirmation(email: string, name: string, magicLink: string) {
     try {
-        return await getResendClient().emails.send({
+        return await sendEmail({
             from: FROM_EMAIL,
             to: email,
             subject: 'Bienvenue chez SOJIF Consulting - Confirmez votre email',
@@ -37,7 +62,7 @@ export async function sendSignupConfirmation(email: string, name: string, magicL
 
 export async function sendPasswordReset(email: string, name: string, resetLink: string) {
     try {
-        return await getResendClient().emails.send({
+        return await sendEmail({
             from: FROM_EMAIL,
             to: email,
             subject: 'SOJIF Consulting - Réinitialisation de votre mot de passe',
@@ -71,7 +96,7 @@ export async function sendNewsletterConfirmation(email: string, unsubscribeUrl?:
         : `<p style="margin-top:12px;font-size:12px;color:#6b7280">Pour vous désabonner, contactez <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a></p>`;
 
     try {
-        return await getResendClient().emails.send({
+        return await sendEmail({
             from: FROM_EMAIL,
             to: email,
             subject: 'SOJIF Consulting - Inscription à la newsletter confirmée',
@@ -101,7 +126,7 @@ export async function sendNewsletterConfirmation(email: string, unsubscribeUrl?:
 
 export async function sendContactConfirmation(email: string, name: string, subject: string) {
     try {
-        return await getResendClient().emails.send({
+        return await sendEmail({
             from: FROM_EMAIL,
             to: email,
             subject: 'SOJIF Consulting - Message reçu',
@@ -125,7 +150,7 @@ export async function sendContactConfirmation(email: string, name: string, subje
 
 export async function sendRecruitmentConfirmation(email: string, name: string, position: string) {
     try {
-        return await getResendClient().emails.send({
+        return await sendEmail({
             from: FROM_EMAIL,
             to: email,
             subject: 'SOJIF Consulting - Candidature reçue',
@@ -167,9 +192,10 @@ interface ContactNotificationData {
  */
 export async function sendContactNotificationToAdmin(data: ContactNotificationData) {
     try {
-        return await getResendClient().emails.send({
+        return await sendEmail({
             from: FROM_EMAIL,
             to: ADMIN_EMAIL,
+            replyTo: data.email,
             subject: `[CONTACT] Nouveau message de ${data.firstName} ${data.lastName} — ${data.subject}`,
             html: `
 <!DOCTYPE html><html><head><meta charset="utf-8">
@@ -230,9 +256,10 @@ export async function sendRecruitmentNotificationToAdmin(data: RecruitmentNotifi
     };
 
     try {
-        return await getResendClient().emails.send({
+        return await sendEmail({
             from: FROM_EMAIL,
             to: ADMIN_EMAIL,
+            replyTo: data.email,
             subject: `[RECRUTEMENT] Nouvelle demande de ${data.companyName} — ${data.positionTitle}`,
             html: `
 <!DOCTYPE html><html><head><meta charset="utf-8">

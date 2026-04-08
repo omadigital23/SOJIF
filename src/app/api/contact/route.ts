@@ -111,7 +111,7 @@ export async function POST(request: Request) {
 
         // Send notification email to admin
         try {
-            await sendContactNotificationToAdmin({
+            const adminNotification = await sendContactNotificationToAdmin({
                 firstName: validated.firstName,
                 lastName: validated.lastName,
                 email: validated.email,
@@ -121,8 +121,17 @@ export async function POST(request: Request) {
                 message: fullMessage,
             });
             addBreadcrumb('Admin contact notification email sent');
+            console.info('Admin contact notification email sent', {
+                emailId: adminNotification.id,
+                to: 'contact@sojifconsulting.com',
+                replyTo: validated.email,
+            });
         } catch (emailError) {
-            console.warn('Failed to send admin contact notification email:', emailError);
+            console.warn('Failed to send admin contact notification email:', {
+                error: emailError,
+                to: 'contact@sojifconsulting.com',
+                replyTo: validated.email,
+            });
             // Don't fail the request, continue normally
         }
 

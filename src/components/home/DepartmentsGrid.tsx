@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import {
@@ -26,6 +25,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function DepartmentsGrid() {
     const t = useTranslations('home');
+    const tDept = useTranslations('departments');
     const tCommon = useTranslations('common');
 
     return (
@@ -85,12 +85,12 @@ export default function DepartmentsGrid() {
                                         <IconComponent className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
                                     </div>
 
+                                    {/* title & subtitle via i18n */}
                                     <h3 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors relative z-10">
-                                        {dept.title}
+                                        {tDept(`departmentsList.${dept.slug}.title`)}
                                     </h3>
-
                                     <p className="text-neutral-gray text-sm leading-relaxed mb-6 relative z-10">
-                                        {dept.subtitle}
+                                        {tDept(`departmentsList.${dept.slug}.subtitle`)}
                                     </p>
 
                                     <span className="inline-flex items-center gap-2 text-primary text-sm font-semibold relative z-10 group/link">

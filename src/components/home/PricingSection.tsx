@@ -15,7 +15,6 @@ export default function PricingSection() {
 
     return (
         <section className="section-padding bg-white relative overflow-hidden">
-            {/* Background blur */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/3 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="container-custom relative z-10">
@@ -53,7 +52,7 @@ export default function PricingSection() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
                     {pricingPacks.map((pack, i) => (
                         <motion.div
-                            key={pack.name}
+                            key={i}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -71,48 +70,32 @@ export default function PricingSection() {
                             )}
 
                             <div className="mb-8">
-                                <h3
-                                    className={`text-xl font-bold mb-3 ${pack.highlighted ? 'text-white' : 'text-dark'
-                                        }`}
-                                >
+                                <h3 className={`text-xl font-bold mb-3 ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
                                     {t(`packs.${i}.name`)}
                                 </h3>
-                                <p
-                                    className={`text-sm leading-relaxed ${pack.highlighted ? 'text-gray-300' : 'text-neutral-gray'
-                                        }`}
-                                >
+                                <p className={`text-sm leading-relaxed ${pack.highlighted ? 'text-gray-300' : 'text-neutral-gray'}`}>
                                     {t(`packs.${i}.description`)}
                                 </p>
                             </div>
 
                             <div className="mb-8 pb-8 border-b border-gray-100/10">
                                 <div className="flex items-baseline gap-1">
-                                    <span
-                                        className={`text-4xl lg:text-5xl font-black ${pack.highlighted ? 'text-white' : 'text-dark'
-                                            }`}
-                                    >
+                                    <span className={`text-4xl lg:text-5xl font-black ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
                                         {formatPrice(pack.price)}
                                     </span>
-                                    <span
-                                        className={`text-sm font-medium ${pack.highlighted ? 'text-gray-400' : 'text-neutral-gray'
-                                            }`}
-                                    >
+                                    <span className={`text-sm font-medium ${pack.highlighted ? 'text-gray-400' : 'text-neutral-gray'}`}>
                                         {t('perYear')}
                                     </span>
                                 </div>
                             </div>
 
                             <ul className="space-y-4 mb-10 flex-1">
-                                {pack.features.map((_, featureIndex) => (
+                                {Array.from({ length: pack.featuresCount }).map((_, featureIndex) => (
                                     <li key={featureIndex} className="flex items-start gap-3">
-                                        <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${pack.highlighted ? 'bg-primary text-white' : 'bg-primary/10 text-primary'
-                                            }`}>
+                                        <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${pack.highlighted ? 'bg-primary text-white' : 'bg-primary/10 text-primary'}`}>
                                             <Check className="w-3 h-3" />
                                         </div>
-                                        <span
-                                            className={`text-sm font-medium ${pack.highlighted ? 'text-gray-300' : 'text-dark/80'
-                                                }`}
-                                        >
+                                        <span className={`text-sm font-medium ${pack.highlighted ? 'text-gray-300' : 'text-dark/80'}`}>
                                             {t(`packs.${i}.features.${featureIndex}`)}
                                         </span>
                                     </li>

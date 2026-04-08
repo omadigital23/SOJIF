@@ -7,6 +7,7 @@ import { captureException, addBreadcrumb } from '@/lib/sentry';
 
 const paymentSchema = z.object({
     packName: z.string().min(1),
+    packId: z.string().optional(),    // ID interne du pack (optionnel pour l'instant)
     amount: z.number().positive(),
     currency: z.literal('XOF'),
     customerEmail: z.string().email(),
@@ -18,15 +19,11 @@ export async function POST(request: Request) {
     const clientIP = getClientIP(request);
 
     try {
-        // Apply rate limiting
+        // Rate limiting
         const rateLimit = await rateLimiters.payment(clientIP);
         if (!rateLimit.success) {
             return NextResponse.json(
-                {
-                    success: false,
-                    message: 'Trop de tentatives de paiement. Veuillez réessayer plus tard.',
-                    retryAfter: rateLimit.resetTime,
-                },
+                { success: false, message: 'Trop de tentatives de paiement. Veuillez réessayer plus tard.', retryAfter: rateLimit.resetTime },
                 { status: 429, headers: { 'Retry-After': rateLimit.resetTime.toString() } }
             );
         }
@@ -39,18 +36,18 @@ export async function POST(request: Request) {
             packName: validated.packName,
         });
 
-        // Find user by email (if exists)
+        // Trouver l'utilisateur par email
         const { data: userData } = await supabaseAdmin
             .from('users')
             .select('id')
             .eq('email', validated.customerEmail)
-            .single();
+            .maybeSingle();
 
-        // Create pending payment record
+        // Créer l'enregistrement de paiement en base avec pack_id
         const { data: paymentData, error: paymentError } = await supabaseAdmin
             .from('payments')
             .insert({
-                user_id: userData?.id || null,
+                user_id: userData?.id ?? null,
                 amount: validated.amount,
                 currency: validated.currency,
                 status: 'pending',
@@ -59,6 +56,7 @@ export async function POST(request: Request) {
                 customer_name: validated.customerName,
                 customer_phone: validated.customerPhone,
                 description: `Abonnement ${validated.packName}`,
+                pack_id: validated.packId ?? null,   // ← transmis au webhook pour activer la subscription
             })
             .select('id')
             .single();
@@ -67,12 +65,12 @@ export async function POST(request: Request) {
             console.error('Payment record error:', paymentError);
             captureException(paymentError as Error, { source: 'payments/initialize' });
             return NextResponse.json(
-                { success: false, message: 'Erreur lors de l\'initialisation du paiement.' },
+                { success: false, message: "Erreur lors de l'initialisation du paiement." },
                 { status: 500 }
             );
         }
 
-        // Initialize Flutterwave payment
+        // Initialiser le paiement Flutterwave
         const flutterwaveResponse = await initializeFlutterwavePayment(
             validated.amount,
             validated.customerEmail,
@@ -82,18 +80,14 @@ export async function POST(request: Request) {
             `Abonnement ${validated.packName}`
         );
 
-        // Update payment record with Flutterwave details
-        const { error: updateError } = await supabaseAdmin
+        // Mettre à jour la référence externe
+        await supabaseAdmin
             .from('payments')
             .update({
                 external_id: flutterwaveResponse.txRef,
                 flutterwave_id: flutterwaveResponse.flutterwaveId,
             })
             .eq('id', paymentData.id);
-
-        if (updateError) {
-            console.warn('Payment update error:', updateError);
-        }
 
         addBreadcrumb('Payment initialized successfully', {
             paymentId: paymentData.id,
@@ -106,28 +100,20 @@ export async function POST(request: Request) {
                 paymentId: paymentData.id,
                 checkoutUrl: flutterwaveResponse.checkoutUrl,
                 txRef: flutterwaveResponse.txRef,
-                message: 'Paiement initialisé avec succès. Veuillez compléter le paiement.',
+                message: 'Paiement initialisé. Veuillez compléter le paiement.',
             },
             { status: 200 }
         );
     } catch (error) {
         if (error instanceof z.ZodError) {
-            return NextResponse.json(
-                { success: false, errors: error.errors },
-                { status: 400 }
-            );
+            return NextResponse.json({ success: false, errors: error.errors }, { status: 400 });
         }
-        
         if (error instanceof Error) {
-            captureException(error, {
-                source: 'payments/initialize',
-                ip: clientIP,
-            });
+            captureException(error, { source: 'payments/initialize', ip: clientIP });
         }
-        
         console.error('Payment API error:', error);
         return NextResponse.json(
-            { success: false, message: 'Erreur d\'initialisation du paiement.' },
+            { success: false, message: "Erreur d'initialisation du paiement." },
             { status: 500 }
         );
     }

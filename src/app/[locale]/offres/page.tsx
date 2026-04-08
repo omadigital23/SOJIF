@@ -51,7 +51,7 @@ export default function OffersPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                         {pricingPacks.map((pack, i) => (
                             <motion.div
-                                key={pack.name}
+                                key={i}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -82,17 +82,18 @@ export default function OffersPage() {
                                     </span>
                                 </div>
                                 <ul className="space-y-3 mb-8 flex-1">
-                                    {pack.features.map((_, featureIndex) => (
+                                    {Array.from({ length: pack.featuresCount }).map((_, featureIndex) => (
                                         <li key={featureIndex} className="flex items-start gap-2.5">
                                             <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${pack.highlighted ? 'text-accent' : 'text-primary'}`} />
-                                            <span className={`text-sm ${pack.highlighted ? 'text-white/80' : 'text-dark/70'}`}>{tHome(`packs.${i}.features.${featureIndex}`)}</span>
+                                            <span className={`text-sm ${pack.highlighted ? 'text-white/80' : 'text-dark/70'}`}>
+                                                {tHome(`packs.${i}.features.${featureIndex}`)}
+                                            </span>
                                         </li>
                                     ))}
                                 </ul>
                                 <Link
                                     href={`/${locale}/contact`}
-                                    className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${pack.highlighted ? 'bg-white text-primary hover:bg-white/90' : 'btn-primary'
-                                        }`}
+                                    className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${pack.highlighted ? 'bg-white text-primary hover:bg-white/90' : 'btn-primary'}`}
                                 >
                                     {tHome(`packs.${i}.cta`)}
                                 </Link>
@@ -113,14 +114,14 @@ export default function OffersPage() {
                             <thead>
                                 <tr className="border-b border-gray-100">
                                     <th className="text-left p-4 text-sm font-semibold text-dark">{t('feature')}</th>
-                                    <th className="p-4 text-sm font-semibold text-dark text-center">Essentiel</th>
-                                    <th className="p-4 text-sm font-semibold text-primary text-center bg-primary/5">Croissance</th>
-                                    <th className="p-4 text-sm font-semibold text-dark text-center">Prestige</th>
+                                    <th className="p-4 text-sm font-semibold text-dark text-center">{tHome('packs.0.name')}</th>
+                                    <th className="p-4 text-sm font-semibold text-primary text-center bg-primary/5">{tHome('packs.1.name')}</th>
+                                    <th className="p-4 text-sm font-semibold text-dark text-center">{tHome('packs.2.name')}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {comparisonFeatures.map((row, i) => (
-                                    <tr key={row.feature} className="border-b border-gray-50 last:border-0">
+                                    <tr key={i} className="border-b border-gray-50 last:border-0">
                                         <td className="p-4 text-sm text-dark/70">{t(`comparisonList.${i}.feature`)}</td>
                                         {(['essentiel', 'croissance', 'prestige'] as const).map((plan) => (
                                             <td
@@ -134,7 +135,9 @@ export default function OffersPage() {
                                                         <X className="w-5 h-5 text-gray-300 mx-auto" />
                                                     )
                                                 ) : (
-                                                    <span className="text-sm font-medium text-dark">{t(`comparisonList.${i}.${plan}`)}</span>
+                                                    <span className="text-sm font-medium text-dark">
+                                                        {t(`comparisonList.${i}.${plan}`)}
+                                                    </span>
                                                 )}
                                             </td>
                                         ))}

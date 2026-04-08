@@ -47,7 +47,7 @@ export default function DigitalizationPage() {
                 </div>
             </section>
 
-            {/* Services grid */}
+            {/* Services grid — toutes les chaînes viennent de i18n via servicesList */}
             <section className="section-padding bg-white">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -55,7 +55,7 @@ export default function DigitalizationPage() {
                             const Icon = iconMap[service.icon] || Globe;
                             return (
                                 <motion.div
-                                    key={service.title}
+                                    key={i}
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -72,8 +72,8 @@ export default function DigitalizationPage() {
                                         {t(`servicesList.${i}.description`)}
                                     </p>
                                     <ul className="space-y-2">
-                                        {service.features.map((f, j) => (
-                                            <li key={f} className="flex items-center gap-2">
+                                        {Array.from({ length: service.featuresCount }).map((_, j) => (
+                                            <li key={j} className="flex items-center gap-2">
                                                 <Check className="w-4 h-4 text-primary group-hover:text-accent flex-shrink-0 transition-colors" />
                                                 <span className="text-dark/70 group-hover:text-white/80 text-sm transition-colors">
                                                     {t(`servicesList.${i}.features.${j}`)}

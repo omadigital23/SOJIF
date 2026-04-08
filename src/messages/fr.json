@@ -54,15 +54,17 @@
         "pricingLabel": "Nos Offres",
         "pricingSubtitle": "Accompagnement 360° : Juridique, Fiscal, Comptabilité & RH",
         "pricingTerms": "Engagement : 12 mois | Condition : 50% d'acompte à la signature.",
-        "whyTitle": "Services Transversaux",
+        "whyTitle": "Pourquoi SOJIF Consulting ?",
         "whyLabel": "Nos Atouts",
-        "whySubtitle": "Inclus dans tous les Packs pour votre sérénité",
-        "why1Title": "Guichet Unique",
-        "why1Desc": "Un seul interlocuteur pour tous vos besoins administratifs.",
-        "why2Title": "Archivage Numérique",
-        "why2Desc": "Tous vos documents (bilans, contrats, statuts) sont sécurisés et accessibles en ligne.",
-        "why3Title": "Réactivité",
-        "why3Desc": "Réponse sous 24h à toutes vos sollicitations.",
+        "whySubtitle": "Un cabinet structuré pour accompagner votre croissance",
+        "why1Title": "Expertise Pluridisciplinaire",
+        "why1Desc": "6 départements complémentaires pour une vision 360° de votre entreprise.",
+        "why2Title": "Proximité & Réactivité",
+        "why2Desc": "Un accompagnement personnalisé avec des interlocuteurs dédiés et réactifs.",
+        "why3Title": "Excellence Opérationnelle",
+        "why3Desc": "Des méthodologies éprouvées et des résultats mesurables.",
+        "why4Title": "Ancrage Africain",
+        "why4Desc": "Une maîtrise profonde du contexte juridique, fiscal et économique d'Afrique de l'Ouest.",
         "testimonialsTitle": "Ce que disent nos clients",
         "testimonialsLabel": "Témoignages",
         "testimonialsSubtitle": "Des entreprises qui nous font confiance",
@@ -79,7 +81,7 @@
                     "1": "Déclaration de TVA mensuelle et bilan annuel",
                     "2": "1 modification statutaire simple par an ou 1 PV annuel",
                     "3": "Conseil fiscal par e-mail et veille réglementaire",
-                    "4": "Rédaction de contrats de travail types (jusqu’à 5 employés)",
+                    "4": "Rédaction de contrats de travail types (jusqu'à 5 employés)",
                     "5": "Conseils sur les déclarations IPRES/CSS",
                     "6": "Assistance téléphonique prioritaire (3 appels/mois)"
                 },
@@ -93,7 +95,7 @@
                     "1": "Déclarations fiscales et sociales mensuelles",
                     "2": "2 modifications statutaires et 2 contrats commerciaux par an",
                     "3": "Audit fiscal annuel préventif",
-                    "4": "Gestion de la paie (jusqu’à 15 employés)",
+                    "4": "Gestion de la paie (jusqu'à 15 employés)",
                     "5": "Gestion dossiers disciplinaires et conseil droit du travail",
                     "6": "Réunion de stratégie trimestrielle (présentiel ou visio)"
                 },
@@ -175,6 +177,7 @@
         "subtitle": "Six centres d'expertise pour une prise en charge complète",
         "missionLabel": "Notre Mission",
         "servicesLabel": "Nos Services",
+        "pricingLabel": "Tarifs Indicatifs",
         "casesLabel": "Cas Pratiques",
         "ctaTitle": "Besoin d'un accompagnement ?",
         "ctaButton": "Demander une consultation",
@@ -201,18 +204,9 @@
                     "2": "Abonnement conseil : Sur devis selon besoins"
                 },
                 "cases": {
-                    "0": {
-                        "title": "Restructuration d'un groupe industriel",
-                        "description": "Accompagnement d'un groupe de 5 sociétés dans une opération de fusion-absorption, avec optimisation de la structure juridique et fiscale."
-                    },
-                    "1": {
-                        "title": "Protection contractuelle à l'international",
-                        "description": "Mise en place d'un cadre contractuel complet pour une entreprise d'export, couvrant 8 pays de la zone CEDEAO."
-                    },
-                    "2": {
-                        "title": "Résolution d'un litige commercial",
-                        "description": "Gestion d'un contentieux de 500M FCFA entre partenaires commerciaux, résolu par médiation en 3 mois."
-                    }
+                    "0": { "title": "Restructuration d'un groupe industriel", "description": "Accompagnement d'un groupe de 5 sociétés dans une opération de fusion-absorption, avec optimisation de la structure juridique et fiscale." },
+                    "1": { "title": "Protection contractuelle à l'international", "description": "Mise en place d'un cadre contractuel complet pour une entreprise d'export, couvrant 8 pays de la zone CEDEAO." },
+                    "2": { "title": "Résolution d'un litige commercial", "description": "Gestion d'un contentieux de 500M FCFA entre partenaires commerciaux, résolu par médiation en 3 mois." }
                 }
             },
             "fiscalite": {
@@ -236,18 +230,9 @@
                     "2": "Gestion de la paie : À partir de 15 000 FCFA par bulletin"
                 },
                 "cases": {
-                    "0": {
-                        "title": "Optimisation fiscale d'une PME",
-                        "description": "Réduction de 30% de la charge fiscale d'une PME grâce à l'utilisation optimale des dispositifs d'incitation fiscale du Code Général des Impôts."
-                    },
-                    "1": {
-                        "title": "Mise en conformité comptable",
-                        "description": "Restructuration complète du système comptable d'une entreprise de 200 employés selon les normes SYSCOHADA révisé."
-                    },
-                    "2": {
-                        "title": "Accompagnement lors d'un contrôle fiscal",
-                        "description": "Assistance d'une société lors d'un contrôle fiscal, résultant en une réduction de 85% du redressement initial."
-                    }
+                    "0": { "title": "Optimisation fiscale d'une PME", "description": "Réduction de 30% de la charge fiscale d'une PME grâce à l'utilisation optimale des dispositifs d'incitation fiscale du Code Général des Impôts." },
+                    "1": { "title": "Mise en conformité comptable", "description": "Restructuration complète du système comptable d'une entreprise de 200 employés selon les normes SYSCOHADA révisé." },
+                    "2": { "title": "Accompagnement lors d'un contrôle fiscal", "description": "Assistance d'une société lors d'un contrôle fiscal, résultant en une réduction de 85% du redressement initial." }
                 }
             },
             "rh": {
@@ -272,18 +257,9 @@
                     "3": "Frais de dossier par recrutement cadre : 50 000 FCFA par salarié"
                 },
                 "cases": {
-                    "0": {
-                        "title": "Transformation RH d'une banque régionale",
-                        "description": "Refonte complète de la politique RH d'un établissement bancaire de 400 employés, incluant la mise en place d'un SIRH et d'un plan de formation."
-                    },
-                    "1": {
-                        "title": "Mise en conformité sociale",
-                        "description": "Audit social complet et plan de mise en conformité pour une entreprise industrielle, évitant des risques de contentieux évalués à 200M FCFA."
-                    },
-                    "2": {
-                        "title": "Programme de rétention des talents",
-                        "description": "Conception et déploiement d'un programme de fidélisation ayant réduit le turnover de 45% en 18 mois."
-                    }
+                    "0": { "title": "Transformation RH d'une banque régionale", "description": "Refonte complète de la politique RH d'un établissement bancaire de 400 employés, incluant la mise en place d'un SIRH et d'un plan de formation." },
+                    "1": { "title": "Mise en conformité sociale", "description": "Audit social complet et plan de mise en conformité pour une entreprise industrielle, évitant des risques de contentieux évalués à 200M FCFA." },
+                    "2": { "title": "Programme de rétention des talents", "description": "Conception et déploiement d'un programme de fidélisation ayant réduit le turnover de 45% en 18 mois." }
                 }
             },
             "conseil": {
@@ -306,18 +282,9 @@
                     "1": "Élaboration de Business Plan : Sur devis"
                 },
                 "cases": {
-                    "0": {
-                        "title": "Levée de fonds pour une startup tech",
-                        "description": "Accompagnement d'une startup fintech dans sa levée de fonds de 1,5 milliard FCFA, de la structuration du dossier à la négociation avec les investisseurs."
-                    },
-                    "1": {
-                        "title": "Restructuration opérationnelle",
-                        "description": "Optimisation des processus d'une entreprise de distribution, générant une amélioration de 25% de la productivité et 15% de réduction des coûts."
-                    },
-                    "2": {
-                        "title": "Plan stratégique quinquennal",
-                        "description": "Élaboration et déploiement d'un plan stratégique pour une coopérative agricole de 3000 membres, doublant le chiffre d'affaires en 4 ans."
-                    }
+                    "0": { "title": "Levée de fonds pour une startup tech", "description": "Accompagnement d'une startup fintech dans sa levée de fonds de 1,5 milliard FCFA, de la structuration du dossier à la négociation avec les investisseurs." },
+                    "1": { "title": "Restructuration opérationnelle", "description": "Optimisation des processus d'une entreprise de distribution, générant une amélioration de 25% de la productivité et 15% de réduction des coûts." },
+                    "2": { "title": "Plan stratégique quinquennal", "description": "Élaboration et déploiement d'un plan stratégique pour une coopérative agricole de 3000 membres, doublant le chiffre d'affaires en 4 ans." }
                 }
             },
             "digitalisation": {
@@ -341,18 +308,9 @@
                     "2": "Application sur mesure : Sur devis"
                 },
                 "cases": {
-                    "0": {
-                        "title": "Plateforme e-commerce B2B",
-                        "description": "Développement d'une marketplace B2B connectant 200 fournisseurs et 5000 acheteurs professionnels dans la zone UEMOA."
-                    },
-                    "1": {
-                        "title": "Digitalisation d'une mutuelle de santé",
-                        "description": "Conception d'une application mobile et web pour la gestion de 50 000 adhérents, intégrant le paiement mobile."
-                    },
-                    "2": {
-                        "title": "CRM pour réseau de distribution",
-                        "description": "Mise en place d'un CRM sur mesure pour un réseau de 150 points de vente, avec automatisation du reporting et suivi des performances."
-                    }
+                    "0": { "title": "Plateforme e-commerce B2B", "description": "Développement d'une marketplace B2B connectant 200 fournisseurs et 5000 acheteurs professionnels dans la zone UEMOA." },
+                    "1": { "title": "Digitalisation d'une mutuelle de santé", "description": "Conception d'une application mobile et web pour la gestion de 50 000 adhérents, intégrant le paiement mobile." },
+                    "2": { "title": "CRM pour réseau de distribution", "description": "Mise en place d'un CRM sur mesure pour un réseau de 150 points de vente, avec automatisation du reporting et suivi des performances." }
                 }
             },
             "recrutement": {
@@ -376,18 +334,9 @@
                     "2": "Intérim : Commission 1 mois de salaire + 20 000 FCFA frais de dossier"
                 },
                 "cases": {
-                    "0": {
-                        "title": "Recrutement massif pour une mine",
-                        "description": "Sourcing et placement de 150 profils techniques et administratifs pour un projet minier en 6 mois, avec un taux de rétention de 92%."
-                    },
-                    "1": {
-                        "title": "Recrutement de direction pour une banque",
-                        "description": "Recherche et placement de 5 directeurs pour une banque régionale, incluant un processus d'assessment center de 3 jours."
-                    },
-                    "2": {
-                        "title": "Programme de stages qualifiants",
-                        "description": "Conception et gestion d'un programme de stages pour 200 jeunes diplômés par an, avec un taux d'insertion de 65%."
-                    }
+                    "0": { "title": "Recrutement massif pour une mine", "description": "Sourcing et placement de 150 profils techniques et administratifs pour un projet minier en 6 mois, avec un taux de rétention de 92%." },
+                    "1": { "title": "Recrutement de direction pour une banque", "description": "Recherche et placement de 5 directeurs pour une banque régionale, incluant un processus d'assessment center de 3 jours." },
+                    "2": { "title": "Programme de stages qualifiants", "description": "Conception et gestion d'un programme de stages pour 200 jeunes diplômés par an, avec un taux d'insertion de 65%." }
                 }
             }
         }
@@ -419,7 +368,15 @@
         "description": "Nous concevons et déployons des solutions digitales sur mesure pour moderniser votre activité et améliorer votre compétitivité sur le marché africain.",
         "ctaTitle": "Un projet digital en tête ?",
         "ctaDesc": "Discutons de votre projet et construisons ensemble la solution idéale.",
-        "ctaButton": "Demander un devis"
+        "ctaButton": "Demander un devis",
+        "servicesList": {
+            "0": { "title": "Sites Vitrines & Institutionnels", "description": "Des sites web modernes et performants qui reflètent l'excellence de votre entreprise.", "features": { "0": "Design premium et responsive", "1": "Optimisation SEO avancée", "2": "Hébergement haute performance", "3": "Maintenance et support inclus" } },
+            "1": { "title": "E-commerce", "description": "Des plateformes de vente en ligne complètes, intégrant les solutions de paiement africaines.", "features": { "0": "Paiement mobile intégré (Orange Money, Wave, etc.)", "1": "Gestion des stocks en temps réel", "2": "Interface d'administration intuitive", "3": "Livraison et logistique" } },
+            "2": { "title": "Applications Web", "description": "Des applications métier sur mesure pour digitaliser et automatiser vos processus.", "features": { "0": "Analyse des besoins métier", "1": "Développement agile", "2": "Intégration avec vos outils existants", "3": "Formation des utilisateurs" } },
+            "3": { "title": "Applications Mobiles", "description": "Des applications iOS et Android natives ou cross-platform pour toucher vos clients où qu'ils soient.", "features": { "0": "Design UX/UI optimisé mobile", "1": "Performance et fluidité", "2": "Notifications push", "3": "Publication sur les stores" } },
+            "4": { "title": "CRM & Automatisation", "description": "Des outils de gestion de la relation client et d'automatisation pour améliorer votre efficacité.", "features": { "0": "CRM personnalisé", "1": "Automatisation des tâches répétitives", "2": "Reporting et tableaux de bord", "3": "Intégration multi-canaux" } },
+            "5": { "title": "Branding & Identité Digitale", "description": "Une identité visuelle forte et cohérente sur tous vos supports digitaux.", "features": { "0": "Logo et charte graphique", "1": "Templates et supports marketing", "2": "Stratégie réseaux sociaux", "3": "Contenu visuel professionnel" } }
+        }
     },
     "recruitment": {
         "title": "Recrutement & Placement Professionnel",
@@ -440,6 +397,32 @@
         "companyStep4": "Entretiens et évaluation",
         "companyStep5": "Signature du contrat et placement",
         "companyCta": "Soumettre un besoin",
+        "companyFormTitle": "Soumettre un besoin de recrutement",
+        "companyFormSubtitle": "Remplissez ce formulaire et notre équipe vous contactera sous 24h",
+        "companyFormCompany": "Nom de l'entreprise",
+        "companyFormContact": "Nom du responsable",
+        "companyFormEmail": "Email professionnel",
+        "companyFormPhone": "Téléphone",
+        "companyFormPosition": "Intitulé du poste",
+        "companyFormDepartment": "Département",
+        "companyFormDescription": "Description du poste",
+        "companyFormRequirements": "Compétences requises",
+        "companyFormSalary": "Fourchette salariale",
+        "companyFormLocation": "Localisation",
+        "companyFormUrgency": "Urgence",
+        "companyFormUrgencyLow": "Faible (> 2 mois)",
+        "companyFormUrgencyMedium": "Moyenne (1-2 mois)",
+        "companyFormUrgencyHigh": "Haute (< 1 mois)",
+        "companyFormContract": "Type de contrat",
+        "companyFormContractCdi": "CDI",
+        "companyFormContractCdd": "CDD",
+        "companyFormContractInterim": "Intérim",
+        "companyFormContractFreelance": "Freelance",
+        "companyFormContractStage": "Stage",
+        "companyFormSubmit": "Soumettre la demande",
+        "companyFormSending": "Envoi en cours...",
+        "companyFormSuccess": "Demande envoyée ! Notre équipe vous contactera sous 24h.",
+        "companyFormError": "Une erreur est survenue. Veuillez réessayer.",
         "form": {
             "title": "Postulez maintenant",
             "fullName": "Nom complet",
@@ -453,27 +436,14 @@
             "sending": "Envoi en cours...",
             "success": "Candidature envoyée avec succès !",
             "error": "Une erreur est survenue. Veuillez réessayer.",
-            "successMsg": "Votre candidature a été enregistrée avec succès. Notre équipe vous contactera dans les 48h.",
+            "successMsg": "Votre candidature a été enregistrée. Notre équipe vous contactera dans les 48h.",
             "fileTooLarge": "Fichier trop volumineux (max 5MB)",
             "formatPdfOnly": "Format PDF uniquement",
             "pdfMax5mb": "PDF, max 5MB",
             "selectDomain": "Sélectionnez votre domaine",
             "selectExperience": "Sélectionnez votre expérience",
-            "domains": {
-                "legal": "Juridique & Fiscal",
-                "finance": "Finance & Comptabilité",
-                "hr": "Ressources Humaines",
-                "it": "Informatique & Digital",
-                "management": "Management & Stratégie",
-                "sales": "Commercial & Marketing",
-                "other": "Autre"
-            },
-            "experiences": {
-                "junior": "Débutant (0-2 ans)",
-                "mid": "Intermédiaire (3-5 ans)",
-                "senior": "Confirmé (5-10 ans)",
-                "expert": "Expert (+10 ans)"
-            }
+            "domains": { "legal": "Juridique & Fiscal", "finance": "Finance & Comptabilité", "hr": "Ressources Humaines", "it": "Informatique & Digital", "management": "Management & Stratégie", "sales": "Commercial & Marketing", "other": "Autre" },
+            "experiences": { "junior": "Débutant (0-2 ans)", "mid": "Intermédiaire (3-5 ans)", "senior": "Confirmé (5-10 ans)", "expert": "Expert (+10 ans)" }
         }
     },
     "resources": {
@@ -503,58 +473,55 @@
         "success": "Message envoyé avec succès !",
         "error": "Erreur lors de l'envoi. Veuillez réessayer.",
         "whatsappCta": "Discuter sur WhatsApp",
-        "subjects": {
-            "general": "Demande générale",
-            "consultation": "Demande de consultation",
-            "subscription": "Offres d'abonnement",
-            "digitalization": "Projet de digitalisation",
-            "recruitment": "Recrutement & placement",
-            "other": "Autre"
-        },
+        "subjects": { "general": "Demande générale", "consultation": "Demande de consultation", "subscription": "Offres d'abonnement", "digitalization": "Projet de digitalisation", "recruitment": "Recrutement & placement", "other": "Autre" },
         "directorLabel": "Nom et prénom du directeur",
         "domainLabel": "Domaine d'activité",
         "turnoverLabel": "Chiffres d'affaires annuels",
         "employeesLabel": "Nombre de salariés ou free-lance",
         "challengeLabel": "Quel est votre plus gros défi actuel ?",
-        "challengeOptions": {
-            "tax": "Fiscalité",
-            "accounting": "Gestion Comptable",
-            "hr": "Structure RH",
-            "other": "Autre"
-        },
+        "challengeOptions": { "tax": "Fiscalité", "accounting": "Gestion Comptable", "hr": "Structure RH", "other": "Autre" },
         "phaseLabel": "Phase actuelle de l'entreprise",
-        "phaseOptions": {
-            "creation": "Création",
-            "growth": "Croissance",
-            "restructuring": "Restructuration"
-        },
+        "phaseOptions": { "creation": "Création", "growth": "Croissance", "restructuring": "Restructuration" },
         "budgetLabel": "Budget annuel pour la sécurisation de votre gestion",
         "meetingLabel": "Moyen de contact préféré",
-        "meetingOptions": {
-            "video": "Appel Visio",
-            "inPerson": "Présentiel"
-        },
+        "meetingOptions": { "video": "Appel Visio", "inPerson": "Présentiel" },
         "sectionDirector": "Informations du Directeur",
         "sectionCompany": "Informations Entreprise",
         "sectionChallenge": "Votre Challenge & Projet",
-        "placeholders": {
-            "domain": "Ex: Commerce, BTP, Services...",
-            "turnover": "Ex: 50M FCFA",
-            "employees": "Ex: 10 salariés",
-            "select": "Sélectionnez...",
-            "budget": "Ex: 5M FCFA"
-        },
-        "errors": {
-            "min2": "Minimum 2 caractères",
-            "invalidEmail": "Email invalide",
-            "invalidPhone": "Numéro invalide",
-            "companyRequired": "Nom de l'entreprise requis",
-            "domainRequired": "Domaine requis",
-            "turnoverRequired": "Chiffre d'affaires requis",
-            "employeesRequired": "Nombre de salariés requis",
-            "budgetRequired": "Budget requis",
-            "selectSubject": "Sélectionnez un sujet",
-            "min10": "Minimum 10 caractères"
+        "placeholders": { "domain": "Ex: Commerce, BTP, Services...", "turnover": "Ex: 50M FCFA", "employees": "Ex: 10 salariés", "select": "Sélectionnez...", "budget": "Ex: 5M FCFA" },
+        "errors": { "min2": "Minimum 2 caractères", "invalidEmail": "Email invalide", "invalidPhone": "Numéro invalide", "companyRequired": "Nom de l'entreprise requis", "domainRequired": "Domaine requis", "turnoverRequired": "Chiffre d'affaires requis", "employeesRequired": "Nombre de salariés requis", "budgetRequired": "Budget requis", "selectSubject": "Sélectionnez un sujet", "min10": "Minimum 10 caractères" }
+    },
+    "clientArea": {
+        "loginTitle": "Espace Client",
+        "loginSubtitle": "Connectez-vous pour accéder à votre espace personnel",
+        "email": "Adresse email",
+        "password": "Mot de passe",
+        "forgotPassword": "Mot de passe oublié ?",
+        "login": "Se connecter",
+        "loggingIn": "Connexion en cours...",
+        "noAccount": "Pas encore client ?",
+        "contactUs": "Contactez-nous",
+        "errorInvalid": "Email ou mot de passe incorrect.",
+        "errorGeneric": "Une erreur est survenue. Veuillez réessayer.",
+        "dashboardTitle": "Mon Espace Client",
+        "logout": "Déconnexion",
+        "subscription": "Mon Abonnement",
+        "subscriptionActive": "Actif",
+        "subscriptionInactive": "Inactif",
+        "subscriptionNone": "Aucun abonnement actif. Découvrez nos offres pour commencer.",
+        "statusLabel": "Statut",
+        "packLabel": "Pack",
+        "startDate": "Date de début",
+        "documents": "Mes Documents",
+        "noDocuments": "Aucun document disponible pour le moment.",
+        "payments": "Historique des Paiements",
+        "noPayments": "Aucun paiement enregistré.",
+        "date": "Date",
+        "amount": "Montant",
+        "paymentStatus": {
+            "success": "Payé",
+            "pending": "En attente",
+            "failed": "Échoué"
         }
     },
     "footer": {

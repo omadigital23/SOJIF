@@ -1,27 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import {
-    Building2,
-    CheckCircle,
-    Users,
-    FileText,
-    Search,
-    Handshake,
-} from 'lucide-react';
+import { Building2, UserCircle } from 'lucide-react';
 import CandidateForm from '@/components/recruitment/CandidateForm';
+import CompanyRecruitmentForm from '@/components/recruitment/CompanyRecruitmentForm';
 
 export default function RecruitmentPage() {
     const t = useTranslations('recruitment');
-
-    const companySteps = [
-        { icon: FileText, text: t('companyStep1') },
-        { icon: Search, text: t('companyStep2') },
-        { icon: Users, text: t('companyStep3') },
-        { icon: CheckCircle, text: t('companyStep4') },
-        { icon: Handshake, text: t('companyStep5') },
-    ];
+    const [activeTab, setActiveTab] = useState<'candidate' | 'company'>('candidate');
 
     return (
         <div className="pt-24 lg:pt-32">
@@ -46,58 +34,93 @@ export default function RecruitmentPage() {
                 </div>
             </section>
 
-            {/* Two columns */}
+            {/* Tab switcher */}
+            <section className="bg-white border-b border-gray-100 sticky top-16 z-30">
+                <div className="container-custom">
+                    <div className="flex gap-1 py-3 max-w-sm">
+                        <button
+                            onClick={() => setActiveTab('candidate')}
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all ${activeTab === 'candidate'
+                                ? 'bg-primary text-white shadow-sm'
+                                : 'text-neutral-gray hover:bg-light-gray'
+                                }`}
+                        >
+                            <UserCircle className="w-4 h-4" />
+                            {t('candidateTitle')}
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('company')}
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all ${activeTab === 'company'
+                                ? 'bg-primary text-white shadow-sm'
+                                : 'text-neutral-gray hover:bg-light-gray'
+                                }`}
+                        >
+                            <Building2 className="w-4 h-4" />
+                            {t('companyTitle')}
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            {/* Content */}
             <section className="section-padding bg-white">
                 <div className="container-custom">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        {/* Candidates */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            <CandidateForm />
-                        </motion.div>
+                    <motion.div
+                        key={activeTab}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.25 }}
+                    >
+                        {activeTab === 'candidate' ? (
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                                {/* Form */}
+                                <CandidateForm />
 
-                        {/* Companies */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="bg-dark rounded-2xl p-8 lg:p-10 text-white"
-                        >
-                            <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-6">
-                                <Building2 className="w-7 h-7 text-white" />
-                            </div>
-                            <h2 className="text-2xl font-bold mb-3">{t('companyTitle')}</h2>
-                            <p className="text-white/70 mb-8">{t('companyDesc')}</p>
-
-                            <div className="space-y-4">
-                                {companySteps.map((step, i) => {
-                                    const StepIcon = step.icon;
-                                    return (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ opacity: 0, x: 10 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: i * 0.1 }}
-                                            className="flex items-center gap-4 bg-white/5 rounded-xl p-4"
-                                        >
-                                            <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                                                <StepIcon className="w-5 h-5 text-accent" />
+                                {/* How it works */}
+                                <div className="bg-dark rounded-2xl p-8 lg:p-10 text-white">
+                                    <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-6">
+                                        <UserCircle className="w-7 h-7 text-white" />
+                                    </div>
+                                    <h2 className="text-2xl font-bold mb-3">{t('candidateTitle')}</h2>
+                                    <p className="text-white/70 mb-8">{t('candidateDesc')}</p>
+                                    <div className="space-y-4">
+                                        {(['candidateStep1', 'candidateStep2', 'candidateStep3', 'candidateStep4', 'candidateStep5'] as const).map((step, i) => (
+                                            <div key={step} className="flex items-center gap-4 bg-white/5 rounded-xl p-4">
+                                                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                                                    <span className="text-accent font-bold text-sm">{i + 1}</span>
+                                                </div>
+                                                <span className="text-sm text-white/80">{t(step)}</span>
                                             </div>
-                                            <div className="flex items-center gap-3 flex-1">
-                                                <span className="text-sm font-bold text-accent">{i + 1}.</span>
-                                                <span className="text-sm text-white/80">{step.text}</span>
-                                            </div>
-                                        </motion.div>
-                                    );
-                                })}
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
+                        ) : (
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                                {/* Form */}
+                                <CompanyRecruitmentForm />
 
-                        </motion.div>
-                    </div>
+                                {/* How it works */}
+                                <div className="bg-dark rounded-2xl p-8 lg:p-10 text-white">
+                                    <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-6">
+                                        <Building2 className="w-7 h-7 text-white" />
+                                    </div>
+                                    <h2 className="text-2xl font-bold mb-3">{t('companyTitle')}</h2>
+                                    <p className="text-white/70 mb-8">{t('companyDesc')}</p>
+                                    <div className="space-y-4">
+                                        {(['companyStep1', 'companyStep2', 'companyStep3', 'companyStep4', 'companyStep5'] as const).map((step, i) => (
+                                            <div key={step} className="flex items-center gap-4 bg-white/5 rounded-xl p-4">
+                                                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                                                    <span className="text-accent font-bold text-sm">{i + 1}</span>
+                                                </div>
+                                                <span className="text-sm text-white/80">{t(step)}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </motion.div>
                 </div>
             </section>
         </div>

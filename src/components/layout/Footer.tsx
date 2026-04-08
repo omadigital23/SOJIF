@@ -141,11 +141,14 @@ export default function Footer() {
                 <div className="border-t border-white/10 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
                     <p>© {currentYear} {COMPANY.name}. {t('footer.allRights')}</p>
                     <div className="flex items-center gap-6">
-                        <Link href={'/privacy'} className="hover:text-white transition-colors">
+                        <Link href={'/politique-confidentialite'} className="hover:text-white transition-colors">
                             {t('footer.privacy')}
                         </Link>
-                        <Link href={'/terms'} className="hover:text-white transition-colors">
+                        <Link href={'/conditions-generales'} className="hover:text-white transition-colors">
                             {t('footer.terms')}
+                        </Link>
+                        <Link href={'/mentions-legales'} className="hover:text-white transition-colors">
+                            {t('footer.legal')}
                         </Link>
                     </div>
                 </div>

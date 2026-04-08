@@ -55,16 +55,19 @@ export default function CandidateForm() {
         setStatus('sending');
 
         try {
-            // 1. Register the candidate
+            const nameParts = data.fullName.trim().split(' ');
+            const firstName = nameParts[0] ?? data.fullName;
+            const lastName = nameParts.slice(1).join(' ') || firstName;
+
+            // 1. Register the candidate via magic-link flow (no password sent)
             const signupRes = await fetch('/api/candidates/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    firstName: data.fullName.split(' ')[0] || data.fullName,
-                    lastName: data.fullName.split(' ').slice(1).join(' ') || data.fullName,
+                    firstName,
+                    lastName,
                     email: data.email,
                     phone: data.phone,
-                    password: data.phone + data.email.slice(0, 4), // Temp password
                     domain: data.domain,
                     experience: data.experience,
                     message: data.message,
@@ -72,12 +75,13 @@ export default function CandidateForm() {
             });
             const signupResult = await signupRes.json();
 
-            // 2. Upload CV if signup succeeded
-            if (signupResult.success && data.cv?.length > 0) {
+            // 2. Upload CV regardless of whether account already existed
+            if (data.cv?.length > 0) {
                 const formData = new FormData();
                 formData.append('cv', data.cv[0]);
-                formData.append('candidateId', signupResult.candidateId || '');
-
+                if (signupResult.candidateId) {
+                    formData.append('candidateId', signupResult.candidateId);
+                }
                 await fetch('/api/candidates/upload-cv', {
                     method: 'POST',
                     body: formData,
@@ -99,22 +103,8 @@ export default function CandidateForm() {
         }
     };
 
-    const domains = [
-        'legal',
-        'finance',
-        'hr',
-        'it',
-        'management',
-        'sales',
-        'other',
-    ];
-
-    const experiences = [
-        'junior',
-        'mid',
-        'senior',
-        'expert',
-    ];
+    const domains = ['legal', 'finance', 'hr', 'it', 'management', 'sales', 'other'];
+    const experiences = ['junior', 'mid', 'senior', 'expert'];
 
     return (
         <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-sm border border-gray-100">
@@ -126,8 +116,7 @@ export default function CandidateForm() {
                     <label className="block text-sm font-medium text-dark mb-2">{t('fullName')}</label>
                     <input
                         {...register('fullName')}
-                        className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${errors.fullName ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'
-                            }`}
+                        className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${errors.fullName ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'}`}
                         placeholder={t('fullName')}
                     />
                     {errors.fullName && <p className="text-red-500 text-xs mt-1">{t('error')}</p>}
@@ -140,8 +129,7 @@ export default function CandidateForm() {
                         <input
                             {...register('email')}
                             type="email"
-                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'
-                                }`}
+                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'}`}
                             placeholder={t('email')}
                         />
                         {errors.email && <p className="text-red-500 text-xs mt-1">{t('error')}</p>}
@@ -151,8 +139,7 @@ export default function CandidateForm() {
                         <input
                             {...register('phone')}
                             type="tel"
-                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${errors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'
-                                }`}
+                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${errors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'}`}
                             placeholder={t('phone')}
                         />
                         {errors.phone && <p className="text-red-500 text-xs mt-1">{t('error')}</p>}
@@ -165,14 +152,11 @@ export default function CandidateForm() {
                         <label className="block text-sm font-medium text-dark mb-2">{t('domain')}</label>
                         <select
                             {...register('domain')}
-                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white ${errors.domain ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'
-                                }`}
+                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white ${errors.domain ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'}`}
                         >
                             <option value="">{t('selectDomain')}</option>
                             {domains.map((d) => (
-                                <option key={d} value={d}>
-                                    {t(`domains.${d}`)}
-                                </option>
+                                <option key={d} value={d}>{t(`domains.${d}`)}</option>
                             ))}
                         </select>
                         {errors.domain && <p className="text-red-500 text-xs mt-1">{t('error')}</p>}
@@ -181,14 +165,11 @@ export default function CandidateForm() {
                         <label className="block text-sm font-medium text-dark mb-2">{t('experience')}</label>
                         <select
                             {...register('experience')}
-                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white ${errors.experience ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'
-                                }`}
+                            className={`w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm bg-white ${errors.experience ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary'}`}
                         >
                             <option value="">{t('selectExperience')}</option>
                             {experiences.map((e) => (
-                                <option key={e} value={e}>
-                                    {t(`experiences.${e}`)}
-                                </option>
+                                <option key={e} value={e}>{t(`experiences.${e}`)}</option>
                             ))}
                         </select>
                         {errors.experience && <p className="text-red-500 text-xs mt-1">{t('error')}</p>}
@@ -276,9 +257,7 @@ export default function CandidateForm() {
                                 <CheckCircle className="w-5 h-5 flex-shrink-0" />
                                 <span className="text-sm font-medium">{t('success')}</span>
                             </div>
-                            <p className="text-xs text-green-700 ml-7">
-                                {t('successMsg')}
-                            </p>
+                            <p className="text-xs text-green-700 ml-7">{t('successMsg')}</p>
                         </motion.div>
                     )}
                     {status === 'error' && (

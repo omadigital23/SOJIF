@@ -13,11 +13,11 @@ export default function WhySection() {
         { titleKey: 'why1Title', descKey: 'why1Desc' },
         { titleKey: 'why2Title', descKey: 'why2Desc' },
         { titleKey: 'why3Title', descKey: 'why3Desc' },
+        { titleKey: 'why4Title', descKey: 'why4Desc' },
     ];
 
     return (
         <section className="section-padding bg-gradient-to-b from-white to-light-gray relative overflow-hidden">
-            {/* Decorative background */}
             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
 
             <div className="container-custom relative z-10">
@@ -50,7 +50,7 @@ export default function WhySection() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {reasons.map((reason, i) => {
                         const Icon = icons[i];
                         return (
@@ -59,7 +59,7 @@ export default function WhySection() {
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.15 }}
+                                transition={{ delay: i * 0.1 }}
                                 className="text-center group p-6 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
                             >
                                 <div className="w-20 h-20 rounded-2xl bg-white shadow-soft flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 border border-gray-100">

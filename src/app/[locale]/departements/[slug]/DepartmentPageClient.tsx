@@ -83,19 +83,21 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-2xl font-bold text-dark mb-4">{t('missionLabel')}</h2>
-                        <p className="text-dark/70 text-lg leading-relaxed">{t(`departmentsList.${department.slug}.mission`)}</p>
+                        <p className="text-dark/70 text-lg leading-relaxed">
+                            {t(`departmentsList.${department.slug}.mission`)}
+                        </p>
                     </motion.div>
                 </div>
             </section>
 
-            {/* Services */}
+            {/* Services — itère via servicesCount */}
             <section className="section-padding bg-light-gray">
                 <div className="container-custom max-w-4xl">
                     <h2 className="text-2xl font-bold text-dark mb-8">{t('servicesLabel')}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {department.services.map((service, i) => (
+                        {Array.from({ length: department.servicesCount }).map((_, i) => (
                             <motion.div
-                                key={service}
+                                key={i}
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
@@ -103,26 +105,30 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                                 className="flex items-start gap-3 bg-white rounded-xl p-5"
                             >
                                 <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                                <span className="text-dark/80 text-sm">{t(`departmentsList.${department.slug}.services.${i}`)}</span>
+                                <span className="text-dark/80 text-sm">
+                                    {t(`departmentsList.${department.slug}.services.${i}`)}
+                                </span>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Pricing */}
-            {department.pricing && (
+            {/* Pricing — itère via pricingCount, titre traduit */}
+            {department.pricingCount > 0 && (
                 <section className="section-padding bg-white">
                     <div className="container-custom max-w-4xl">
-                        <h2 className="text-2xl font-bold text-dark mb-8">Tarifs Indicatifs</h2>
-                        <div className="bg-light-gray rounded-2xl p-8 border border-neutral-khaki/20">
+                        <h2 className="text-2xl font-bold text-dark mb-8">{t('pricingLabel')}</h2>
+                        <div className="bg-light-gray rounded-2xl p-8 border border-gray-100">
                             <ul className="space-y-4">
-                                {department.pricing.map((price, i) => (
+                                {Array.from({ length: department.pricingCount }).map((_, i) => (
                                     <li key={i} className="flex items-start gap-3">
                                         <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                            <span className="text-primary font-bold text-sm">$</span>
+                                            <span className="text-primary font-bold text-sm">›</span>
                                         </div>
-                                        <span className="text-dark font-medium">{t(`departmentsList.${department.slug}.pricing.${i}`)}</span>
+                                        <span className="text-dark font-medium">
+                                            {t(`departmentsList.${department.slug}.pricing.${i}`)}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
@@ -131,22 +137,26 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                 </section>
             )}
 
-            {/* Case studies */}
+            {/* Case studies — itère via casesCount */}
             <section className="section-padding bg-white">
                 <div className="container-custom max-w-4xl">
                     <h2 className="text-2xl font-bold text-dark mb-8">{t('casesLabel')}</h2>
                     <div className="space-y-6">
-                        {department.cases.map((cs, i) => (
+                        {Array.from({ length: department.casesCount }).map((_, i) => (
                             <motion.div
-                                key={cs.title}
+                                key={i}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
                                 className="bg-light-gray rounded-2xl p-8"
                             >
-                                <h3 className="text-lg font-bold text-dark mb-3">{t(`departmentsList.${department.slug}.cases.${i}.title`)}</h3>
-                                <p className="text-dark/70 text-sm leading-relaxed">{t(`departmentsList.${department.slug}.cases.${i}.description`)}</p>
+                                <h3 className="text-lg font-bold text-dark mb-3">
+                                    {t(`departmentsList.${department.slug}.cases.${i}.title`)}
+                                </h3>
+                                <p className="text-dark/70 text-sm leading-relaxed">
+                                    {t(`departmentsList.${department.slug}.cases.${i}.description`)}
+                                </p>
                             </motion.div>
                         ))}
                     </div>
@@ -167,7 +177,7 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                 </div>
             </section>
 
-            {/* Other departments */}
+            {/* Autres départements */}
             <section className="section-padding bg-light-gray">
                 <div className="container-custom">
                     <h2 className="text-2xl font-bold text-dark mb-8 text-center">{t('title')}</h2>
@@ -186,7 +196,9 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                                     <h3 className="font-bold text-dark group-hover:text-primary transition-colors">
                                         {t(`departmentsList.${dept.slug}.title`)}
                                     </h3>
-                                    <p className="text-neutral-gray text-sm mt-1">{t(`departmentsList.${dept.slug}.subtitle`)}</p>
+                                    <p className="text-neutral-gray text-sm mt-1">
+                                        {t(`departmentsList.${dept.slug}.subtitle`)}
+                                    </p>
                                 </Link>
                             );
                         })}

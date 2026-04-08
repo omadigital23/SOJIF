@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
-import { sendContactConfirmation } from '@/lib/email';
+import { sendContactConfirmation, sendContactNotificationToAdmin } from '@/lib/email';
 import { rateLimiters, getClientIP } from '@/lib/rate-limit';
 import { captureException, addBreadcrumb } from '@/lib/sentry';
 
@@ -106,6 +106,23 @@ export async function POST(request: Request) {
             });
         } catch (emailError) {
             console.warn('Failed to send contact confirmation email:', emailError);
+            // Don't fail the request, continue normally
+        }
+
+        // Send notification email to admin
+        try {
+            await sendContactNotificationToAdmin({
+                firstName: validated.firstName,
+                lastName: validated.lastName,
+                email: validated.email,
+                phone: validated.phone,
+                company: validated.company || null,
+                subject: validated.subject,
+                message: fullMessage,
+            });
+            addBreadcrumb('Admin contact notification email sent');
+        } catch (emailError) {
+            console.warn('Failed to send admin contact notification email:', emailError);
             // Don't fail the request, continue normally
         }
 

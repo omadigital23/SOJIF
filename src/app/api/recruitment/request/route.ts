@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
+import { sendRecruitmentNotificationToAdmin } from '@/lib/email';
 
 const recruitmentSchema = z.object({
     companyName: z.string().min(2),
@@ -46,6 +47,27 @@ export async function POST(request: Request) {
                 { success: false, message: 'Erreur lors de l\'enregistrement.' },
                 { status: 500 }
             );
+        }
+
+        // Send notification email to admin
+        try {
+            await sendRecruitmentNotificationToAdmin({
+                companyName: validated.companyName,
+                contactName: validated.contactName,
+                email: validated.email,
+                phone: validated.phone,
+                positionTitle: validated.positionTitle,
+                department: validated.department || null,
+                description: validated.description,
+                requirements: validated.requirements || null,
+                salary: validated.salary || null,
+                location: validated.location || null,
+                urgency: validated.urgency || null,
+                contractType: validated.contractType || null,
+            });
+        } catch (emailError) {
+            console.warn('Failed to send admin recruitment notification email:', emailError);
+            // Don't fail the request, continue normally
         }
 
         return NextResponse.json(

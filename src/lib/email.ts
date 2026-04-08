@@ -3,6 +3,7 @@ import { env } from './env';
 
 export const FROM_EMAIL = 'noreply@sojifconsulting.com';
 export const SUPPORT_EMAIL = 'support@sojifconsulting.com';
+export const ADMIN_EMAIL = 'contact@sojifconsulting.com';
 
 function getResendClient() {
     return new Resend(env.RESEND_API_KEY);
@@ -144,6 +145,122 @@ export async function sendRecruitmentConfirmation(email: string, name: string, p
         });
     } catch (error) {
         console.error('Recruitment confirmation email error:', error);
+        throw error;
+    }
+}
+
+// ─── Admin notification emails ───────────────────────────────────────────────
+
+interface ContactNotificationData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    company?: string | null;
+    subject: string;
+    message: string;
+}
+
+/**
+ * Envoie une notification à l'admin (contact@sojifconsulting.com)
+ * quand un message est soumis via le formulaire de contact.
+ */
+export async function sendContactNotificationToAdmin(data: ContactNotificationData) {
+    try {
+        return await getResendClient().emails.send({
+            from: FROM_EMAIL,
+            to: ADMIN_EMAIL,
+            subject: `[CONTACT] Nouveau message de ${data.firstName} ${data.lastName} — ${data.subject}`,
+            html: `
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>body{font-family:'Segoe UI',sans-serif;line-height:1.6;color:#333}.container{max-width:600px;margin:0 auto;padding:20px;background:#f9fafb}.email-content{background:white;padding:40px;border-radius:12px}h1{color:#1f2937;margin-bottom:20px}table{width:100%;border-collapse:collapse;margin:20px 0}td{padding:8px 12px;border-bottom:1px solid #e5e7eb}td:first-child{font-weight:600;color:#374151;width:140px}.message-box{background:#f3f4f6;padding:16px;border-radius:8px;margin-top:16px;white-space:pre-wrap}.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;color:#6b7280;font-size:12px}.badge{display:inline-block;padding:4px 12px;background:#dbeafe;color:#1e40af;border-radius:20px;font-size:12px;font-weight:600}</style>
+</head><body>
+<div class="container"><div class="email-content">
+<h1>📩 Nouveau message de contact</h1>
+<span class="badge">Formulaire de contact</span>
+<table>
+<tr><td>Nom</td><td>${data.firstName} ${data.lastName}</td></tr>
+<tr><td>Email</td><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
+<tr><td>Téléphone</td><td>${data.phone}</td></tr>
+${data.company ? `<tr><td>Entreprise</td><td>${data.company}</td></tr>` : ''}
+<tr><td>Sujet</td><td>${data.subject}</td></tr>
+</table>
+<h3>Message :</h3>
+<div class="message-box">${data.message.replace(/\n/g, '<br/>')}</div>
+<div class="footer"><p>Email envoyé automatiquement depuis le site SOJIF Consulting.</p></div>
+</div></div></body></html>`,
+        });
+    } catch (error) {
+        console.error('Admin contact notification email error:', error);
+        throw error;
+    }
+}
+
+interface RecruitmentNotificationData {
+    companyName: string;
+    contactName: string;
+    email: string;
+    phone: string;
+    positionTitle: string;
+    department?: string | null;
+    description: string;
+    requirements?: string | null;
+    salary?: string | null;
+    location?: string | null;
+    urgency?: string | null;
+    contractType?: string | null;
+}
+
+/**
+ * Envoie une notification à l'admin (contact@sojifconsulting.com)
+ * quand une demande de recrutement est soumise.
+ */
+export async function sendRecruitmentNotificationToAdmin(data: RecruitmentNotificationData) {
+    const urgencyLabels: Record<string, string> = {
+        low: '🟢 Faible',
+        medium: '🟡 Moyenne',
+        high: '🔴 Urgente',
+    };
+    const contractLabels: Record<string, string> = {
+        cdi: 'CDI',
+        cdd: 'CDD',
+        interim: 'Intérim',
+        freelance: 'Freelance',
+        stage: 'Stage',
+    };
+
+    try {
+        return await getResendClient().emails.send({
+            from: FROM_EMAIL,
+            to: ADMIN_EMAIL,
+            subject: `[RECRUTEMENT] Nouvelle demande de ${data.companyName} — ${data.positionTitle}`,
+            html: `
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>body{font-family:'Segoe UI',sans-serif;line-height:1.6;color:#333}.container{max-width:600px;margin:0 auto;padding:20px;background:#f9fafb}.email-content{background:white;padding:40px;border-radius:12px}h1{color:#1f2937;margin-bottom:20px}table{width:100%;border-collapse:collapse;margin:20px 0}td{padding:8px 12px;border-bottom:1px solid #e5e7eb}td:first-child{font-weight:600;color:#374151;width:160px}.message-box{background:#f3f4f6;padding:16px;border-radius:8px;margin-top:16px;white-space:pre-wrap}.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;color:#6b7280;font-size:12px}.badge{display:inline-block;padding:4px 12px;background:#fef3c7;color:#92400e;border-radius:20px;font-size:12px;font-weight:600}</style>
+</head><body>
+<div class="container"><div class="email-content">
+<h1>📋 Nouvelle demande de recrutement</h1>
+<span class="badge">Formulaire de recrutement</span>
+<table>
+<tr><td>Entreprise</td><td>${data.companyName}</td></tr>
+<tr><td>Contact</td><td>${data.contactName}</td></tr>
+<tr><td>Email</td><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
+<tr><td>Téléphone</td><td>${data.phone}</td></tr>
+<tr><td>Poste recherché</td><td><strong>${data.positionTitle}</strong></td></tr>
+${data.department ? `<tr><td>Département</td><td>${data.department}</td></tr>` : ''}
+${data.contractType ? `<tr><td>Type de contrat</td><td>${contractLabels[data.contractType] || data.contractType}</td></tr>` : ''}
+${data.urgency ? `<tr><td>Urgence</td><td>${urgencyLabels[data.urgency] || data.urgency}</td></tr>` : ''}
+${data.salary ? `<tr><td>Salaire</td><td>${data.salary}</td></tr>` : ''}
+${data.location ? `<tr><td>Localisation</td><td>${data.location}</td></tr>` : ''}
+</table>
+<h3>Description du poste :</h3>
+<div class="message-box">${data.description.replace(/\n/g, '<br/>')}</div>
+${data.requirements ? `<h3>Exigences :</h3><div class="message-box">${data.requirements.replace(/\n/g, '<br/>')}</div>` : ''}
+<div class="footer"><p>Email envoyé automatiquement depuis le site SOJIF Consulting.</p></div>
+</div></div></body></html>`,
+        });
+    } catch (error) {
+        console.error('Admin recruitment notification email error:', error);
         throw error;
     }
 }

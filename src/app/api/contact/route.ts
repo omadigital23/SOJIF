@@ -129,7 +129,7 @@ export async function POST(request: Request) {
             });
             addBreadcrumb('Admin contact notification email sent');
             console.info('Admin contact notification email sent', {
-                emailId: adminNotification.id,
+                emailId: adminNotification.messageId,
                 to: ADMIN_EMAIL,
             });
         } catch (emailError) {

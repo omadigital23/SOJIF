@@ -66,7 +66,7 @@ export async function POST(request: Request) {
                 contractType: validated.contractType || null,
             });
             console.info('Admin recruitment notification email sent', {
-                emailId: adminNotification.id,
+                emailId: adminNotification.messageId,
                 to: 'contact@sojifconsulting.com',
                 replyTo: validated.email,
             });

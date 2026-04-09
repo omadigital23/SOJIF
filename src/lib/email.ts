@@ -1,43 +1,47 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { env } from './env';
 
-export const FROM_EMAIL = 'noreply@sojifconsulting.com';
+export const FROM_EMAIL = 'support@sojifconsulting.com';
+export const FROM_NAME = 'SOJIF Consulting';
 export const SUPPORT_EMAIL = 'support@sojifconsulting.com';
 export const ADMIN_EMAIL = 'contact@sojifconsulting.com';
 
-function getResendClient() {
-    return new Resend(env.RESEND_API_KEY);
+function getTransporter() {
+    const user = env.BREVO_SMTP_USER;
+    const pass = env.BREVO_SMTP_PASS;
+    if (!user || !pass) {
+        throw new Error('BREVO_SMTP_USER or BREVO_SMTP_PASS is not configured.');
+    }
+    return nodemailer.createTransport({
+        host: 'smtp-relay.brevo.com',
+        port: 587,
+        secure: false,
+        auth: { user, pass },
+    });
 }
 
 type SendEmailOptions = {
-    from: string;
     to: string | string[];
     subject: string;
     html: string;
-    replyTo?: string | string[];
+    replyTo?: string;
 };
 
 async function sendEmail(options: SendEmailOptions) {
-    const { data, error } = await getResendClient().emails.send(options);
-
-    if (error) {
-        const details = typeof error === 'object' && error !== null
-            ? JSON.stringify(error)
-            : String(error);
-        throw new Error(`Resend send failed: ${details}`);
-    }
-
-    if (!data?.id) {
-        throw new Error('Resend send failed: missing email id in response');
-    }
-
-    return data;
+    const transporter = getTransporter();
+    const info = await transporter.sendMail({
+        from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
+        to: options.to,
+        subject: options.subject,
+        html: options.html,
+        replyTo: options.replyTo,
+    });
+    return info;
 }
 
 export async function sendSignupConfirmation(email: string, name: string, magicLink: string) {
     try {
         return await sendEmail({
-            from: FROM_EMAIL,
             to: email,
             subject: 'Bienvenue chez SOJIF Consulting - Confirmez votre email',
             html: `
@@ -63,7 +67,6 @@ export async function sendSignupConfirmation(email: string, name: string, magicL
 export async function sendPasswordReset(email: string, name: string, resetLink: string) {
     try {
         return await sendEmail({
-            from: FROM_EMAIL,
             to: email,
             subject: 'SOJIF Consulting - Réinitialisation de votre mot de passe',
             html: `
@@ -97,7 +100,6 @@ export async function sendNewsletterConfirmation(email: string, unsubscribeUrl?:
 
     try {
         return await sendEmail({
-            from: FROM_EMAIL,
             to: email,
             subject: 'SOJIF Consulting - Inscription à la newsletter confirmée',
             html: `
@@ -127,7 +129,6 @@ export async function sendNewsletterConfirmation(email: string, unsubscribeUrl?:
 export async function sendContactConfirmation(email: string, name: string, subject: string) {
     try {
         return await sendEmail({
-            from: FROM_EMAIL,
             to: email,
             subject: 'SOJIF Consulting - Message reçu',
             html: `
@@ -151,7 +152,6 @@ export async function sendContactConfirmation(email: string, name: string, subje
 export async function sendRecruitmentConfirmation(email: string, name: string, position: string) {
     try {
         return await sendEmail({
-            from: FROM_EMAIL,
             to: email,
             subject: 'SOJIF Consulting - Candidature reçue',
             html: `
@@ -184,36 +184,91 @@ interface ContactNotificationData {
     company?: string | null;
     subject: string;
     message: string;
+    domain?: string | null;
+    turnover?: string | null;
+    employees?: string | null;
+    challenge?: string | null;
+    phase?: string | null;
+    budget?: string | null;
+    meetingPref?: string | null;
 }
 
 /**
- * Envoie une notification à l'admin (contact@sojifconsulting.com)
- * quand un message est soumis via le formulaire de contact.
+ * Envoie un email complet à l'admin (contact@sojifconsulting.com)
+ * avec toutes les informations soumises via le formulaire de contact.
  */
 export async function sendContactNotificationToAdmin(data: ContactNotificationData) {
+    const challengeLabels: Record<string, string> = {
+        tax: 'Fiscalité / Comptabilité',
+        accounting: 'Comptabilité',
+        hr: 'Ressources Humaines',
+        other: 'Autre',
+    };
+    const phaseLabels: Record<string, string> = {
+        creation: 'Création',
+        growth: 'Croissance',
+        restructuring: 'Restructuration',
+    };
+    const meetingLabels: Record<string, string> = {
+        video: 'Visioconférence',
+        inPerson: 'En présentiel',
+    };
+
+    const optionalRows = [
+        data.company ? `<tr><td>Entreprise</td><td>${data.company}</td></tr>` : '',
+        data.domain ? `<tr><td>Domaine d'activité</td><td>${data.domain}</td></tr>` : '',
+        data.turnover ? `<tr><td>Chiffre d'affaires</td><td>${data.turnover}</td></tr>` : '',
+        data.employees ? `<tr><td>Nombre de salariés</td><td>${data.employees}</td></tr>` : '',
+        data.phase ? `<tr><td>Phase de l'entreprise</td><td>${phaseLabels[data.phase] || data.phase}</td></tr>` : '',
+        data.budget ? `<tr><td>Budget</td><td>${data.budget}</td></tr>` : '',
+        data.challenge ? `<tr><td>Challenge principal</td><td>${challengeLabels[data.challenge] || data.challenge}</td></tr>` : '',
+        data.meetingPref ? `<tr><td>Préférence de RDV</td><td>${meetingLabels[data.meetingPref] || data.meetingPref}</td></tr>` : '',
+    ].filter(Boolean).join('\n');
+
     try {
         return await sendEmail({
-            from: FROM_EMAIL,
             to: ADMIN_EMAIL,
             replyTo: data.email,
-            subject: `[CONTACT] Nouveau message de ${data.firstName} ${data.lastName} — ${data.subject}`,
+            subject: `[CONTACT] ${data.firstName} ${data.lastName} — ${data.subject}`,
             html: `
 <!DOCTYPE html><html><head><meta charset="utf-8">
-<style>body{font-family:'Segoe UI',sans-serif;line-height:1.6;color:#333}.container{max-width:600px;margin:0 auto;padding:20px;background:#f9fafb}.email-content{background:white;padding:40px;border-radius:12px}h1{color:#1f2937;margin-bottom:20px}table{width:100%;border-collapse:collapse;margin:20px 0}td{padding:8px 12px;border-bottom:1px solid #e5e7eb}td:first-child{font-weight:600;color:#374151;width:140px}.message-box{background:#f3f4f6;padding:16px;border-radius:8px;margin-top:16px;white-space:pre-wrap}.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;color:#6b7280;font-size:12px}.badge{display:inline-block;padding:4px 12px;background:#dbeafe;color:#1e40af;border-radius:20px;font-size:12px;font-weight:600}</style>
+<style>
+body{font-family:'Segoe UI',sans-serif;line-height:1.6;color:#333}
+.container{max-width:650px;margin:0 auto;padding:20px;background:#f9fafb}
+.email-content{background:white;padding:40px;border-radius:12px}
+h1{color:#1f2937;margin-bottom:4px;font-size:22px}
+.subtitle{color:#6b7280;font-size:13px;margin-bottom:24px}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+td{padding:10px 14px;border-bottom:1px solid #f3f4f6;font-size:14px}
+td:first-child{font-weight:600;color:#374151;width:180px;background:#f9fafb}
+.message-box{background:#f3f4f6;padding:16px;border-radius:8px;margin-top:8px;white-space:pre-wrap;font-size:14px;line-height:1.6}
+.section-title{font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin:24px 0 8px}
+.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:11px}
+.badge{display:inline-block;padding:4px 14px;background:#dbeafe;color:#1e40af;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:20px}
+</style>
 </head><body>
 <div class="container"><div class="email-content">
 <h1>📩 Nouveau message de contact</h1>
+<p class="subtitle">Reçu via le formulaire du site SOJIF Consulting</p>
 <span class="badge">Formulaire de contact</span>
+
+<p class="section-title">Coordonnées</p>
 <table>
-<tr><td>Nom</td><td>${data.firstName} ${data.lastName}</td></tr>
-<tr><td>Email</td><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
+<tr><td>Nom complet</td><td>${data.firstName} ${data.lastName}</td></tr>
+<tr><td>Email</td><td><a href="mailto:${data.email}" style="color:#2563eb">${data.email}</a></td></tr>
 <tr><td>Téléphone</td><td>${data.phone}</td></tr>
-${data.company ? `<tr><td>Entreprise</td><td>${data.company}</td></tr>` : ''}
-<tr><td>Sujet</td><td>${data.subject}</td></tr>
+<tr><td>Sujet</td><td><strong>${data.subject}</strong></td></tr>
 </table>
-<h3>Message :</h3>
+
+${optionalRows ? `<p class="section-title">Informations Entreprise</p><table>${optionalRows}</table>` : ''}
+
+<p class="section-title">Message</p>
 <div class="message-box">${data.message.replace(/\n/g, '<br/>')}</div>
-<div class="footer"><p>Email envoyé automatiquement depuis le site SOJIF Consulting.</p></div>
+
+<div class="footer">
+<p>Vous pouvez répondre directement à cet email pour contacter <strong>${data.firstName} ${data.lastName}</strong> (${data.email}).</p>
+<p>© ${new Date().getFullYear()} SOJIF Consulting — Notification automatique</p>
+</div>
 </div></div></body></html>`,
         });
     } catch (error) {
@@ -257,7 +312,6 @@ export async function sendRecruitmentNotificationToAdmin(data: RecruitmentNotifi
 
     try {
         return await sendEmail({
-            from: FROM_EMAIL,
             to: ADMIN_EMAIL,
             replyTo: data.email,
             subject: `[RECRUTEMENT] Nouvelle demande de ${data.companyName} — ${data.positionTitle}`,

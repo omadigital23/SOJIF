@@ -82,10 +82,15 @@ export default function CandidateForm() {
                 if (signupResult.candidateId) {
                     formData.append('candidateId', signupResult.candidateId);
                 }
-                await fetch('/api/candidates/upload-cv', {
+                const uploadRes = await fetch('/api/candidates/upload-cv', {
                     method: 'POST',
                     body: formData,
                 });
+                const uploadResult = await uploadRes.json();
+
+                if (!uploadRes.ok || !uploadResult.success) {
+                    throw new Error(uploadResult.message || 'CV upload failed');
+                }
             }
 
             if (signupResult.success) {

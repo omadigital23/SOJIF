@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
 
+const CV_BUCKET = 'sojifcv';
+
 export async function POST(request: Request) {
     try {
         const formData = await request.formData();
@@ -38,14 +40,18 @@ export async function POST(request: Request) {
         const fileBuffer = new Uint8Array(arrayBuffer);
 
         const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
-            .from('candidate-cvs')
+            .from(CV_BUCKET)
             .upload(filePath, fileBuffer, {
                 contentType: 'application/pdf',
                 upsert: false,
             });
 
         if (uploadError) {
-            console.error('Storage upload error:', uploadError);
+            console.error('Storage upload error:', {
+                bucket: CV_BUCKET,
+                filePath,
+                error: uploadError,
+            });
             return NextResponse.json(
                 { success: false, message: 'Erreur lors de l\'upload du fichier.' },
                 { status: 500 }
@@ -54,7 +60,7 @@ export async function POST(request: Request) {
 
         // Get public URL
         const { data: urlData } = supabaseAdmin.storage
-            .from('candidate-cvs')
+            .from(CV_BUCKET)
             .getPublicUrl(uploadData.path);
 
         // Insert document record if candidateId provided

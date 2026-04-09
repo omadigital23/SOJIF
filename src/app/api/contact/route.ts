@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
-import { sendContactConfirmation, sendContactNotificationToAdmin } from '@/lib/email';
+import { sendContactConfirmation, sendContactNotificationToAdmin, ADMIN_EMAIL } from '@/lib/email';
 import { rateLimiters, getClientIP } from '@/lib/rate-limit';
 import { captureException, addBreadcrumb } from '@/lib/sentry';
 
@@ -109,7 +109,7 @@ export async function POST(request: Request) {
             // Don't fail the request, continue normally
         }
 
-        // Send notification email to admin
+        // Send notification email to admin with all form data
         try {
             const adminNotification = await sendContactNotificationToAdmin({
                 firstName: validated.firstName,
@@ -119,20 +119,21 @@ export async function POST(request: Request) {
                 company: validated.company || null,
                 subject: validated.subject,
                 message: fullMessage,
+                domain: validated.domain || null,
+                turnover: validated.turnover || null,
+                employees: validated.employees || null,
+                challenge: validated.challenge || null,
+                phase: validated.phase || null,
+                budget: validated.budget || null,
+                meetingPref: validated.meetingPref || null,
             });
             addBreadcrumb('Admin contact notification email sent');
             console.info('Admin contact notification email sent', {
                 emailId: adminNotification.id,
-                to: 'contact@sojifconsulting.com',
-                replyTo: validated.email,
+                to: ADMIN_EMAIL,
             });
         } catch (emailError) {
-            console.warn('Failed to send admin contact notification email:', {
-                error: emailError,
-                to: 'contact@sojifconsulting.com',
-                replyTo: validated.email,
-            });
-            // Don't fail the request, continue normally
+            console.warn('Failed to send admin contact notification email:', emailError);
         }
 
         return NextResponse.json(

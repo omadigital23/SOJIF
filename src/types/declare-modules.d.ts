@@ -1,32 +1,3 @@
-declare module '@upstash/ratelimit' {
-    import { Redis } from '@upstash/redis';
-
-    export interface RatelimitConfig {
-        redis: Redis;
-        limiter: RatelimitLimiter;
-        analytics?: boolean;
-        prefix?: string;
-    }
-
-    export interface RatelimitResult {
-        success: boolean;
-        limit: number;
-        remaining: number;
-        reset: number;
-        pending?: Promise<void>;
-    }
-
-    export interface RatelimitLimiter {
-        [key: string]: unknown;
-    }
-
-    export class Ratelimit {
-        constructor(config: RatelimitConfig);
-        limit(identifier: string): Promise<RatelimitResult>;
-        static slidingWindow(limit: number, window: string): RatelimitLimiter;
-    }
-}
-
 declare module 'flutterwave-node-v3' {
     export interface FlutterwavePayload {
         [key: string]: unknown;

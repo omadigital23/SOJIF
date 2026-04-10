@@ -1,118 +1,56 @@
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
-import { env } from './env';
-
-let redisClient: Redis | null | undefined;
-
-function isRateLimitConfigured() {
-    return Boolean(env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN);
+export interface RateLimitResult {
+    success: boolean;
+    remaining: number;
+    resetTime: number;
+    limit: number;
 }
 
-// Lazy initialize Redis only when credentials are available.
-function getRedisClient() {
-    if (redisClient !== undefined) {
-        return redisClient;
-    }
-
-    if (!isRateLimitConfigured()) {
-        redisClient = null;
-        return redisClient;
-    }
-
-    redisClient = new Redis({
-        url: env.UPSTASH_REDIS_REST_URL,
-        token: env.UPSTASH_REDIS_REST_TOKEN,
-    });
-
-    return redisClient;
+function allowRequest(limit: number, window: number): RateLimitResult {
+    return {
+        success: true,
+        remaining: limit,
+        resetTime: Math.floor(Date.now() / 1000) + window,
+        limit,
+    };
 }
 
-/**
- * Create a rate limiter for API routes
- * @param key Unique identifier (e.g., user ID, IP address)
- * @param limit Number of requests allowed
- * @param window Time window in seconds
- */
 export function createRateLimiter(key: string, limit: number = 10, window: number = 60) {
-    const redis = getRedisClient();
-    if (!redis) {
-        return null;
-    }
+    void key;
 
-    return new Ratelimit({
-        redis,
-        limiter: Ratelimit.slidingWindow(limit, `${window}s`),
-        analytics: true,
-        prefix: `rl:${key}`,
-    });
+    return {
+        limit: async (identifier: string) => {
+            void identifier;
+
+            return {
+            success: true,
+            remaining: limit,
+            reset: Date.now() + (window * 1000),
+            };
+        },
+    };
 }
 
-/**
- * Generic rate limit checker for API routes
- * @param identifier Unique identifier (IP, user ID, email, etc.)
- * @param limit Number of requests allowed
- * @param window Time window in seconds
- * @returns { success: boolean, remaining: number, resetTime: number }
- */
 export async function checkRateLimit(
     identifier: string,
     limit: number = 10,
     window: number = 60
 ) {
-    try {
-        const limiter = createRateLimiter(identifier, limit, window);
-        if (!limiter) {
-            return {
-                success: true,
-                remaining: limit,
-                resetTime: Math.floor(Date.now() / 1000) + window,
-                limit: limit,
-            };
-        }
+    void identifier;
 
-        const result = await limiter.limit(identifier);
-
-        return {
-            success: result.success,
-            remaining: result.remaining,
-            resetTime: Math.ceil(result.reset / 1000),
-            limit: limit,
-        };
-    } catch (error) {
-        console.error('Rate limit check error:', error);
-        // Fail open - allow request if Redis is unavailable
-        return {
-            success: true,
-            remaining: limit,
-            resetTime: Math.floor(Date.now() / 1000) + window,
-            limit: limit,
-        };
-    }
+    return allowRequest(limit, window);
 }
 
-/**
- * Pre-configured rate limiters for different endpoints
- */
-
 export const rateLimiters = {
-    // Auth endpoints
-    login: (identifier: string) => checkRateLimit(`login:${identifier}`, 5, 300), // 5 requests per 5 min
-    signup: (identifier: string) => checkRateLimit(`signup:${identifier}`, 3, 3600), // 3 requests per hour
-    magicLink: (identifier: string) => checkRateLimit(`magic-link:${identifier}`, 3, 600), // 3 requests per 10 min
-
-    // API endpoints
-    contact: (identifier: string) => checkRateLimit(`contact:${identifier}`, 5, 3600), // 5 per hour
-    newsletter: (identifier: string) => checkRateLimit(`newsletter:${identifier}`, 5, 3600), // 5 per hour
-    recruitment: (identifier: string) => checkRateLimit(`recruitment:${identifier}`, 10, 86400), // 10 per day
-    payment: (identifier: string) => checkRateLimit(`payment:${identifier}`, 20, 3600), // 20 per hour
-
-    // CV upload
-    cvUpload: (identifier: string) => checkRateLimit(`cv-upload:${identifier}`, 5, 3600), // 5 per hour
+    login: (identifier: string) => checkRateLimit(`login:${identifier}`, 5, 300),
+    signup: (identifier: string) => checkRateLimit(`signup:${identifier}`, 3, 3600),
+    magicLink: (identifier: string) => checkRateLimit(`magic-link:${identifier}`, 3, 600),
+    contact: (identifier: string) => checkRateLimit(`contact:${identifier}`, 5, 3600),
+    newsletter: (identifier: string) => checkRateLimit(`newsletter:${identifier}`, 5, 3600),
+    recruitment: (identifier: string) => checkRateLimit(`recruitment:${identifier}`, 10, 86400),
+    payment: (identifier: string) => checkRateLimit(`payment:${identifier}`, 20, 3600),
+    cvUpload: (identifier: string) => checkRateLimit(`cv-upload:${identifier}`, 5, 3600),
 };
 
-/**
- * Get client IP address from request
- */
 export function getClientIP(request: Request): string {
     const forwardedFor = request.headers.get('x-forwarded-for');
     const realIP = request.headers.get('x-real-ip');

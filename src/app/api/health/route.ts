@@ -17,10 +17,6 @@ export async function GET() {
                 smtpUser: !!process.env.BREVO_SMTP_USER,
                 smtpPass: !!process.env.BREVO_SMTP_PASS,
             },
-            upstash: {
-                url: !!process.env.UPSTASH_REDIS_REST_URL,
-                token: !!process.env.UPSTASH_REDIS_REST_TOKEN,
-            },
             flutterwave: {
                 publicKey: !!process.env.FLUTTERWAVE_PUBLIC_KEY,
                 secretKey: !!process.env.FLUTTERWAVE_SECRET_KEY,

@@ -2,12 +2,29 @@ import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import { env } from './env';
 
-// Lazy initialize Redis
+let redisClient: Redis | null | undefined;
+
+function isRateLimitConfigured() {
+    return Boolean(env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN);
+}
+
+// Lazy initialize Redis only when credentials are available.
 function getRedisClient() {
-    return new Redis({
+    if (redisClient !== undefined) {
+        return redisClient;
+    }
+
+    if (!isRateLimitConfigured()) {
+        redisClient = null;
+        return redisClient;
+    }
+
+    redisClient = new Redis({
         url: env.UPSTASH_REDIS_REST_URL,
         token: env.UPSTASH_REDIS_REST_TOKEN,
     });
+
+    return redisClient;
 }
 
 /**
@@ -17,8 +34,13 @@ function getRedisClient() {
  * @param window Time window in seconds
  */
 export function createRateLimiter(key: string, limit: number = 10, window: number = 60) {
+    const redis = getRedisClient();
+    if (!redis) {
+        return null;
+    }
+
     return new Ratelimit({
-        redis: getRedisClient(),
+        redis,
         limiter: Ratelimit.slidingWindow(limit, `${window}s`),
         analytics: true,
         prefix: `rl:${key}`,
@@ -39,6 +61,15 @@ export async function checkRateLimit(
 ) {
     try {
         const limiter = createRateLimiter(identifier, limit, window);
+        if (!limiter) {
+            return {
+                success: true,
+                remaining: limit,
+                resetTime: Math.floor(Date.now() / 1000) + window,
+                limit: limit,
+            };
+        }
+
         const result = await limiter.limit(identifier);
 
         return {

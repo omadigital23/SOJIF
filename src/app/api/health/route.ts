@@ -13,6 +13,10 @@ export async function GET() {
             resend: {
                 apiKey: !!process.env.RESEND_API_KEY,
             },
+            brevo: {
+                smtpUser: !!process.env.BREVO_SMTP_USER,
+                smtpPass: !!process.env.BREVO_SMTP_PASS,
+            },
             upstash: {
                 url: !!process.env.UPSTASH_REDIS_REST_URL,
                 token: !!process.env.UPSTASH_REDIS_REST_TOKEN,

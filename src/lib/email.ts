@@ -1,8 +1,8 @@
 import nodemailer from 'nodemailer';
 import { env } from './env';
 
-export const FROM_EMAIL = 'support@sojifconsulting.com';
-export const FROM_NAME = 'SOJIF Consulting';
+export const FROM_EMAIL = env.BREVO_FROM_EMAIL || 'support@sojifconsulting.com';
+export const FROM_NAME = env.BREVO_FROM_NAME || 'SOJIF Consulting';
 export const SUPPORT_EMAIL = 'support@sojifconsulting.com';
 export const ADMIN_EMAIL = 'contact@sojifconsulting.com';
 
@@ -20,14 +20,12 @@ function getTransporter() {
     });
 }
 
-type SendEmailOptions = {
+async function sendEmail(options: {
     to: string | string[];
     subject: string;
     html: string;
     replyTo?: string;
-};
-
-async function sendEmail(options: SendEmailOptions) {
+}) {
     const transporter = getTransporter();
     const info = await transporter.sendMail({
         from: `"${FROM_NAME}" <${FROM_EMAIL}>`,

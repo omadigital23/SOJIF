@@ -1,24 +1,9 @@
-import nodemailer from 'nodemailer';
 import { env } from './env';
 
-export const FROM_EMAIL = env.BREVO_FROM_EMAIL || 'support@sojifconsulting.com';
-export const FROM_NAME = env.BREVO_FROM_NAME || 'SOJIF Consulting';
+export const FROM_EMAIL = 'support@sojifconsulting.com';
+export const FROM_NAME = 'SOJIF Consulting';
 export const SUPPORT_EMAIL = 'support@sojifconsulting.com';
 export const ADMIN_EMAIL = 'contact@sojifconsulting.com';
-
-function getTransporter() {
-    const user = env.BREVO_SMTP_USER;
-    const pass = env.BREVO_SMTP_PASS;
-    if (!user || !pass) {
-        throw new Error('BREVO_SMTP_USER or BREVO_SMTP_PASS is not configured.');
-    }
-    return nodemailer.createTransport({
-        host: 'smtp-relay.brevo.com',
-        port: 587,
-        secure: false,
-        auth: { user, pass },
-    });
-}
 
 async function sendEmail(options: {
     to: string | string[];
@@ -26,15 +11,38 @@ async function sendEmail(options: {
     html: string;
     replyTo?: string;
 }) {
-    const transporter = getTransporter();
-    const info = await transporter.sendMail({
-        from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
-        to: options.to,
+    const apiKey = env.BREVO_API_KEY;
+    if (!apiKey) throw new Error('BREVO_API_KEY is not configured.');
+
+    const recipients = Array.isArray(options.to)
+        ? options.to.map((email) => ({ email }))
+        : [{ email: options.to }];
+
+    const body: Record<string, unknown> = {
+        sender: { name: FROM_NAME, email: FROM_EMAIL },
+        to: recipients,
         subject: options.subject,
-        html: options.html,
-        replyTo: options.replyTo,
+        htmlContent: options.html,
+    };
+
+    if (options.replyTo) body.replyTo = { email: options.replyTo };
+
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+            'accept': 'application/json',
+            'content-type': 'application/json',
+            'api-key': apiKey,
+        },
+        body: JSON.stringify(body),
     });
-    return info;
+
+    if (!res.ok) {
+        const error = await res.text();
+        throw new Error(`Brevo API error ${res.status}: ${error}`);
+    }
+
+    return res.json();
 }
 
 export async function sendSignupConfirmation(email: string, name: string, magicLink: string) {

@@ -79,6 +79,8 @@ export default function CandidateForm() {
             if (data.cv?.length > 0) {
                 const formData = new FormData();
                 formData.append('cv', data.cv[0]);
+                formData.append('candidateName', data.fullName);
+                formData.append('candidateEmail', data.email);
                 if (signupResult.candidateId) {
                     formData.append('candidateId', signupResult.candidateId);
                 }

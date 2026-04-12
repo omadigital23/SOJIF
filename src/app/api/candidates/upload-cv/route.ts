@@ -10,11 +10,19 @@ async function sendCvNotification({
     candidateEmail,
     cvUrl,
     fileName,
+    candidatePhone,
+    candidateDomain,
+    candidateExperience,
+    candidateMessage,
 }: {
     candidateName: string;
     candidateEmail: string;
     cvUrl: string;
     fileName: string;
+    candidatePhone?: string | null;
+    candidateDomain?: string | null;
+    candidateExperience?: string | null;
+    candidateMessage?: string | null;
 }) {
     const apiKey = env.BREVO_API_KEY;
     if (!apiKey) return;
@@ -31,37 +39,70 @@ async function sendCvNotification({
             to: [{ email: ADMIN_EMAIL }],
             replyTo: { email: candidateEmail },
             subject: `[CANDIDATURE] CV reçu — ${candidateName}`,
-            htmlContent: `
-<!DOCTYPE html><html><head><meta charset="utf-8">
+            htmlContent: `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-body{font-family:'Segoe UI',sans-serif;line-height:1.6;color:#333}
-.container{max-width:650px;margin:0 auto;padding:20px;background:#f9fafb}
-.email-content{background:white;padding:40px;border-radius:12px}
-h1{color:#1f2937;margin-bottom:4px;font-size:22px}
-.subtitle{color:#6b7280;font-size:13px;margin-bottom:24px}
-table{width:100%;border-collapse:collapse;margin:16px 0}
-td{padding:10px 14px;border-bottom:1px solid #f3f4f6;font-size:14px}
-td:first-child{font-weight:600;color:#374151;width:160px;background:#f9fafb}
-.btn{display:inline-block;padding:12px 28px;background:#2563eb;color:white;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;margin-top:16px}
-.badge{display:inline-block;padding:4px 14px;background:#fef3c7;color:#92400e;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:20px}
-.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;color:#9ca3af;font-size:11px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:#1e293b}
+.wrapper{max-width:680px;margin:32px auto;padding:0 16px}
+.header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);border-radius:12px 12px 0 0;padding:32px 40px;text-align:center}
+.header h1{color:white;font-size:22px;font-weight:700;letter-spacing:.3px}
+.header p{color:rgba(255,255,255,.75);font-size:13px;margin-top:6px}
+.badge{display:inline-block;background:rgba(255,255,255,.15);color:white;border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:12px}
+.body{background:white;padding:36px 40px}
+.meta{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 16px;margin-bottom:28px;font-size:12px;color:#64748b;text-align:right}
+.section-title{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.8px;margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid #f1f5f9}
+.section-title:first-of-type{margin-top:0}
+table{width:100%;border-collapse:collapse}
+tr:last-child td{border-bottom:none}
+td{padding:10px 14px;border-bottom:1px solid #f1f5f9;font-size:14px;vertical-align:top}
+td.label{font-weight:600;color:#475569;width:170px;background:#f8fafc;border-radius:4px}
+td.value{color:#1e293b}
+.motivation{background:#f8fafc;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:16px 20px;font-size:14px;line-height:1.7;color:#334155;white-space:pre-wrap}
+.cv-btn{display:block;text-align:center;margin:28px 0 0}
+.cv-btn a{display:inline-block;background:#2563eb;color:white;text-decoration:none;padding:13px 32px;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:.3px}
+.footer{background:#f8fafc;border-top:1px solid #e2e8f0;border-radius:0 0 12px 12px;padding:20px 40px;text-align:center}
+.footer p{font-size:11px;color:#94a3b8;line-height:1.6}
+.footer strong{color:#64748b}
 </style>
 </head><body>
-<div class="container"><div class="email-content">
-<h1>📄 Nouveau CV reçu</h1>
-<p class="subtitle">Reçu via le formulaire de candidature SOJIF Consulting</p>
-<span class="badge">Formulaire candidat</span>
-<table>
-<tr><td>Candidat</td><td><strong>${candidateName}</strong></td></tr>
-<tr><td>Email</td><td><a href="mailto:${candidateEmail}" style="color:#2563eb">${candidateEmail}</a></td></tr>
-<tr><td>Fichier</td><td>${fileName}</td></tr>
-</table>
-<a href="${cvUrl}" class="btn">📥 Télécharger le CV</a>
-<div class="footer">
-<p>Répondez directement à cet email pour contacter le candidat.</p>
-<p>© ${new Date().getFullYear()} SOJIF Consulting — Notification automatique</p>
+<div class="wrapper">
+
+  <div class="header">
+    <h1>📄 Nouvelle Candidature</h1>
+    <p>Formulaire de candidature — SOJIF Consulting</p>
+    <span class="badge">CV reçu</span>
+  </div>
+
+  <div class="body">
+    <div class="meta">Reçu le ${new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} à ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</div>
+
+    <p class="section-title">Informations du candidat</p>
+    <table>
+      <tr><td class="label">Nom complet</td><td class="value"><strong>${candidateName}</strong></td></tr>
+      <tr><td class="label">Email</td><td class="value"><a href="mailto:${candidateEmail}" style="color:#2563eb;text-decoration:none">${candidateEmail}</a></td></tr>
+      ${candidatePhone ? `<tr><td class="label">Téléphone</td><td class="value">${candidatePhone}</td></tr>` : ''}
+      ${candidateDomain ? `<tr><td class="label">Domaine d'expertise</td><td class="value">${candidateDomain}</td></tr>` : ''}
+      ${candidateExperience ? `<tr><td class="label">Années d'expérience</td><td class="value">${candidateExperience}</td></tr>` : ''}
+      <tr><td class="label">Fichier CV</td><td class="value">${fileName}</td></tr>
+    </table>
+
+    ${candidateMessage ? `
+    <p class="section-title">Lettre de motivation</p>
+    <div class="motivation">${candidateMessage.replace(/\n/g, '<br/>')}</div>` : ''}
+
+    <div class="cv-btn">
+      <a href="${cvUrl}">📥 Télécharger le CV</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Vous pouvez répondre directement à cet email pour contacter <strong>${candidateName}</strong>.<br>
+    © ${new Date().getFullYear()} SOJIF Consulting — Notification automatique</p>
+  </div>
+
 </div>
-</div></div></body></html>`,
+</body></html>`,
         }),
     });
 }
@@ -73,6 +114,10 @@ export async function POST(request: Request) {
         const candidateId = formData.get('candidateId') as string | null;
         const candidateName = formData.get('candidateName') as string | null;
         const candidateEmail = formData.get('candidateEmail') as string | null;
+        const candidatePhone = formData.get('candidatePhone') as string | null;
+        const candidateDomain = formData.get('candidateDomain') as string | null;
+        const candidateExperience = formData.get('candidateExperience') as string | null;
+        const candidateMessage = formData.get('candidateMessage') as string | null;
 
         if (!file) {
             return NextResponse.json({ success: false, message: 'Aucun fichier fourni.' }, { status: 400 });
@@ -147,6 +192,10 @@ export async function POST(request: Request) {
                     candidateEmail,
                     cvUrl: urlData.publicUrl,
                     fileName: file.name,
+                    candidatePhone: candidatePhone || null,
+                    candidateDomain: candidateDomain || null,
+                    candidateExperience: candidateExperience || null,
+                    candidateMessage: candidateMessage || null,
                 });
                 console.info('CV notification email sent to admin');
             } catch (emailError) {

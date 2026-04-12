@@ -81,6 +81,10 @@ export default function CandidateForm() {
                 formData.append('cv', data.cv[0]);
                 formData.append('candidateName', data.fullName);
                 formData.append('candidateEmail', data.email);
+                formData.append('candidatePhone', data.phone);
+                formData.append('candidateDomain', data.domain);
+                formData.append('candidateExperience', data.experience);
+                if (data.message) formData.append('candidateMessage', data.message);
                 if (signupResult.candidateId) {
                     formData.append('candidateId', signupResult.candidateId);
                 }

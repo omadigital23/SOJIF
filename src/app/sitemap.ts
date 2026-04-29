@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
-import { env } from '@/lib/env';
+import { PUBLIC_SITE_URL, getLocalizedRoute } from '@/lib/site-url';
+import { DEPARTMENT_SLUGS } from '@/lib/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = env.NEXT_PUBLIC_APP_URL;
-    const locales = ['fr', 'en'];
+    const locales = ['fr', 'en'] as const;
     const lastModified = new Date();
 
     // Base routes that should be in both languages
@@ -24,9 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Add localized routes
     locales.forEach((locale) => {
         baseRoutes.forEach((route) => {
-            const path = `/${locale}${route}`;
             sitemap.push({
-                url: `${baseUrl}${path}`,
+                url: `${PUBLIC_SITE_URL}${getLocalizedRoute(locale, route)}`,
                 lastModified,
                 changeFrequency: 'weekly',
                 priority: route === '' ? 1.0 : 0.8,
@@ -34,22 +33,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         });
     });
 
-    // Add department-specific routes (example - you might want to fetch these from your database)
-    const departmentSlugs = [
-        'rh-consulting',
-        'digitalisation',
-        'formation',
-        'recrutement',
-        'conseil-strategie',
-    ];
-
+    // Add department-specific routes
     locales.forEach((locale) => {
-        departmentSlugs.forEach((slug) => {
+        DEPARTMENT_SLUGS.forEach((slug) => {
             sitemap.push({
-                url: `${baseUrl}/${locale}/departements/${slug}`,
+                url: `${PUBLIC_SITE_URL}${getLocalizedRoute(locale, `/departements/${slug}`)}`,
                 lastModified,
                 changeFrequency: 'monthly',
-                priority: 0.7,
+                priority: 0.9, // Departments are highly important for SEO
             });
         });
     });

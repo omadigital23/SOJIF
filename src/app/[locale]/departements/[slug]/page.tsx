@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { departments, getDepartmentBySlug } from '@/data/departments';
 import DepartmentPageClient from './DepartmentPageClient';
 import type { Metadata } from 'next';
+import { buildCanonicalAlternates } from '@/lib/site-url';
 
 type Props = {
     params: Promise<{ locale: string; slug: string }>;
@@ -18,13 +19,14 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
+    const { locale, slug } = await params;
     const dept = getDepartmentBySlug(slug);
     if (!dept) return {};
 
     return {
         title: dept.title,
         description: dept.description,
+        alternates: buildCanonicalAlternates(locale as 'fr' | 'en', `/departements/${slug}`),
     };
 }
 

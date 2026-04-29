@@ -68,7 +68,7 @@ function formatDate(dateStr: string) {
     });
 }
 
-export default function ClientAreaPage() {
+export default function ClientAreaPageClient() {
     const t = useTranslations('clientArea');
     const { locale } = useParams();
 

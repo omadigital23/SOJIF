@@ -1,9 +1,7 @@
 import { MetadataRoute } from 'next';
-import { env } from '@/lib/env';
+import { PUBLIC_SITE_URL } from '@/lib/site-url';
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = env.NEXT_PUBLIC_APP_URL;
-
     return {
         rules: [
             {
@@ -16,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
             },
         ],
-        sitemap: `${baseUrl}/sitemap.xml`,
+        sitemap: `${PUBLIC_SITE_URL}/sitemap.xml`,
     };
 }

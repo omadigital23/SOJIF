@@ -129,6 +129,8 @@ export default function Header() {
                                                 ? 'text-dark/80 hover:text-primary hover:bg-primary/5'
                                                 : 'text-white/90 hover:text-white hover:bg-white/10'
                                         )}
+                                        aria-haspopup={item.children ? 'true' : undefined}
+                                        aria-expanded={item.children ? openDropdown === item.label : undefined}
                                     >
                                         {t(item.label)}
                                         {item.children && (
@@ -193,6 +195,7 @@ export default function Header() {
                                         : "hover:bg-white/10 text-white backdrop-blur-sm bg-white/5"
                                 )}
                                 aria-label="Menu"
+                                aria-expanded={mobileOpen}
                             >
                                 <Menu className="w-6 h-6" />
                             </button>

@@ -164,6 +164,7 @@ export default function HeroSection() {
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.5 }}
                                     className="text-2xl text-white/80 font-light leading-relaxed italic"
+                                    aria-live="polite"
                                 >
                                     &quot;{t(sliderTexts[currentSlide])}&quot;
                                 </motion.p>

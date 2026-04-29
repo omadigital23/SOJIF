@@ -6,13 +6,17 @@ import Script from 'next/script';
 /**
  * Analytics Component - Configures Google Analytics and Vercel Analytics
  */
-export function AnalyticsProvider() {
+export function AnalyticsProvider({
+    enableVercelAnalytics = false,
+}: {
+    enableVercelAnalytics?: boolean;
+}) {
     const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_ID;
 
     return (
         <>
             {/* Vercel Analytics - Provides Web Vitals and Performance Monitoring */}
-            <Analytics />
+            {enableVercelAnalytics && <Analytics />}
 
             {/* Google Analytics */}
             {googleAnalyticsId && (

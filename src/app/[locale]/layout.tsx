@@ -1,12 +1,21 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { Inter } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import JsonLd from '@/components/seo/JsonLd';
 import type { Metadata } from 'next';
 import { PUBLIC_SITE_URL } from '@/lib/site-url';
+import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider';
+import '../globals.css';
+
+const inter = Inter({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-inter',
+});
 
 type Props = {
     children: React.ReactNode;
@@ -22,12 +31,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const url = `${PUBLIC_SITE_URL}/${locale}`;
 
     return {
+        metadataBase: new URL(PUBLIC_SITE_URL),
         title: {
             default: title,
             template: `%s | SOJIF Consulting`,
         },
         description,
         keywords: t('keywords'),
+        robots: {
+            index: true,
+            follow: true,
+            googleBot: {
+                index: true,
+                follow: true,
+                'max-video-preview': -1,
+                'max-image-preview': 'large',
+                'max-snippet': -1,
+            },
+        },
+        icons: {
+            icon: '/images/logo_sojif.jpg',
+            apple: '/images/logo_sojif.jpg',
+        },
         authors: [{ name: 'SOJIF Consulting', url: PUBLIC_SITE_URL }],
         creator: 'SOJIF Consulting',
         publisher: 'SOJIF Consulting',
@@ -63,6 +88,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             },
         },
         category: 'business',
+        other: {
+            'theme-color': '#1E40AF',
+        },
     };
 }
 
@@ -80,14 +108,15 @@ export default async function LocaleLayout({ children, params }: Props) {
     const messages = await getMessages();
 
     return (
-        <html lang={locale} suppressHydrationWarning>
-            <body className="min-h-screen flex flex-col">
+        <html lang={locale} className={inter.variable} suppressHydrationWarning>
+            <body className="min-h-screen flex flex-col font-sans">
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <JsonLd locale={locale} />
                     <Header />
                     <main className="flex-1">{children}</main>
                     <Footer />
                 </NextIntlClientProvider>
+                <AnalyticsProvider enableVercelAnalytics={process.env.VERCEL === '1'} />
             </body>
         </html>
     );

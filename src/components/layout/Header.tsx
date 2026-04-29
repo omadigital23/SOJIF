@@ -88,7 +88,7 @@ export default function Header() {
                         <Link href={'/'} className="flex items-center gap-3 group">
                             <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:shadow-md bg-white">
                                 <NextImage
-                                    src="/images/logo.jpg"
+                                    src="/images/logo_sojif.jpg"
                                     alt={COMPANY.name}
                                     fill
                                     className="object-contain p-1"

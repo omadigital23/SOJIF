@@ -21,7 +21,7 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function DigitalizationPageClient() {
-    const t = useTranslations('digitalization');
+    const t = useTranslations('digitalisation');
     const { locale } = useParams();
 
     return (

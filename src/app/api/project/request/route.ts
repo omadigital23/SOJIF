@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
+import { sendProjectNotificationToAdmin, ADMIN_EMAIL } from '@/lib/email';
 
 const projectSchema = z.object({
     companyName: z.string().min(2),
@@ -38,6 +39,30 @@ export async function POST(request: Request) {
                 { success: false, message: 'Erreur lors de l\'enregistrement.' },
                 { status: 500 }
             );
+        }
+
+        try {
+            const adminNotification = await sendProjectNotificationToAdmin({
+                companyName: validated.companyName,
+                contactName: validated.contactName,
+                email: validated.email,
+                phone: validated.phone,
+                projectType: validated.projectType,
+                description: validated.description,
+                budget: validated.budget || null,
+                timeline: validated.timeline || null,
+            });
+            console.info('Admin project notification email sent', {
+                emailId: adminNotification.messageId,
+                to: ADMIN_EMAIL,
+                replyTo: validated.email,
+            });
+        } catch (emailError) {
+            console.warn('Failed to send admin project notification email:', {
+                error: emailError,
+                to: ADMIN_EMAIL,
+                replyTo: validated.email,
+            });
         }
 
         return NextResponse.json(

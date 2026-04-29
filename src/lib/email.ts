@@ -1,9 +1,75 @@
 import { env } from './env';
+import nodemailer, { type Transporter } from 'nodemailer';
 
 export const FROM_EMAIL = 'support@sojifconsulting.com';
 export const FROM_NAME = 'SOJIF Consulting';
 export const SUPPORT_EMAIL = 'support@sojifconsulting.com';
 export const ADMIN_EMAIL = 'contact@sojifconsulting.com';
+
+let adminSmtpTransporter: Transporter | null = null;
+
+function hasAdminSmtpConfig() {
+    return Boolean(process.env.BREVO_SMTP_USER && process.env.BREVO_SMTP_PASS);
+}
+
+function getAdminSmtpTransporter() {
+    if (!adminSmtpTransporter) {
+        const port = Number(process.env.BREVO_SMTP_PORT || 587);
+
+        adminSmtpTransporter = nodemailer.createTransport({
+            host: process.env.BREVO_SMTP_HOST || 'smtp-relay.brevo.com',
+            port,
+            secure: port === 465,
+            auth: {
+                user: process.env.BREVO_SMTP_USER,
+                pass: process.env.BREVO_SMTP_PASS,
+            },
+        });
+    }
+
+    return adminSmtpTransporter;
+}
+
+function cleanHeaderValue(value: string) {
+    return value.replace(/[\r\n]+/g, ' ').trim();
+}
+
+function escapeHtml(value: unknown) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function nl2br(value: unknown) {
+    return escapeHtml(value).replace(/\r?\n/g, '<br/>');
+}
+
+export async function sendAdminNotificationEmail(options: {
+    subject: string;
+    html: string;
+    replyTo?: string;
+}) {
+    if (!hasAdminSmtpConfig()) {
+        console.warn('BREVO_SMTP_USER/PASS missing, falling back to BREVO_API_KEY for admin notification email.');
+        return sendEmail({
+            to: ADMIN_EMAIL,
+            subject: options.subject,
+            html: options.html,
+            replyTo: options.replyTo,
+        });
+    }
+
+    return getAdminSmtpTransporter().sendMail({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: ADMIN_EMAIL,
+        replyTo: options.replyTo,
+        subject: cleanHeaderValue(options.subject),
+        html: options.html,
+    });
+}
 
 async function sendEmail(options: {
     to: string | string[];
@@ -221,19 +287,18 @@ export async function sendContactNotificationToAdmin(data: ContactNotificationDa
     };
 
     const optionalRows = [
-        data.company ? `<tr><td>Entreprise</td><td>${data.company}</td></tr>` : '',
-        data.domain ? `<tr><td>Domaine d'activité</td><td>${data.domain}</td></tr>` : '',
-        data.turnover ? `<tr><td>Chiffre d'affaires</td><td>${data.turnover}</td></tr>` : '',
-        data.employees ? `<tr><td>Nombre de salariés</td><td>${data.employees}</td></tr>` : '',
-        data.phase ? `<tr><td>Phase de l'entreprise</td><td>${phaseLabels[data.phase] || data.phase}</td></tr>` : '',
-        data.budget ? `<tr><td>Budget</td><td>${data.budget}</td></tr>` : '',
-        data.challenge ? `<tr><td>Challenge principal</td><td>${challengeLabels[data.challenge] || data.challenge}</td></tr>` : '',
-        data.meetingPref ? `<tr><td>Préférence de RDV</td><td>${meetingLabels[data.meetingPref] || data.meetingPref}</td></tr>` : '',
+        data.company ? `<tr><td>Entreprise</td><td>${escapeHtml(data.company)}</td></tr>` : '',
+        data.domain ? `<tr><td>Domaine d'activité</td><td>${escapeHtml(data.domain)}</td></tr>` : '',
+        data.turnover ? `<tr><td>Chiffre d'affaires</td><td>${escapeHtml(data.turnover)}</td></tr>` : '',
+        data.employees ? `<tr><td>Nombre de salariés</td><td>${escapeHtml(data.employees)}</td></tr>` : '',
+        data.phase ? `<tr><td>Phase de l'entreprise</td><td>${escapeHtml(phaseLabels[data.phase] || data.phase)}</td></tr>` : '',
+        data.budget ? `<tr><td>Budget</td><td>${escapeHtml(data.budget)}</td></tr>` : '',
+        data.challenge ? `<tr><td>Challenge principal</td><td>${escapeHtml(challengeLabels[data.challenge] || data.challenge)}</td></tr>` : '',
+        data.meetingPref ? `<tr><td>Préférence de RDV</td><td>${escapeHtml(meetingLabels[data.meetingPref] || data.meetingPref)}</td></tr>` : '',
     ].filter(Boolean).join('\n');
 
     try {
-        return await sendEmail({
-            to: ADMIN_EMAIL,
+        return await sendAdminNotificationEmail({
             replyTo: data.email,
             subject: `[CONTACT] ${data.firstName} ${data.lastName} — ${data.subject}`,
             html: `
@@ -260,19 +325,19 @@ td:first-child{font-weight:600;color:#374151;width:180px;background:#f9fafb}
 
 <p class="section-title">Coordonnées</p>
 <table>
-<tr><td>Nom complet</td><td>${data.firstName} ${data.lastName}</td></tr>
-<tr><td>Email</td><td><a href="mailto:${data.email}" style="color:#2563eb">${data.email}</a></td></tr>
-<tr><td>Téléphone</td><td>${data.phone}</td></tr>
-<tr><td>Sujet</td><td><strong>${data.subject}</strong></td></tr>
+<tr><td>Nom complet</td><td>${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)}</td></tr>
+<tr><td>Email</td><td><a href="mailto:${escapeHtml(data.email)}" style="color:#2563eb">${escapeHtml(data.email)}</a></td></tr>
+<tr><td>Téléphone</td><td>${escapeHtml(data.phone)}</td></tr>
+<tr><td>Sujet</td><td><strong>${escapeHtml(data.subject)}</strong></td></tr>
 </table>
 
 ${optionalRows ? `<p class="section-title">Informations Entreprise</p><table>${optionalRows}</table>` : ''}
 
 <p class="section-title">Message</p>
-<div class="message-box">${data.message.replace(/\n/g, '<br/>')}</div>
+<div class="message-box">${nl2br(data.message)}</div>
 
 <div class="footer">
-<p>Vous pouvez répondre directement à cet email pour contacter <strong>${data.firstName} ${data.lastName}</strong> (${data.email}).</p>
+<p>Vous pouvez répondre directement à cet email pour contacter <strong>${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)}</strong> (${escapeHtml(data.email)}).</p>
 <p>© ${new Date().getFullYear()} SOJIF Consulting — Notification automatique</p>
 </div>
 </div></div></body></html>`,
@@ -317,8 +382,7 @@ export async function sendRecruitmentNotificationToAdmin(data: RecruitmentNotifi
     };
 
     try {
-        return await sendEmail({
-            to: ADMIN_EMAIL,
+        return await sendAdminNotificationEmail({
             replyTo: data.email,
             subject: `[RECRUTEMENT] Nouvelle demande de ${data.companyName} — ${data.positionTitle}`,
             html: `
@@ -329,25 +393,79 @@ export async function sendRecruitmentNotificationToAdmin(data: RecruitmentNotifi
 <h1>📋 Nouvelle demande de recrutement</h1>
 <span class="badge">Formulaire de recrutement</span>
 <table>
-<tr><td>Entreprise</td><td>${data.companyName}</td></tr>
-<tr><td>Contact</td><td>${data.contactName}</td></tr>
-<tr><td>Email</td><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
-<tr><td>Téléphone</td><td>${data.phone}</td></tr>
-<tr><td>Poste recherché</td><td><strong>${data.positionTitle}</strong></td></tr>
-${data.department ? `<tr><td>Département</td><td>${data.department}</td></tr>` : ''}
-${data.contractType ? `<tr><td>Type de contrat</td><td>${contractLabels[data.contractType] || data.contractType}</td></tr>` : ''}
-${data.urgency ? `<tr><td>Urgence</td><td>${urgencyLabels[data.urgency] || data.urgency}</td></tr>` : ''}
-${data.salary ? `<tr><td>Salaire</td><td>${data.salary}</td></tr>` : ''}
-${data.location ? `<tr><td>Localisation</td><td>${data.location}</td></tr>` : ''}
+<tr><td>Entreprise</td><td>${escapeHtml(data.companyName)}</td></tr>
+<tr><td>Contact</td><td>${escapeHtml(data.contactName)}</td></tr>
+<tr><td>Email</td><td><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td></tr>
+<tr><td>Téléphone</td><td>${escapeHtml(data.phone)}</td></tr>
+<tr><td>Poste recherché</td><td><strong>${escapeHtml(data.positionTitle)}</strong></td></tr>
+${data.department ? `<tr><td>Département</td><td>${escapeHtml(data.department)}</td></tr>` : ''}
+${data.contractType ? `<tr><td>Type de contrat</td><td>${escapeHtml(contractLabels[data.contractType] || data.contractType)}</td></tr>` : ''}
+${data.urgency ? `<tr><td>Urgence</td><td>${escapeHtml(urgencyLabels[data.urgency] || data.urgency)}</td></tr>` : ''}
+${data.salary ? `<tr><td>Salaire</td><td>${escapeHtml(data.salary)}</td></tr>` : ''}
+${data.location ? `<tr><td>Localisation</td><td>${escapeHtml(data.location)}</td></tr>` : ''}
 </table>
 <h3>Description du poste :</h3>
-<div class="message-box">${data.description.replace(/\n/g, '<br/>')}</div>
-${data.requirements ? `<h3>Exigences :</h3><div class="message-box">${data.requirements.replace(/\n/g, '<br/>')}</div>` : ''}
+<div class="message-box">${nl2br(data.description)}</div>
+${data.requirements ? `<h3>Exigences :</h3><div class="message-box">${nl2br(data.requirements)}</div>` : ''}
 <div class="footer"><p>Email envoyé automatiquement depuis le site SOJIF Consulting.</p></div>
 </div></div></body></html>`,
         });
     } catch (error) {
         console.error('Admin recruitment notification email error:', error);
+        throw error;
+    }
+}
+
+interface ProjectNotificationData {
+    companyName: string;
+    contactName: string;
+    email: string;
+    phone: string;
+    projectType: string;
+    description: string;
+    budget?: string | null;
+    timeline?: string | null;
+}
+
+export async function sendProjectNotificationToAdmin(data: ProjectNotificationData) {
+    const projectTypeLabels: Record<string, string> = {
+        website: 'Site vitrine',
+        ecommerce: 'E-commerce',
+        webapp: 'Application web',
+        mobile: 'Application mobile',
+        crm: 'CRM / Automatisation',
+        branding: 'Branding / Identité digitale',
+    };
+
+    const projectType = projectTypeLabels[data.projectType] || data.projectType;
+
+    try {
+        return await sendAdminNotificationEmail({
+            replyTo: data.email,
+            subject: `[PROJET DIGITAL] ${data.companyName} — ${projectType}`,
+            html: `
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>body{font-family:'Segoe UI',sans-serif;line-height:1.6;color:#333}.container{max-width:620px;margin:0 auto;padding:20px;background:#f9fafb}.email-content{background:white;padding:40px;border-radius:12px}h1{color:#1f2937;margin-bottom:20px}table{width:100%;border-collapse:collapse;margin:20px 0}td{padding:8px 12px;border-bottom:1px solid #e5e7eb}td:first-child{font-weight:600;color:#374151;width:170px}.message-box{background:#f3f4f6;padding:16px;border-radius:8px;margin-top:16px;white-space:pre-wrap}.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #e5e7eb;color:#6b7280;font-size:12px}.badge{display:inline-block;padding:4px 12px;background:#dbeafe;color:#1e40af;border-radius:20px;font-size:12px;font-weight:600}</style>
+</head><body>
+<div class="container"><div class="email-content">
+<h1>Nouvelle demande de projet digital</h1>
+<span class="badge">Formulaire digitalisation</span>
+<table>
+<tr><td>Entreprise</td><td>${escapeHtml(data.companyName)}</td></tr>
+<tr><td>Contact</td><td>${escapeHtml(data.contactName)}</td></tr>
+<tr><td>Email</td><td><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td></tr>
+<tr><td>Téléphone</td><td>${escapeHtml(data.phone)}</td></tr>
+<tr><td>Type de projet</td><td><strong>${escapeHtml(projectType)}</strong></td></tr>
+${data.budget ? `<tr><td>Budget</td><td>${escapeHtml(data.budget)}</td></tr>` : ''}
+${data.timeline ? `<tr><td>Délai souhaité</td><td>${escapeHtml(data.timeline)}</td></tr>` : ''}
+</table>
+<h3>Description du projet :</h3>
+<div class="message-box">${nl2br(data.description)}</div>
+<div class="footer"><p>Vous pouvez répondre directement à cet email pour contacter ${escapeHtml(data.contactName)}.</p></div>
+</div></div></body></html>`,
+        });
+    } catch (error) {
+        console.error('Admin project notification email error:', error);
         throw error;
     }
 }

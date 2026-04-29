@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
-import { ADMIN_EMAIL, FROM_EMAIL, FROM_NAME } from '@/lib/email';
-import { env } from '@/lib/env';
+import { sendAdminNotificationEmail } from '@/lib/email';
 
 const CV_BUCKET = 'sojifcv';
 
@@ -24,22 +23,10 @@ async function sendCvNotification({
     candidateExperience?: string | null;
     candidateMessage?: string | null;
 }) {
-    const apiKey = env.BREVO_API_KEY;
-    if (!apiKey) return;
-
-    await fetch('https://api.brevo.com/v3/smtp/email', {
-        method: 'POST',
-        headers: {
-            'accept': 'application/json',
-            'content-type': 'application/json',
-            'api-key': apiKey,
-        },
-        body: JSON.stringify({
-            sender: { name: FROM_NAME, email: FROM_EMAIL },
-            to: [{ email: ADMIN_EMAIL }],
-            replyTo: { email: candidateEmail },
-            subject: `[CANDIDATURE] CV reçu — ${candidateName}`,
-            htmlContent: `<!DOCTYPE html>
+    return sendAdminNotificationEmail({
+        replyTo: candidateEmail,
+        subject: `[CANDIDATURE] CV reçu — ${candidateName}`,
+        html: `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -103,7 +90,6 @@ td.value{color:#1e293b}
 
 </div>
 </body></html>`,
-        }),
     });
 }
 

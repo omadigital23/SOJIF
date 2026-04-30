@@ -1,32 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase-server';
-
-async function verifyAdminToken(token: string) {
-    try {
-        const {
-            data: { user },
-        } = await supabaseAdmin.auth.admin.getUserById(token);
-
-        if (!user) return null;
-
-        const { data: userData } = await supabaseAdmin
-            .from('users')
-            .select('role')
-            .eq('id', user.id)
-            .single();
-
-        return userData && ['admin', 'super_admin'].includes(userData.role) ? user : null;
-    } catch {
-        return null;
-    }
-}
+import { requireAdmin } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
     try {
-        const authHeader = request.headers.get('authorization');
-        const token = authHeader?.replace('Bearer ', '');
-
-        if (!token || !(await verifyAdminToken(token))) {
+        if (!(await requireAdmin(request))) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 

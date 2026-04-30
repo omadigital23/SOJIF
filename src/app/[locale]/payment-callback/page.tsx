@@ -88,10 +88,10 @@ export default function PaymentCallbackPage() {
                         </Link>
                         {isSuccess ? (
                             <Link
-                                href={`/${locale}/espace-client`}
+                                href={`/${locale}/contact`}
                                 className="btn-primary gap-2"
                             >
-                                Mon espace client
+                                Contacter SOJIF
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
                         ) : (

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
 import { env } from '@/lib/env';
+import { getUserProfile } from '@/lib/auth';
 
 const loginSchema = z.object({
     email: z.string().email(),
@@ -28,13 +29,25 @@ export async function POST(request: Request) {
             );
         }
 
+        const profile = await getUserProfile(data.user.id);
+
+        if (!profile?.is_active) {
+            return NextResponse.json(
+                { success: false, message: 'Compte inactif ou non autorise.' },
+                { status: 403 }
+            );
+        }
+
         return NextResponse.json(
             {
                 success: true,
                 accessToken: data.session.access_token,
                 user: {
-                    id: data.user.id,
-                    email: data.user.email,
+                    id: profile.id,
+                    email: profile.email,
+                    firstName: profile.first_name,
+                    lastName: profile.last_name,
+                    role: profile.role,
                 },
             },
             { status: 200 }

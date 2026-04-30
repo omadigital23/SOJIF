@@ -9,7 +9,7 @@ export default function FloatingContactCTA() {
     const locale = useLocale();
     const pathname = usePathname() || '/';
 
-    if (pathname.startsWith('/admin') || pathname.startsWith('/mon-compte')) {
+    if (pathname.startsWith('/admin')) {
         return null;
     }
 

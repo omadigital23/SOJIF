@@ -215,17 +215,6 @@ export default function Header() {
                         {/* CTA + Mobile toggle */}
                         <div className="flex items-center gap-3">
                             <Link
-                                href={'/mon-compte'}
-                                className={cn(
-                                    "hidden 2xl:inline-flex btn-secondary !py-2.5 !px-5",
-                                    !isOverlay
-                                        ? "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                                        : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/30"
-                                )}
-                            >
-                                {t('nav.clientArea')}
-                            </Link>
-                            <Link
                                 href={'/contact'}
                                 className={cn(
                                     "hidden xl:inline-flex btn-primary !py-2.5 !px-5 shadow-lg shadow-primary/20",

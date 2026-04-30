@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/contact',
         '/departements',
         '/digitalisation',
-        '/espace-client',
         '/offres',
         '/recrutement',
         '/ressources',

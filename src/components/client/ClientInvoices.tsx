@@ -114,7 +114,7 @@ export default function ClientInvoices() {
                                 {t('invoices.amount')}
                             </th>
                             <th className="px-6 py-3 text-left text-xs font-semibold text-slate-600">
-                                {t('invoices.status')}
+                                {t('invoices.statusLabel')}
                             </th>
                             <th className="px-6 py-3 text-left text-xs font-semibold text-slate-600">
                                 {t('invoices.date')}

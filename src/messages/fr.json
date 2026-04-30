@@ -507,6 +507,89 @@
         "placeholders": { "domain": "Ex: Commerce, BTP, Services...", "turnover": "Ex: 50M FCFA", "employees": "Ex: 10 salariés", "select": "Sélectionnez...", "budget": "Ex: 5M FCFA" },
         "errors": { "min2": "Minimum 2 caractères", "invalidEmail": "Email invalide", "invalidPhone": "Numéro invalide", "companyRequired": "Nom de l'entreprise requis", "domainRequired": "Domaine requis", "turnoverRequired": "Chiffre d'affaires requis", "employeesRequired": "Nombre de salariés requis", "budgetRequired": "Budget requis", "selectSubject": "Sélectionnez un sujet", "min10": "Minimum 10 caractères" }
     },
+    "client": {
+        "loading": "Chargement...",
+        "loadingError": "Impossible de charger les informations pour le moment.",
+        "noData": "Aucune donnée disponible.",
+        "welcome": "Bienvenue, {name}",
+        "logout": "Déconnexion",
+        "auth": {
+            "loginTitle": "Connectez-vous à votre espace client",
+            "signupTitle": "Créer un accès client",
+            "email": "Adresse email",
+            "password": "Mot de passe",
+            "login": "Se connecter",
+            "signup": "Créer un compte",
+            "loading": "Traitement en cours...",
+            "haveAccount": "Vous avez déjà un compte ?",
+            "noAccount": "Pas encore client ?",
+            "backHome": "Retour à l'accueil",
+            "error": "Connexion impossible. Vérifiez vos informations et réessayez."
+        },
+        "tabs": {
+            "overview": "Tableau de bord",
+            "profile": "Profil",
+            "invoices": "Factures",
+            "documents": "Documents"
+        },
+        "dashboard": {
+            "title": "Mon espace client"
+        },
+        "overview": {
+            "subscription": "Abonnement",
+            "active": "Actif",
+            "inactive": "Inactif",
+            "nextBilling": "Prochaine facturation",
+            "totalSpent": "Total payé",
+            "invoices": "Factures",
+            "quickActions": "Actions rapides",
+            "createTicket": "Créer une demande",
+            "contactSupport": "Contacter l'équipe SOJIF",
+            "downloadResources": "Télécharger les ressources",
+            "accessDocuments": "Accéder à vos documents",
+            "scheduleCall": "Planifier un appel",
+            "bookMeeting": "Réserver un rendez-vous"
+        },
+        "profile": {
+            "title": "Informations du profil",
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "email": "Email",
+            "emailHelp": "L'adresse email ne peut pas être modifiée depuis cet espace.",
+            "phone": "Téléphone",
+            "company": "Entreprise",
+            "position": "Fonction",
+            "save": "Enregistrer",
+            "saving": "Enregistrement...",
+            "saveSuccess": "Profil mis à jour avec succès.",
+            "saveError": "Erreur lors de la mise à jour du profil."
+        },
+        "invoices": {
+            "total": "Total payé",
+            "count": "Nombre de factures",
+            "pending": "En attente",
+            "number": "Numéro",
+            "period": "Période",
+            "amount": "Montant",
+            "statusLabel": "Statut",
+            "date": "Date",
+            "action": "Action",
+            "download": "Télécharger",
+            "status": {
+                "all": "Toutes",
+                "paid": "Payées",
+                "pending": "En attente",
+                "overdue": "En retard"
+            }
+        },
+        "documents": {
+            "all": "Tous",
+            "category": "Catégorie",
+            "size": "Taille",
+            "uploaded": "Ajouté le",
+            "download": "Télécharger"
+        }
+    },
     "clientArea": {
         "loginTitle": "Espace Client",
         "loginSubtitle": "Connectez-vous pour accéder à votre espace personnel",

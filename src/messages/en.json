@@ -404,6 +404,89 @@
         "subjects": { "general": "General inquiry", "consultation": "Consultation request", "subscription": "Subscription offers", "digitalization": "Digitalization project", "recruitment": "Recruitment & placement", "other": "Other" },
         "errors": { "min2": "Minimum 2 characters", "invalidEmail": "Invalid email", "invalidPhone": "Invalid number", "companyRequired": "Company name required", "domainRequired": "Domain required", "turnoverRequired": "Turnover required", "employeesRequired": "Number of employees required", "budgetRequired": "Budget required", "selectSubject": "Select a subject", "min10": "Minimum 10 characters" }
     },
+    "client": {
+        "loading": "Loading...",
+        "loadingError": "Unable to load the information right now.",
+        "noData": "No data available.",
+        "welcome": "Welcome, {name}",
+        "logout": "Sign out",
+        "auth": {
+            "loginTitle": "Sign in to your client area",
+            "signupTitle": "Create client access",
+            "email": "Email address",
+            "password": "Password",
+            "login": "Sign in",
+            "signup": "Create account",
+            "loading": "Processing...",
+            "haveAccount": "Already have an account?",
+            "noAccount": "Not a client yet?",
+            "backHome": "Back to home",
+            "error": "Unable to sign in. Check your details and try again."
+        },
+        "tabs": {
+            "overview": "Dashboard",
+            "profile": "Profile",
+            "invoices": "Invoices",
+            "documents": "Documents"
+        },
+        "dashboard": {
+            "title": "My client area"
+        },
+        "overview": {
+            "subscription": "Subscription",
+            "active": "Active",
+            "inactive": "Inactive",
+            "nextBilling": "Next billing",
+            "totalSpent": "Total paid",
+            "invoices": "Invoices",
+            "quickActions": "Quick actions",
+            "createTicket": "Create a request",
+            "contactSupport": "Contact the SOJIF team",
+            "downloadResources": "Download resources",
+            "accessDocuments": "Access your documents",
+            "scheduleCall": "Schedule a call",
+            "bookMeeting": "Book a meeting"
+        },
+        "profile": {
+            "title": "Profile information",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "email": "Email",
+            "emailHelp": "The email address cannot be changed from this area.",
+            "phone": "Phone",
+            "company": "Company",
+            "position": "Position",
+            "save": "Save",
+            "saving": "Saving...",
+            "saveSuccess": "Profile updated successfully.",
+            "saveError": "Error updating profile."
+        },
+        "invoices": {
+            "total": "Total paid",
+            "count": "Number of invoices",
+            "pending": "Pending",
+            "number": "Number",
+            "period": "Period",
+            "amount": "Amount",
+            "statusLabel": "Status",
+            "date": "Date",
+            "action": "Action",
+            "download": "Download",
+            "status": {
+                "all": "All",
+                "paid": "Paid",
+                "pending": "Pending",
+                "overdue": "Overdue"
+            }
+        },
+        "documents": {
+            "all": "All",
+            "category": "Category",
+            "size": "Size",
+            "uploaded": "Uploaded",
+            "download": "Download"
+        }
+    },
     "clientArea": {
         "loginTitle": "Client Area",
         "loginSubtitle": "Sign in to access your personal space",

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useRouter } from 'next/navigation';
 
 export default function ClientAuth() {
@@ -30,7 +30,7 @@ export default function ClientAuth() {
             const data = await res.json();
 
             if (!res.ok) {
-                setError(data.message || t('auth.error'));
+                setError(t('auth.error'));
                 setIsLoading(false);
                 return;
             }
@@ -117,7 +117,7 @@ export default function ClientAuth() {
 
                     <div className="mt-4 text-center text-xs text-slate-500">
                         <Link href="/" className="hover:text-slate-700">
-                            ← {t('auth.backHome')}
+                            <span aria-hidden="true">&larr;</span> {t('auth.backHome')}
                         </Link>
                     </div>
                 </div>

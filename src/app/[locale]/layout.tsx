@@ -44,8 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             },
         },
         icons: {
-            icon: '/images/logo_sojif.jpg',
-            apple: '/images/logo_sojif.jpg',
+            icon: '/images/sojif-mark.svg',
+            apple: '/images/sojif-mark.png',
         },
         authors: [{ name: 'SOJIF Consulting', url: PUBLIC_SITE_URL }],
         creator: 'SOJIF Consulting',
@@ -60,9 +60,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             type: 'website',
             images: [
                 {
-                    url: `${PUBLIC_SITE_URL}/images/logo_sojif.jpg`,
-                    width: 800,
-                    height: 600,
+                    url: `${PUBLIC_SITE_URL}/images/sojif-logo.png`,
+                    width: 720,
+                    height: 220,
                     alt: 'SOJIF Consulting — Cabinet de Conseil à Dakar, Sénégal',
                 },
             ],
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             card: 'summary_large_image',
             title,
             description,
-            images: [`${PUBLIC_SITE_URL}/images/logo_sojif.jpg`],
+            images: [`${PUBLIC_SITE_URL}/images/sojif-logo.png`],
         },
         alternates: {
             canonical: url,

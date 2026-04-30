@@ -1,0 +1,17 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SOJIF mark</title>
+  <desc id="desc">Premium SOJIF Consulting monogram mark with structured growth line.</desc>
+  <rect width="160" height="160" rx="36" fill="#0F172A"/>
+  <path d="M35 118V52C35 43.2 42.2 36 51 36H118" stroke="url(#frame)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M49 106C64.5 106 75.4 99.2 79.9 87.5L84.8 74.6C90 60.9 101.7 52 118 52" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round"/>
+  <path d="M49 79C61.4 79 70.6 72.4 75.5 60.9" stroke="#60A5FA" stroke-width="10" stroke-linecap="round"/>
+  <path d="M57 119H120" stroke="#F59E0B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M101 79L121 59L121 85" stroke="#10B981" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="50" cy="50" r="6" fill="#F59E0B"/>
+  <defs>
+    <linearGradient id="frame" x1="35" y1="118" x2="126" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#60A5FA"/>
+    </linearGradient>
+  </defs>
+</svg>

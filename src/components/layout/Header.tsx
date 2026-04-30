@@ -107,12 +107,15 @@ export default function Header() {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <Link href={'/'} className="flex items-center gap-3 group">
-                            <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:shadow-md bg-white">
+                            <div className={cn(
+                                "relative w-10 h-10 lg:w-12 lg:h-12 overflow-hidden rounded-2xl shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg",
+                                isOverlay ? "bg-white/95 ring-1 ring-white/30" : "bg-white ring-1 ring-slate-200"
+                            )}>
                                 <NextImage
-                                    src="/images/logo_sojif.jpg"
+                                    src="/images/sojif-mark.svg"
                                     alt={COMPANY.name}
                                     fill
-                                    className="object-contain p-1"
+                                    className="object-contain"
                                     sizes="48px"
                                     priority
                                 />

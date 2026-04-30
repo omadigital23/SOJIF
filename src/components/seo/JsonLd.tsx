@@ -29,8 +29,8 @@ export default function JsonLd({ locale, type = 'LocalBusiness', serviceData, br
             ? 'Cabinet d\'expertise en droit des affaires, fiscalité, comptabilité, ressources humaines et conseil stratégique à Dakar, Sénégal.'
             : 'Leading business law, taxation, accounting, HR and strategic consulting firm in Dakar, Senegal.',
         url: PUBLIC_SITE_URL,
-        logo: `${PUBLIC_SITE_URL}/images/logo_sojif.jpg`,
-        image: `${PUBLIC_SITE_URL}/images/logo_sojif.jpg`,
+        logo: `${PUBLIC_SITE_URL}/images/sojif-logo.svg`,
+        image: `${PUBLIC_SITE_URL}/images/sojif-logo.svg`,
         telephone: COMPANY.phone,
         email: COMPANY.email,
         address: {

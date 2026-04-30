@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
+import NextImage from 'next/image';
 import { useTranslations } from 'next-intl';
 import { ChevronDown, MessageCircle, Phone, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -59,9 +60,20 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
                         <div className="flex flex-col h-full">
                             {/* Header */}
                             <div className="flex items-center justify-between p-4 border-b border-gray-100">
-                                <div>
-                                    <span className="font-bold text-dark text-lg">Menu</span>
-                                    <p className="text-xs text-neutral-gray mt-0.5">{COMPANY.name}</p>
+                                <div className="flex items-center gap-3">
+                                    <div className="relative h-11 w-11 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+                                        <NextImage
+                                            src="/images/sojif-mark.svg"
+                                            alt={COMPANY.name}
+                                            fill
+                                            className="object-contain"
+                                            sizes="44px"
+                                        />
+                                    </div>
+                                    <div>
+                                        <span className="font-bold text-dark text-lg">Menu</span>
+                                        <p className="text-xs text-neutral-gray mt-0.5">{COMPANY.name}</p>
+                                    </div>
                                 </div>
                                 <button
                                     onClick={onClose}

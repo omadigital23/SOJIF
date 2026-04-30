@@ -14,7 +14,7 @@
         "resources": "Resources",
         "contact": "Contact",
         "clientArea": "Client Area",
-        "requestDemo": "Request a demo",
+        "requestDemo": "Free diagnostic",
         "services": "Services",
         "company": "Company"
     },
@@ -22,8 +22,13 @@
         "title": "Business Structuring & Performance Firm",
         "subtitle": "Law • Finance • Development",
         "description": "We support African businesses in their legal structuring, financial performance and digital transformation.",
-        "cta1": "Discover our services",
-        "cta2": "Free diagnostic",
+        "cta1": "Request a diagnostic",
+        "cta2": "View expertise",
+        "proof": {
+            "response": "Reply within 24h",
+            "diagnostic": "Free initial diagnostic",
+            "plan": "Prioritized action plan"
+        },
         "slider": {
             "0": "Custom legal support to secure your business.",
             "1": "Tax optimization and rigorous audit for your growth.",
@@ -65,12 +70,22 @@
         "why3Desc": "Proven methodologies and measurable results.",
         "why4Title": "African Roots",
         "why4Desc": "Deep knowledge of the legal, tax and economic environment of West Africa.",
+        "leadLabel": "Operational diagnostic",
+        "leadTitle": "A first exchange that clarifies priorities",
+        "leadDesc": "The form and quick actions route each request to the right team: tax, legal, HR, accounting, digitalization or recruitment.",
+        "leadCta": "Plan the diagnostic",
+        "leadSteps": {
+            "audit": { "title": "Need analysis", "desc": "We identify the topic, urgency and main risks." },
+            "priority": { "title": "Action priorities", "desc": "You leave with a clear view of what to address first." },
+            "action": { "title": "Recommended next step", "desc": "We suggest the right format: one-off advice, subscription or dedicated project." }
+        },
         "testimonialsTitle": "What our clients say",
         "testimonialsLabel": "Testimonials",
         "testimonialsSubtitle": "Companies that trust us",
         "ctaTitle": "Ready to structure your growth?",
-        "ctaDesc": "Get a free diagnostic of your business from our experts.",
+        "ctaDesc": "Get a free diagnostic of your business from our experts. An advisor will respond to frame the need and suggest the right next step.",
         "ctaButton": "Request my free diagnostic",
+        "ctaCall": "Call",
         "perYear": "/year",
         "packs": {
             "0": {
@@ -357,7 +372,8 @@
         "addressLabel": "Address",
         "phoneLabel": "Phone",
         "emailLabel": "Email",
-        "formTitle": "Send us a message",
+        "formTitle": "Request a free diagnostic",
+        "formHint": "Only your contact details, a subject and your message are required. Company details remain optional.",
         "firstName": "First name",
         "lastName": "Last name",
         "email": "Email",
@@ -381,9 +397,9 @@
         "budgetLabel": "Annual budget for securing your management",
         "meetingLabel": "Preferred contact method",
         "meetingOptions": { "video": "Video call", "inPerson": "In-person" },
-        "sectionDirector": "Director Information",
-        "sectionCompany": "Company Information",
-        "sectionChallenge": "Your Challenge & Project",
+        "sectionDirector": "Your contact details",
+        "sectionCompany": "Company details (optional)",
+        "sectionChallenge": "Need qualification (optional)",
         "placeholders": { "domain": "Ex: Commerce, Construction, Services...", "turnover": "Ex: 50M FCFA", "employees": "Ex: 10 employees", "select": "Select...", "budget": "Ex: 5M FCFA" },
         "subjects": { "general": "General inquiry", "consultation": "Consultation request", "subscription": "Subscription offers", "digitalization": "Digitalization project", "recruitment": "Recruitment & placement", "other": "Other" },
         "errors": { "min2": "Minimum 2 characters", "invalidEmail": "Invalid email", "invalidPhone": "Invalid number", "companyRequired": "Company name required", "domainRequired": "Domain required", "turnoverRequired": "Turnover required", "employeesRequired": "Number of employees required", "budgetRequired": "Budget required", "selectSubject": "Select a subject", "min10": "Minimum 10 characters" }

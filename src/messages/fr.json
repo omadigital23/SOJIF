@@ -14,7 +14,7 @@
         "resources": "Ressources",
         "contact": "Contact",
         "clientArea": "Espace Client",
-        "requestDemo": "Demandez une démo",
+        "requestDemo": "Diagnostic gratuit",
         "services": "Services",
         "company": "Entreprise"
     },
@@ -22,8 +22,13 @@
         "title": "Cabinet de Structuration & Performance des Entreprises",
         "subtitle": "Droit • Finance • Développement",
         "description": "Nous accompagnons les entreprises africaines dans leur structuration juridique, leur performance financière et leur transformation digitale.",
-        "cta1": "Découvrir nos services",
-        "cta2": "Diagnostic gratuit",
+        "cta1": "Demander un diagnostic",
+        "cta2": "Voir les expertises",
+        "proof": {
+            "response": "Réponse sous 24h",
+            "diagnostic": "Diagnostic initial offert",
+            "plan": "Plan d'action priorisé"
+        },
         "slider": {
             "0": "Accompagnement juridique sur mesure pour sécuriser vos affaires.",
             "1": "Optimisation fiscale et audit rigoureux pour votre croissance.",
@@ -65,12 +70,22 @@
         "why3Desc": "Des méthodologies éprouvées et des résultats mesurables.",
         "why4Title": "Ancrage Africain",
         "why4Desc": "Une maîtrise profonde du contexte juridique, fiscal et économique d'Afrique de l'Ouest.",
+        "leadLabel": "Diagnostic opérationnel",
+        "leadTitle": "Un premier échange qui clarifie vos priorités",
+        "leadDesc": "Le formulaire et les actions rapides orientent chaque demande vers le bon pôle: fiscalité, droit, RH, comptabilité, digitalisation ou recrutement.",
+        "leadCta": "Planifier le diagnostic",
+        "leadSteps": {
+            "audit": { "title": "Analyse du besoin", "desc": "Nous identifions le sujet, l'urgence et les risques principaux." },
+            "priority": { "title": "Priorités d'action", "desc": "Vous repartez avec une lecture claire des points à traiter en premier." },
+            "action": { "title": "Suite proposée", "desc": "Nous indiquons le bon format: conseil ponctuel, abonnement ou projet dédié." }
+        },
         "testimonialsTitle": "Ce que disent nos clients",
         "testimonialsLabel": "Témoignages",
         "testimonialsSubtitle": "Des entreprises qui nous font confiance",
         "ctaTitle": "Prêt à structurer votre croissance ?",
-        "ctaDesc": "Bénéficiez d'un diagnostic gratuit de votre entreprise par nos experts.",
+        "ctaDesc": "Bénéficiez d'un diagnostic gratuit de votre entreprise par nos experts. Un conseiller vous répond pour cadrer le besoin et proposer la suite adaptée.",
         "ctaButton": "Demander mon diagnostic gratuit",
+        "ctaCall": "Appeler",
         "perYear": "/an",
         "packs": {
             "0": {
@@ -460,7 +475,8 @@
         "addressLabel": "Adresse",
         "phoneLabel": "Téléphone",
         "emailLabel": "Email",
-        "formTitle": "Envoyez-nous un message",
+        "formTitle": "Demander un diagnostic gratuit",
+        "formHint": "Seuls vos coordonnées, un sujet et votre message sont nécessaires. Les informations entreprise restent facultatives.",
         "firstName": "Prénom",
         "lastName": "Nom",
         "email": "Email",
@@ -485,9 +501,9 @@
         "budgetLabel": "Budget annuel pour la sécurisation de votre gestion",
         "meetingLabel": "Moyen de contact préféré",
         "meetingOptions": { "video": "Appel Visio", "inPerson": "Présentiel" },
-        "sectionDirector": "Informations du Directeur",
-        "sectionCompany": "Informations Entreprise",
-        "sectionChallenge": "Votre Challenge & Projet",
+        "sectionDirector": "Vos coordonnées",
+        "sectionCompany": "Informations entreprise (facultatif)",
+        "sectionChallenge": "Qualification du besoin (facultatif)",
         "placeholders": { "domain": "Ex: Commerce, BTP, Services...", "turnover": "Ex: 50M FCFA", "employees": "Ex: 10 salariés", "select": "Sélectionnez...", "budget": "Ex: 5M FCFA" },
         "errors": { "min2": "Minimum 2 caractères", "invalidEmail": "Email invalide", "invalidPhone": "Numéro invalide", "companyRequired": "Nom de l'entreprise requis", "domainRequired": "Domaine requis", "turnoverRequired": "Chiffre d'affaires requis", "employeesRequired": "Nombre de salariés requis", "budgetRequired": "Budget requis", "selectSubject": "Sélectionnez un sujet", "min10": "Minimum 10 caractères" }
     },

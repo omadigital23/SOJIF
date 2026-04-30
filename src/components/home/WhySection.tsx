@@ -1,8 +1,9 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
-import { Layers, Zap, Award, Globe } from 'lucide-react';
+import { ArrowRight, Award, CheckCircle2, Globe, Layers, Zap } from 'lucide-react';
 
 const icons = [Layers, Zap, Award, Globe];
 
@@ -14,6 +15,11 @@ export default function WhySection() {
         { titleKey: 'why2Title', descKey: 'why2Desc' },
         { titleKey: 'why3Title', descKey: 'why3Desc' },
         { titleKey: 'why4Title', descKey: 'why4Desc' },
+    ];
+    const outcomes = [
+        { step: '01', titleKey: 'leadSteps.audit.title', descKey: 'leadSteps.audit.desc' },
+        { step: '02', titleKey: 'leadSteps.priority.title', descKey: 'leadSteps.priority.desc' },
+        { step: '03', titleKey: 'leadSteps.action.title', descKey: 'leadSteps.action.desc' },
     ];
 
     return (
@@ -75,6 +81,48 @@ export default function WhySection() {
                         );
                     })}
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-16 border-t border-gray-200 pt-12"
+                >
+                    <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.4fr] gap-10 items-start">
+                        <div>
+                            <div className="inline-flex items-center gap-2 text-primary text-sm font-semibold mb-4">
+                                <CheckCircle2 className="w-4 h-4" />
+                                {t('leadLabel')}
+                            </div>
+                            <h3 className="text-2xl sm:text-3xl font-bold text-dark mb-4">
+                                {t('leadTitle')}
+                            </h3>
+                            <p className="text-neutral-gray leading-relaxed mb-6">
+                                {t('leadDesc')}
+                            </p>
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center gap-2 text-primary font-bold hover:text-primary-dark transition-colors"
+                            >
+                                {t('leadCta')}
+                                <ArrowRight className="w-4 h-4" />
+                            </Link>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            {outcomes.map((outcome) => (
+                                <div
+                                    key={outcome.step}
+                                    className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+                                >
+                                    <div className="text-xs font-bold text-primary mb-4">{outcome.step}</div>
+                                    <h4 className="font-bold text-dark mb-2">{t(outcome.titleKey)}</h4>
+                                    <p className="text-sm text-neutral-gray leading-relaxed">{t(outcome.descKey)}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

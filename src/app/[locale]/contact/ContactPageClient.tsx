@@ -18,19 +18,35 @@ import {
 } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 
+const emptyToUndefined = (value: unknown) => (
+    value === null || (typeof value === 'string' && value.trim() === '') ? undefined : value
+);
+
+const optionalText = z.preprocess(emptyToUndefined, z.string().optional());
+
+const optionalMinText = (min: number, message: string) => z.preprocess(
+    emptyToUndefined,
+    z.string().min(min, message).optional()
+);
+
+const optionalEnum = <T extends [string, ...string[]]>(values: T) => z.preprocess(
+    emptyToUndefined,
+    z.enum(values).optional()
+);
+
 const getContactSchema = (t: (key: string) => string) => z.object({
     firstName: z.string().min(2, t('errors.min2')),
     lastName: z.string().min(2, t('errors.min2')),
     email: z.string().email(t('errors.invalidEmail')),
     phone: z.string().min(8, t('errors.invalidPhone')),
-    company: z.string().min(2, t('errors.companyRequired')),
-    domain: z.string().min(2, t('errors.domainRequired')),
-    turnover: z.string().min(1, t('errors.turnoverRequired')),
-    employees: z.string().min(1, t('errors.employeesRequired')),
-    challenge: z.enum(['tax', 'accounting', 'hr', 'other']),
-    phase: z.enum(['creation', 'growth', 'restructuring']),
-    budget: z.string().min(1, t('errors.budgetRequired')),
-    meetingPref: z.enum(['video', 'inPerson']),
+    company: optionalMinText(2, t('errors.min2')),
+    domain: optionalText,
+    turnover: optionalText,
+    employees: optionalText,
+    challenge: optionalEnum(['tax', 'accounting', 'hr', 'other']),
+    phase: optionalEnum(['creation', 'growth', 'restructuring']),
+    budget: optionalText,
+    meetingPref: optionalEnum(['video', 'inPerson']),
     subject: z.string().min(1, t('errors.selectSubject')),
     message: z.string().min(10, t('errors.min10')),
 });
@@ -252,7 +268,10 @@ export default function ContactPageClient() {
                         {/* Form column */}
                         <div className="lg:col-span-3">
                             <div className="bg-light-gray rounded-2xl p-8 lg:p-10">
-                                <h2 className="text-2xl font-bold text-dark mb-8">{t('formTitle')}</h2>
+                                <div className="mb-8">
+                                    <h2 className="text-2xl font-bold text-dark">{t('formTitle')}</h2>
+                                    <p className="text-sm text-neutral-gray mt-2">{t('formHint')}</p>
+                                </div>
 
                                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                                     {/* Section: Director & Contact */}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { COMPANY } from '@/lib/constants';
 
 export default function PrivacyPage() {
     const t = useTranslations('legal');
@@ -100,9 +101,9 @@ export default function PrivacyPage() {
                             <p>{t('privacy.section7.intro')}</p>
                             <div className="bg-slate-100 p-4 rounded-lg">
                                 <p className="font-semibold">SOJIF Consulting</p>
-                                <p>{t('privacy.section7.email')}: contact@sojif.sn</p>
-                                <p>{t('privacy.section7.phone')}: +221 33 869 39 39</p>
-                                <p>{t('privacy.section7.address')}: Dakar, Sénégal</p>
+                                <p>{t('privacy.section7.email')}: {COMPANY.email}</p>
+                                <p>{t('privacy.section7.phone')}: {COMPANY.phoneDisplay}</p>
+                                <p>{t('privacy.section7.address')}: {COMPANY.address}</p>
                             </div>
                         </div>
                     </section>

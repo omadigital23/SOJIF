@@ -365,7 +365,9 @@
         "comingSoon": "Section under development",
         "comingSoonDesc": "Our resource library will be available soon. Subscribe to our newsletter to be notified of the launch.",
         "newsletterPlaceholder": "Your email",
-        "newsletterButton": "Subscribe"
+        "newsletterButton": "Subscribe",
+        "subscribed": "Thank you. You will be notified.",
+        "emailLabel": "Email"
     },
     "contact": {
         "title": "Contact us",
@@ -387,6 +389,12 @@
         "success": "Message sent successfully!",
         "error": "Error sending. Please try again.",
         "whatsappCta": "Chat on WhatsApp",
+        "highlights": {
+            "responseLabel": "Response",
+            "responseValue": "Within 24 business hours",
+            "meetingLabel": "Meeting",
+            "meetingValue": "Video or Dakar"
+        },
         "directorLabel": "Director name and first name",
         "domainLabel": "Business domain",
         "turnoverLabel": "Annual turnover",
@@ -519,6 +527,199 @@
             "success": "Paid",
             "pending": "Pending",
             "failed": "Failed"
+        }
+    },
+    "paymentCallback": {
+        "successTitle": "Payment confirmed!",
+        "successDescription": "Your payment was processed successfully. Our team will contact you within 24 hours to finalize your subscription.",
+        "cancelledTitle": "Payment cancelled",
+        "cancelledDescription": "You cancelled the payment. You can try again at any time.",
+        "failedTitle": "Payment failed",
+        "failedDescription": "An error occurred while processing your payment. Please try again or contact us.",
+        "backHome": "Back to home",
+        "contact": "Contact SOJIF",
+        "retry": "Try again"
+    },
+    "legal": {
+        "terms": {
+            "title": "Terms of Use",
+            "lastUpdated": "Last updated: April 30, 2026",
+            "intro": "These terms govern the use of the SOJIF Consulting website and requests submitted through its forms, offer pages and contact channels.",
+            "section1": {
+                "title": "1. Definitions",
+                "sojif": "SOJIF Consulting",
+                "sojifDef": "means the consulting firm providing services in business law, taxation, accounting, human resources, strategic advisory, digitalization and recruitment.",
+                "user": "User",
+                "userDef": "means any person browsing the website or using a contact, diagnostic, recruitment or project request form.",
+                "content": "Content",
+                "contentDef": "means all text, visuals, logos, information, documents and resources published on the website.",
+                "services": "Services",
+                "servicesDef": "means the advisory, support, subscription, recruitment and digitalization services offered by SOJIF Consulting."
+            },
+            "section2": {
+                "title": "2. User obligations",
+                "intro": "The user agrees to use the website fairly, lawfully and with respect for the rights of SOJIF Consulting and third parties.",
+                "item1": "Provide accurate information when submitting a form.",
+                "item2": "Do not use the website to transmit unlawful, fraudulent or malicious content.",
+                "item3": "Do not attempt to alter the operation, security or availability of the website.",
+                "item4": "Respect the intellectual property rights attached to published content."
+            },
+            "section3": {
+                "title": "3. Description of services",
+                "intro": "The website presents SOJIF Consulting's areas of expertise, subscription offers and contact channels.",
+                "details": "The information published is general in nature and does not, by itself, constitute personalized legal, tax, accounting or HR advice. Each assignment is scoped beforehand and, where appropriate, confirmed through a tailored proposal."
+            },
+            "section4": {
+                "title": "4. Subscriptions and payments",
+                "intro": "The offers displayed on the website indicate the general conditions applicable to subscriptions and recurring services.",
+                "commitment": "Unless otherwise agreed, subscriptions are presented on an annual basis with the conditions specified on the Offers page.",
+                "payment": "Payment, deposit, invoicing and renewal terms are confirmed before the effective start of the assignment.",
+                "cancellation": "Any cancellation, suspension or modification of an assignment must be formalized under the terms agreed between the parties."
+            },
+            "section5": {
+                "title": "5. Intellectual property",
+                "intro": "The website, its structure, text, graphic elements, logos and content are protected by applicable intellectual property rules.",
+                "sojifRights": "SOJIF Consulting retains all rights attached to its trademarks, materials, methods, documents and published content.",
+                "userLicense": "Any unauthorized reproduction, adaptation, distribution or exploitation is prohibited without prior written consent."
+            },
+            "section6": {
+                "title": "6. Liability",
+                "intro": "SOJIF Consulting makes reasonable efforts to ensure the accuracy and updating of the information published on the website.",
+                "damaging": "SOJIF Consulting cannot be held liable for inappropriate use of the website, temporary interruption, technical error or indirect damage.",
+                "liability": "Decisions made by the user based on general website information remain under the user's responsibility until a personalized assignment has been formally agreed."
+            },
+            "section7": {
+                "title": "7. Governing law and jurisdiction",
+                "intro": "These terms are governed by the laws applicable in Senegal, unless mandatory rules provide otherwise.",
+                "jurisdiction": "In the event of a dispute, the parties will seek an amicable resolution before referring the matter to the competent courts."
+            },
+            "section8": {
+                "title": "8. Contact",
+                "intro": "For any question regarding these terms of use, you may contact SOJIF Consulting.",
+                "email": "Email",
+                "phone": "Phone"
+            },
+            "lastUpdatedFull": "Document updated on April 30, 2026."
+        },
+        "legal": {
+            "title": "Legal notice",
+            "lastUpdated": "Last updated: April 30, 2026",
+            "section1": {
+                "title": "1. Website publisher",
+                "company": "Company",
+                "legalForm": "Legal form",
+                "legalFormValue": "Consulting business",
+                "registrationNumber": "Registration number",
+                "registrationValue": "RCCM Dakar [to be completed]",
+                "taxId": "Tax identifier",
+                "taxIdValue": "NIF [to be completed]",
+                "address": "Address",
+                "phone": "Phone",
+                "email": "Email",
+                "director": "Publication director"
+            },
+            "section2": {
+                "title": "2. Hosting",
+                "provider": "Hosting provider",
+                "address": "Address",
+                "addressValue": "San Francisco, United States",
+                "website": "Website"
+            },
+            "section3": {
+                "title": "3. Domain name",
+                "intro": "The domain name and associated information are managed in accordance with applicable rules.",
+                "domain": "Domain name",
+                "registrar": "Registrar",
+                "registrarValue": "[to be completed]"
+            },
+            "section4": {
+                "title": "4. Website management",
+                "intro": "Publication management is handled by the representative of SOJIF Consulting.",
+                "name": "Name"
+            },
+            "section5": {
+                "title": "5. Editorial responsibility",
+                "content": "SOJIF Consulting strives to publish reliable information, but does not guarantee that content will always be exhaustive.",
+                "links": "External links may lead to third-party websites whose content is not controlled by SOJIF Consulting.",
+                "interruption": "The website may be temporarily unavailable for maintenance, security or technical improvement reasons."
+            },
+            "section6": {
+                "title": "6. Intellectual property",
+                "intro": "Trademarks, logos, text, visuals, documents and graphic elements on the website are protected.",
+                "trademarks": "SOJIF Consulting and its brand assets remain the property of their respective owners.",
+                "prohibition": "Any unauthorized reproduction or use is prohibited."
+            },
+            "section7": {
+                "title": "7. Personal data",
+                "intro": "Data submitted through forms is used to respond to requests and manage follow-up communications.",
+                "senegal": "Data processing takes into account applicable rules in Senegal and personal data protection best practices.",
+                "privacy": "For more details, please refer to the privacy policy."
+            },
+            "section8": {
+                "title": "8. Cookies",
+                "intro": "The website may use cookies required for operation, audience measurement or user experience improvement.",
+                "details": "Users may manage their browser preferences according to the options provided by their browser."
+            },
+            "section9": {
+                "title": "9. Changes to the legal notice",
+                "intro": "SOJIF Consulting may update this legal notice to reflect changes to the website, services or regulatory framework."
+            },
+            "lastUpdatedFull": "Legal notice updated on April 30, 2026."
+        },
+        "privacy": {
+            "title": "Privacy policy",
+            "lastUpdated": "Last updated: April 30, 2026",
+            "intro": "This policy explains how SOJIF Consulting collects, uses and protects personal data submitted through the website.",
+            "section1": {
+                "title": "1. Data collected",
+                "intro": "The data collected depends on the forms used and the nature of the request.",
+                "personal": "Personal data that may be collected",
+                "item1": "First and last name.",
+                "item2": "Email address and phone number.",
+                "item3": "Company name, position, business sector and organization size.",
+                "item4": "Information about the expressed need, project, budget or contact preference.",
+                "item5": "Documents voluntarily submitted, especially as part of a job application."
+            },
+            "section2": {
+                "title": "2. Use of data",
+                "intro": "Data is used only for purposes related to SOJIF Consulting services.",
+                "item1": "Respond to contact, diagnostic or consultation requests.",
+                "item2": "Qualify needs and route requests to the right area of expertise.",
+                "item3": "Manage applications, recruitment requests and professional communications.",
+                "item4": "Ensure administrative, commercial and operational follow-up of assignments.",
+                "item5": "Improve the quality of the website, content and user experience."
+            },
+            "section3": {
+                "title": "3. Data protection",
+                "intro": "SOJIF Consulting implements reasonable measures to protect data against unauthorized access, loss, alteration or disclosure.",
+                "details": "Access to information is limited to authorized persons and technical providers required for service operation."
+            },
+            "section4": {
+                "title": "4. Data sharing",
+                "intro": "Data is not sold to third parties.",
+                "details": "It may be shared with technical providers, partners or authorities when necessary for service delivery, compliance with a legal obligation or defense of SOJIF Consulting's rights."
+            },
+            "section5": {
+                "title": "5. User rights",
+                "intro": "Subject to applicable rules, users may exercise rights over their personal data.",
+                "item1": "Request access to personal data held.",
+                "item2": "Request correction of inaccurate or incomplete information.",
+                "item3": "Request deletion or restriction of processing where possible.",
+                "item4": "Object to certain processing operations or withdraw consent where consent is required."
+            },
+            "section6": {
+                "title": "6. Cookies and audience measurement",
+                "intro": "The website may use technical or audience measurement cookies.",
+                "details": "These tools help ensure proper website operation, analyze usage and improve published content."
+            },
+            "section7": {
+                "title": "7. Personal data contact",
+                "intro": "For any question regarding your personal data, contact SOJIF Consulting.",
+                "email": "Email",
+                "phone": "Phone",
+                "address": "Address"
+            },
+            "lastUpdatedFull": "Privacy policy updated on April 30, 2026."
         }
     },
     "footer": {

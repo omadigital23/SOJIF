@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { COMPANY } from '@/lib/constants';
 
 export default function LegalNoticePage() {
     const t = useTranslations('legal');
@@ -20,14 +21,14 @@ export default function LegalNoticePage() {
                     <section>
                         <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('legal.section1.title')}</h2>
                         <div className="bg-slate-100 p-6 rounded-lg space-y-2 text-slate-700">
-                            <p><strong>{t('legal.section1.company')}:</strong> SOJIF Consulting</p>
+                            <p><strong>{t('legal.section1.company')}:</strong> {COMPANY.name}</p>
                             <p><strong>{t('legal.section1.legalForm')}:</strong> {t('legal.section1.legalFormValue')}</p>
-                            <p><strong>{t('legal.section1.registrationNumber')}:</strong> RCCM Dakar [à compléter]</p>
-                            <p><strong>{t('legal.section1.taxId')}:</strong> NIF [à compléter]</p>
-                            <p><strong>{t('legal.section1.address')}:</strong> Dakar, Sénégal</p>
-                            <p><strong>{t('legal.section1.phone')}:</strong> +221 33 869 39 39</p>
-                            <p><strong>{t('legal.section1.email')}:</strong> contact@sojif.sn</p>
-                            <p><strong>{t('legal.section1.director')}:</strong> Fatou Guewel MBAYE</p>
+                            <p><strong>{t('legal.section1.registrationNumber')}:</strong> {t('legal.section1.registrationValue')}</p>
+                            <p><strong>{t('legal.section1.taxId')}:</strong> {t('legal.section1.taxIdValue')}</p>
+                            <p><strong>{t('legal.section1.address')}:</strong> {COMPANY.address}</p>
+                            <p><strong>{t('legal.section1.phone')}:</strong> {COMPANY.phoneDisplay}</p>
+                            <p><strong>{t('legal.section1.email')}:</strong> {COMPANY.email}</p>
+                            <p><strong>{t('legal.section1.director')}:</strong> {COMPANY.director}</p>
                         </div>
                     </section>
 
@@ -36,7 +37,7 @@ export default function LegalNoticePage() {
                         <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('legal.section2.title')}</h2>
                         <div className="bg-slate-100 p-6 rounded-lg space-y-2 text-slate-700">
                             <p><strong>{t('legal.section2.provider')}:</strong> Vercel Inc.</p>
-                            <p><strong>{t('legal.section2.address')}:</strong> San Francisco, USA</p>
+                            <p><strong>{t('legal.section2.address')}:</strong> {t('legal.section2.addressValue')}</p>
                             <p><strong>{t('legal.section2.website')}:</strong> www.vercel.com</p>
                         </div>
                     </section>
@@ -47,8 +48,8 @@ export default function LegalNoticePage() {
                         <div className="space-y-3 text-slate-700">
                             <p>{t('legal.section3.intro')}</p>
                             <div className="bg-slate-100 p-6 rounded-lg space-y-2">
-                                <p><strong>{t('legal.section3.domain')}:</strong> sojif.sn</p>
-                                <p><strong>{t('legal.section3.registrar')}:</strong> [à compléter]</p>
+                                <p><strong>{t('legal.section3.domain')}:</strong> {COMPANY.website}</p>
+                                <p><strong>{t('legal.section3.registrar')}:</strong> {t('legal.section3.registrarValue')}</p>
                             </div>
                         </div>
                     </section>
@@ -58,7 +59,7 @@ export default function LegalNoticePage() {
                         <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('legal.section4.title')}</h2>
                         <div className="space-y-3 text-slate-700">
                             <p>{t('legal.section4.intro')}</p>
-                            <p><strong>{t('legal.section4.name')}:</strong> Fatou Guewel MBAYE</p>
+                            <p><strong>{t('legal.section4.name')}:</strong> {COMPANY.director}</p>
                         </div>
                     </section>
 

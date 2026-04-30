@@ -1,7 +1,8 @@
 'use client';
 
-import { useSearchParams, useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { CheckCircle, XCircle, ArrowRight } from 'lucide-react';
 
@@ -9,7 +10,8 @@ type PaymentStatus = 'loading' | 'success' | 'failed' | 'cancelled';
 
 export default function PaymentCallbackPage() {
     const searchParams = useSearchParams();
-    const { locale } = useParams();
+    const locale = useLocale();
+    const t = useTranslations('paymentCallback');
     const statusParam = searchParams.get('status');
     const txRef = searchParams.get('tx_ref');
     const amount = searchParams.get('amount');
@@ -34,14 +36,14 @@ export default function PaymentCallbackPage() {
                             <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
                                 <CheckCircle className="w-10 h-10 text-green-600" />
                             </div>
-                            <h1 className="text-2xl font-bold text-dark mb-3">Paiement confirmé !</h1>
+                            <h1 className="text-2xl font-bold text-dark mb-3">{t('successTitle')}</h1>
                             {amount && (
                                 <p className="text-4xl font-black text-primary mb-4">
-                                    {new Intl.NumberFormat('fr-FR').format(Number(amount))} FCFA
+                                    {new Intl.NumberFormat(locale).format(Number(amount))} FCFA
                                 </p>
                             )}
                             <p className="text-neutral-gray mb-8">
-                                Votre paiement a été traité avec succès. Notre équipe vous contactera sous 24h pour finaliser votre abonnement.
+                                {t('successDescription')}
                             </p>
                         </>
                     ) : (
@@ -50,12 +52,12 @@ export default function PaymentCallbackPage() {
                                 <XCircle className="w-10 h-10 text-red-600" />
                             </div>
                             <h1 className="text-2xl font-bold text-dark mb-3">
-                                {status === 'cancelled' ? 'Paiement annulé' : 'Paiement échoué'}
+                                {status === 'cancelled' ? t('cancelledTitle') : t('failedTitle')}
                             </h1>
                             <p className="text-neutral-gray mb-8">
                                 {status === 'cancelled'
-                                    ? 'Vous avez annulé le paiement. Vous pouvez réessayer à tout moment.'
-                                    : 'Une erreur est survenue lors du traitement de votre paiement. Veuillez réessayer ou nous contacter.'}
+                                    ? t('cancelledDescription')
+                                    : t('failedDescription')}
                             </p>
                         </>
                     )}
@@ -65,14 +67,14 @@ export default function PaymentCallbackPage() {
                             href={`/${locale}`}
                             className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-gray-200 text-dark font-semibold text-sm hover:bg-gray-50 transition-colors"
                         >
-                            Retour à l&apos;accueil
+                            {t('backHome')}
                         </Link>
                         {isSuccess ? (
                             <Link
                                 href={`/${locale}/contact`}
                                 className="btn-primary gap-2"
                             >
-                                Contacter SOJIF
+                                {t('contact')}
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
                         ) : (
@@ -80,7 +82,7 @@ export default function PaymentCallbackPage() {
                                 href={`/${locale}/offres`}
                                 className="btn-primary gap-2"
                             >
-                                Réessayer
+                                {t('retry')}
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
                         )}

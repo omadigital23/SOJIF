@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { COMPANY } from '@/lib/constants';
 
 export default function TermsPage() {
     const t = useTranslations('legal');
@@ -102,8 +103,8 @@ export default function TermsPage() {
                             <p>{t('terms.section8.intro')}</p>
                             <div className="bg-slate-100 p-4 rounded-lg">
                                 <p className="font-semibold">SOJIF Consulting</p>
-                                <p>{t('terms.section8.email')}: contact@sojif.sn</p>
-                                <p>{t('terms.section8.phone')}: +221 33 869 39 39</p>
+                                <p>{t('terms.section8.email')}: {COMPANY.email}</p>
+                                <p>{t('terms.section8.phone')}: {COMPANY.phoneDisplay}</p>
                             </div>
                         </div>
                     </section>

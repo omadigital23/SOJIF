@@ -67,11 +67,11 @@ export default function ResourcesPageClient() {
                         {subscribed ? (
                             <div className="flex items-center justify-center gap-2 text-green-600 font-semibold" role="status">
                                 <Mail className="w-5 h-5" aria-hidden="true" />
-                                Merci ! Vous serez notifié.
+                                {t('subscribed')}
                             </div>
                         ) : (
                             <form onSubmit={handleSubscribe} className="flex gap-3 max-w-md mx-auto">
-                                <label htmlFor="newsletter-email" className="sr-only">Email</label>
+                                <label htmlFor="newsletter-email" className="sr-only">{t('emailLabel')}</label>
                                 <input
                                     id="newsletter-email"
                                     type="email"

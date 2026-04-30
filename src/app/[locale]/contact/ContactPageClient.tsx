@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -56,73 +56,13 @@ const getContactSchema = (t: (key: string) => string) => z.object({
 type ContactFormData = z.infer<ReturnType<typeof getContactSchema>>;
 
 export default function ContactPageClient() {
-    const locale = useLocale();
     const t = useTranslations('contact');
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const contactSchema = getContactSchema(t);
-    const contactHighlights = locale === 'fr'
-        ? [
-            { icon: Clock3, label: 'Réponse', value: 'Sous 24h ouvrées' },
-            { icon: Navigation, label: 'Rendez-vous', value: 'Visio ou Dakar' },
-        ]
-        : [
-            { icon: Clock3, label: 'Response', value: 'Within 24 business hours' },
-            { icon: Navigation, label: 'Meeting', value: 'Video or Dakar' },
-        ];
-    const optionFallbacks = locale === 'fr'
-        ? {
-            challengeOptions: {
-                tax: 'Fiscalité',
-                accounting: 'Gestion Comptable',
-                hr: 'Structure RH',
-                other: 'Autre',
-            },
-            phaseOptions: {
-                creation: 'Création',
-                growth: 'Croissance',
-                restructuring: 'Restructuration',
-            },
-            meetingOptions: {
-                video: 'Appel Visio',
-                inPerson: 'Présentiel',
-            },
-            subjects: {
-                general: 'Demande générale',
-                consultation: 'Demande de consultation',
-                subscription: 'Offres d\'abonnement',
-                digitalization: 'Projet de digitalisation',
-                recruitment: 'Recrutement & placement',
-                other: 'Autre',
-            },
-        }
-        : {
-            challengeOptions: {
-                tax: 'Taxation',
-                accounting: 'Accounting Management',
-                hr: 'HR Structure',
-                other: 'Other',
-            },
-            phaseOptions: {
-                creation: 'Creation',
-                growth: 'Growth',
-                restructuring: 'Restructuring',
-            },
-            meetingOptions: {
-                video: 'Video call',
-                inPerson: 'In-person',
-            },
-            subjects: {
-                general: 'General inquiry',
-                consultation: 'Consultation request',
-                subscription: 'Subscription offers',
-                digitalization: 'Digitalization project',
-                recruitment: 'Recruitment & placement',
-                other: 'Other',
-            },
-        };
-    const translateOption = (key: string, fallback: string) => (
-        t.has(key) ? t(key) : fallback
-    );
+    const contactHighlights = [
+        { icon: Clock3, label: t('highlights.responseLabel'), value: t('highlights.responseValue') },
+        { icon: Navigation, label: t('highlights.meetingLabel'), value: t('highlights.meetingValue') },
+    ];
 
     const {
         register,
@@ -156,30 +96,30 @@ export default function ContactPageClient() {
     };
 
     const subjects = [
-        { value: 'general', label: translateOption('subjects.general', optionFallbacks.subjects.general) },
-        { value: 'consultation', label: translateOption('subjects.consultation', optionFallbacks.subjects.consultation) },
-        { value: 'subscription', label: translateOption('subjects.subscription', optionFallbacks.subjects.subscription) },
-        { value: 'digitalization', label: translateOption('subjects.digitalization', optionFallbacks.subjects.digitalization) },
-        { value: 'recruitment', label: translateOption('subjects.recruitment', optionFallbacks.subjects.recruitment) },
-        { value: 'other', label: translateOption('subjects.other', optionFallbacks.subjects.other) },
+        { value: 'general', label: t('subjects.general') },
+        { value: 'consultation', label: t('subjects.consultation') },
+        { value: 'subscription', label: t('subjects.subscription') },
+        { value: 'digitalization', label: t('subjects.digitalization') },
+        { value: 'recruitment', label: t('subjects.recruitment') },
+        { value: 'other', label: t('subjects.other') },
     ];
 
     const challenges = [
-        { value: 'tax', label: translateOption('challengeOptions.tax', optionFallbacks.challengeOptions.tax) },
-        { value: 'accounting', label: translateOption('challengeOptions.accounting', optionFallbacks.challengeOptions.accounting) },
-        { value: 'hr', label: translateOption('challengeOptions.hr', optionFallbacks.challengeOptions.hr) },
-        { value: 'other', label: translateOption('challengeOptions.other', optionFallbacks.challengeOptions.other) },
+        { value: 'tax', label: t('challengeOptions.tax') },
+        { value: 'accounting', label: t('challengeOptions.accounting') },
+        { value: 'hr', label: t('challengeOptions.hr') },
+        { value: 'other', label: t('challengeOptions.other') },
     ];
 
     const phases = [
-        { value: 'creation', label: translateOption('phaseOptions.creation', optionFallbacks.phaseOptions.creation) },
-        { value: 'growth', label: translateOption('phaseOptions.growth', optionFallbacks.phaseOptions.growth) },
-        { value: 'restructuring', label: translateOption('phaseOptions.restructuring', optionFallbacks.phaseOptions.restructuring) },
+        { value: 'creation', label: t('phaseOptions.creation') },
+        { value: 'growth', label: t('phaseOptions.growth') },
+        { value: 'restructuring', label: t('phaseOptions.restructuring') },
     ];
 
     const meetingPrefs = [
-        { value: 'video', label: translateOption('meetingOptions.video', optionFallbacks.meetingOptions.video) },
-        { value: 'inPerson', label: translateOption('meetingOptions.inPerson', optionFallbacks.meetingOptions.inPerson) },
+        { value: 'video', label: t('meetingOptions.video') },
+        { value: 'inPerson', label: t('meetingOptions.inPerson') },
     ];
 
     return (

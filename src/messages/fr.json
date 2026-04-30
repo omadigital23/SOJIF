@@ -468,7 +468,9 @@
         "comingSoon": "Section en cours de développement",
         "comingSoonDesc": "Notre bibliothèque de ressources sera bientôt disponible. Inscrivez-vous à notre newsletter pour être informé du lancement.",
         "newsletterPlaceholder": "Votre email",
-        "newsletterButton": "S'inscrire"
+        "newsletterButton": "S'inscrire",
+        "subscribed": "Merci ! Vous serez notifié.",
+        "emailLabel": "Email"
     },
     "contact": {
         "title": "Contactez-nous",
@@ -490,6 +492,12 @@
         "success": "Message envoyé avec succès !",
         "error": "Erreur lors de l'envoi. Veuillez réessayer.",
         "whatsappCta": "Discuter sur WhatsApp",
+        "highlights": {
+            "responseLabel": "Réponse",
+            "responseValue": "Sous 24h ouvrées",
+            "meetingLabel": "Rendez-vous",
+            "meetingValue": "Visio ou Dakar"
+        },
         "subjects": { "general": "Demande générale", "consultation": "Demande de consultation", "subscription": "Offres d'abonnement", "digitalization": "Projet de digitalisation", "recruitment": "Recrutement & placement", "other": "Autre" },
         "directorLabel": "Nom et prénom du directeur",
         "domainLabel": "Domaine d'activité",
@@ -622,6 +630,199 @@
             "success": "Payé",
             "pending": "En attente",
             "failed": "Échoué"
+        }
+    },
+    "paymentCallback": {
+        "successTitle": "Paiement confirmé !",
+        "successDescription": "Votre paiement a été traité avec succès. Notre équipe vous contactera sous 24h pour finaliser votre abonnement.",
+        "cancelledTitle": "Paiement annulé",
+        "cancelledDescription": "Vous avez annulé le paiement. Vous pouvez réessayer à tout moment.",
+        "failedTitle": "Paiement échoué",
+        "failedDescription": "Une erreur est survenue lors du traitement de votre paiement. Veuillez réessayer ou nous contacter.",
+        "backHome": "Retour à l'accueil",
+        "contact": "Contacter SOJIF",
+        "retry": "Réessayer"
+    },
+    "legal": {
+        "terms": {
+            "title": "Conditions générales d'utilisation",
+            "lastUpdated": "Dernière mise à jour : 30 avril 2026",
+            "intro": "Les présentes conditions générales encadrent l'utilisation du site SOJIF Consulting et les demandes adressées via ses formulaires, pages d'offres et canaux de contact.",
+            "section1": {
+                "title": "1. Définitions",
+                "sojif": "SOJIF Consulting",
+                "sojifDef": "désigne le cabinet de conseil proposant des services en droit des affaires, fiscalité, comptabilité, ressources humaines, conseil stratégique, digitalisation et recrutement.",
+                "user": "Utilisateur",
+                "userDef": "désigne toute personne consultant le site ou utilisant un formulaire de contact, de diagnostic, de recrutement ou de demande de projet.",
+                "content": "Contenu",
+                "contentDef": "désigne l'ensemble des textes, visuels, logos, informations, documents et ressources publiés sur le site.",
+                "services": "Services",
+                "servicesDef": "désigne les prestations de conseil, d'accompagnement, d'abonnement, de recrutement et de digitalisation proposées par SOJIF Consulting."
+            },
+            "section2": {
+                "title": "2. Obligations de l'utilisateur",
+                "intro": "L'utilisateur s'engage à utiliser le site de manière loyale, conforme à la loi et respectueuse des droits de SOJIF Consulting et des tiers.",
+                "item1": "Fournir des informations exactes lors de l'envoi d'un formulaire.",
+                "item2": "Ne pas utiliser le site pour transmettre des contenus illicites, frauduleux ou malveillants.",
+                "item3": "Ne pas tenter d'altérer le fonctionnement, la sécurité ou la disponibilité du site.",
+                "item4": "Respecter les droits de propriété intellectuelle attachés aux contenus publiés."
+            },
+            "section3": {
+                "title": "3. Description des services",
+                "intro": "Le site présente les domaines d'expertise, offres d'abonnement et canaux de contact de SOJIF Consulting.",
+                "details": "Les informations publiées ont une vocation générale et ne constituent pas, à elles seules, un avis juridique, fiscal, comptable ou RH personnalisé. Toute mission fait l'objet d'un cadrage préalable et, le cas échéant, d'une proposition adaptée."
+            },
+            "section4": {
+                "title": "4. Abonnements et paiements",
+                "intro": "Les offres affichées sur le site indiquent les conditions générales applicables aux abonnements et prestations récurrentes.",
+                "commitment": "Sauf accord spécifique, les abonnements sont présentés sur une base annuelle avec les conditions précisées dans la page Offres.",
+                "payment": "Les modalités de paiement, d'acompte, de facturation et de renouvellement sont confirmées avant le démarrage effectif de la mission.",
+                "cancellation": "Toute résiliation, suspension ou modification d'une mission doit être formalisée selon les conditions convenues entre les parties."
+            },
+            "section5": {
+                "title": "5. Propriété intellectuelle",
+                "intro": "Le site, son architecture, ses textes, ses éléments graphiques, ses logos et ses contenus sont protégés par les règles applicables en matière de propriété intellectuelle.",
+                "sojifRights": "SOJIF Consulting conserve l'ensemble des droits attachés à ses marques, supports, méthodes, documents et contenus publiés.",
+                "userLicense": "Toute reproduction, adaptation, diffusion ou exploitation non autorisée est interdite sans accord écrit préalable."
+            },
+            "section6": {
+                "title": "6. Responsabilité",
+                "intro": "SOJIF Consulting s'efforce d'assurer l'exactitude et la mise à jour des informations publiées sur le site.",
+                "damaging": "La responsabilité de SOJIF Consulting ne saurait être engagée en cas d'utilisation inappropriée du site, d'interruption temporaire, d'erreur technique ou de dommage indirect.",
+                "liability": "Les décisions prises par l'utilisateur sur la base d'informations générales du site restent sous sa responsabilité tant qu'aucune mission personnalisée n'a été formalisée."
+            },
+            "section7": {
+                "title": "7. Droit applicable et juridiction",
+                "intro": "Les présentes conditions sont régies par le droit applicable au Sénégal, sauf règle impérative contraire.",
+                "jurisdiction": "En cas de différend, les parties privilégieront une résolution amiable avant toute saisine des juridictions compétentes."
+            },
+            "section8": {
+                "title": "8. Contact",
+                "intro": "Pour toute question relative aux présentes conditions générales, vous pouvez contacter SOJIF Consulting.",
+                "email": "Email",
+                "phone": "Téléphone"
+            },
+            "lastUpdatedFull": "Document mis à jour le 30 avril 2026."
+        },
+        "legal": {
+            "title": "Mentions légales",
+            "lastUpdated": "Dernière mise à jour : 30 avril 2026",
+            "section1": {
+                "title": "1. Éditeur du site",
+                "company": "Société",
+                "legalForm": "Forme juridique",
+                "legalFormValue": "Entreprise de conseil",
+                "registrationNumber": "Numéro d'immatriculation",
+                "registrationValue": "RCCM Dakar [à compléter]",
+                "taxId": "Identifiant fiscal",
+                "taxIdValue": "NIF [à compléter]",
+                "address": "Adresse",
+                "phone": "Téléphone",
+                "email": "Email",
+                "director": "Directrice de publication"
+            },
+            "section2": {
+                "title": "2. Hébergement",
+                "provider": "Hébergeur",
+                "address": "Adresse",
+                "addressValue": "San Francisco, États-Unis",
+                "website": "Site web"
+            },
+            "section3": {
+                "title": "3. Nom de domaine",
+                "intro": "Le nom de domaine et les informations associées sont gérés conformément aux règles applicables.",
+                "domain": "Nom de domaine",
+                "registrar": "Registraire",
+                "registrarValue": "[à compléter]"
+            },
+            "section4": {
+                "title": "4. Direction du site",
+                "intro": "La direction de la publication est assurée par la représentante de SOJIF Consulting.",
+                "name": "Nom"
+            },
+            "section5": {
+                "title": "5. Responsabilité éditoriale",
+                "content": "SOJIF Consulting veille à publier des informations fiables, mais ne garantit pas l'exhaustivité permanente des contenus.",
+                "links": "Les liens externes peuvent mener vers des sites tiers dont SOJIF Consulting ne contrôle pas le contenu.",
+                "interruption": "Le site peut être temporairement indisponible pour des raisons de maintenance, de sécurité ou d'évolution technique."
+            },
+            "section6": {
+                "title": "6. Propriété intellectuelle",
+                "intro": "Les marques, logos, textes, visuels, documents et éléments graphiques présents sur le site sont protégés.",
+                "trademarks": "SOJIF Consulting et ses éléments de marque restent la propriété de leurs titulaires.",
+                "prohibition": "Toute reproduction ou exploitation non autorisée est interdite."
+            },
+            "section7": {
+                "title": "7. Données personnelles",
+                "intro": "Les données transmises via les formulaires sont utilisées pour répondre aux demandes et assurer le suivi des échanges.",
+                "senegal": "Le traitement des données tient compte des règles applicables au Sénégal et des bonnes pratiques de protection des données.",
+                "privacy": "Pour plus de détails, consultez la politique de confidentialité."
+            },
+            "section8": {
+                "title": "8. Cookies",
+                "intro": "Le site peut utiliser des cookies nécessaires au fonctionnement, à la mesure d'audience ou à l'amélioration de l'expérience.",
+                "details": "L'utilisateur peut gérer les préférences de son navigateur conformément aux options proposées par celui-ci."
+            },
+            "section9": {
+                "title": "9. Modification des mentions légales",
+                "intro": "SOJIF Consulting peut mettre à jour les présentes mentions légales afin de refléter l'évolution du site, des services ou du cadre réglementaire."
+            },
+            "lastUpdatedFull": "Mentions légales mises à jour le 30 avril 2026."
+        },
+        "privacy": {
+            "title": "Politique de confidentialité",
+            "lastUpdated": "Dernière mise à jour : 30 avril 2026",
+            "intro": "La présente politique explique comment SOJIF Consulting collecte, utilise et protège les données personnelles transmises via le site.",
+            "section1": {
+                "title": "1. Données collectées",
+                "intro": "Les données collectées dépendent des formulaires utilisés et de la nature de la demande.",
+                "personal": "Données personnelles susceptibles d'être collectées",
+                "item1": "Nom et prénom.",
+                "item2": "Adresse email et numéro de téléphone.",
+                "item3": "Nom de l'entreprise, fonction, domaine d'activité et taille de structure.",
+                "item4": "Informations relatives au besoin exprimé, au projet, au budget ou à la préférence de contact.",
+                "item5": "Documents transmis volontairement, notamment dans le cadre d'une candidature."
+            },
+            "section2": {
+                "title": "2. Utilisation des données",
+                "intro": "Les données sont utilisées uniquement pour des finalités liées aux services de SOJIF Consulting.",
+                "item1": "Répondre aux demandes de contact, de diagnostic ou de consultation.",
+                "item2": "Qualifier les besoins et orienter la demande vers le bon pôle d'expertise.",
+                "item3": "Gérer les candidatures, demandes de recrutement et échanges professionnels.",
+                "item4": "Assurer le suivi administratif, commercial et opérationnel des missions.",
+                "item5": "Améliorer la qualité du site, des contenus et de l'expérience utilisateur."
+            },
+            "section3": {
+                "title": "3. Protection des données",
+                "intro": "SOJIF Consulting met en œuvre des mesures raisonnables pour protéger les données contre l'accès non autorisé, la perte, l'altération ou la divulgation.",
+                "details": "L'accès aux informations est limité aux personnes habilitées et aux prestataires techniques nécessaires au fonctionnement des services."
+            },
+            "section4": {
+                "title": "4. Partage des données",
+                "intro": "Les données ne sont pas vendues à des tiers.",
+                "details": "Elles peuvent être partagées avec des prestataires techniques, partenaires ou autorités lorsque cela est nécessaire à l'exécution du service, au respect d'une obligation légale ou à la défense des droits de SOJIF Consulting."
+            },
+            "section5": {
+                "title": "5. Droits des utilisateurs",
+                "intro": "Sous réserve des règles applicables, l'utilisateur peut exercer ses droits sur les données le concernant.",
+                "item1": "Demander l'accès aux données personnelles détenues.",
+                "item2": "Demander la correction d'informations inexactes ou incomplètes.",
+                "item3": "Demander la suppression ou la limitation du traitement lorsque cela est possible.",
+                "item4": "S'opposer à certains traitements ou retirer son consentement lorsque celui-ci est requis."
+            },
+            "section6": {
+                "title": "6. Cookies et mesure d'audience",
+                "intro": "Le site peut utiliser des cookies techniques ou de mesure d'audience.",
+                "details": "Ces outils servent à assurer le bon fonctionnement du site, analyser son utilisation et améliorer les contenus proposés."
+            },
+            "section7": {
+                "title": "7. Contact données personnelles",
+                "intro": "Pour toute question relative à vos données personnelles, contactez SOJIF Consulting.",
+                "email": "Email",
+                "phone": "Téléphone",
+                "address": "Adresse"
+            },
+            "lastUpdatedFull": "Politique de confidentialité mise à jour le 30 avril 2026."
         }
     },
     "footer": {

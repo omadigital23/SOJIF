@@ -9,11 +9,12 @@ describe('Footer Component', () => {
 
     it('contains copyright text', () => {
         render(<Footer />);
-        expect(screen.getByText(/© 2026 SOJIF Consulting/i)).toBeInTheDocument();
+        const year = new Date().getFullYear();
+        expect(screen.getByText(new RegExp(`© ${year} SOJIF Consulting\\. footer\\.allRights`, 'i'))).toBeInTheDocument();
     });
 
     it('contains contact links', () => {
         render(<Footer />);
-        expect(screen.getByText(/contact/i)).toBeInTheDocument();
+        expect(screen.getByText('contact@sojifconsulting.com')).toBeInTheDocument();
     });
 });

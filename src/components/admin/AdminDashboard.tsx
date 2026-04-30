@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import AdminStats from './AdminStats';
@@ -15,12 +15,9 @@ export default function AdminDashboard() {
     const t = useTranslations('admin');
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<AdminTab>('overview');
-    const [userName, setUserName] = useState('');
-
-    useEffect(() => {
-        const name = localStorage.getItem('userName');
-        if (name) setUserName(name);
-    }, []);
+    const [userName] = useState(() => (
+        typeof window === 'undefined' ? '' : localStorage.getItem('userName') ?? ''
+    ));
 
     const handleLogout = () => {
         localStorage.removeItem('accessToken');

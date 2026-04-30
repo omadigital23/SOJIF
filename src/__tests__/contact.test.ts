@@ -32,8 +32,18 @@ jest.mock('../lib/sentry', () => ({
 }));
 
 describe('Contact API', () => {
+    let consoleErrorSpy: jest.SpyInstance;
+    let consoleInfoSpy: jest.SpyInstance;
+
     beforeEach(() => {
         jest.clearAllMocks();
+        consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+        consoleInfoSpy = jest.spyOn(console, 'info').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+        consoleErrorSpy.mockRestore();
+        consoleInfoSpy.mockRestore();
     });
 
     it('returns 400 when Zod validation fails', async () => {

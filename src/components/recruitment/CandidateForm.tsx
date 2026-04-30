@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -39,17 +39,16 @@ export default function CandidateForm() {
         register,
         handleSubmit,
         reset,
-        watch,
         formState: { errors },
     } = useForm<CandidateFormData>({
         resolver: zodResolver(candidateSchema),
     });
+    const cvRegistration = register('cv');
 
-    // Watch files to update fileName state
-    const cvFiles = watch('cv');
-    if (cvFiles && cvFiles.length > 0 && cvFiles[0].name !== fileName) {
-        setFileName(cvFiles[0].name);
-    }
+    const handleCvChange = (event: ChangeEvent<HTMLInputElement>) => {
+        void cvRegistration.onChange(event);
+        setFileName(event.target.files?.[0]?.name ?? null);
+    };
 
     const onSubmit = async (data: CandidateFormData) => {
         setStatus('sending');
@@ -192,11 +191,12 @@ export default function CandidateForm() {
                     <label className="block text-sm font-medium text-dark mb-2">{t('cv')}</label>
                     <div className="relative">
                         <input
-                            {...register('cv')}
+                            {...cvRegistration}
                             type="file"
                             accept=".pdf"
                             className="hidden"
                             id="cv-upload"
+                            onChange={handleCvChange}
                         />
                         <label
                             htmlFor="cv-upload"

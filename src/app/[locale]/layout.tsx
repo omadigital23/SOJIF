@@ -1,7 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { Inter } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -11,12 +10,6 @@ import type { Metadata } from 'next';
 import { PUBLIC_SITE_URL } from '@/lib/site-url';
 import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider';
 import '../globals.css';
-
-const inter = Inter({
-    subsets: ['latin'],
-    display: 'swap',
-    variable: '--font-inter',
-});
 
 type Props = {
     children: React.ReactNode;
@@ -109,7 +102,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     const messages = await getMessages();
 
     return (
-        <html lang={locale} className={inter.variable} suppressHydrationWarning>
+        <html lang={locale} suppressHydrationWarning>
             <body className="min-h-screen flex flex-col font-sans">
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <JsonLd locale={locale} />

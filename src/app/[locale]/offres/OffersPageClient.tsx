@@ -15,9 +15,9 @@ export default function OffersPageClient() {
     const { locale } = useParams();
 
     return (
-        <div className="pt-24 lg:pt-32">
+        <div className="pt-20 lg:pt-24">
             {/* Header */}
-            <section className="section-padding bg-light-gray">
+            <section className="bg-light-gray py-14 lg:py-20">
                 <div className="container-custom text-center">
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
@@ -46,59 +46,66 @@ export default function OffersPageClient() {
             </section>
 
             {/* Pricing cards */}
-            <section className="section-padding bg-white">
+            <section className="bg-white py-12 lg:py-16">
                 <div className="container-custom">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                        {pricingPacks.map((pack, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.15 }}
-                                className={`relative rounded-2xl p-8 flex flex-col ${pack.highlighted
-                                    ? 'bg-primary text-white shadow-2xl shadow-primary/25 scale-105 z-10'
-                                    : 'bg-white border-2 border-gray-100 card-hover'
-                                    }`}
-                            >
-                                {pack.highlighted && (
-                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent rounded-full text-white text-xs font-bold flex items-center gap-1">
-                                        <Star className="w-3 h-3" />
-                                        {tCommon('recommended')}
-                                    </div>
-                                )}
-                                <h3 className={`text-xl font-bold mb-2 ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
-                                    {tHome(`packs.${i}.name`)}
-                                </h3>
-                                <p className={`text-sm mb-6 ${pack.highlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
-                                    {tHome(`packs.${i}.description`)}
-                                </p>
-                                <div className="mb-6">
-                                    <span className={`text-3xl font-black ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
-                                        {formatPrice(pack.price)}
-                                    </span>
-                                    <span className={`text-sm ${pack.highlighted ? 'text-white/60' : 'text-neutral-gray'}`}>
-                                        {tHome('perYear')}
-                                    </span>
-                                </div>
-                                <ul className="space-y-3 mb-8 flex-1">
-                                    {Array.from({ length: pack.featuresCount }).map((_, featureIndex) => (
-                                        <li key={featureIndex} className="flex items-start gap-2.5">
-                                            <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${pack.highlighted ? 'text-accent' : 'text-primary'}`} />
-                                            <span className={`text-sm ${pack.highlighted ? 'text-white/80' : 'text-dark/70'}`}>
-                                                {tHome(`packs.${i}.features.${featureIndex}`)}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <Link
-                                    href={`/${locale}/contact`}
-                                    className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${pack.highlighted ? 'bg-white text-primary hover:bg-white/90' : 'btn-primary'}`}
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-3 max-w-6xl mx-auto items-start">
+                        {pricingPacks.map((pack, i) => {
+                            const [amount] = formatPrice(pack.price).split(' FCFA');
+
+                            return (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.15 }}
+                                    className={`relative flex flex-col rounded-2xl p-8 ${pack.highlighted
+                                        ? 'bg-primary text-white shadow-2xl shadow-primary/25 z-10'
+                                        : 'bg-white border-2 border-gray-100 card-hover'
+                                        }`}
                                 >
-                                    {tHome(`packs.${i}.cta`)}
-                                </Link>
-                            </motion.div>
-                        ))}
+                                    {pack.highlighted && (
+                                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent rounded-full text-white text-xs font-bold flex items-center gap-1 whitespace-nowrap">
+                                            <Star className="w-3 h-3" />
+                                            {tCommon('recommended')}
+                                        </div>
+                                    )}
+                                    <h3 className={`text-xl font-bold mb-2 ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
+                                        {tHome(`packs.${i}.name`)}
+                                    </h3>
+                                    <p className={`text-sm mb-6 min-h-20 ${pack.highlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
+                                        {tHome(`packs.${i}.description`)}
+                                    </p>
+                                    <div className="mb-6 flex flex-wrap items-end gap-x-2 gap-y-1">
+                                        <span className={`text-4xl font-black tracking-normal ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
+                                            {amount}
+                                        </span>
+                                        <span className={`pb-1 text-sm font-bold uppercase tracking-wide ${pack.highlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
+                                            FCFA
+                                        </span>
+                                        <span className={`text-sm font-medium ${pack.highlighted ? 'text-white/60' : 'text-neutral-gray'}`}>
+                                            {tHome('perYear')}
+                                        </span>
+                                    </div>
+                                    <ul className="space-y-3 mb-8 flex-1">
+                                        {Array.from({ length: pack.featuresCount }).map((_, featureIndex) => (
+                                            <li key={featureIndex} className="flex items-start gap-2.5">
+                                                <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${pack.highlighted ? 'text-accent' : 'text-primary'}`} />
+                                                <span className={`text-sm ${pack.highlighted ? 'text-white/80' : 'text-dark/70'}`}>
+                                                    {tHome(`packs.${i}.features.${featureIndex}`)}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <Link
+                                        href={`/${locale}/contact`}
+                                        className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${pack.highlighted ? 'bg-white text-primary hover:bg-white/90' : 'btn-primary'}`}
+                                    >
+                                        {tHome(`packs.${i}.cta`)}
+                                    </Link>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>

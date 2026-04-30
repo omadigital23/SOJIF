@@ -217,7 +217,7 @@ export default function Header() {
                             <Link
                                 href={'/contact'}
                                 className={cn(
-                                    "hidden xl:inline-flex btn-primary !py-2.5 !px-5 shadow-lg shadow-primary/20",
+                                    "hidden xl:inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold tracking-wide text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-xl hover:shadow-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 active:scale-[0.98]",
                                     isOverlay && "bg-white text-primary hover:bg-white/90 hover:text-primary-dark shadow-none"
                                 )}
                             >

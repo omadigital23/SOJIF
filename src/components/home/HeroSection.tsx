@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from '@/i18n/navigation';
-import { ArrowRight, Shield, CheckCircle, Clock3, ClipboardCheck, ListChecks } from 'lucide-react';
+import { ArrowRight, Shield, CheckCircle, Clock3, ClipboardCheck, ListChecks, MessageCircle } from 'lucide-react';
+import { COMPANY } from '@/lib/constants';
 
 export default function HeroSection() {
     const t = useTranslations('hero');
@@ -24,6 +25,9 @@ export default function HeroSection() {
         { key: 'proof.diagnostic', icon: ClipboardCheck },
         { key: 'proof.plan', icon: ListChecks },
     ];
+    const whatsappUrl = `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
+        'Bonjour SOJIF Consulting, je souhaite planifier un diagnostic gratuit.'
+    )}`;
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -33,7 +37,7 @@ export default function HeroSection() {
     }, [sliderTexts.length]);
 
     return (
-        <section className="relative min-h-[95vh] flex items-center overflow-hidden pt-20 lg:pt-32 bg-dark">
+        <section className="relative flex min-h-[92svh] items-start overflow-hidden bg-dark pb-28 pt-28 md:pb-20 lg:min-h-[95vh] lg:items-center lg:pt-32">
             <div className="absolute inset-0 bg-[linear-gradient(135deg,#0F172A_0%,#111827_48%,#1E3A8A_100%)]" />
 
             {/* Grid pattern overlay */}
@@ -65,7 +69,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tight"
+                        className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.06] mb-6 tracking-tight"
                     >
                         {t('title')}
                     </motion.h1>
@@ -85,7 +89,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="flex flex-col sm:flex-row gap-5"
+                        className="flex flex-col sm:flex-row sm:flex-wrap gap-4"
                     >
                         <Link
                             href="/contact"
@@ -94,6 +98,15 @@ export default function HeroSection() {
                             {t('cta1')}
                             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                         </Link>
+                        <a
+                            href={whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-emerald-950/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-600 hover:shadow-xl active:scale-[0.98]"
+                        >
+                            <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                            {t('whatsappCta')}
+                        </a>
                         <Link
                             href="/departements/droit"
                             className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white font-semibold text-base transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:-translate-y-0.5 active:scale-[0.98]"
@@ -128,7 +141,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
-                        className="mt-16 flex flex-wrap gap-12 border-t border-white/10 pt-8"
+                        className="mt-10 flex flex-wrap gap-8 border-t border-white/10 pt-6 lg:mt-16 lg:gap-12 lg:pt-8"
                     >
                         {[
                             { valueKey: 'stats.departmentsValue', labelKey: 'stats.departments' },

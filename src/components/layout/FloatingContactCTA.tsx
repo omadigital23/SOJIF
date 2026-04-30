@@ -1,79 +1,76 @@
 'use client';
 
-import { Link, usePathname } from '@/i18n/navigation';
+import { useEffect, useState } from 'react';
+import { usePathname } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
-import { MessageCircle, Phone, Send } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 
 export default function FloatingContactCTA() {
     const locale = useLocale();
     const pathname = usePathname() || '/';
+    const isHome = pathname === '/';
+    const [showMobileBar, setShowMobileBar] = useState(false);
 
-    if (pathname.startsWith('/admin')) {
+    useEffect(() => {
+        if (!isHome) {
+            return;
+        }
+
+        const handleScroll = () => setShowMobileBar(window.scrollY > 480);
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isHome]);
+    const mobileBarVisible = !isHome || showMobileBar;
+
+    if (pathname.startsWith('/admin') || pathname.startsWith('/contact')) {
         return null;
     }
 
     const labels = locale === 'fr'
         ? {
-            diagnostic: 'Diagnostic gratuit',
-            whatsapp: 'WhatsApp',
-            call: 'Appeler',
-            contact: 'Contact',
+            whatsapp: 'Discuter sur WhatsApp',
+            message: 'Bonjour SOJIF Consulting, je souhaite planifier un diagnostic gratuit.',
         }
         : {
-            diagnostic: 'Free diagnostic',
-            whatsapp: 'WhatsApp',
-            call: 'Call',
-            contact: 'Contact',
+            whatsapp: 'Chat on WhatsApp',
+            message: 'Hello SOJIF Consulting, I would like to schedule a free diagnostic.',
         };
+    const whatsappUrl = `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(labels.message)}`;
 
     return (
         <>
-            <div className="fixed bottom-5 right-5 z-40 hidden md:flex flex-col items-end gap-2">
+            <div
+                className={`fixed bottom-6 right-6 z-40 hidden transition-all duration-300 md:block ${
+                    mobileBarVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-8 opacity-0'
+                }`}
+            >
                 <a
-                    href={`https://wa.me/${COMPANY.whatsapp}`}
+                    href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-green-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-green-950/15 transition-colors hover:bg-green-600"
+                    className="inline-flex items-center gap-3 rounded-full bg-emerald-500 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-emerald-950/20 ring-1 ring-white/40 transition-all hover:-translate-y-0.5 hover:bg-emerald-600"
                     aria-label={labels.whatsapp}
                 >
-                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                    {labels.whatsapp}
+                    <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                    <span>WhatsApp</span>
                 </a>
-                <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-colors hover:bg-primary-dark"
-                    aria-label={labels.diagnostic}
-                >
-                    <Send className="h-4 w-4" aria-hidden="true" />
-                    {labels.diagnostic}
-                </Link>
             </div>
-
-            <div className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-3 gap-2 rounded-xl border border-gray-200 bg-white/95 p-2 shadow-xl shadow-slate-950/10 backdrop-blur md:hidden">
+            <div
+                className={`fixed bottom-4 right-4 z-40 transition-all duration-300 md:hidden ${
+                    mobileBarVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-8 opacity-0'
+                }`}
+            >
                 <a
-                    href={`tel:${COMPANY.phone}`}
-                    className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-semibold text-dark transition-colors hover:bg-slate-100"
-                >
-                    <Phone className="h-4 w-4" aria-hidden="true" />
-                    {labels.call}
-                </a>
-                <a
-                    href={`https://wa.me/${COMPANY.whatsapp}`}
+                    href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-green-500 px-2 text-xs font-semibold text-white transition-colors hover:bg-green-600"
+                    className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-xl shadow-emerald-950/20 ring-1 ring-white/40 transition-colors hover:bg-emerald-600"
+                    aria-label={labels.whatsapp}
                 >
-                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                    {labels.whatsapp}
+                    <MessageCircle className="h-5 w-5" aria-hidden="true" />
                 </a>
-                <Link
-                    href="/contact"
-                    className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-2 text-xs font-semibold text-white transition-colors hover:bg-primary-dark"
-                >
-                    <Send className="h-4 w-4" aria-hidden="true" />
-                    {labels.contact}
-                </Link>
             </div>
         </>
     );

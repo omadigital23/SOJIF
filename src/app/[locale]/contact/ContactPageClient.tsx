@@ -11,6 +11,8 @@ import {
     Phone,
     Mail,
     MessageCircle,
+    Clock3,
+    Navigation,
     Send,
     Loader2,
     CheckCircle,
@@ -58,6 +60,15 @@ export default function ContactPageClient() {
     const t = useTranslations('contact');
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const contactSchema = getContactSchema(t);
+    const contactHighlights = locale === 'fr'
+        ? [
+            { icon: Clock3, label: 'Réponse', value: 'Sous 24h ouvrées' },
+            { icon: Navigation, label: 'Rendez-vous', value: 'Visio ou Dakar' },
+        ]
+        : [
+            { icon: Clock3, label: 'Response', value: 'Within 24 business hours' },
+            { icon: Navigation, label: 'Meeting', value: 'Video or Dakar' },
+        ];
     const optionFallbacks = locale === 'fr'
         ? {
             challengeOptions: {
@@ -172,9 +183,9 @@ export default function ContactPageClient() {
     ];
 
     return (
-        <div className="pt-24 lg:pt-32">
+        <div className="pt-20 lg:pt-24">
             {/* Header */}
-            <section className="section-padding bg-light-gray">
+            <section className="bg-light-gray py-14 lg:py-20">
                 <div className="container-custom text-center">
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
@@ -195,7 +206,7 @@ export default function ContactPageClient() {
             </section>
 
             {/* Contact info + Form */}
-            <section className="section-padding bg-white">
+            <section className="bg-white py-12 lg:py-16">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
                         {/* Info column */}
@@ -250,24 +261,41 @@ export default function ContactPageClient() {
                                 </a>
                             </div>
 
-                            {/* Map */}
-                            <div className="mt-10 rounded-2xl overflow-hidden h-64 bg-light-gray">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.5!2d-17.4441!3d14.7167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQzJzAwLjAiTiAxN8KwMjYnMzkuMCJX!5e0!3m2!1sfr!2ssn!4v1"
-                                    width="100%"
-                                    height="100%"
-                                    style={{ border: 0 }}
-                                    allowFullScreen
-                                    loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                    title="SOJIF Consulting - Dakar, Sénégal"
-                                />
+                            {/* Visit card */}
+                            <div className="mt-10 rounded-2xl bg-dark p-6 text-white shadow-xl shadow-slate-950/10">
+                                <div className="mb-8 flex items-start justify-between gap-4">
+                                    <div>
+                                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/50">
+                                            SOJIF Consulting
+                                        </p>
+                                        <h3 className="mt-2 text-2xl font-black">Dakar</h3>
+                                        <p className="mt-1 text-sm text-white/65">{COMPANY.address}</p>
+                                    </div>
+                                    <div className="rounded-full border border-white/10 bg-white/10 p-3">
+                                        <MapPin className="h-5 w-5 text-secondary" aria-hidden="true" />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-1 gap-3">
+                                    {contactHighlights.map((item) => {
+                                        const Icon = item.icon;
+
+                                        return (
+                                            <div key={item.label} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] p-4">
+                                                <Icon className="h-4 w-4 text-secondary" aria-hidden="true" />
+                                                <div>
+                                                    <p className="text-xs uppercase tracking-[0.14em] text-white/45">{item.label}</p>
+                                                    <p className="text-sm font-semibold">{item.value}</p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </div>
 
                         {/* Form column */}
                         <div className="lg:col-span-3">
-                            <div className="bg-light-gray rounded-2xl p-8 lg:p-10">
+                            <div className="bg-light-gray rounded-2xl p-6 lg:p-8">
                                 <div className="mb-8">
                                     <h2 className="text-2xl font-bold text-dark">{t('formTitle')}</h2>
                                     <p className="text-sm text-neutral-gray mt-2">{t('formHint')}</p>

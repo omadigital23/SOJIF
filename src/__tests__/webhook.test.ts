@@ -21,6 +21,16 @@ jest.mock('../lib/flutterwave', () => ({
 }));
 
 describe('Webhook API', () => {
+    let consoleWarnSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+        consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+        consoleWarnSpy.mockRestore();
+    });
+
     it('returns 401 on invalid signature', async () => {
         const req = new Request('http://localhost/api/webhook', {
             method: 'POST',

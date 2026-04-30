@@ -79,7 +79,5 @@ export default withSentryConfig(
             disable: process.env.NODE_ENV === 'development',
             deleteSourcemapsAfterUpload: true,
         },
-        // Hides client-side outgoing requests from being traced, if they aren't already filtered by the global filters
-        hideSourceMaps: true,
     }
 );

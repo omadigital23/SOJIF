@@ -50,20 +50,23 @@ export default function PricingSection() {
 
                 {/* Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
-                    {pricingPacks.map((pack, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.15 }}
-                            className={`relative rounded-3xl p-8 flex flex-col h-full transition-all duration-300 ${pack.highlighted
-                                ? 'bg-dark text-white shadow-2xl shadow-primary/20 scale-105 z-10 ring-4 ring-primary/20'
-                                : 'bg-white border border-gray-100 hover:shadow-xl hover:-translate-y-1'
-                                }`}
-                        >
+                    {pricingPacks.map((pack, i) => {
+                        const [amount] = formatPrice(pack.price).split(' FCFA');
+
+                        return (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.15 }}
+                                className={`relative rounded-2xl p-8 flex flex-col h-full transition-all duration-300 ${pack.highlighted
+                                    ? 'bg-dark text-white shadow-2xl shadow-primary/20 z-10 ring-4 ring-primary/20'
+                                    : 'bg-white border border-gray-100 hover:shadow-xl hover:-translate-y-1'
+                                    }`}
+                            >
                             {pack.highlighted && (
-                                <div className="absolute -top-5 left-1/2 -translate-x-1/2 px-6 py-2 bg-gradient-to-r from-primary to-primary-light rounded-full text-white text-sm font-bold shadow-lg shadow-primary/30 flex items-center gap-2 whitespace-nowrap">
+                                <div className="absolute -top-5 left-1/2 -translate-x-1/2 px-5 py-2 bg-gradient-to-r from-primary to-primary-light rounded-full text-white text-sm font-bold shadow-lg shadow-primary/30 flex items-center gap-2 whitespace-nowrap">
                                     <Star className="w-4 h-4 fill-current" />
                                     {tCommon('recommended')}
                                 </div>
@@ -79,9 +82,12 @@ export default function PricingSection() {
                             </div>
 
                             <div className="mb-8 pb-8 border-b border-gray-100/10">
-                                <div className="flex items-baseline gap-1">
-                                    <span className={`text-4xl lg:text-5xl font-black ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
-                                        {formatPrice(pack.price)}
+                                <div className="flex flex-wrap items-end gap-x-3 gap-y-1">
+                                    <span className={`text-4xl lg:text-[2.8rem] font-black leading-none tracking-tight ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
+                                        {amount}
+                                    </span>
+                                    <span className={`pb-1 text-sm font-bold uppercase tracking-wide ${pack.highlighted ? 'text-gray-300' : 'text-neutral-gray'}`}>
+                                        FCFA
                                     </span>
                                     <span className={`text-sm font-medium ${pack.highlighted ? 'text-gray-400' : 'text-neutral-gray'}`}>
                                         {t('perYear')}
@@ -111,8 +117,9 @@ export default function PricingSection() {
                             >
                                 {t(`packs.${i}.cta`)}
                             </Link>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

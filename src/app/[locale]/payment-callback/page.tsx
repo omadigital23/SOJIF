@@ -1,42 +1,23 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useSearchParams, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { CheckCircle, XCircle, Loader2, ArrowRight } from 'lucide-react';
+import { CheckCircle, XCircle, ArrowRight } from 'lucide-react';
 
 type PaymentStatus = 'loading' | 'success' | 'failed' | 'cancelled';
 
 export default function PaymentCallbackPage() {
     const searchParams = useSearchParams();
     const { locale } = useParams();
-    const [status, setStatus] = useState<PaymentStatus>('loading');
-    const [amount, setAmount] = useState<string | null>(null);
-
-    useEffect(() => {
-        const statusParam = searchParams.get('status');
-        const txRef = searchParams.get('tx_ref');
-        const amountParam = searchParams.get('amount');
-
-        if (amountParam) setAmount(amountParam);
-
-        if (statusParam === 'successful' && txRef) {
-            setStatus('success');
-        } else if (statusParam === 'cancelled') {
-            setStatus('cancelled');
-        } else {
-            setStatus('failed');
-        }
-    }, [searchParams]);
-
-    if (status === 'loading') {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <Loader2 className="w-10 h-10 text-primary animate-spin" />
-            </div>
-        );
-    }
+    const statusParam = searchParams.get('status');
+    const txRef = searchParams.get('tx_ref');
+    const amount = searchParams.get('amount');
+    const status: PaymentStatus = statusParam === 'successful' && txRef
+        ? 'success'
+        : statusParam === 'cancelled'
+            ? 'cancelled'
+            : 'failed';
 
     const isSuccess = status === 'success';
 

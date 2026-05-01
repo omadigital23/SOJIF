@@ -1,14 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import type { ElementType } from 'react';
 import {
     BarChart3,
     BriefcaseBusiness,
     Building2,
+    CalendarCheck2,
     Calculator,
     CheckCircle2,
+    CircleDollarSign,
+    ClipboardCheck,
     FileCheck2,
     Globe2,
     LayoutDashboard,
@@ -108,6 +112,12 @@ const visualCopy = {
         companyCards: ['Brief', 'Shortlist', 'Validation', 'Onboarding'],
         diagnosticCircuit: 'Circuit diagnostic',
         contactSignals: ['Message recu', 'Analyse du besoin', 'Retour priorise'],
+        offerStudio: 'Pilotage offres',
+        offerTracks: ['Juridique', 'Finance', 'Fiscal', 'RH'],
+        offerProof: ['Couverture annuelle', 'Suivi trimestriel', 'Support priorise'],
+        aboutStudio: 'Identite SOJIF',
+        aboutSignals: ['Dakar', 'Droit', 'Finance', 'Developpement'],
+        brandSystem: 'Performance structuree',
     },
     en: {
         diagnostic: '360 diagnostic',
@@ -127,6 +137,12 @@ const visualCopy = {
         companyCards: ['Brief', 'Shortlist', 'Validation', 'Onboarding'],
         diagnosticCircuit: 'Diagnostic flow',
         contactSignals: ['Message received', 'Need analysis', 'Priority reply'],
+        offerStudio: 'Offer cockpit',
+        offerTracks: ['Legal', 'Finance', 'Tax', 'HR'],
+        offerProof: ['Annual coverage', 'Quarterly steering', 'Priority support'],
+        aboutStudio: 'SOJIF identity',
+        aboutSignals: ['Dakar', 'Law', 'Finance', 'Development'],
+        brandSystem: 'Structured performance',
     },
 };
 
@@ -477,5 +493,173 @@ export function ContactSignalVisual() {
                 })}
             </div>
         </div>
+    );
+}
+
+export function OffersHeroVisual() {
+    const copy = useVisualCopy();
+    const planHeights = [46, 72, 92];
+
+    return (
+        <figure className="relative mx-auto mt-12 w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-5 text-white shadow-2xl shadow-slate-950/20 lg:mt-0">
+            <div className="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.35)_1px,transparent_1px)] [background-size:28px_28px]" />
+            <div className="relative z-10">
+                <div className="mb-6 flex items-center justify-between gap-4">
+                    <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">{copy.offerStudio}</p>
+                        <p className="mt-2 text-2xl font-black text-white">Essentiel / Croissance / Prestige</p>
+                    </div>
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-primary">
+                        <CircleDollarSign className="h-6 w-6" aria-hidden="true" />
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                    {planHeights.map((height, index) => (
+                        <motion.div
+                            key={height}
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.12 }}
+                            className={`relative flex h-44 flex-col justify-end overflow-hidden rounded-xl p-3 ${index === 1 ? 'bg-primary' : 'bg-white/[0.07]'}`}
+                        >
+                            <motion.div
+                                initial={{ height: 0 }}
+                                animate={{ height: `${height}%` }}
+                                transition={{ duration: 0.8, delay: 0.25 + index * 0.12 }}
+                                className={`absolute inset-x-3 bottom-12 rounded-t-lg ${index === 1 ? 'bg-white/35' : 'bg-secondary/80'}`}
+                            />
+                            <div className="relative z-10">
+                                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/55">Pack {index + 1}</p>
+                                <p className="mt-1 text-lg font-black text-white">{height}%</p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                    {copy.offerTracks.map((item, index) => (
+                        <div key={item} className="flex items-center gap-3 rounded-xl bg-white/[0.06] p-3">
+                            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
+                                <ClipboardCheck className="h-4 w-4 text-secondary" aria-hidden="true" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                                <p className="truncate text-sm font-bold text-white">{item}</p>
+                                <div className="mt-2 h-1.5 rounded-full bg-white/10">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${58 + index * 10}%` }}
+                                        transition={{ duration: 0.75, delay: 0.35 + index * 0.1 }}
+                                        className="h-full rounded-full bg-secondary"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                    {copy.offerProof.map((item, index) => (
+                        <motion.span
+                            key={item}
+                            animate={{ y: [0, -3, 0] }}
+                            transition={{ duration: 2.8, repeat: Infinity, delay: index * 0.25 }}
+                            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-xs font-bold text-white/80"
+                        >
+                            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-300" aria-hidden="true" />
+                            {item}
+                        </motion.span>
+                    ))}
+                </div>
+            </div>
+        </figure>
+    );
+}
+
+export function OfferPackVisual({ index, highlighted }: { index: number; highlighted: boolean }) {
+    const Icon = [ClipboardCheck, BarChart3, CalendarCheck2][index] || ClipboardCheck;
+    const rows = [56 + index * 8, 72 + index * 7, 48 + index * 12];
+
+    return (
+        <div className={`mb-6 overflow-hidden rounded-xl border ${highlighted ? 'border-white/15 bg-white/10' : 'border-slate-200 bg-slate-950'}`}>
+            <div className="relative h-32 p-4">
+                <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,.45)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.45)_1px,transparent_1px)] [background-size:20px_20px]" />
+                <div className="relative z-10 flex h-full items-end justify-between gap-3">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white text-primary">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <div className="flex flex-1 items-end justify-end gap-2">
+                        {rows.map((height, rowIndex) => (
+                            <div key={`${height}-${rowIndex}`} className="flex h-20 w-full max-w-12 items-end rounded-md bg-white/10 p-1.5">
+                                <motion.div
+                                    initial={{ height: 0 }}
+                                    whileInView={{ height: `${height}%` }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.65, delay: rowIndex * 0.08 }}
+                                    className={`w-full rounded-sm ${rowIndex === 1 ? 'bg-secondary' : 'bg-primary-400'}`}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function AboutIdentityVisual() {
+    const copy = useVisualCopy();
+
+    return (
+        <figure className="relative mx-auto w-full max-w-xl overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 p-5 shadow-2xl shadow-slate-950/10">
+            <div className="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.35)_1px,transparent_1px)] [background-size:30px_30px]" />
+            <div className="relative z-10">
+                <div className="mb-5 flex items-center justify-between gap-4">
+                    <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45">{copy.aboutStudio}</p>
+                        <p className="mt-2 text-xl font-black text-white">{copy.brandSystem}</p>
+                    </div>
+                    <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-200">
+                        2026
+                    </span>
+                </div>
+
+                <div className="rounded-xl bg-white p-5">
+                    <Image
+                        src="/images/logo-sojif-premium-transparent.png"
+                        alt="SOJIF Consulting"
+                        width={420}
+                        height={128}
+                        className="h-auto w-full"
+                        priority
+                    />
+                </div>
+
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                    {copy.aboutSignals.map((item, index) => (
+                        <motion.div
+                            key={item}
+                            animate={{ y: [0, -3, 0] }}
+                            transition={{ duration: 3, repeat: Infinity, delay: index * 0.2 }}
+                            className="rounded-xl bg-white/[0.06] p-3"
+                        >
+                            <div className="mb-3 flex items-center gap-2">
+                                <span className="h-2 w-2 rounded-full bg-secondary" />
+                                <p className="text-sm font-bold text-white">{item}</p>
+                            </div>
+                            <div className="h-1.5 rounded-full bg-white/10">
+                                <motion.div
+                                    initial={{ width: 0 }}
+                                    whileInView={{ width: `${58 + index * 9}%` }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.7, delay: index * 0.08 }}
+                                    className="h-full rounded-full bg-primary-400"
+                                />
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </figure>
     );
 }

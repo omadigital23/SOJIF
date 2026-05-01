@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { Check, X, Star, ArrowRight } from 'lucide-react';
 import { pricingPacks, comparisonFeatures } from '@/data/pricing';
 import { formatPrice } from '@/lib/utils';
+import { OfferPackVisual, OffersHeroVisual } from '@/components/visuals/BusinessVisuals';
 
 export default function OffersPageClient() {
     const t = useTranslations('offers');
@@ -15,33 +16,53 @@ export default function OffersPageClient() {
     const { locale } = useParams();
 
     return (
-        <div className="pt-20 lg:pt-24">
+        <div className="overflow-hidden pt-20 lg:pt-24">
             {/* Header */}
-            <section className="bg-light-gray py-14 lg:py-20">
-                <div className="container-custom text-center">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl sm:text-5xl font-bold text-dark mb-4"
-                    >
-                        {t('title')}
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="text-neutral-gray text-lg max-w-2xl mx-auto mb-6"
-                    >
-                        {t('subtitle')}
-                    </motion.p>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-primary font-medium text-sm bg-primary/5 inline-block px-4 py-2 rounded-full"
-                    >
-                        {tHome('pricingTerms')}
-                    </motion.p>
+            <section className="relative overflow-hidden bg-slate-950 py-16 lg:py-24">
+                <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.45)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.45)_1px,transparent_1px)] [background-size:42px_42px]" />
+                <div className="container-custom relative z-10">
+                    <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+                        <div className="max-w-2xl">
+                            <motion.p
+                                initial={{ opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="mb-5 inline-flex rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm font-bold text-secondary"
+                            >
+                                {tHome('pricingTerms')}
+                            </motion.p>
+                            <motion.h1
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.05 }}
+                                className="text-4xl font-black tracking-normal text-white sm:text-5xl lg:text-6xl"
+                            >
+                                {t('title')}
+                            </motion.h1>
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.12 }}
+                                className="mt-5 max-w-xl text-lg leading-relaxed text-white/70 sm:text-xl"
+                            >
+                                {t('subtitle')}
+                            </motion.p>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.18 }}
+                                className="mt-8 flex flex-col gap-3 sm:flex-row"
+                            >
+                                <Link href={`/${locale}/contact`} className="btn-accent">
+                                    {t('ctaButton')}
+                                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                                </Link>
+                                <a href="#comparatif" className="btn-secondary border-white/15 bg-white/10 text-white hover:border-white/30 hover:bg-white/15 hover:text-white">
+                                    {t('comparisonTitle')}
+                                </a>
+                            </motion.div>
+                        </div>
+                        <OffersHeroVisual />
+                    </div>
                 </div>
             </section>
 
@@ -51,6 +72,7 @@ export default function OffersPageClient() {
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-3 max-w-6xl mx-auto items-start">
                         {pricingPacks.map((pack, i) => {
                             const [amount] = formatPrice(pack.price).split(' FCFA');
+                            const isHighlighted = Boolean(pack.highlighted);
 
                             return (
                                 <motion.div
@@ -59,39 +81,40 @@ export default function OffersPageClient() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.15 }}
-                                    className={`relative flex flex-col rounded-2xl p-8 ${pack.highlighted
+                                    className={`relative flex flex-col rounded-2xl p-8 ${isHighlighted
                                         ? 'bg-primary text-white shadow-2xl shadow-primary/25 z-10'
                                         : 'bg-white border-2 border-gray-100 card-hover'
                                         }`}
                                 >
-                                    {pack.highlighted && (
+                                    {isHighlighted && (
                                         <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent rounded-full text-white text-xs font-bold flex items-center gap-1 whitespace-nowrap">
                                             <Star className="w-3 h-3" />
                                             {tCommon('recommended')}
                                         </div>
                                     )}
-                                    <h3 className={`text-xl font-bold mb-2 ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
+                                    <OfferPackVisual index={i} highlighted={isHighlighted} />
+                                    <h3 className={`text-xl font-bold mb-2 ${isHighlighted ? 'text-white' : 'text-dark'}`}>
                                         {tHome(`packs.${i}.name`)}
                                     </h3>
-                                    <p className={`text-sm mb-6 min-h-20 ${pack.highlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
+                                    <p className={`text-sm mb-6 min-h-20 ${isHighlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
                                         {tHome(`packs.${i}.description`)}
                                     </p>
                                     <div className="mb-6 flex flex-wrap items-end gap-x-2 gap-y-1">
-                                        <span className={`text-4xl font-black tracking-normal ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
+                                        <span className={`text-4xl font-black tracking-normal ${isHighlighted ? 'text-white' : 'text-dark'}`}>
                                             {amount}
                                         </span>
-                                        <span className={`pb-1 text-sm font-bold uppercase tracking-wide ${pack.highlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
+                                        <span className={`pb-1 text-sm font-bold uppercase tracking-wide ${isHighlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
                                             FCFA
                                         </span>
-                                        <span className={`text-sm font-medium ${pack.highlighted ? 'text-white/60' : 'text-neutral-gray'}`}>
+                                        <span className={`text-sm font-medium ${isHighlighted ? 'text-white/60' : 'text-neutral-gray'}`}>
                                             {tHome('perYear')}
                                         </span>
                                     </div>
                                     <ul className="space-y-3 mb-8 flex-1">
                                         {Array.from({ length: pack.featuresCount }).map((_, featureIndex) => (
                                             <li key={featureIndex} className="flex items-start gap-2.5">
-                                                <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${pack.highlighted ? 'text-accent' : 'text-primary'}`} />
-                                                <span className={`text-sm ${pack.highlighted ? 'text-white/80' : 'text-dark/70'}`}>
+                                                <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${isHighlighted ? 'text-accent' : 'text-primary'}`} />
+                                                <span className={`text-sm ${isHighlighted ? 'text-white/80' : 'text-dark/70'}`}>
                                                     {tHome(`packs.${i}.features.${featureIndex}`)}
                                                 </span>
                                             </li>
@@ -99,7 +122,7 @@ export default function OffersPageClient() {
                                     </ul>
                                     <Link
                                         href={`/${locale}/contact`}
-                                        className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${pack.highlighted ? 'bg-white text-primary hover:bg-white/90' : 'btn-primary'}`}
+                                        className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${isHighlighted ? 'bg-white text-primary hover:bg-white/90' : 'btn-primary'}`}
                                     >
                                         {tHome(`packs.${i}.cta`)}
                                     </Link>
@@ -111,7 +134,7 @@ export default function OffersPageClient() {
             </section>
 
             {/* Comparison table */}
-            <section className="section-padding bg-light-gray">
+            <section id="comparatif" className="section-padding bg-light-gray">
                 <div className="container-custom">
                     <h2 className="text-3xl font-bold text-dark text-center mb-12">
                         {t('comparisonTitle')}

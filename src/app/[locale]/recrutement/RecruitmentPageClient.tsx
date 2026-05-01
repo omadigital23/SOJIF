@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Building2, UserCircle } from 'lucide-react';
 import CandidateForm from '@/components/recruitment/CandidateForm';
 import CompanyRecruitmentForm from '@/components/recruitment/CompanyRecruitmentForm';
+import { RecruitmentPipelineVisual } from '@/components/visuals/BusinessVisuals';
 
 export default function RecruitmentPageClient() {
     const t = useTranslations('recruitment');
@@ -83,6 +84,7 @@ export default function RecruitmentPageClient() {
                                     </div>
                                     <h2 className="text-2xl font-bold mb-3">{t('candidateTitle')}</h2>
                                     <p className="text-white/70 mb-8">{t('candidateDesc')}</p>
+                                    <RecruitmentPipelineVisual mode="candidate" />
                                     <div className="space-y-4">
                                         {(['candidateStep1', 'candidateStep2', 'candidateStep3', 'candidateStep4', 'candidateStep5'] as const).map((step, i) => (
                                             <div key={step} className="flex items-center gap-4 bg-white/5 rounded-xl p-4">
@@ -107,6 +109,7 @@ export default function RecruitmentPageClient() {
                                     </div>
                                     <h2 className="text-2xl font-bold mb-3">{t('companyTitle')}</h2>
                                     <p className="text-white/70 mb-8">{t('companyDesc')}</p>
+                                    <RecruitmentPipelineVisual mode="company" />
                                     <div className="space-y-4">
                                         {(['companyStep1', 'companyStep2', 'companyStep3', 'companyStep4', 'companyStep5'] as const).map((step, i) => (
                                             <div key={step} className="flex items-center gap-4 bg-white/5 rounded-xl p-4">

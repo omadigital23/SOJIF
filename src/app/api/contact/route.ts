@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
-import { sendContactConfirmation, sendContactNotificationToAdmin, ADMIN_EMAIL } from '@/lib/email';
+import { sendBrandedContactConfirmation, sendContactNotificationToAdmin, ADMIN_EMAIL } from '@/lib/email';
 import { rateLimiters, getClientIP } from '@/lib/rate-limit';
 import { captureException, addBreadcrumb } from '@/lib/sentry';
 
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
 
         // Send confirmation email to user
         try {
-            await sendContactConfirmation(
+            await sendBrandedContactConfirmation(
                 validated.email,
                 validated.firstName,
                 validated.subject

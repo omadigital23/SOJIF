@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
-import { sendProjectNotificationToAdmin, ADMIN_EMAIL } from '@/lib/email';
+import { sendProjectNotificationToAdmin, sendProjectRequestConfirmation, ADMIN_EMAIL } from '@/lib/email';
 
 const projectSchema = z.object({
     companyName: z.string().min(2),
@@ -39,6 +39,23 @@ export async function POST(request: Request) {
                 { success: false, message: 'Erreur lors de l\'enregistrement.' },
                 { status: 500 }
             );
+        }
+
+        try {
+            await sendProjectRequestConfirmation(
+                validated.email,
+                validated.contactName,
+                validated.projectType
+            );
+            console.info('Project request confirmation email sent', {
+                to: validated.email,
+            });
+        } catch (emailError) {
+            console.warn('Failed to send project request confirmation email:', {
+                error: emailError,
+                to: validated.email,
+            });
+            // Don't fail the request, continue normally
         }
 
         try {

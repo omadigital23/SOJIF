@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
-import { sendRecruitmentNotificationToAdmin } from '@/lib/email';
+import { sendRecruitmentNotificationToAdmin, sendRecruitmentRequestConfirmation } from '@/lib/email';
 
 const recruitmentSchema = z.object({
     companyName: z.string().min(2),
@@ -47,6 +47,24 @@ export async function POST(request: Request) {
                 { success: false, message: 'Erreur lors de l\'enregistrement.' },
                 { status: 500 }
             );
+        }
+
+        // Send confirmation email to requester
+        try {
+            await sendRecruitmentRequestConfirmation(
+                validated.email,
+                validated.contactName,
+                validated.positionTitle
+            );
+            console.info('Recruitment request confirmation email sent', {
+                to: validated.email,
+            });
+        } catch (emailError) {
+            console.warn('Failed to send recruitment request confirmation email:', {
+                error: emailError,
+                to: validated.email,
+            });
+            // Don't fail the request, continue normally
         }
 
         // Send notification email to admin

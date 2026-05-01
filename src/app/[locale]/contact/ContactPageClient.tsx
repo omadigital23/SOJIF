@@ -19,6 +19,7 @@ import {
     AlertCircle,
 } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
+import { ContactSignalVisual } from '@/components/visuals/BusinessVisuals';
 
 const emptyToUndefined = (value: unknown) => (
     value === null || (typeof value === 'string' && value.trim() === '') ? undefined : value
@@ -230,6 +231,7 @@ export default function ContactPageClient() {
                                         );
                                     })}
                                 </div>
+                                <ContactSignalVisual />
                             </div>
                         </div>
 
@@ -296,11 +298,15 @@ export default function ContactPageClient() {
                                     </div>
 
                                     {/* Section: Company Info */}
-                                    <div className="space-y-6">
-                                        <h3 className="text-lg font-semibold text-dark border-b border-gray-100 pb-2">
-                                            {t('sectionCompany')}
-                                        </h3>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <details className="group rounded-xl border border-gray-200 bg-white p-4">
+                                        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-dark">
+                                            <span>{t('sectionCompany')}</span>
+                                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary transition-transform group-open:rotate-45">
+                                                +
+                                            </span>
+                                        </summary>
+                                        <div className="mt-6 space-y-6">
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>
                                                 <label htmlFor="contact-company" className="block text-sm font-medium text-dark mb-2">{t('company')}</label>
                                                 <input
@@ -321,8 +327,8 @@ export default function ContactPageClient() {
                                                 />
                                                 {errors.domain && <p className="text-red-500 text-xs mt-1">{errors.domain.message}</p>}
                                             </div>
-                                        </div>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            </div>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>
                                                 <label htmlFor="contact-turnover" className="block text-sm font-medium text-dark mb-2">{t('turnoverLabel')}</label>
                                                 <input
@@ -343,8 +349,8 @@ export default function ContactPageClient() {
                                                 />
                                                 {errors.employees && <p className="text-red-500 text-xs mt-1">{errors.employees.message}</p>}
                                             </div>
-                                        </div>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                            </div>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>
                                                 <label htmlFor="contact-phase" className="block text-sm font-medium text-dark mb-2">{t('phaseLabel')}</label>
                                                 <select
@@ -369,17 +375,23 @@ export default function ContactPageClient() {
                                                 />
                                                 {errors.budget && <p className="text-red-500 text-xs mt-1">{errors.budget.message}</p>}
                                             </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </details>
 
                                     {/* Section: Challenge & Project */}
                                     <div className="space-y-6">
                                         <h3 className="text-lg font-semibold text-dark border-b border-gray-100 pb-2">
                                             {t('sectionChallenge')}
                                         </h3>
-                                        <div>
-                                            <label className="block text-sm font-medium text-dark mb-3">{t('challengeLabel')}</label>
-                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label={t('challengeLabel')}>
+                                        <details className="group rounded-xl border border-gray-200 bg-white p-4">
+                                            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-dark">
+                                                <span>{t('challengeLabel')}</span>
+                                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary transition-transform group-open:rotate-45">
+                                                    +
+                                                </span>
+                                            </summary>
+                                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label={t('challengeLabel')}>
                                                 {challenges.map((c) => (
                                                     <label key={c.value} className="flex items-center gap-3 p-3 border border-gray-100 rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
                                                         <input
@@ -393,7 +405,7 @@ export default function ContactPageClient() {
                                                 ))}
                                             </div>
                                             {errors.challenge && <p className="text-red-500 text-xs mt-1">{errors.challenge.message}</p>}
-                                        </div>
+                                        </details>
 
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>

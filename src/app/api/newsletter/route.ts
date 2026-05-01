@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
-import { sendNewsletterConfirmation } from '@/lib/email';
+import { sendBrandedNewsletterConfirmation } from '@/lib/email';
 import { rateLimiters, getClientIP } from '@/lib/rate-limit';
 import { captureException, addBreadcrumb } from '@/lib/sentry';
 
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
 
         // Send confirmation email
         try {
-            await sendNewsletterConfirmation(email);
+            await sendBrandedNewsletterConfirmation(email);
             addBreadcrumb('Newsletter confirmation email sent', { email });
         } catch (emailError) {
             console.warn('Failed to send newsletter confirmation:', emailError);

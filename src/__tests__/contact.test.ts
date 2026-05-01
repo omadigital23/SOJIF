@@ -1,9 +1,10 @@
 import { POST } from '../app/api/contact/route';
-import { sendContactConfirmation, sendContactNotificationToAdmin } from '../lib/email';
+import { sendBrandedContactConfirmation, sendContactNotificationToAdmin } from '../lib/email';
 
 jest.mock('../lib/email', () => ({
     ADMIN_EMAIL: 'contact@sojifconsulting.com',
     sendContactConfirmation: jest.fn().mockResolvedValue(true),
+    sendBrandedContactConfirmation: jest.fn().mockResolvedValue(true),
     sendContactNotificationToAdmin: jest.fn().mockResolvedValue({ messageId: 'test-message-id' }),
 }));
 
@@ -75,7 +76,7 @@ describe('Contact API', () => {
         const response = await POST(request);
 
         expect(response.status).toBe(200);
-        expect(sendContactConfirmation).toHaveBeenCalled();
+        expect(sendBrandedContactConfirmation).toHaveBeenCalled();
         expect(sendContactNotificationToAdmin).toHaveBeenCalled();
     });
 });

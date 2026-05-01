@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from '@/i18n/navigation';
-import { ArrowRight, Shield, CheckCircle, Clock3, ClipboardCheck, ListChecks, MessageCircle } from 'lucide-react';
+import { ArrowRight, Shield, Clock3, ClipboardCheck, ListChecks, MessageCircle } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
+import { HeroMotionVisual } from '@/components/visuals/BusinessVisuals';
 
 export default function HeroSection() {
     const t = useTranslations('hero');
@@ -156,65 +157,17 @@ export default function HeroSection() {
                     </motion.div>
                 </div>
 
-                {/* Right Visual (Text Slider) */}
+                {/* Right Visual */}
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="hidden lg:flex flex-col justify-center h-[600px] w-full relative"
+                    className="hidden lg:block"
                 >
-                    <div className="absolute inset-0 bg-gradient-to-l from-primary/5 to-transparent rounded-2xl blur-3xl pointer-events-none" />
-
-                    {/* Fixed content block container */}
-                    <div className="relative z-10 w-full pl-12 border-l-2 border-white/10 py-12">
-                        {/* Static Department Labels - Fixed Position */}
-                        <div className="space-y-6 mb-12">
-                            {['legal', 'audit', 'hr'].map((item, i) => (
-                                <motion.div
-                                    key={item}
-                                    initial={{ x: -20, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: 0.4 + i * 0.1 }}
-                                    className="flex items-center gap-4 group"
-                                >
-                                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-colors">
-                                        <CheckCircle className="w-5 h-5 text-emerald-400" />
-                                    </div>
-                                    <span className="text-white font-bold text-xl tracking-wide">
-                                        {t(`labels.${item}`)}
-                                    </span>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* Animated Slider Text */}
-                        <div className="h-32 relative overflow-hidden">
-                            <AnimatePresence mode="wait">
-                                <motion.p
-                                    key={currentSlide}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="text-2xl text-white/80 font-light leading-relaxed italic"
-                                    aria-live="polite"
-                                >
-                                    &quot;{t(sliderTexts[currentSlide])}&quot;
-                                </motion.p>
-                            </AnimatePresence>
-
-                            {/* Progress Indicators */}
-                            <div className="flex gap-2 mt-6">
-                                {sliderTexts.map((_, idx) => (
-                                    <div
-                                        key={idx}
-                                        className={`h-1 rounded-full transition-all duration-500 ${idx === currentSlide ? 'w-8 bg-primary' : 'w-2 bg-white/20'
-                                            }`}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                    <HeroMotionVisual
+                        quote={t(sliderTexts[currentSlide])}
+                        labels={[t('labels.legal'), t('labels.audit'), t('labels.hr')]}
+                    />
                 </motion.div>
             </div>
         </section>

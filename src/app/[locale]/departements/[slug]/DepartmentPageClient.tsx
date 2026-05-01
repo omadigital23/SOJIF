@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import type { Department } from '@/lib/types';
 import { departments } from '@/data/departments';
+import { DepartmentCardVisual } from '@/components/visuals/BusinessVisuals';
 
 const iconMap: Record<string, React.ElementType> = {
     Scale, Calculator, Users, TrendingUp, Monitor, UserPlus,
@@ -45,31 +46,51 @@ export default function DepartmentPageClient({ department, locale }: Props) {
                         {t('backToHome')}
                     </Link>
 
-                    <div className="flex items-start gap-6">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0"
-                        >
-                            <Icon className="w-8 h-8 text-white" />
-                        </motion.div>
-                        <div>
-                            <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="text-4xl sm:text-5xl font-bold text-white mb-3"
+                    <div className="grid gap-10 lg:grid-cols-[0.95fr_0.65fr] lg:items-center">
+                        <div className="flex items-start gap-6">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0"
                             >
-                                {t(`departmentsList.${department.slug}.title`)}
-                            </motion.h1>
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.1 }}
-                                className="text-white/70 text-lg max-w-2xl"
-                            >
-                                {t(`departmentsList.${department.slug}.subtitle`)}
-                            </motion.p>
+                                <Icon className="w-8 h-8 text-white" />
+                            </motion.div>
+                            <div>
+                                <motion.h1
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="text-4xl sm:text-5xl font-bold text-white mb-3"
+                                >
+                                    {t(`departmentsList.${department.slug}.title`)}
+                                </motion.h1>
+                                <motion.p
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 }}
+                                    className="text-white/70 text-lg max-w-2xl"
+                                >
+                                    {t(`departmentsList.${department.slug}.subtitle`)}
+                                </motion.p>
+                            </div>
                         </div>
+                        <motion.div
+                            initial={{ opacity: 0, x: 18 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.15 }}
+                            className="hidden overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-2xl shadow-slate-950/20 lg:block"
+                        >
+                            <DepartmentCardVisual slug={department.slug} />
+                            <div className="grid grid-cols-2 gap-3 p-5">
+                                <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
+                                    <p className="text-xs uppercase tracking-[0.16em] text-white/45">{t('servicesLabel')}</p>
+                                    <p className="mt-2 text-2xl font-black text-white">{department.servicesCount}</p>
+                                </div>
+                                <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4">
+                                    <p className="text-xs uppercase tracking-[0.16em] text-white/45">{t('pricingLabel')}</p>
+                                    <p className="mt-2 text-2xl font-black text-white">{department.pricingCount}</p>
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>

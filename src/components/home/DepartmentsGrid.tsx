@@ -13,6 +13,7 @@ import {
     ArrowRight,
 } from 'lucide-react';
 import { departments } from '@/data/departments';
+import { DepartmentCardVisual } from '@/components/visuals/BusinessVisuals';
 
 const iconMap: Record<string, React.ElementType> = {
     Scale,
@@ -77,26 +78,28 @@ export default function DepartmentsGrid() {
                             >
                                 <Link
                                     href={`/departements/${dept.slug}`}
-                                    className="group block bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full border border-transparent hover:border-primary/10 relative overflow-hidden"
+                                    className="group block h-full overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/10 hover:shadow-xl"
                                 >
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-8 -mt-8 transition-transform duration-500 group-hover:scale-150 group-hover:bg-primary/10" />
+                                    <DepartmentCardVisual slug={dept.slug} />
 
-                                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300 relative z-10">
-                                        <IconComponent className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
+                                    <div className="p-7">
+                                        <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                            <IconComponent className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
+                                        </div>
+
+                                        {/* title & subtitle via i18n */}
+                                        <h3 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors">
+                                            {tDept(`departmentsList.${dept.slug}.title`)}
+                                        </h3>
+                                        <p className="text-neutral-gray text-sm leading-relaxed mb-6">
+                                            {tDept(`departmentsList.${dept.slug}.subtitle`)}
+                                        </p>
+
+                                        <span className="inline-flex items-center gap-2 text-primary text-sm font-semibold group/link">
+                                            {tCommon('learnMore')}
+                                            <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+                                        </span>
                                     </div>
-
-                                    {/* title & subtitle via i18n */}
-                                    <h3 className="text-xl font-bold text-dark mb-3 group-hover:text-primary transition-colors relative z-10">
-                                        {tDept(`departmentsList.${dept.slug}.title`)}
-                                    </h3>
-                                    <p className="text-neutral-gray text-sm leading-relaxed mb-6 relative z-10">
-                                        {tDept(`departmentsList.${dept.slug}.subtitle`)}
-                                    </p>
-
-                                    <span className="inline-flex items-center gap-2 text-primary text-sm font-semibold relative z-10 group/link">
-                                        {tCommon('learnMore')}
-                                        <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
-                                    </span>
                                 </Link>
                             </motion.div>
                         );

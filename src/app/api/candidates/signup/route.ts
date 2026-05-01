@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabase-server';
-import { sendRecruitmentConfirmation } from '@/lib/email';
+import { sendBrandedCandidateConfirmation } from '@/lib/email';
 
 const candidateSchema = z.object({
     firstName: z.string().min(2),
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
 
         // ─── 5. Email de confirmation (via Resend, hors flux Supabase) ──────────
         try {
-            await sendRecruitmentConfirmation(
+            await sendBrandedCandidateConfirmation(
                 validated.email,
                 `${validated.firstName} ${validated.lastName}`,
                 validated.domain ?? 'votre domaine'

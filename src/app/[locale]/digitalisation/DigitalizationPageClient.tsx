@@ -15,6 +15,7 @@ import {
     Check,
 } from 'lucide-react';
 import { digitalServices } from '@/data/services';
+import { DigitalHeroVisual, DigitalServiceVisual } from '@/components/visuals/BusinessVisuals';
 
 const iconMap: Record<string, React.ElementType> = {
     Globe, ShoppingCart, Layout, Smartphone, Settings, Palette,
@@ -27,23 +28,26 @@ export default function DigitalizationPageClient() {
     return (
         <div className="pt-24 lg:pt-32">
             {/* Header */}
-            <section className="gradient-dark py-20">
-                <div className="container-custom text-center">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl sm:text-5xl font-bold text-white mb-4"
-                    >
-                        {t('title')}
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="text-white/70 text-lg max-w-2xl mx-auto"
-                    >
-                        {t('description')}
-                    </motion.p>
+            <section className="gradient-dark py-16 lg:py-20">
+                <div className="container-custom grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+                    <div className="text-center lg:text-left">
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-4xl sm:text-5xl font-bold text-white mb-4"
+                        >
+                            {t('title')}
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-white/70 text-lg max-w-2xl mx-auto lg:mx-0"
+                        >
+                            {t('description')}
+                        </motion.p>
+                    </div>
+                    <DigitalHeroVisual />
                 </div>
             </section>
 
@@ -60,22 +64,25 @@ export default function DigitalizationPageClient() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="bg-light-gray rounded-2xl p-8 group hover:bg-primary transition-all duration-500"
+                                    className="group rounded-2xl border border-transparent bg-light-gray p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/15 hover:bg-white hover:shadow-xl"
                                 >
-                                    <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-white/20 flex items-center justify-center mb-5 transition-colors">
-                                        <Icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
+                                    <DigitalServiceVisual index={i} />
+                                    <div className="mb-3 flex items-center gap-3">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                                            <Icon className="w-5 h-5 text-primary" aria-hidden="true" />
+                                        </div>
+                                        <h3 className="text-xl font-bold text-dark transition-colors group-hover:text-primary">
+                                            {t(`servicesList.${i}.title`)}
+                                        </h3>
                                     </div>
-                                    <h3 className="text-xl font-bold text-dark group-hover:text-white mb-3 transition-colors">
-                                        {t(`servicesList.${i}.title`)}
-                                    </h3>
-                                    <p className="text-neutral-gray group-hover:text-white/70 text-sm leading-relaxed mb-5 transition-colors">
+                                    <p className="text-neutral-gray text-sm leading-relaxed mb-5">
                                         {t(`servicesList.${i}.description`)}
                                     </p>
                                     <ul className="space-y-2">
                                         {Array.from({ length: service.featuresCount }).map((_, j) => (
                                             <li key={j} className="flex items-center gap-2">
-                                                <Check className="w-4 h-4 text-primary group-hover:text-accent flex-shrink-0 transition-colors" aria-hidden="true" />
-                                                <span className="text-dark/70 group-hover:text-white/80 text-sm transition-colors">
+                                                <Check className="w-4 h-4 text-primary flex-shrink-0" aria-hidden="true" />
+                                                <span className="text-dark/70 text-sm">
                                                     {t(`servicesList.${i}.features.${j}`)}
                                                 </span>
                                             </li>

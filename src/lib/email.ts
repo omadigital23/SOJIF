@@ -47,17 +47,132 @@ function nl2br(value: unknown) {
     return escapeHtml(value).replace(/\r?\n/g, '<br/>');
 }
 
+function getPublicAppUrl() {
+    const rawUrl = process.env.NEXT_PUBLIC_APP_URL
+        || process.env.VERCEL_PROJECT_PRODUCTION_URL
+        || process.env.VERCEL_URL
+        || 'https://www.sojifconsulting.com';
+
+    const url = rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`;
+    return url.replace(/\/$/, '');
+}
+
+function getEmailLogoUrl() {
+    return `${getPublicAppUrl()}/images/logo-sojif-premium-transparent.png`;
+}
+
+function renderBrandedEmail(options: {
+    preheader: string;
+    title: string;
+    badge?: string;
+    body: string;
+    cta?: {
+        label: string;
+        href: string;
+    };
+    footerNote?: string;
+}) {
+    const currentYear = new Date().getFullYear();
+    const badge = options.badge
+        ? `<span class="badge">${escapeHtml(options.badge)}</span>`
+        : '';
+    const cta = options.cta
+        ? `<p class="cta-wrap"><a href="${escapeHtml(options.cta.href)}" class="cta-button">${escapeHtml(options.cta.label)}</a></p>`
+        : '';
+    const footerNote = options.footerNote
+        ? `<p>${options.footerNote}</p>`
+        : '';
+
+    return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{margin:0;background:#f1f5f9;color:#0f172a;font-family:'Segoe UI',Arial,sans-serif;line-height:1.6}
+.preheader{display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;overflow:hidden}
+.wrapper{max-width:640px;margin:0 auto;padding:28px 16px}
+.card{overflow:hidden;border-radius:16px;background:#ffffff;box-shadow:0 16px 40px rgba(15,23,42,.08)}
+.header{background:#0f172a;padding:28px 34px;text-align:center}
+.logo{display:block;width:178px;max-width:70%;height:auto;margin:0 auto 12px}
+.signature{color:#93c5fd;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.content{padding:34px}
+.badge{display:inline-block;margin-bottom:18px;border-radius:999px;background:#dbeafe;color:#1e40af;padding:6px 14px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+h1{margin:0 0 16px;color:#0f172a;font-size:26px;line-height:1.2}
+p{margin:0 0 14px}
+ul{margin:16px 0 16px 20px;padding:0}
+li{margin:8px 0}
+.summary{margin:20px 0;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;padding:16px}
+.summary strong{color:#0f172a}
+.cta-wrap{margin:26px 0 8px}
+.cta-button{display:inline-block;border-radius:10px;background:#1e40af;color:#ffffff!important;text-decoration:none;padding:13px 24px;font-weight:800}
+.link-text{word-break:break-all;color:#1d4ed8;font-size:12px}
+.alert{margin:20px 0;border-left:4px solid #ef4444;border-radius:8px;background:#fef2f2;padding:14px 16px}
+.footer{border-top:1px solid #e2e8f0;background:#f8fafc;padding:20px 34px;text-align:center;color:#64748b;font-size:12px}
+.footer p{margin:0 0 8px}
+a{color:#1d4ed8}
+@media(max-width:520px){.wrapper{padding:0}.card{border-radius:0}.header,.content,.footer{padding-left:22px;padding-right:22px}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="preheader">${escapeHtml(options.preheader)}</div>
+<div class="wrapper">
+  <div class="card">
+    <div class="header">
+      <img src="${getEmailLogoUrl()}" width="178" alt="SOJIF Consulting" class="logo">
+      <div class="signature">Droit &bull; Finance &bull; Developpement</div>
+    </div>
+    <div class="content">
+      ${badge}
+      <h1>${escapeHtml(options.title)}</h1>
+      ${options.body}
+      ${cta}
+    </div>
+    <div class="footer">
+      ${footerNote}
+      <p>&copy; ${currentYear} SOJIF Consulting. Tous droits reserves.</p>
+      <p><a href="${getPublicAppUrl()}" style="color:#64748b;text-decoration:none">www.sojifconsulting.com</a></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>`;
+}
+
+function addLogoToAdminHtml(html: string) {
+    if (html.includes('data-sojif-logo')) {
+        return html;
+    }
+
+    const logoBlock = `
+<div data-sojif-logo style="text-align:center;margin:0 0 24px">
+  <img src="${getEmailLogoUrl()}" width="170" alt="SOJIF Consulting" style="display:inline-block;width:170px;max-width:70%;height:auto">
+</div>`;
+
+    if (html.includes('<div class="email-content">')) {
+        return html.replace('<div class="email-content">', `<div class="email-content">${logoBlock}`);
+    }
+
+    if (html.includes('<div class="body">')) {
+        return html.replace('<div class="body">', `<div class="body">${logoBlock}`);
+    }
+
+    return html.replace('<body>', `<body>${logoBlock}`);
+}
+
 export async function sendAdminNotificationEmail(options: {
     subject: string;
     html: string;
     replyTo?: string;
 }) {
+    const html = addLogoToAdminHtml(options.html);
+
     if (!hasAdminSmtpConfig()) {
         console.warn('BREVO_SMTP_USER/PASS missing, falling back to BREVO_API_KEY for admin notification email.');
         return sendEmail({
             to: ADMIN_EMAIL,
             subject: options.subject,
-            html: options.html,
+            html,
             replyTo: options.replyTo,
         });
     }
@@ -67,7 +182,7 @@ export async function sendAdminNotificationEmail(options: {
         to: ADMIN_EMAIL,
         replyTo: options.replyTo,
         subject: cleanHeaderValue(options.subject),
-        html: options.html,
+        html,
     });
 }
 
@@ -247,6 +362,140 @@ export async function sendRecruitmentConfirmation(email: string, name: string, p
 }
 
 // ─── Admin notification emails ───────────────────────────────────────────────
+
+export async function sendBrandedContactConfirmation(email: string, name: string, subject: string) {
+    try {
+        return await sendEmail({
+            to: email,
+            subject: 'SOJIF Consulting - Message recu',
+            html: renderBrandedEmail({
+                preheader: 'Votre message a bien ete recu par SOJIF Consulting.',
+                title: `Merci, ${name}`,
+                badge: 'Message recu',
+                body: `
+<p>Bonjour ${escapeHtml(name)},</p>
+<p>Nous avons bien recu votre message.</p>
+<div class="summary"><strong>Sujet :</strong> ${escapeHtml(subject)}</div>
+<p>Notre equipe vous repondra dans les meilleurs delais, generalement sous 24 heures ouvrees.</p>
+<p>Cordialement,<br>L'equipe SOJIF Consulting</p>`,
+            }),
+        });
+    } catch (error) {
+        console.error('Branded contact confirmation email error:', error);
+        throw error;
+    }
+}
+
+export async function sendBrandedNewsletterConfirmation(email: string, unsubscribeUrl?: string) {
+    const unsubscribeLink = unsubscribeUrl
+        ? `<p style="margin-top:12px"><a href="${escapeHtml(unsubscribeUrl)}" style="color:#6b7280;font-size:12px">Se desabonner</a></p>`
+        : `<p style="margin-top:12px;font-size:12px;color:#6b7280">Pour vous desabonner, contactez <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a></p>`;
+
+    try {
+        return await sendEmail({
+            to: email,
+            subject: 'SOJIF Consulting - Inscription a la newsletter confirmee',
+            html: renderBrandedEmail({
+                preheader: 'Votre inscription a la newsletter SOJIF Consulting est confirmee.',
+                title: 'Bienvenue dans notre newsletter',
+                badge: 'Newsletter',
+                body: `
+<p>Merci de vous etre inscrit a la newsletter SOJIF Consulting.</p>
+<p>Vous recevrez nos contenus utiles pour structurer et developper votre activite :</p>
+<ul>
+<li>Conseils en droit, fiscalite, finance et RH</li>
+<li>Actualites sur nos services de digitalisation</li>
+<li>Informations utiles sur le recrutement et la performance</li>
+<li>Offres et invitations SOJIF Consulting</li>
+</ul>
+<p>A tres bientot.</p>`,
+                footerNote: unsubscribeLink,
+            }),
+        });
+    } catch (error) {
+        console.error('Branded newsletter confirmation email error:', error);
+        throw error;
+    }
+}
+
+export async function sendBrandedCandidateConfirmation(email: string, name: string, position: string) {
+    try {
+        return await sendEmail({
+            to: email,
+            subject: 'SOJIF Consulting - Candidature recue',
+            html: renderBrandedEmail({
+                preheader: 'Votre candidature a bien ete recue par SOJIF Consulting.',
+                title: 'Candidature recue',
+                badge: 'Recrutement',
+                body: `
+<p>Bonjour ${escapeHtml(name)},</p>
+<p>Nous avons bien recu votre candidature.</p>
+<div class="summary"><strong>Domaine / poste :</strong> ${escapeHtml(position)}</div>
+<p>Notre equipe recrutement examinera votre profil et vous contactera si votre experience correspond aux besoins identifies.</p>
+<p>Merci pour votre interet pour SOJIF Consulting.</p>`,
+            }),
+        });
+    } catch (error) {
+        console.error('Branded candidate confirmation email error:', error);
+        throw error;
+    }
+}
+
+export async function sendRecruitmentRequestConfirmation(email: string, name: string, position: string) {
+    try {
+        return await sendEmail({
+            to: email,
+            subject: 'SOJIF Consulting - Demande de recrutement recue',
+            html: renderBrandedEmail({
+                preheader: 'Votre demande de recrutement a bien ete recue par SOJIF Consulting.',
+                title: 'Demande de recrutement recue',
+                badge: 'Recrutement entreprise',
+                body: `
+<p>Bonjour ${escapeHtml(name)},</p>
+<p>Nous avons bien recu votre demande de recrutement.</p>
+<div class="summary"><strong>Poste recherche :</strong> ${escapeHtml(position)}</div>
+<p>Notre equipe va analyser votre besoin, le niveau d'urgence et les criteres du poste afin de vous proposer la suite adaptee.</p>
+<p>Vous recevrez un retour dans les meilleurs delais.</p>`,
+            }),
+        });
+    } catch (error) {
+        console.error('Recruitment request confirmation email error:', error);
+        throw error;
+    }
+}
+
+export async function sendProjectRequestConfirmation(email: string, name: string, projectType: string) {
+    const projectTypeLabels: Record<string, string> = {
+        website: 'Site vitrine',
+        ecommerce: 'E-commerce',
+        webapp: 'Application web',
+        mobile: 'Application mobile',
+        crm: 'CRM / Automatisation',
+        branding: 'Branding / Identite digitale',
+    };
+    const projectLabel = projectTypeLabels[projectType] || projectType;
+
+    try {
+        return await sendEmail({
+            to: email,
+            subject: 'SOJIF Consulting - Demande de projet digital recue',
+            html: renderBrandedEmail({
+                preheader: 'Votre demande de projet digital a bien ete recue par SOJIF Consulting.',
+                title: 'Demande de projet digital recue',
+                badge: 'Digitalisation',
+                body: `
+<p>Bonjour ${escapeHtml(name)},</p>
+<p>Nous avons bien recu votre demande de projet digital.</p>
+<div class="summary"><strong>Type de projet :</strong> ${escapeHtml(projectLabel)}</div>
+<p>Notre equipe va etudier votre besoin, votre delai et les informations transmises afin de cadrer la suite.</p>
+<p>Un conseiller SOJIF Consulting vous recontactera dans les meilleurs delais.</p>`,
+            }),
+        });
+    } catch (error) {
+        console.error('Project request confirmation email error:', error);
+        throw error;
+    }
+}
 
 interface ContactNotificationData {
     firstName: string;

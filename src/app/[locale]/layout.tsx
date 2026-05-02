@@ -44,8 +44,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             },
         },
         icons: {
-            icon: '/images/sojif-mark.svg',
-            apple: '/images/sojif-mark.png',
+            icon: [
+                { url: '/favicon.ico', sizes: 'any' },
+                { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+            ],
+            apple: [
+                { url: '/apple-touch-icon.png', type: 'image/png', sizes: '180x180' },
+            ],
         },
         authors: [{ name: 'SOJIF Consulting', url: PUBLIC_SITE_URL }],
         creator: 'SOJIF Consulting',

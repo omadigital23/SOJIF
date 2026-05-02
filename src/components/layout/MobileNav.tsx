@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
 import NextImage from 'next/image';
 import { useTranslations } from 'next-intl';
-import { ChevronDown, MessageCircle, Phone, X } from 'lucide-react';
+import { ChevronDown, Phone, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COMPANY } from '@/lib/constants';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 interface NavItem {
     label: string;
@@ -176,10 +177,11 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
                                         href={`https://wa.me/${COMPANY.whatsapp}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center justify-center gap-2 rounded-lg bg-green-500 px-3 py-2.5 text-sm font-semibold text-white hover:bg-green-600 transition-colors"
+                                        className="relative inline-flex items-center justify-center gap-2 overflow-visible rounded-lg bg-[#25D366] px-3 py-2.5 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(7,94,84,0.22)] ring-1 ring-[#25D366]/45 transition-all hover:-translate-y-0.5 hover:bg-[#1FC45C]"
                                     >
-                                        <MessageCircle className="w-4 h-4" />
-                                        WhatsApp
+                                        <span aria-hidden="true" className="pointer-events-none absolute inset-[-3px] rounded-lg bg-[#25D366]/15 blur-md" />
+                                        <WhatsAppIcon className="relative h-4 w-4 drop-shadow-sm" />
+                                        <span className="relative">WhatsApp</span>
                                     </a>
                                 </div>
                                 <Link

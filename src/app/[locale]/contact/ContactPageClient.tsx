@@ -10,7 +10,6 @@ import {
     MapPin,
     Phone,
     Mail,
-    MessageCircle,
     Clock3,
     Navigation,
     Send,
@@ -20,6 +19,7 @@ import {
 } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 import { ContactSignalVisual } from '@/components/visuals/BusinessVisuals';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 const emptyToUndefined = (value: unknown) => (
     value === null || (typeof value === 'string' && value.trim() === '') ? undefined : value
@@ -195,10 +195,11 @@ export default function ContactPageClient() {
                                     href={`https://wa.me/${COMPANY.whatsapp}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-3 bg-green-500 text-white px-6 py-4 rounded-xl font-semibold transition-all hover:bg-green-600 hover:shadow-lg"
+                                    className="group relative flex items-center gap-3 overflow-visible rounded-xl bg-[#25D366] px-6 py-4 font-semibold text-white shadow-[0_16px_30px_rgba(7,94,84,0.22)] ring-1 ring-white/40 transition-all hover:-translate-y-0.5 hover:bg-[#1FC45C] hover:shadow-[0_20px_38px_rgba(7,94,84,0.3)]"
                                 >
-                                    <MessageCircle className="w-5 h-5" />
-                                    {t('whatsappCta')}
+                                    <span aria-hidden="true" className="pointer-events-none absolute inset-[-5px] rounded-xl bg-[#25D366]/15 blur-md" />
+                                    <WhatsAppIcon className="relative h-5 w-5 drop-shadow-sm" />
+                                    <span className="relative">{t('whatsappCta')}</span>
                                 </a>
                             </div>
 

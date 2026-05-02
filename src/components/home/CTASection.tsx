@@ -3,8 +3,9 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
-import { ArrowRight, MessageCircle, Phone } from 'lucide-react';
+import { ArrowRight, Phone } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 export default function CTASection() {
     const t = useTranslations('home');
@@ -50,10 +51,11 @@ export default function CTASection() {
                                 href={`https://wa.me/${COMPANY.whatsapp}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-2 rounded-full bg-green-500 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-600"
+                                className="relative inline-flex items-center justify-center gap-2 overflow-visible rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(7,94,84,0.24)] ring-1 ring-white/30 transition-all hover:-translate-y-0.5 hover:bg-[#1FC45C] hover:shadow-[0_16px_30px_rgba(7,94,84,0.32)]"
                             >
-                                <MessageCircle className="h-4 w-4" />
-                                WhatsApp
+                                <span aria-hidden="true" className="pointer-events-none absolute inset-[-4px] rounded-full bg-[#25D366]/15 blur-md" />
+                                <WhatsAppIcon className="relative h-4 w-4 drop-shadow-sm" />
+                                <span className="relative">WhatsApp</span>
                             </a>
                         </div>
                     </div>

@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Link } from '@/i18n/navigation';
-import { ArrowRight, Shield, Clock3, ClipboardCheck, ListChecks, MessageCircle } from 'lucide-react';
+import { ArrowRight, Shield, Clock3, ClipboardCheck, ListChecks } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 import { HeroMotionVisual } from '@/components/visuals/BusinessVisuals';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 export default function HeroSection() {
     const t = useTranslations('hero');
@@ -103,9 +104,11 @@ export default function HeroSection() {
                             href={whatsappUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-emerald-950/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-600 hover:shadow-xl active:scale-[0.98]"
+                            className="group relative inline-flex items-center justify-center gap-2 overflow-visible rounded-full bg-[#25D366] px-8 py-4 text-base font-bold text-white shadow-[0_16px_32px_rgba(7,94,84,0.28)] ring-1 ring-white/45 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1FC45C] hover:shadow-[0_20px_40px_rgba(7,94,84,0.34)] active:scale-[0.98]"
                         >
-                            <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                            <span aria-hidden="true" className="pointer-events-none absolute inset-[-5px] rounded-full bg-[#25D366]/20 blur-md" />
+                            <span aria-hidden="true" className="pointer-events-none absolute inset-[-3px] rounded-full border border-[#25D366]/45 shadow-[0_0_22px_rgba(37,211,102,0.46)]" />
+                            <WhatsAppIcon className="relative h-5 w-5 drop-shadow-sm" />
                             {t('whatsappCta')}
                         </a>
                         <Link

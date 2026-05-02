@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COMPANY } from '@/lib/constants';
 import MobileNav from './MobileNav';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 const navItems = [
     { label: 'nav.home', href: '/' },
@@ -87,9 +88,13 @@ export default function Header() {
                                 href={`https://wa.me/${COMPANY.whatsapp}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="hover:text-white transition-colors font-medium"
+                                className="group inline-flex items-center gap-1.5 font-medium text-white/90 transition-colors hover:text-white"
                             >
-                                WhatsApp
+                                <span className="relative inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_0_14px_rgba(37,211,102,0.42)] ring-1 ring-white/20">
+                                    <span aria-hidden="true" className="absolute inset-[-2px] rounded-full bg-[#25D366]/20 blur-sm transition-opacity group-hover:opacity-100" />
+                                    <WhatsAppIcon className="relative h-3.5 w-3.5" />
+                                </span>
+                                <span>WhatsApp</span>
                             </a>
                             <Link
                                 href={'/'}

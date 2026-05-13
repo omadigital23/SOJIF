@@ -6,22 +6,40 @@ import type { PricingPack } from '@/lib/types';
 
 export const pricingPacks: PricingPack[] = [
     {
-        price: 2500000,
-        period: '/an',
+        translationKey: '0',
         featuresCount: 7,
         highlighted: false,
+        visualIndex: 0,
     },
     {
-        price: 4000000,
-        period: '/an',
+        translationKey: '1',
         featuresCount: 7,
         highlighted: true,
+        visualIndex: 1,
     },
     {
-        price: 7000000,
-        period: '/an',
+        translationKey: '2',
         featuresCount: 8,
         highlighted: false,
+        visualIndex: 2,
+    },
+    {
+        translationKey: '3',
+        featuresCount: 7,
+        highlighted: false,
+        visualIndex: 0,
+    },
+    {
+        translationKey: '4',
+        featuresCount: 7,
+        highlighted: false,
+        visualIndex: 1,
+    },
+    {
+        translationKey: '5',
+        featuresCount: 8,
+        highlighted: false,
+        visualIndex: 2,
     },
 ];
 

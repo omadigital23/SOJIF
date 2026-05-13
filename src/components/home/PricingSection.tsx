@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Check, Star } from 'lucide-react';
 import { pricingPacks } from '@/data/pricing';
-import { formatPrice } from '@/lib/utils';
 
 export default function PricingSection() {
     const t = useTranslations('home');
@@ -51,11 +50,9 @@ export default function PricingSection() {
                 {/* Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
                     {pricingPacks.map((pack, i) => {
-                        const [amount] = formatPrice(pack.price).split(' FCFA');
-
                         return (
                             <motion.div
-                                key={i}
+                                key={pack.translationKey}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -74,23 +71,23 @@ export default function PricingSection() {
 
                             <div className="mb-8">
                                 <h3 className={`text-xl font-bold mb-3 ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
-                                    {t(`packs.${i}.name`)}
+                                    {t(`packs.${pack.translationKey}.name`)}
                                 </h3>
                                 <p className={`text-sm leading-relaxed ${pack.highlighted ? 'text-gray-300' : 'text-neutral-gray'}`}>
-                                    {t(`packs.${i}.description`)}
+                                    {t(`packs.${pack.translationKey}.description`)}
                                 </p>
                             </div>
 
                             <div className="mb-8 pb-8 border-b border-gray-100/10">
                                 <div className="flex flex-wrap items-end gap-x-3 gap-y-1">
                                     <span className={`text-4xl lg:text-[2.8rem] font-black leading-none tracking-tight ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
-                                        {amount}
+                                        {t(`packs.${pack.translationKey}.price`)}
                                     </span>
                                     <span className={`pb-1 text-sm font-bold uppercase tracking-wide ${pack.highlighted ? 'text-gray-300' : 'text-neutral-gray'}`}>
-                                        FCFA
+                                        {t(`packs.${pack.translationKey}.currency`)}
                                     </span>
                                     <span className={`text-sm font-medium ${pack.highlighted ? 'text-gray-400' : 'text-neutral-gray'}`}>
-                                        {t('perYear')}
+                                        {t(`packs.${pack.translationKey}.period`)}
                                     </span>
                                 </div>
                             </div>
@@ -102,7 +99,7 @@ export default function PricingSection() {
                                             <Check className="w-3 h-3" />
                                         </div>
                                         <span className={`text-sm font-medium ${pack.highlighted ? 'text-gray-300' : 'text-dark/80'}`}>
-                                            {t(`packs.${i}.features.${featureIndex}`)}
+                                            {t(`packs.${pack.translationKey}.features.${featureIndex}`)}
                                         </span>
                                     </li>
                                 ))}
@@ -115,7 +112,7 @@ export default function PricingSection() {
                                     : 'bg-dark text-white hover:bg-dark/90 hover:shadow-lg'
                                     }`}
                             >
-                                {t(`packs.${i}.cta`)}
+                                {t(`packs.${pack.translationKey}.cta`)}
                             </Link>
                             </motion.div>
                         );

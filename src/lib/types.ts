@@ -13,10 +13,10 @@ export interface Department {
 }
 
 export interface PricingPack {
-    price: number;
-    period: string;
+    translationKey: string;
     featuresCount: number;
     highlighted?: boolean;
+    visualIndex?: number;
     // Champs optionnels gardés pour compatibilité
     name?: string;
     description?: string;

@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Check, X, Star, ArrowRight } from 'lucide-react';
 import { pricingPacks, comparisonFeatures } from '@/data/pricing';
-import { formatPrice } from '@/lib/utils';
 import { OfferPackVisual, OffersHeroVisual } from '@/components/visuals/BusinessVisuals';
 
 export default function OffersPageClient() {
@@ -71,12 +70,11 @@ export default function OffersPageClient() {
                 <div className="container-custom">
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-3 max-w-6xl mx-auto items-start">
                         {pricingPacks.map((pack, i) => {
-                            const [amount] = formatPrice(pack.price).split(' FCFA');
                             const isHighlighted = Boolean(pack.highlighted);
 
                             return (
                                 <motion.div
-                                    key={i}
+                                    key={pack.translationKey}
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -92,22 +90,22 @@ export default function OffersPageClient() {
                                             {tCommon('recommended')}
                                         </div>
                                     )}
-                                    <OfferPackVisual index={i} highlighted={isHighlighted} />
+                                    <OfferPackVisual index={pack.visualIndex ?? i} highlighted={isHighlighted} />
                                     <h3 className={`text-xl font-bold mb-2 ${isHighlighted ? 'text-white' : 'text-dark'}`}>
-                                        {tHome(`packs.${i}.name`)}
+                                        {tHome(`packs.${pack.translationKey}.name`)}
                                     </h3>
                                     <p className={`text-sm mb-6 min-h-20 ${isHighlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
-                                        {tHome(`packs.${i}.description`)}
+                                        {tHome(`packs.${pack.translationKey}.description`)}
                                     </p>
                                     <div className="mb-6 flex flex-wrap items-end gap-x-2 gap-y-1">
                                         <span className={`text-4xl font-black tracking-normal ${isHighlighted ? 'text-white' : 'text-dark'}`}>
-                                            {amount}
+                                            {tHome(`packs.${pack.translationKey}.price`)}
                                         </span>
                                         <span className={`pb-1 text-sm font-bold uppercase tracking-wide ${isHighlighted ? 'text-white/70' : 'text-neutral-gray'}`}>
-                                            FCFA
+                                            {tHome(`packs.${pack.translationKey}.currency`)}
                                         </span>
                                         <span className={`text-sm font-medium ${isHighlighted ? 'text-white/60' : 'text-neutral-gray'}`}>
-                                            {tHome('perYear')}
+                                            {tHome(`packs.${pack.translationKey}.period`)}
                                         </span>
                                     </div>
                                     <ul className="space-y-3 mb-8 flex-1">
@@ -115,7 +113,7 @@ export default function OffersPageClient() {
                                             <li key={featureIndex} className="flex items-start gap-2.5">
                                                 <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${isHighlighted ? 'text-accent' : 'text-primary'}`} />
                                                 <span className={`text-sm ${isHighlighted ? 'text-white/80' : 'text-dark/70'}`}>
-                                                    {tHome(`packs.${i}.features.${featureIndex}`)}
+                                                    {tHome(`packs.${pack.translationKey}.features.${featureIndex}`)}
                                                 </span>
                                             </li>
                                         ))}
@@ -124,7 +122,7 @@ export default function OffersPageClient() {
                                         href={`/${locale}/contact`}
                                         className={`text-center py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${isHighlighted ? 'bg-white text-primary hover:bg-white/90' : 'btn-primary'}`}
                                     >
-                                        {tHome(`packs.${i}.cta`)}
+                                        {tHome(`packs.${pack.translationKey}.cta`)}
                                     </Link>
                                 </motion.div>
                             );

@@ -714,16 +714,7 @@ INSERT INTO departments (slug, icon, title, subtitle, description, mission, sort
 ON CONFLICT (slug) DO NOTHING;
 
 -- =============================================
--- DONNÉES DE SEED : Pricing Packs
--- =============================================
-INSERT INTO pricing_packs (name, slug, price, currency, period, description, highlighted, cta_label, sort_order) VALUES
-('Pack Essentiel', 'essentiel', 2500000, 'XOF', '/an', 'Cible : Startups, TPE et Indépendants. Objectif : Assurer une conformité de base sans alourdir vos charges.', false, 'Choisir Essentiel', 1),
-('Pack Croissance', 'croissance', 4000000, 'XOF', '/an', 'Cible : PME en plein développement. Objectif : Sécuriser votre expansion avec une expertise proactive.', true, 'Choisir Croissance', 2),
-('Pack Prestige', 'prestige', 7000000, 'XOF', '/an', 'Cible : Grandes Entreprises, Filiales et PME à fort volume. Objectif : Une direction externalisée de haut niveau.', false, 'Choisir Prestige', 3)
-ON CONFLICT (slug) DO NOTHING;
-
--- =============================================
--- DONNÉES DE SEED : Témoignages
+-- DONNEES DE SEED : Temoignages
 -- =============================================
 INSERT INTO testimonials (name, role, company, content, rating, is_featured) VALUES
 ('Amadou Diallo', 'Directeur Général', 'Diallo Industries SA', 'SOJIF Consulting a transformé notre approche de la gestion d''entreprise. Un partenaire de confiance, indispensable.', 5, true),

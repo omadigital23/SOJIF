@@ -56,10 +56,10 @@
         "departmentsTitle": "Our 6 Departments of Excellence",
         "departmentsLabel": "Our Areas of Expertise",
         "departmentsSubtitle": "Multidisciplinary expertise serving your success",
-        "pricingTitle": "Annual Subscription Offers",
+        "pricingTitle": "Subscription Offers",
         "pricingLabel": "Our Offers",
         "pricingSubtitle": "Packages tailored to every stage of your development",
-        "pricingTerms": "Commitment: 12 months | Condition: 50% deposit upon signing.",
+        "pricingTerms": "Annual and 6-month plans | Condition: 50% deposit upon signing.",
         "whyTitle": "Why SOJIF Consulting?",
         "whyLabel": "Key Benefits",
         "whySubtitle": "A structured firm to support your growth",
@@ -76,9 +76,18 @@
         "leadDesc": "The form and quick actions route each request to the right team: tax, legal, HR, accounting, digitalization or recruitment.",
         "leadCta": "Plan the diagnostic",
         "leadSteps": {
-            "audit": { "title": "Need analysis", "desc": "We identify the topic, urgency and main risks." },
-            "priority": { "title": "Action priorities", "desc": "You leave with a clear view of what to address first." },
-            "action": { "title": "Recommended next step", "desc": "We suggest the right format: one-off advice, subscription or dedicated project." }
+            "audit": {
+                "title": "Need analysis",
+                "desc": "We identify the topic, urgency and main risks."
+            },
+            "priority": {
+                "title": "Action priorities",
+                "desc": "You leave with a clear view of what to address first."
+            },
+            "action": {
+                "title": "Recommended next step",
+                "desc": "We suggest the right format: one-off advice, subscription or dedicated project."
+            }
         },
         "testimonialsTitle": "What our clients say",
         "testimonialsLabel": "Testimonials",
@@ -88,6 +97,7 @@
         "ctaButton": "Request my free diagnostic",
         "ctaCall": "Call",
         "perYear": "/year",
+        "perSixMonths": "/ 6 months",
         "packs": {
             "0": {
                 "name": "Essential Pack",
@@ -101,7 +111,10 @@
                     "5": "Advice on IPRES/CSS declarations",
                     "6": "Priority phone support (3 calls/month)"
                 },
-                "cta": "Choose Essential"
+                "cta": "Choose Essential",
+                "price": "1,500,000",
+                "currency": "FCFA",
+                "period": "/year"
             },
             "1": {
                 "name": "Growth Pack",
@@ -115,7 +128,10 @@
                     "5": "Disciplinary file management and labor law advice",
                     "6": "Quarterly strategy meeting (in-person or video)"
                 },
-                "cta": "Choose Growth"
+                "cta": "Choose Growth",
+                "price": "2,500,000",
+                "currency": "FCFA",
+                "period": "/year"
             },
             "2": {
                 "name": "Prestige Pack",
@@ -130,15 +146,95 @@
                     "6": "Social mediation and full social audit",
                     "7": "Dedicated consultant available 24/7"
                 },
-                "cta": "Choose Prestige"
+                "cta": "Choose Prestige",
+                "price": "4,000,000",
+                "currency": "FCFA",
+                "period": "/year"
+            },
+            "3": {
+                "name": "Essential Pack - 6 months",
+                "description": "Six-month plan for startups, VSEs and freelancers who want to secure compliance over 6 months.",
+                "price": "350,000",
+                "currency": "FCFA",
+                "period": "/ 6 months",
+                "features": {
+                    "0": "Full accounting (Turnover < 50 million FCFA)",
+                    "1": "Monthly VAT declaration and annual balance sheet",
+                    "2": "1 simple statutory modification per year or 1 annual general meeting",
+                    "3": "Email tax advice and regulatory watch",
+                    "4": "Drafting of standard employment contracts (up to 5 employees)",
+                    "5": "Advice on IPRES/CSS declarations",
+                    "6": "Priority phone support (3 calls/month)"
+                },
+                "cta": "Choose Essential 6 months"
+            },
+            "4": {
+                "name": "Growth Pack - 6 months",
+                "description": "Six-month plan for growing SMEs that want structured support over 6 months.",
+                "price": "500,000",
+                "currency": "FCFA",
+                "period": "/ 6 months",
+                "features": {
+                    "0": "Full accounting and BRS (Turnover < 150 million FCFA)",
+                    "1": "Monthly tax and social declarations",
+                    "2": "2 statutory modifications and 2 commercial contracts per year",
+                    "3": "Annual preventive tax audit",
+                    "4": "Payroll management (up to 15 employees)",
+                    "5": "Disciplinary file management and labor law advice",
+                    "6": "Quarterly strategy meeting (in-person or video)"
+                },
+                "cta": "Choose Growth 6 months"
+            },
+            "5": {
+                "name": "Prestige Pack - 6 months",
+                "description": "Six-month plan for high-volume companies seeking reinforced support over 6 months.",
+                "price": "700,000",
+                "currency": "FCFA",
+                "period": "/ 6 months",
+                "features": {
+                    "0": "Total accounting management without turnover limit",
+                    "1": "Complete tax returns (BIC) and monthly reporting",
+                    "2": "Full legal secretarial services and complex contracts",
+                    "3": "Intellectual property protection (OAPI)",
+                    "4": "Tax optimization and audit assistance (Defense and Appeals)",
+                    "5": "Unlimited payroll management and 2 executive recruitments/year",
+                    "6": "Social mediation and full social audit",
+                    "7": "Dedicated consultant available 24/7"
+                },
+                "cta": "Choose Prestige 6 months"
             }
         },
         "testimonialsList": {
-            "0": { "name": "Amadou Diallo", "role": "General Manager", "company": "Diallo Industries SA", "content": "SOJIF Consulting has transformed our approach to business management. Their expertise in business law and taxation has allowed us to optimally structure our group. A trusted, essential partner." },
-            "1": { "name": "Mariama Sow", "role": "Founder & CEO", "company": "TechSen Solutions", "content": "SOJIF's support in our fundraising was decisive. Their mastery of the business plan and their network of investors allowed us to raise 500M FCFA in record time." },
-            "2": { "name": "Ibrahima Ndiaye", "role": "Chief Financial Officer", "company": "Ndiaye & Fils SARL", "content": "Thanks to the tax optimization carried out by SOJIF, we have reduced our load by 30% while remaining completely compliant. Their expertise is remarkable." },
-            "3": { "name": "Aïssatou Ba", "role": "HR Director", "company": "Banque de l'Afrique de l'Ouest", "content": "SOJIF's HR department redesigned our entire compensation and talent management policy. Our employee satisfaction rate has increased by 40%." },
-            "4": { "name": "Moussa Camara", "role": "Founder", "company": "AgriTech Sahel", "content": "From the digitalization of our processes to the creation of our e-commerce platform, SOJIF has been an exceptional technical and strategic partner." }
+            "0": {
+                "name": "Amadou Diallo",
+                "role": "General Manager",
+                "company": "Diallo Industries SA",
+                "content": "SOJIF Consulting has transformed our approach to business management. Their expertise in business law and taxation has allowed us to optimally structure our group. A trusted, essential partner."
+            },
+            "1": {
+                "name": "Mariama Sow",
+                "role": "Founder & CEO",
+                "company": "TechSen Solutions",
+                "content": "SOJIF's support in our fundraising was decisive. Their mastery of the business plan and their network of investors allowed us to raise 500M FCFA in record time."
+            },
+            "2": {
+                "name": "Ibrahima Ndiaye",
+                "role": "Chief Financial Officer",
+                "company": "Ndiaye & Fils SARL",
+                "content": "Thanks to the tax optimization carried out by SOJIF, we have reduced our load by 30% while remaining completely compliant. Their expertise is remarkable."
+            },
+            "3": {
+                "name": "Aïssatou Ba",
+                "role": "HR Director",
+                "company": "Banque de l'Afrique de l'Ouest",
+                "content": "SOJIF's HR department redesigned our entire compensation and talent management policy. Our employee satisfaction rate has increased by 40%."
+            },
+            "4": {
+                "name": "Moussa Camara",
+                "role": "Founder",
+                "company": "AgriTech Sahel",
+                "content": "From the digitalization of our processes to the creation of our e-commerce platform, SOJIF has been an exceptional technical and strategic partner."
+            }
         }
     },
     "about": {
@@ -179,12 +275,34 @@
                 "subtitle": "Secure your legal operations",
                 "description": "Our legal department supports companies in all their business law issues, from incorporation to restructuring.",
                 "mission": "Provide a solid legal framework to secure every stage of your company's life, from its creation to its international development.",
-                "services": { "0": "Creation and structuring of companies", "1": "Drafting and negotiation of commercial contracts", "2": "Regulatory compliance and legal watch", "3": "Labor law and social relations", "4": "Commercial litigation and arbitration", "5": "Mergers, acquisitions and restructuring", "6": "Intellectual property and trademark protection", "7": "OHADA law and community law" },
-                "pricing": { "0": "Incorporation of SASU/SAS: From 350,000 FCFA (excluding notary fees)", "1": "Compliance audit: On estimate", "2": "Advisory subscription: On estimate according to needs" },
+                "services": {
+                    "0": "Creation and structuring of companies",
+                    "1": "Drafting and negotiation of commercial contracts",
+                    "2": "Regulatory compliance and legal watch",
+                    "3": "Labor law and social relations",
+                    "4": "Commercial litigation and arbitration",
+                    "5": "Mergers, acquisitions and restructuring",
+                    "6": "Intellectual property and trademark protection",
+                    "7": "OHADA law and community law"
+                },
+                "pricing": {
+                    "0": "Incorporation of SASU/SAS: From 350,000 FCFA (excluding notary fees)",
+                    "1": "Compliance audit: On estimate",
+                    "2": "Advisory subscription: On estimate according to needs"
+                },
                 "cases": {
-                    "0": { "title": "Restructuring of an industrial group", "description": "Support for a group of 5 companies in a merger-absorption operation, with optimization of the legal and tax structure." },
-                    "1": { "title": "International contractual protection", "description": "Establishment of a comprehensive contractual framework for an export company, covering 8 countries in the ECOWAS zone." },
-                    "2": { "title": "Resolution of a commercial dispute", "description": "Management of a 500M FCFA dispute between commercial partners, resolved by mediation in 3 months." }
+                    "0": {
+                        "title": "Restructuring of an industrial group",
+                        "description": "Support for a group of 5 companies in a merger-absorption operation, with optimization of the legal and tax structure."
+                    },
+                    "1": {
+                        "title": "International contractual protection",
+                        "description": "Establishment of a comprehensive contractual framework for an export company, covering 8 countries in the ECOWAS zone."
+                    },
+                    "2": {
+                        "title": "Resolution of a commercial dispute",
+                        "description": "Management of a 500M FCFA dispute between commercial partners, resolved by mediation in 3 months."
+                    }
                 }
             },
             "fiscalite": {
@@ -192,12 +310,34 @@
                 "subtitle": "Optimize your financial performance",
                 "description": "Our tax and accounting expertise allows you to master your obligations, optimize your tax burden and manage your financial performance.",
                 "mission": "Ensure tax compliance while identifying financial optimization levers to maximize your company's profitability.",
-                "services": { "0": "Bookkeeping and financial statements", "1": "Tax and social declarations", "2": "Accounting and financial audit", "3": "Legal tax optimization", "4": "Investment and financing advice", "5": "Business valuation", "6": "Payroll and social charges management", "7": "Tax audit assistance" },
-                "pricing": { "0": "Monthly advisory subscription: From 150,000 FCFA / month", "1": "Comprehensive tax diagnosis: From 500,000 FCFA", "2": "Payroll management: From 15,000 FCFA per payslip" },
+                "services": {
+                    "0": "Bookkeeping and financial statements",
+                    "1": "Tax and social declarations",
+                    "2": "Accounting and financial audit",
+                    "3": "Legal tax optimization",
+                    "4": "Investment and financing advice",
+                    "5": "Business valuation",
+                    "6": "Payroll and social charges management",
+                    "7": "Tax audit assistance"
+                },
+                "pricing": {
+                    "0": "Monthly advisory subscription: From 150,000 FCFA / month",
+                    "1": "Comprehensive tax diagnosis: From 500,000 FCFA",
+                    "2": "Payroll management: From 15,000 FCFA per payslip"
+                },
                 "cases": {
-                    "0": { "title": "Tax optimization of an SME", "description": "30% reduction in the tax burden of an SME through the optimal use of tax incentive measures of the General Tax Code." },
-                    "1": { "title": "Accounting compliance", "description": "Complete restructuring of the accounting system of a 200-employee company according to revised SYSCOHADA standards." },
-                    "2": { "title": "Support during a tax audit", "description": "Assistance to a company during a tax audit, resulting in an 85% reduction of the initial adjustment." }
+                    "0": {
+                        "title": "Tax optimization of an SME",
+                        "description": "30% reduction in the tax burden of an SME through the optimal use of tax incentive measures of the General Tax Code."
+                    },
+                    "1": {
+                        "title": "Accounting compliance",
+                        "description": "Complete restructuring of the accounting system of a 200-employee company according to revised SYSCOHADA standards."
+                    },
+                    "2": {
+                        "title": "Support during a tax audit",
+                        "description": "Assistance to a company during a tax audit, resulting in an 85% reduction of the initial adjustment."
+                    }
                 }
             },
             "rh": {
@@ -205,12 +345,35 @@
                 "subtitle": "Develop your human capital",
                 "description": "We support companies in the strategic management of their human resources, from HR policy to talent management.",
                 "mission": "Transform HR management into a performance lever by developing modern practices, compliant and aligned with the company's strategy.",
-                "services": { "0": "HR audit and diagnosis", "1": "Remuneration policy and employee benefits", "2": "Forward-looking management of jobs and skills (GPEC)", "3": "Training and talent development", "4": "Social relations and social dialogue", "5": "Labor law compliance", "6": "Implementation of HRIS", "7": "Support for organizational change" },
-                "pricing": { "0": "Payroll management: From 15,000 FCFA per payslip", "1": "Social Audit: From 400,000 FCFA", "2": "Recruitment (executive profile): 15% to 20% of annual gross salary", "3": "Application fee per executive recruitment: 50,000 FCFA per employee" },
+                "services": {
+                    "0": "HR audit and diagnosis",
+                    "1": "Remuneration policy and employee benefits",
+                    "2": "Forward-looking management of jobs and skills (GPEC)",
+                    "3": "Training and talent development",
+                    "4": "Social relations and social dialogue",
+                    "5": "Labor law compliance",
+                    "6": "Implementation of HRIS",
+                    "7": "Support for organizational change"
+                },
+                "pricing": {
+                    "0": "Payroll management: From 15,000 FCFA per payslip",
+                    "1": "Social Audit: From 400,000 FCFA",
+                    "2": "Recruitment (executive profile): 15% to 20% of annual gross salary",
+                    "3": "Application fee per executive recruitment: 50,000 FCFA per employee"
+                },
                 "cases": {
-                    "0": { "title": "HR transformation of a regional bank", "description": "Complete overhaul of the HR policy of a 400-employee banking institution, including the implementation of an HRIS and a training plan." },
-                    "1": { "title": "Social compliance", "description": "Comprehensive social audit and compliance plan for an industrial company, avoiding litigation risks estimated at 200M FCFA." },
-                    "2": { "title": "Talent retention program", "description": "Design and deployment of a loyalty program that reduced turnover by 45% in 18 months." }
+                    "0": {
+                        "title": "HR transformation of a regional bank",
+                        "description": "Complete overhaul of the HR policy of a 400-employee banking institution, including the implementation of an HRIS and a training plan."
+                    },
+                    "1": {
+                        "title": "Social compliance",
+                        "description": "Comprehensive social audit and compliance plan for an industrial company, avoiding litigation risks estimated at 200M FCFA."
+                    },
+                    "2": {
+                        "title": "Talent retention program",
+                        "description": "Design and deployment of a loyalty program that reduced turnover by 45% in 18 months."
+                    }
                 }
             },
             "conseil": {
@@ -218,12 +381,33 @@
                 "subtitle": "Accelerate your growth",
                 "description": "We support leaders in their strategic decisions and the transformation of their company for sustainable performance.",
                 "mission": "Be the strategic partner who enlightens decisions, structures growth and maximizes the operational performance of your company.",
-                "services": { "0": "Strategic and organizational diagnosis", "1": "Development of business plans and market studies", "2": "Support in fundraising", "3": "Optimization of operational processes", "4": "Performance management (KPIs, dashboards)", "5": "Development and diversification strategy", "6": "Corporate governance", "7": "Support for certification (ISO, etc.)" },
-                "pricing": { "0": "Strategic consultation: On estimate", "1": "Development of Business Plan: On estimate" },
+                "services": {
+                    "0": "Strategic and organizational diagnosis",
+                    "1": "Development of business plans and market studies",
+                    "2": "Support in fundraising",
+                    "3": "Optimization of operational processes",
+                    "4": "Performance management (KPIs, dashboards)",
+                    "5": "Development and diversification strategy",
+                    "6": "Corporate governance",
+                    "7": "Support for certification (ISO, etc.)"
+                },
+                "pricing": {
+                    "0": "Strategic consultation: On estimate",
+                    "1": "Development of Business Plan: On estimate"
+                },
                 "cases": {
-                    "0": { "title": "Fundraising for a tech startup", "description": "Support for a fintech startup in its 1.5 billion FCFA fundraising, from structuring the file to negotiating with investors." },
-                    "1": { "title": "Operational restructuring", "description": "Optimization of the processes of a distribution company, generating a 25% improvement in productivity and a 15% reduction in costs." },
-                    "2": { "title": "Five-year strategic plan", "description": "Development and deployment of a strategic plan for an agricultural cooperative of 3,000 members, doubling turnover in 4 years." }
+                    "0": {
+                        "title": "Fundraising for a tech startup",
+                        "description": "Support for a fintech startup in its 1.5 billion FCFA fundraising, from structuring the file to negotiating with investors."
+                    },
+                    "1": {
+                        "title": "Operational restructuring",
+                        "description": "Optimization of the processes of a distribution company, generating a 25% improvement in productivity and a 15% reduction in costs."
+                    },
+                    "2": {
+                        "title": "Five-year strategic plan",
+                        "description": "Development and deployment of a strategic plan for an agricultural cooperative of 3,000 members, doubling turnover in 4 years."
+                    }
                 }
             },
             "digitalisation": {
@@ -231,12 +415,34 @@
                 "subtitle": "Transform your business through digital",
                 "description": "We design and deploy customized digital solutions to modernize your business and improve your competitiveness.",
                 "mission": "Support the digital transformation of African companies by designing adapted, efficient and scalable technological solutions.",
-                "services": { "0": "Showcase and institutional websites", "1": "E-commerce platforms", "2": "Customized web applications", "3": "Mobile applications (iOS & Android)", "4": "CRM and process automation", "5": "Branding and digital visual identity", "6": "Hosting and maintenance", "7": "Training in digital tools" },
-                "pricing": { "0": "Accounting, tax and HR platforms: From 150,000 FCFA / month", "1": "Showcase website: On estimate", "2": "Custom application: On estimate" },
+                "services": {
+                    "0": "Showcase and institutional websites",
+                    "1": "E-commerce platforms",
+                    "2": "Customized web applications",
+                    "3": "Mobile applications (iOS & Android)",
+                    "4": "CRM and process automation",
+                    "5": "Branding and digital visual identity",
+                    "6": "Hosting and maintenance",
+                    "7": "Training in digital tools"
+                },
+                "pricing": {
+                    "0": "Accounting, tax and HR platforms: From 150,000 FCFA / month",
+                    "1": "Showcase website: On estimate",
+                    "2": "Custom application: On estimate"
+                },
                 "cases": {
-                    "0": { "title": "B2B e-commerce platform", "description": "Development of a B2B marketplace connecting 200 suppliers and 5,000 professional buyers in the WAEMU zone." },
-                    "1": { "title": "Digitalization of a health mutual", "description": "Design of a mobile and web application for the management of 50,000 members, integrating mobile payment." },
-                    "2": { "title": "CRM for a distribution network", "description": "Implementation of a customized CRM for a network of 150 points of sale, with automation of reporting and performance tracking." }
+                    "0": {
+                        "title": "B2B e-commerce platform",
+                        "description": "Development of a B2B marketplace connecting 200 suppliers and 5,000 professional buyers in the WAEMU zone."
+                    },
+                    "1": {
+                        "title": "Digitalization of a health mutual",
+                        "description": "Design of a mobile and web application for the management of 50,000 members, integrating mobile payment."
+                    },
+                    "2": {
+                        "title": "CRM for a distribution network",
+                        "description": "Implementation of a customized CRM for a network of 150 points of sale, with automation of reporting and performance tracking."
+                    }
                 }
             },
             "recrutement": {
@@ -244,12 +450,34 @@
                 "subtitle": "Find the talents you need",
                 "description": "Our recruitment and placement service connects you with the best talents on the market, with a rigorous selection and integration process.",
                 "mission": "Identify, evaluate and place the talents most suited to the specific needs of each company, ensuring successful integration.",
-                "services": { "0": "Recruitment of executives and directors", "1": "Recruitment of specialized technical profiles", "2": "Temporary work and provision of personnel", "3": "Skills evaluation and assessment", "4": "Integration support", "5": "Management of a qualified talent base", "6": "Employer branding consulting", "7": "Outplacement and career transition" },
-                "pricing": { "0": "Recruitment (executive profile): 15% to 20% of annual gross salary", "1": "Application fee per employee (Executives): 50,000 FCFA", "2": "Temporary work: Commission 1 month of salary + 20,000 FCFA application fee" },
+                "services": {
+                    "0": "Recruitment of executives and directors",
+                    "1": "Recruitment of specialized technical profiles",
+                    "2": "Temporary work and provision of personnel",
+                    "3": "Skills evaluation and assessment",
+                    "4": "Integration support",
+                    "5": "Management of a qualified talent base",
+                    "6": "Employer branding consulting",
+                    "7": "Outplacement and career transition"
+                },
+                "pricing": {
+                    "0": "Recruitment (executive profile): 15% to 20% of annual gross salary",
+                    "1": "Application fee per employee (Executives): 50,000 FCFA",
+                    "2": "Temporary work: Commission 1 month of salary + 20,000 FCFA application fee"
+                },
                 "cases": {
-                    "0": { "title": "Mass recruitment for a mine", "description": "Sourcing and placement of 150 technical and administrative profiles for a mining project in 6 months, with a retention rate of 92%." },
-                    "1": { "title": "Executive recruitment for a bank", "description": "Search and placement of 5 directors for a regional bank, including a 3-day assessment center process." },
-                    "2": { "title": "Qualifying internship program", "description": "Design and management of an internship program for 200 young graduates per year, with an integration rate of 65%." }
+                    "0": {
+                        "title": "Mass recruitment for a mine",
+                        "description": "Sourcing and placement of 150 technical and administrative profiles for a mining project in 6 months, with a retention rate of 92%."
+                    },
+                    "1": {
+                        "title": "Executive recruitment for a bank",
+                        "description": "Search and placement of 5 directors for a regional bank, including a 3-day assessment center process."
+                    },
+                    "2": {
+                        "title": "Qualifying internship program",
+                        "description": "Design and management of an internship program for 200 young graduates per year, with an integration rate of 65%."
+                    }
                 }
             }
         }
@@ -266,13 +494,42 @@
         "ctaDesc": "Contact us for a personalized solution, tailored to your business needs.",
         "ctaButton": "Contact us",
         "comparisonList": {
-            "0": { "feature": "Accounting management", "essentiel": "Turnover < 50M", "croissance": "Turnover < 150M", "prestige": "Unlimited" },
-            "1": { "feature": "Legal", "essentiel": "1 modification/year", "croissance": "2 modifications + 2 contracts", "prestige": "Complete secretarial" },
-            "2": { "feature": "Taxation", "essentiel": "Email advice", "croissance": "Preventive audit", "prestige": "Optimization & Defense" },
-            "3": { "feature": "Human Resources", "essentiel": "Standard contracts (5 emp.)", "croissance": "Payroll (15 emp.)", "prestige": "Unlimited payroll + Recruitment" },
-            "4": { "feature": "Assistance", "essentiel": "Phone (3 calls/month)", "croissance": "Quarterly meeting", "prestige": "Dedicated consultant 24/7" },
-            "5": { "feature": "Intellectual Property" },
-            "6": { "feature": "Social Audit" }
+            "0": {
+                "feature": "Accounting management",
+                "essentiel": "Turnover < 50M",
+                "croissance": "Turnover < 150M",
+                "prestige": "Unlimited"
+            },
+            "1": {
+                "feature": "Legal",
+                "essentiel": "1 modification/year",
+                "croissance": "2 modifications + 2 contracts",
+                "prestige": "Complete secretarial"
+            },
+            "2": {
+                "feature": "Taxation",
+                "essentiel": "Email advice",
+                "croissance": "Preventive audit",
+                "prestige": "Optimization & Defense"
+            },
+            "3": {
+                "feature": "Human Resources",
+                "essentiel": "Standard contracts (5 emp.)",
+                "croissance": "Payroll (15 emp.)",
+                "prestige": "Unlimited payroll + Recruitment"
+            },
+            "4": {
+                "feature": "Assistance",
+                "essentiel": "Phone (3 calls/month)",
+                "croissance": "Quarterly meeting",
+                "prestige": "Dedicated consultant 24/7"
+            },
+            "5": {
+                "feature": "Intellectual Property"
+            },
+            "6": {
+                "feature": "Social Audit"
+            }
         }
     },
     "digitalisation": {
@@ -283,12 +540,66 @@
         "ctaDesc": "Let's discuss your project and build the ideal solution together.",
         "ctaButton": "Request a quote",
         "servicesList": {
-            "0": { "title": "Showcase & Institutional Websites", "description": "Modern, high-performance websites that reflect the excellence of your company.", "features": { "0": "Premium responsive design", "1": "Advanced SEO optimization", "2": "High-performance hosting", "3": "Maintenance and support included" } },
-            "1": { "title": "E-commerce", "description": "Complete online sales platforms, integrating African payment solutions.", "features": { "0": "Integrated mobile payment (Orange Money, Wave, etc.)", "1": "Real-time inventory management", "2": "Intuitive administration interface", "3": "Delivery and logistics" } },
-            "2": { "title": "Web Applications", "description": "Custom business applications to digitize and automate your processes.", "features": { "0": "Business needs analysis", "1": "Agile development", "2": "Integration with your existing tools", "3": "User training" } },
-            "3": { "title": "Mobile Applications", "description": "Native or cross-platform iOS and Android applications to reach your customers wherever they are.", "features": { "0": "Mobile-optimized UX/UI design", "1": "Performance and fluidity", "2": "Push notifications", "3": "Store publication" } },
-            "4": { "title": "CRM & Automation", "description": "Customer relationship management and automation tools to improve your efficiency.", "features": { "0": "Customized CRM", "1": "Automation of repetitive tasks", "2": "Reporting and dashboards", "3": "Multi-channel integration" } },
-            "5": { "title": "Branding & Digital Identity", "description": "A strong and consistent visual identity across all your digital media.", "features": { "0": "Logo and brand guidelines", "1": "Templates and marketing materials", "2": "Social media strategy", "3": "Professional visual content" } }
+            "0": {
+                "title": "Showcase & Institutional Websites",
+                "description": "Modern, high-performance websites that reflect the excellence of your company.",
+                "features": {
+                    "0": "Premium responsive design",
+                    "1": "Advanced SEO optimization",
+                    "2": "High-performance hosting",
+                    "3": "Maintenance and support included"
+                }
+            },
+            "1": {
+                "title": "E-commerce",
+                "description": "Complete online sales platforms, integrating African payment solutions.",
+                "features": {
+                    "0": "Integrated mobile payment (Orange Money, Wave, etc.)",
+                    "1": "Real-time inventory management",
+                    "2": "Intuitive administration interface",
+                    "3": "Delivery and logistics"
+                }
+            },
+            "2": {
+                "title": "Web Applications",
+                "description": "Custom business applications to digitize and automate your processes.",
+                "features": {
+                    "0": "Business needs analysis",
+                    "1": "Agile development",
+                    "2": "Integration with your existing tools",
+                    "3": "User training"
+                }
+            },
+            "3": {
+                "title": "Mobile Applications",
+                "description": "Native or cross-platform iOS and Android applications to reach your customers wherever they are.",
+                "features": {
+                    "0": "Mobile-optimized UX/UI design",
+                    "1": "Performance and fluidity",
+                    "2": "Push notifications",
+                    "3": "Store publication"
+                }
+            },
+            "4": {
+                "title": "CRM & Automation",
+                "description": "Customer relationship management and automation tools to improve your efficiency.",
+                "features": {
+                    "0": "Customized CRM",
+                    "1": "Automation of repetitive tasks",
+                    "2": "Reporting and dashboards",
+                    "3": "Multi-channel integration"
+                }
+            },
+            "5": {
+                "title": "Branding & Digital Identity",
+                "description": "A strong and consistent visual identity across all your digital media.",
+                "features": {
+                    "0": "Logo and brand guidelines",
+                    "1": "Templates and marketing materials",
+                    "2": "Social media strategy",
+                    "3": "Professional visual content"
+                }
+            }
         }
     },
     "recruitment": {
@@ -355,8 +666,21 @@
             "pdfMax5mb": "PDF, max 5MB",
             "selectDomain": "Select your domain",
             "selectExperience": "Select your experience",
-            "domains": { "legal": "Legal & Tax", "finance": "Finance & Accounting", "hr": "Human Resources", "it": "IT & Digital", "management": "Management & Strategy", "sales": "Sales & Marketing", "other": "Other" },
-            "experiences": { "junior": "Junior (0-2 years)", "mid": "Mid-level (3-5 years)", "senior": "Senior (5-10 years)", "expert": "Expert (+10 years)" }
+            "domains": {
+                "legal": "Legal & Tax",
+                "finance": "Finance & Accounting",
+                "hr": "Human Resources",
+                "it": "IT & Digital",
+                "management": "Management & Strategy",
+                "sales": "Sales & Marketing",
+                "other": "Other"
+            },
+            "experiences": {
+                "junior": "Junior (0-2 years)",
+                "mid": "Mid-level (3-5 years)",
+                "senior": "Senior (5-10 years)",
+                "expert": "Expert (+10 years)"
+            }
         }
     },
     "resources": {
@@ -400,18 +724,54 @@
         "turnoverLabel": "Annual turnover",
         "employeesLabel": "Number of employees or freelancers",
         "challengeLabel": "What is your biggest current challenge?",
-        "challengeOptions": { "tax": "Taxation", "accounting": "Accounting Management", "hr": "HR Structure", "other": "Other" },
+        "challengeOptions": {
+            "tax": "Taxation",
+            "accounting": "Accounting Management",
+            "hr": "HR Structure",
+            "other": "Other"
+        },
         "phaseLabel": "Current phase of the company",
-        "phaseOptions": { "creation": "Creation", "growth": "Growth", "restructuring": "Restructuring" },
+        "phaseOptions": {
+            "creation": "Creation",
+            "growth": "Growth",
+            "restructuring": "Restructuring"
+        },
         "budgetLabel": "Annual budget for securing your management",
         "meetingLabel": "Preferred contact method",
-        "meetingOptions": { "video": "Video call", "inPerson": "In-person" },
+        "meetingOptions": {
+            "video": "Video call",
+            "inPerson": "In-person"
+        },
         "sectionDirector": "Your contact details",
         "sectionCompany": "Company details (optional)",
         "sectionChallenge": "Need qualification (optional)",
-        "placeholders": { "domain": "Ex: Commerce, Construction, Services...", "turnover": "Ex: 50M FCFA", "employees": "Ex: 10 employees", "select": "Select...", "budget": "Ex: 5M FCFA" },
-        "subjects": { "general": "General inquiry", "consultation": "Consultation request", "subscription": "Subscription offers", "digitalization": "Digitalization project", "recruitment": "Recruitment & placement", "other": "Other" },
-        "errors": { "min2": "Minimum 2 characters", "invalidEmail": "Invalid email", "invalidPhone": "Invalid number", "companyRequired": "Company name required", "domainRequired": "Domain required", "turnoverRequired": "Turnover required", "employeesRequired": "Number of employees required", "budgetRequired": "Budget required", "selectSubject": "Select a subject", "min10": "Minimum 10 characters" }
+        "placeholders": {
+            "domain": "Ex: Commerce, Construction, Services...",
+            "turnover": "Ex: 50M FCFA",
+            "employees": "Ex: 10 employees",
+            "select": "Select...",
+            "budget": "Ex: 5M FCFA"
+        },
+        "subjects": {
+            "general": "General inquiry",
+            "consultation": "Consultation request",
+            "subscription": "Subscription offers",
+            "digitalization": "Digitalization project",
+            "recruitment": "Recruitment & placement",
+            "other": "Other"
+        },
+        "errors": {
+            "min2": "Minimum 2 characters",
+            "invalidEmail": "Invalid email",
+            "invalidPhone": "Invalid number",
+            "companyRequired": "Company name required",
+            "domainRequired": "Domain required",
+            "turnoverRequired": "Turnover required",
+            "employeesRequired": "Number of employees required",
+            "budgetRequired": "Budget required",
+            "selectSubject": "Select a subject",
+            "min10": "Minimum 10 characters"
+        }
     },
     "client": {
         "loading": "Loading...",
@@ -572,7 +932,7 @@
             "section4": {
                 "title": "4. Subscriptions and payments",
                 "intro": "The offers displayed on the website indicate the general conditions applicable to subscriptions and recurring services.",
-                "commitment": "Unless otherwise agreed, subscriptions are presented on an annual basis with the conditions specified on the Offers page.",
+                "commitment": "Unless otherwise agreed, subscriptions are presented on an annual or semiannual basis with the conditions specified on the Offers page.",
                 "payment": "Payment, deposit, invoicing and renewal terms are confirmed before the effective start of the assignment.",
                 "cancellation": "Any cancellation, suspension or modification of an assignment must be formalized under the terms agreed between the parties."
             },

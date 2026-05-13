@@ -56,10 +56,10 @@
         "departmentsTitle": "Nos 6 Départements d'Excellence",
         "departmentsLabel": "Nos Pôles d'Expertise",
         "departmentsSubtitle": "Une expertise pluridisciplinaire au service de votre réussite",
-        "pricingTitle": "OFFRES D'ABONNEMENT ANNUEL",
+        "pricingTitle": "OFFRES D'ABONNEMENT",
         "pricingLabel": "Nos Offres",
         "pricingSubtitle": "Accompagnement 360° : Juridique, Fiscal, Comptabilité & RH",
-        "pricingTerms": "Engagement : 12 mois | Condition : 50% d'acompte à la signature.",
+        "pricingTerms": "Formules annuelles et 6 mois | Condition : 50% d'acompte à la signature.",
         "whyTitle": "Pourquoi SOJIF Consulting ?",
         "whyLabel": "Nos Atouts",
         "whySubtitle": "Un cabinet structuré pour accompagner votre croissance",
@@ -76,9 +76,18 @@
         "leadDesc": "Le formulaire et les actions rapides orientent chaque demande vers le bon pôle: fiscalité, droit, RH, comptabilité, digitalisation ou recrutement.",
         "leadCta": "Planifier le diagnostic",
         "leadSteps": {
-            "audit": { "title": "Analyse du besoin", "desc": "Nous identifions le sujet, l'urgence et les risques principaux." },
-            "priority": { "title": "Priorités d'action", "desc": "Vous repartez avec une lecture claire des points à traiter en premier." },
-            "action": { "title": "Suite proposée", "desc": "Nous indiquons le bon format: conseil ponctuel, abonnement ou projet dédié." }
+            "audit": {
+                "title": "Analyse du besoin",
+                "desc": "Nous identifions le sujet, l'urgence et les risques principaux."
+            },
+            "priority": {
+                "title": "Priorités d'action",
+                "desc": "Vous repartez avec une lecture claire des points à traiter en premier."
+            },
+            "action": {
+                "title": "Suite proposée",
+                "desc": "Nous indiquons le bon format: conseil ponctuel, abonnement ou projet dédié."
+            }
         },
         "testimonialsTitle": "Ce que disent nos clients",
         "testimonialsLabel": "Témoignages",
@@ -88,6 +97,7 @@
         "ctaButton": "Demander mon diagnostic gratuit",
         "ctaCall": "Appeler",
         "perYear": "/an",
+        "perSixMonths": "/ 6 mois",
         "packs": {
             "0": {
                 "name": "Pack Essentiel",
@@ -101,7 +111,10 @@
                     "5": "Conseils sur les déclarations IPRES/CSS",
                     "6": "Assistance téléphonique prioritaire (3 appels/mois)"
                 },
-                "cta": "Choisir Essentiel"
+                "cta": "Choisir Essentiel",
+                "price": "1 500 000",
+                "currency": "FCFA",
+                "period": "/an"
             },
             "1": {
                 "name": "Pack Croissance",
@@ -115,7 +128,10 @@
                     "5": "Gestion dossiers disciplinaires et conseil droit du travail",
                     "6": "Réunion de stratégie trimestrielle (présentiel ou visio)"
                 },
-                "cta": "Choisir Croissance"
+                "cta": "Choisir Croissance",
+                "price": "2 500 000",
+                "currency": "FCFA",
+                "period": "/an"
             },
             "2": {
                 "name": "Pack Prestige",
@@ -130,7 +146,62 @@
                     "6": "Médiation sociale et audit social complet",
                     "7": "Consultant dédié disponible 24h/24 et 7j/7"
                 },
-                "cta": "Choisir Prestige"
+                "cta": "Choisir Prestige",
+                "price": "4 000 000",
+                "currency": "FCFA",
+                "period": "/an"
+            },
+            "3": {
+                "name": "Pack Essentiel - 6 mois",
+                "description": "Formule semestrielle pour startups, TPE et independants qui souhaitent securiser leur conformite sur 6 mois.",
+                "price": "350 000",
+                "currency": "FCFA",
+                "period": "/ 6 mois",
+                "features": {
+                    "0": "Tenue complète de la comptabilité (CA < 50 millions FCFA)",
+                    "1": "Déclaration de TVA mensuelle et bilan annuel",
+                    "2": "1 modification statutaire simple par an ou 1 PV annuel",
+                    "3": "Conseil fiscal par e-mail et veille réglementaire",
+                    "4": "Rédaction de contrats de travail types (jusqu'à 5 employés)",
+                    "5": "Conseils sur les déclarations IPRES/CSS",
+                    "6": "Assistance téléphonique prioritaire (3 appels/mois)"
+                },
+                "cta": "Choisir Essentiel 6 mois"
+            },
+            "4": {
+                "name": "Pack Croissance - 6 mois",
+                "description": "Formule semestrielle pour PME en developpement qui veulent un accompagnement structure sur 6 mois.",
+                "price": "500 000",
+                "currency": "FCFA",
+                "period": "/ 6 mois",
+                "features": {
+                    "0": "Tenue comptable complète et BRS (CA < 150 millions FCFA)",
+                    "1": "Déclarations fiscales et sociales mensuelles",
+                    "2": "2 modifications statutaires et 2 contrats commerciaux par an",
+                    "3": "Audit fiscal annuel préventif",
+                    "4": "Gestion de la paie (jusqu'à 15 employés)",
+                    "5": "Gestion dossiers disciplinaires et conseil droit du travail",
+                    "6": "Réunion de stratégie trimestrielle (présentiel ou visio)"
+                },
+                "cta": "Choisir Croissance 6 mois"
+            },
+            "5": {
+                "name": "Pack Prestige - 6 mois",
+                "description": "Formule semestrielle pour entreprises a fort volume qui recherchent un accompagnement renforce sur 6 mois.",
+                "price": "700 000",
+                "currency": "FCFA",
+                "period": "/ 6 mois",
+                "features": {
+                    "0": "Gestion comptable totale sans limite de CA",
+                    "1": "Liasses fiscales complètes (BIC) et reporting mensuel",
+                    "2": "Secrétariat juridique complet et contrats complexes",
+                    "3": "Protection de la propriété intellectuelle (OAPI)",
+                    "4": "Optimisation fiscale et assistance contrôle (Défense et Recours)",
+                    "5": "Gestion de la paie illimitée et 2 recrutements cadres/an",
+                    "6": "Médiation sociale et audit social complet",
+                    "7": "Consultant dédié disponible 24h/24 et 7j/7"
+                },
+                "cta": "Choisir Prestige 6 mois"
             }
         },
         "testimonialsList": {
@@ -220,9 +291,18 @@
                     "2": "Abonnement conseil : Sur devis selon besoins"
                 },
                 "cases": {
-                    "0": { "title": "Restructuration d'un groupe industriel", "description": "Accompagnement d'un groupe de 5 sociétés dans une opération de fusion-absorption, avec optimisation de la structure juridique et fiscale." },
-                    "1": { "title": "Protection contractuelle à l'international", "description": "Mise en place d'un cadre contractuel complet pour une entreprise d'export, couvrant 8 pays de la zone CEDEAO." },
-                    "2": { "title": "Résolution d'un litige commercial", "description": "Gestion d'un contentieux de 500M FCFA entre partenaires commerciaux, résolu par médiation en 3 mois." }
+                    "0": {
+                        "title": "Restructuration d'un groupe industriel",
+                        "description": "Accompagnement d'un groupe de 5 sociétés dans une opération de fusion-absorption, avec optimisation de la structure juridique et fiscale."
+                    },
+                    "1": {
+                        "title": "Protection contractuelle à l'international",
+                        "description": "Mise en place d'un cadre contractuel complet pour une entreprise d'export, couvrant 8 pays de la zone CEDEAO."
+                    },
+                    "2": {
+                        "title": "Résolution d'un litige commercial",
+                        "description": "Gestion d'un contentieux de 500M FCFA entre partenaires commerciaux, résolu par médiation en 3 mois."
+                    }
                 }
             },
             "fiscalite": {
@@ -246,9 +326,18 @@
                     "2": "Gestion de la paie : À partir de 15 000 FCFA par bulletin"
                 },
                 "cases": {
-                    "0": { "title": "Optimisation fiscale d'une PME", "description": "Réduction de 30% de la charge fiscale d'une PME grâce à l'utilisation optimale des dispositifs d'incitation fiscale du Code Général des Impôts." },
-                    "1": { "title": "Mise en conformité comptable", "description": "Restructuration complète du système comptable d'une entreprise de 200 employés selon les normes SYSCOHADA révisé." },
-                    "2": { "title": "Accompagnement lors d'un contrôle fiscal", "description": "Assistance d'une société lors d'un contrôle fiscal, résultant en une réduction de 85% du redressement initial." }
+                    "0": {
+                        "title": "Optimisation fiscale d'une PME",
+                        "description": "Réduction de 30% de la charge fiscale d'une PME grâce à l'utilisation optimale des dispositifs d'incitation fiscale du Code Général des Impôts."
+                    },
+                    "1": {
+                        "title": "Mise en conformité comptable",
+                        "description": "Restructuration complète du système comptable d'une entreprise de 200 employés selon les normes SYSCOHADA révisé."
+                    },
+                    "2": {
+                        "title": "Accompagnement lors d'un contrôle fiscal",
+                        "description": "Assistance d'une société lors d'un contrôle fiscal, résultant en une réduction de 85% du redressement initial."
+                    }
                 }
             },
             "rh": {
@@ -273,9 +362,18 @@
                     "3": "Frais de dossier par recrutement cadre : 50 000 FCFA par salarié"
                 },
                 "cases": {
-                    "0": { "title": "Transformation RH d'une banque régionale", "description": "Refonte complète de la politique RH d'un établissement bancaire de 400 employés, incluant la mise en place d'un SIRH et d'un plan de formation." },
-                    "1": { "title": "Mise en conformité sociale", "description": "Audit social complet et plan de mise en conformité pour une entreprise industrielle, évitant des risques de contentieux évalués à 200M FCFA." },
-                    "2": { "title": "Programme de rétention des talents", "description": "Conception et déploiement d'un programme de fidélisation ayant réduit le turnover de 45% en 18 mois." }
+                    "0": {
+                        "title": "Transformation RH d'une banque régionale",
+                        "description": "Refonte complète de la politique RH d'un établissement bancaire de 400 employés, incluant la mise en place d'un SIRH et d'un plan de formation."
+                    },
+                    "1": {
+                        "title": "Mise en conformité sociale",
+                        "description": "Audit social complet et plan de mise en conformité pour une entreprise industrielle, évitant des risques de contentieux évalués à 200M FCFA."
+                    },
+                    "2": {
+                        "title": "Programme de rétention des talents",
+                        "description": "Conception et déploiement d'un programme de fidélisation ayant réduit le turnover de 45% en 18 mois."
+                    }
                 }
             },
             "conseil": {
@@ -298,9 +396,18 @@
                     "1": "Élaboration de Business Plan : Sur devis"
                 },
                 "cases": {
-                    "0": { "title": "Levée de fonds pour une startup tech", "description": "Accompagnement d'une startup fintech dans sa levée de fonds de 1,5 milliard FCFA, de la structuration du dossier à la négociation avec les investisseurs." },
-                    "1": { "title": "Restructuration opérationnelle", "description": "Optimisation des processus d'une entreprise de distribution, générant une amélioration de 25% de la productivité et 15% de réduction des coûts." },
-                    "2": { "title": "Plan stratégique quinquennal", "description": "Élaboration et déploiement d'un plan stratégique pour une coopérative agricole de 3000 membres, doublant le chiffre d'affaires en 4 ans." }
+                    "0": {
+                        "title": "Levée de fonds pour une startup tech",
+                        "description": "Accompagnement d'une startup fintech dans sa levée de fonds de 1,5 milliard FCFA, de la structuration du dossier à la négociation avec les investisseurs."
+                    },
+                    "1": {
+                        "title": "Restructuration opérationnelle",
+                        "description": "Optimisation des processus d'une entreprise de distribution, générant une amélioration de 25% de la productivité et 15% de réduction des coûts."
+                    },
+                    "2": {
+                        "title": "Plan stratégique quinquennal",
+                        "description": "Élaboration et déploiement d'un plan stratégique pour une coopérative agricole de 3000 membres, doublant le chiffre d'affaires en 4 ans."
+                    }
                 }
             },
             "digitalisation": {
@@ -324,9 +431,18 @@
                     "2": "Application sur mesure : Sur devis"
                 },
                 "cases": {
-                    "0": { "title": "Plateforme e-commerce B2B", "description": "Développement d'une marketplace B2B connectant 200 fournisseurs et 5000 acheteurs professionnels dans la zone UEMOA." },
-                    "1": { "title": "Digitalisation d'une mutuelle de santé", "description": "Conception d'une application mobile et web pour la gestion de 50 000 adhérents, intégrant le paiement mobile." },
-                    "2": { "title": "CRM pour réseau de distribution", "description": "Mise en place d'un CRM sur mesure pour un réseau de 150 points de vente, avec automatisation du reporting et suivi des performances." }
+                    "0": {
+                        "title": "Plateforme e-commerce B2B",
+                        "description": "Développement d'une marketplace B2B connectant 200 fournisseurs et 5000 acheteurs professionnels dans la zone UEMOA."
+                    },
+                    "1": {
+                        "title": "Digitalisation d'une mutuelle de santé",
+                        "description": "Conception d'une application mobile et web pour la gestion de 50 000 adhérents, intégrant le paiement mobile."
+                    },
+                    "2": {
+                        "title": "CRM pour réseau de distribution",
+                        "description": "Mise en place d'un CRM sur mesure pour un réseau de 150 points de vente, avec automatisation du reporting et suivi des performances."
+                    }
                 }
             },
             "recrutement": {
@@ -350,9 +466,18 @@
                     "2": "Intérim : Commission 1 mois de salaire + 20 000 FCFA frais de dossier"
                 },
                 "cases": {
-                    "0": { "title": "Recrutement massif pour une mine", "description": "Sourcing et placement de 150 profils techniques et administratifs pour un projet minier en 6 mois, avec un taux de rétention de 92%." },
-                    "1": { "title": "Recrutement de direction pour une banque", "description": "Recherche et placement de 5 directeurs pour une banque régionale, incluant un processus d'assessment center de 3 jours." },
-                    "2": { "title": "Programme de stages qualifiants", "description": "Conception et gestion d'un programme de stages pour 200 jeunes diplômés par an, avec un taux d'insertion de 65%." }
+                    "0": {
+                        "title": "Recrutement massif pour une mine",
+                        "description": "Sourcing et placement de 150 profils techniques et administratifs pour un projet minier en 6 mois, avec un taux de rétention de 92%."
+                    },
+                    "1": {
+                        "title": "Recrutement de direction pour une banque",
+                        "description": "Recherche et placement de 5 directeurs pour une banque régionale, incluant un processus d'assessment center de 3 jours."
+                    },
+                    "2": {
+                        "title": "Programme de stages qualifiants",
+                        "description": "Conception et gestion d'un programme de stages pour 200 jeunes diplômés par an, avec un taux d'insertion de 65%."
+                    }
                 }
             }
         }
@@ -369,13 +494,42 @@
         "ctaDesc": "Contactez-nous pour une solution personnalisée, adaptée aux besoins spécifiques de votre entreprise.",
         "ctaButton": "Nous contacter",
         "comparisonList": {
-            "0": { "feature": "Gestion comptable", "essentiel": "CA < 50M", "croissance": "CA < 150M", "prestige": "Illimité" },
-            "1": { "feature": "Juridique", "essentiel": "1 modif/an", "croissance": "2 modifs + 2 contrats", "prestige": "Secrétariat complet" },
-            "2": { "feature": "Fiscalité", "essentiel": "Conseil email", "croissance": "Audit préventif", "prestige": "Optimisation & Défense" },
-            "3": { "feature": "Ressources Humaines", "essentiel": "Contrats types (5 emp.)", "croissance": "Paie (15 emp.)", "prestige": "Paie illimitée + Recrutement" },
-            "4": { "feature": "Assistance", "essentiel": "Tel (3 appels/mois)", "croissance": "Réunion trimestrielle", "prestige": "Consultant dédié 24/7" },
-            "5": { "feature": "Propriété Intellectuelle" },
-            "6": { "feature": "Audit Social" }
+            "0": {
+                "feature": "Gestion comptable",
+                "essentiel": "CA < 50M",
+                "croissance": "CA < 150M",
+                "prestige": "Illimité"
+            },
+            "1": {
+                "feature": "Juridique",
+                "essentiel": "1 modif/an",
+                "croissance": "2 modifs + 2 contrats",
+                "prestige": "Secrétariat complet"
+            },
+            "2": {
+                "feature": "Fiscalité",
+                "essentiel": "Conseil email",
+                "croissance": "Audit préventif",
+                "prestige": "Optimisation & Défense"
+            },
+            "3": {
+                "feature": "Ressources Humaines",
+                "essentiel": "Contrats types (5 emp.)",
+                "croissance": "Paie (15 emp.)",
+                "prestige": "Paie illimitée + Recrutement"
+            },
+            "4": {
+                "feature": "Assistance",
+                "essentiel": "Tel (3 appels/mois)",
+                "croissance": "Réunion trimestrielle",
+                "prestige": "Consultant dédié 24/7"
+            },
+            "5": {
+                "feature": "Propriété Intellectuelle"
+            },
+            "6": {
+                "feature": "Audit Social"
+            }
         }
     },
     "digitalisation": {
@@ -386,12 +540,66 @@
         "ctaDesc": "Discutons de votre projet et construisons ensemble la solution idéale.",
         "ctaButton": "Demander un devis",
         "servicesList": {
-            "0": { "title": "Sites Vitrines & Institutionnels", "description": "Des sites web modernes et performants qui reflètent l'excellence de votre entreprise.", "features": { "0": "Design premium et responsive", "1": "Optimisation SEO avancée", "2": "Hébergement haute performance", "3": "Maintenance et support inclus" } },
-            "1": { "title": "E-commerce", "description": "Des plateformes de vente en ligne complètes, intégrant les solutions de paiement africaines.", "features": { "0": "Paiement mobile intégré (Orange Money, Wave, etc.)", "1": "Gestion des stocks en temps réel", "2": "Interface d'administration intuitive", "3": "Livraison et logistique" } },
-            "2": { "title": "Applications Web", "description": "Des applications métier sur mesure pour digitaliser et automatiser vos processus.", "features": { "0": "Analyse des besoins métier", "1": "Développement agile", "2": "Intégration avec vos outils existants", "3": "Formation des utilisateurs" } },
-            "3": { "title": "Applications Mobiles", "description": "Des applications iOS et Android natives ou cross-platform pour toucher vos clients où qu'ils soient.", "features": { "0": "Design UX/UI optimisé mobile", "1": "Performance et fluidité", "2": "Notifications push", "3": "Publication sur les stores" } },
-            "4": { "title": "CRM & Automatisation", "description": "Des outils de gestion de la relation client et d'automatisation pour améliorer votre efficacité.", "features": { "0": "CRM personnalisé", "1": "Automatisation des tâches répétitives", "2": "Reporting et tableaux de bord", "3": "Intégration multi-canaux" } },
-            "5": { "title": "Branding & Identité Digitale", "description": "Une identité visuelle forte et cohérente sur tous vos supports digitaux.", "features": { "0": "Logo et charte graphique", "1": "Templates et supports marketing", "2": "Stratégie réseaux sociaux", "3": "Contenu visuel professionnel" } }
+            "0": {
+                "title": "Sites Vitrines & Institutionnels",
+                "description": "Des sites web modernes et performants qui reflètent l'excellence de votre entreprise.",
+                "features": {
+                    "0": "Design premium et responsive",
+                    "1": "Optimisation SEO avancée",
+                    "2": "Hébergement haute performance",
+                    "3": "Maintenance et support inclus"
+                }
+            },
+            "1": {
+                "title": "E-commerce",
+                "description": "Des plateformes de vente en ligne complètes, intégrant les solutions de paiement africaines.",
+                "features": {
+                    "0": "Paiement mobile intégré (Orange Money, Wave, etc.)",
+                    "1": "Gestion des stocks en temps réel",
+                    "2": "Interface d'administration intuitive",
+                    "3": "Livraison et logistique"
+                }
+            },
+            "2": {
+                "title": "Applications Web",
+                "description": "Des applications métier sur mesure pour digitaliser et automatiser vos processus.",
+                "features": {
+                    "0": "Analyse des besoins métier",
+                    "1": "Développement agile",
+                    "2": "Intégration avec vos outils existants",
+                    "3": "Formation des utilisateurs"
+                }
+            },
+            "3": {
+                "title": "Applications Mobiles",
+                "description": "Des applications iOS et Android natives ou cross-platform pour toucher vos clients où qu'ils soient.",
+                "features": {
+                    "0": "Design UX/UI optimisé mobile",
+                    "1": "Performance et fluidité",
+                    "2": "Notifications push",
+                    "3": "Publication sur les stores"
+                }
+            },
+            "4": {
+                "title": "CRM & Automatisation",
+                "description": "Des outils de gestion de la relation client et d'automatisation pour améliorer votre efficacité.",
+                "features": {
+                    "0": "CRM personnalisé",
+                    "1": "Automatisation des tâches répétitives",
+                    "2": "Reporting et tableaux de bord",
+                    "3": "Intégration multi-canaux"
+                }
+            },
+            "5": {
+                "title": "Branding & Identité Digitale",
+                "description": "Une identité visuelle forte et cohérente sur tous vos supports digitaux.",
+                "features": {
+                    "0": "Logo et charte graphique",
+                    "1": "Templates et supports marketing",
+                    "2": "Stratégie réseaux sociaux",
+                    "3": "Contenu visuel professionnel"
+                }
+            }
         }
     },
     "recruitment": {
@@ -458,8 +666,21 @@
             "pdfMax5mb": "PDF, max 5MB",
             "selectDomain": "Sélectionnez votre domaine",
             "selectExperience": "Sélectionnez votre expérience",
-            "domains": { "legal": "Juridique & Fiscal", "finance": "Finance & Comptabilité", "hr": "Ressources Humaines", "it": "Informatique & Digital", "management": "Management & Stratégie", "sales": "Commercial & Marketing", "other": "Autre" },
-            "experiences": { "junior": "Débutant (0-2 ans)", "mid": "Intermédiaire (3-5 ans)", "senior": "Confirmé (5-10 ans)", "expert": "Expert (+10 ans)" }
+            "domains": {
+                "legal": "Juridique & Fiscal",
+                "finance": "Finance & Comptabilité",
+                "hr": "Ressources Humaines",
+                "it": "Informatique & Digital",
+                "management": "Management & Stratégie",
+                "sales": "Commercial & Marketing",
+                "other": "Autre"
+            },
+            "experiences": {
+                "junior": "Débutant (0-2 ans)",
+                "mid": "Intermédiaire (3-5 ans)",
+                "senior": "Confirmé (5-10 ans)",
+                "expert": "Expert (+10 ans)"
+            }
         }
     },
     "resources": {
@@ -498,23 +719,59 @@
             "meetingLabel": "Rendez-vous",
             "meetingValue": "Visio ou Dakar"
         },
-        "subjects": { "general": "Demande générale", "consultation": "Demande de consultation", "subscription": "Offres d'abonnement", "digitalization": "Projet de digitalisation", "recruitment": "Recrutement & placement", "other": "Autre" },
+        "subjects": {
+            "general": "Demande générale",
+            "consultation": "Demande de consultation",
+            "subscription": "Offres d'abonnement",
+            "digitalization": "Projet de digitalisation",
+            "recruitment": "Recrutement & placement",
+            "other": "Autre"
+        },
         "directorLabel": "Nom et prénom du directeur",
         "domainLabel": "Domaine d'activité",
         "turnoverLabel": "Chiffres d'affaires annuels",
         "employeesLabel": "Nombre de salariés ou free-lance",
         "challengeLabel": "Quel est votre plus gros défi actuel ?",
-        "challengeOptions": { "tax": "Fiscalité", "accounting": "Gestion Comptable", "hr": "Structure RH", "other": "Autre" },
+        "challengeOptions": {
+            "tax": "Fiscalité",
+            "accounting": "Gestion Comptable",
+            "hr": "Structure RH",
+            "other": "Autre"
+        },
         "phaseLabel": "Phase actuelle de l'entreprise",
-        "phaseOptions": { "creation": "Création", "growth": "Croissance", "restructuring": "Restructuration" },
+        "phaseOptions": {
+            "creation": "Création",
+            "growth": "Croissance",
+            "restructuring": "Restructuration"
+        },
         "budgetLabel": "Budget annuel pour la sécurisation de votre gestion",
         "meetingLabel": "Moyen de contact préféré",
-        "meetingOptions": { "video": "Appel Visio", "inPerson": "Présentiel" },
+        "meetingOptions": {
+            "video": "Appel Visio",
+            "inPerson": "Présentiel"
+        },
         "sectionDirector": "Vos coordonnées",
         "sectionCompany": "Informations entreprise (facultatif)",
         "sectionChallenge": "Qualification du besoin (facultatif)",
-        "placeholders": { "domain": "Ex: Commerce, BTP, Services...", "turnover": "Ex: 50M FCFA", "employees": "Ex: 10 salariés", "select": "Sélectionnez...", "budget": "Ex: 5M FCFA" },
-        "errors": { "min2": "Minimum 2 caractères", "invalidEmail": "Email invalide", "invalidPhone": "Numéro invalide", "companyRequired": "Nom de l'entreprise requis", "domainRequired": "Domaine requis", "turnoverRequired": "Chiffre d'affaires requis", "employeesRequired": "Nombre de salariés requis", "budgetRequired": "Budget requis", "selectSubject": "Sélectionnez un sujet", "min10": "Minimum 10 caractères" }
+        "placeholders": {
+            "domain": "Ex: Commerce, BTP, Services...",
+            "turnover": "Ex: 50M FCFA",
+            "employees": "Ex: 10 salariés",
+            "select": "Sélectionnez...",
+            "budget": "Ex: 5M FCFA"
+        },
+        "errors": {
+            "min2": "Minimum 2 caractères",
+            "invalidEmail": "Email invalide",
+            "invalidPhone": "Numéro invalide",
+            "companyRequired": "Nom de l'entreprise requis",
+            "domainRequired": "Domaine requis",
+            "turnoverRequired": "Chiffre d'affaires requis",
+            "employeesRequired": "Nombre de salariés requis",
+            "budgetRequired": "Budget requis",
+            "selectSubject": "Sélectionnez un sujet",
+            "min10": "Minimum 10 caractères"
+        }
     },
     "client": {
         "loading": "Chargement...",
@@ -675,7 +932,7 @@
             "section4": {
                 "title": "4. Abonnements et paiements",
                 "intro": "Les offres affichées sur le site indiquent les conditions générales applicables aux abonnements et prestations récurrentes.",
-                "commitment": "Sauf accord spécifique, les abonnements sont présentés sur une base annuelle avec les conditions précisées dans la page Offres.",
+                "commitment": "Sauf accord spécifique, les abonnements sont présentés sur une base annuelle ou semestrielle avec les conditions précisées dans la page Offres.",
                 "payment": "Les modalités de paiement, d'acompte, de facturation et de renouvellement sont confirmées avant le démarrage effectif de la mission.",
                 "cancellation": "Toute résiliation, suspension ou modification d'une mission doit être formalisée selon les conditions convenues entre les parties."
             },

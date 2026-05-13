@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const title = t('title');
     const description = locale === 'fr'
-        ? 'Découvrez les offres d\'abonnement annuel SOJIF Consulting : Pack Essentiel, Croissance et Prestige. Comptabilité, fiscalité, juridique et RH à Dakar, Sénégal. 50% d\'acompte à la signature.'
-        : 'Explore SOJIF Consulting annual subscription plans: Essential, Growth and Prestige Packs. Accounting, tax, legal and HR services in Dakar, Senegal. 50% deposit upon signing.';
+        ? 'Découvrez les offres d\'abonnement annuel et 6 mois SOJIF Consulting : Pack Essentiel, Croissance et Prestige. Comptabilité, fiscalité, juridique et RH à Dakar, Sénégal. 50% d\'acompte à la signature.'
+        : 'Explore SOJIF Consulting annual and 6-month subscription plans: Essential, Growth and Prestige Packs. Accounting, tax, legal and HR services in Dakar, Senegal. 50% deposit upon signing.';
 
     return {
         title,

@@ -18,6 +18,10 @@
         "services": "Services",
         "company": "Company"
     },
+    "pwa": {
+        "install": "Install app",
+        "installAria": "Install SOJIF Consulting on this device"
+    },
     "hero": {
         "title": "Business Structuring & Performance Firm",
         "subtitle": "Law • Finance • Development",

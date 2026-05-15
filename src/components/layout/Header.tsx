@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 import { COMPANY } from '@/lib/constants';
 import MobileNav from './MobileNav';
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
+import InstallButton from '@/components/pwa/InstallButton';
 
 const navItems = [
     { label: 'nav.home', href: '/' },
@@ -222,6 +223,7 @@ export default function Header() {
 
                         {/* CTA + Mobile toggle */}
                         <div className="flex items-center gap-3">
+                            <InstallButton variant="desktop" />
                             <Link
                                 href={'/contact'}
                                 className={cn(

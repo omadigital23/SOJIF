@@ -18,6 +18,10 @@
         "services": "Services",
         "company": "Entreprise"
     },
+    "pwa": {
+        "install": "Installer l'app",
+        "installAria": "Installer SOJIF Consulting sur cet appareil"
+    },
     "hero": {
         "title": "Cabinet de Structuration & Performance des Entreprises",
         "subtitle": "Droit • Finance • Développement",

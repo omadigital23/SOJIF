@@ -9,6 +9,7 @@ import JsonLd from '@/components/seo/JsonLd';
 import type { Metadata } from 'next';
 import { PUBLIC_SITE_URL } from '@/lib/site-url';
 import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider';
+import PWARegister from '@/components/pwa/PWARegister';
 import '../globals.css';
 
 type Props = {
@@ -52,6 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 { url: '/apple-touch-icon.png', type: 'image/png', sizes: '180x180' },
             ],
         },
+        manifest: '/manifest.webmanifest',
         authors: [{ name: 'SOJIF Consulting', url: PUBLIC_SITE_URL }],
         creator: 'SOJIF Consulting',
         publisher: 'SOJIF Consulting',
@@ -115,6 +117,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                     <main className="flex-1">{children}</main>
                     <Footer />
                     <FloatingContactCTA />
+                    <PWARegister />
                 </NextIntlClientProvider>
                 <AnalyticsProvider enableVercelAnalytics={process.env.VERCEL === '1'} />
             </body>

@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { COMPANY } from '@/lib/constants';
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
+import InstallButton from '@/components/pwa/InstallButton';
 
 interface NavItem {
     label: string;
@@ -165,6 +166,9 @@ export default function MobileNav({ isOpen, onClose, items, locale }: MobileNavP
 
                             {/* CTA */}
                             <div className="p-4 border-t border-gray-100">
+                                <div className="mb-3">
+                                    <InstallButton variant="mobile" onInstalled={onClose} />
+                                </div>
                                 <div className="grid grid-cols-2 gap-2 mb-3">
                                     <a
                                         href={`tel:${COMPANY.phone}`}

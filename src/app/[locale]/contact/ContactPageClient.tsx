@@ -101,6 +101,7 @@ export default function ContactPageClient() {
         { value: 'consultation', label: t('subjects.consultation') },
         { value: 'subscription', label: t('subjects.subscription') },
         { value: 'digitalization', label: t('subjects.digitalization') },
+        { value: 'odooTraining', label: t('subjects.odooTraining') },
         { value: 'recruitment', label: t('subjects.recruitment') },
         { value: 'other', label: t('subjects.other') },
     ];

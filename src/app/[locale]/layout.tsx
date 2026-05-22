@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import FloatingContactCTA from '@/components/layout/FloatingContactCTA';
 import JsonLd from '@/components/seo/JsonLd';
 import type { Metadata } from 'next';
 import { PUBLIC_SITE_URL } from '@/lib/site-url';
@@ -116,7 +115,6 @@ export default async function LocaleLayout({ children, params }: Props) {
                     <Header />
                     <main className="flex-1">{children}</main>
                     <Footer />
-                    <FloatingContactCTA />
                     <PWARegister />
                 </NextIntlClientProvider>
                 <AnalyticsProvider enableVercelAnalytics={process.env.VERCEL === '1'} />

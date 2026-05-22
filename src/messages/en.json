@@ -75,6 +75,29 @@
         "why3Desc": "Proven methodologies and measurable results.",
         "why4Title": "African Roots",
         "why4Desc": "Deep knowledge of the legal, tax and economic environment of West Africa.",
+        "trustProof": {
+            "label": "Practice proof",
+            "title": "Recognized frameworks, concrete deliverables",
+            "desc": "Each diagnostic is grounded in frameworks companies actually use in the region: OHADA business law, SYSCOHADA accounting, social obligations and asset protection.",
+            "items": {
+                "0": {
+                    "label": "OHADA",
+                    "desc": "Legal structuring, corporate acts, contracts and decision compliance."
+                },
+                "1": {
+                    "label": "SYSCOHADA",
+                    "desc": "Accounting review, reporting, tax obligations and management steering."
+                },
+                "2": {
+                    "label": "IPRES / CSS",
+                    "desc": "Payroll vigilance points, social declarations and HR organization."
+                },
+                "3": {
+                    "label": "OAPI",
+                    "desc": "Trademark protection, intellectual property and asset security."
+                }
+            }
+        },
         "leadLabel": "Operational diagnostic",
         "leadTitle": "A first exchange that clarifies priorities",
         "leadDesc": "The form and quick actions route each request to the right team: tax, legal, HR, accounting, digitalization or recruitment.",
@@ -427,12 +450,16 @@
                     "4": "CRM and process automation",
                     "5": "Branding and digital visual identity",
                     "6": "Hosting and maintenance",
-                    "7": "Training in digital tools"
+                    "7": "Training in digital tools",
+                    "8": "Odoo ERP training with dedicated system access"
                 },
                 "pricing": {
                     "0": "Accounting, tax and HR platforms: From 150,000 FCFA / month",
                     "1": "Showcase website: On estimate",
-                    "2": "Custom application: On estimate"
+                    "2": "Custom application: On estimate",
+                    "3": "Initial Odoo Training (1 month): 150,000 FCFA",
+                    "4": "Intermediate Odoo Training (3 months): 300,000 FCFA",
+                    "5": "Annual Expert Odoo Training (1 year): 850,000 FCFA"
                 },
                 "cases": {
                     "0": {
@@ -603,7 +630,70 @@
                     "2": "Social media strategy",
                     "3": "Professional visual content"
                 }
+            },
+            "6": {
+                "title": "Odoo ERP Training",
+                "description": "A practical path to master Odoo, understand ERP workflows and make your teams autonomous.",
+                "features": {
+                    "0": "ERP theory and practical workshops",
+                    "1": "Accounting, CRM, purchasing and HR modules",
+                    "2": "Access to a dedicated environment",
+                    "3": "User support according to the package"
+                }
             }
+        },
+        "odooTraining": {
+            "label": "New service",
+            "title": "Odoo ERP training with system access",
+            "description": "A proposal designed for companies that want to digitize their management with Odoo: training, practical cases, a test environment and user support.",
+            "programLabel": "Operational program",
+            "programTitle": "Theory, practice and autonomy",
+            "programDescription": "Each session covers ERP architecture, data integration and real exercises on key modules: Accounting, CRM, Purchasing and Human Resources.",
+            "benefits": {
+                "0": "Understanding ERP concepts",
+                "1": "Workshops on business processes",
+                "2": "24/7 system access during training",
+                "3": "Dedicated environment to validate skills"
+            },
+            "plans": {
+                "0": {
+                    "name": "Initial Pack",
+                    "duration": "1 month",
+                    "price": "150,000 FCFA",
+                    "cta": "Start now",
+                    "features": {
+                        "0": "Introduction to ERP concepts",
+                        "1": "Basic workflow configuration",
+                        "2": "System access for 1 month",
+                        "3": "Standard user support"
+                    }
+                },
+                "1": {
+                    "name": "Intermediate Pack",
+                    "duration": "3 months",
+                    "price": "300,000 FCFA",
+                    "cta": "Choose immersion",
+                    "features": {
+                        "0": "Business process mastery",
+                        "1": "Inventory and sales management",
+                        "2": "System access for 3 months",
+                        "3": "150,000 FCFA savings"
+                    }
+                },
+                "2": {
+                    "name": "Annual Expert Pack",
+                    "duration": "1 year",
+                    "price": "850,000 FCFA",
+                    "cta": "Become an expert",
+                    "features": {
+                        "0": "Advanced training on all modules",
+                        "1": "Customized reports",
+                        "2": "System access for 12 months",
+                        "3": "Best value for money"
+                    }
+                }
+            },
+            "terms": "Rates are per participant, or by specific company agreement. Short packs are paid upon registration; the annual pack can be arranged in installments."
         }
     },
     "recruitment": {
@@ -761,6 +851,7 @@
             "consultation": "Consultation request",
             "subscription": "Subscription offers",
             "digitalization": "Digitalization project",
+            "odooTraining": "Odoo ERP training",
             "recruitment": "Recruitment & placement",
             "other": "Other"
         },
@@ -907,7 +998,7 @@
     "legal": {
         "terms": {
             "title": "Terms of Use",
-            "lastUpdated": "Last updated: April 30, 2026",
+            "lastUpdated": "Last updated: May 22, 2026",
             "intro": "These terms govern the use of the SOJIF Consulting website and requests submitted through its forms, offer pages and contact channels.",
             "section1": {
                 "title": "1. Definitions",
@@ -967,16 +1058,16 @@
         },
         "legal": {
             "title": "Legal notice",
-            "lastUpdated": "Last updated: April 30, 2026",
+            "lastUpdated": "Last updated: May 22, 2026",
             "section1": {
                 "title": "1. Website publisher",
                 "company": "Company",
                 "legalForm": "Legal form",
                 "legalFormValue": "Consulting business",
                 "registrationNumber": "Registration number",
-                "registrationValue": "RCCM Dakar [to be completed]",
+                "registrationValue": "Available upon request from SOJIF Consulting",
                 "taxId": "Tax identifier",
-                "taxIdValue": "NIF [to be completed]",
+                "taxIdValue": "Available upon request from SOJIF Consulting",
                 "address": "Address",
                 "phone": "Phone",
                 "email": "Email",
@@ -994,7 +1085,7 @@
                 "intro": "The domain name and associated information are managed in accordance with applicable rules.",
                 "domain": "Domain name",
                 "registrar": "Registrar",
-                "registrarValue": "[to be completed]"
+                "registrarValue": "Squarespace Domains LLC"
             },
             "section4": {
                 "title": "4. Website management",
@@ -1028,7 +1119,7 @@
                 "title": "9. Changes to the legal notice",
                 "intro": "SOJIF Consulting may update this legal notice to reflect changes to the website, services or regulatory framework."
             },
-            "lastUpdatedFull": "Legal notice updated on April 30, 2026."
+            "lastUpdatedFull": "Legal notice updated on May 22, 2026."
         },
         "privacy": {
             "title": "Privacy policy",

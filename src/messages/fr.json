@@ -75,6 +75,29 @@
         "why3Desc": "Des méthodologies éprouvées et des résultats mesurables.",
         "why4Title": "Ancrage Africain",
         "why4Desc": "Une maîtrise profonde du contexte juridique, fiscal et économique d'Afrique de l'Ouest.",
+        "trustProof": {
+            "label": "Preuves métier",
+            "title": "Des cadres reconnus, des livrables concrets",
+            "desc": "Chaque diagnostic s'appuie sur les référentiels réellement utilisés par les entreprises de la zone : droit OHADA, normes comptables SYSCOHADA, obligations sociales et protection des actifs.",
+            "items": {
+                "0": {
+                    "label": "OHADA",
+                    "desc": "Structuration juridique, actes de société, contrats et conformité des décisions."
+                },
+                "1": {
+                    "label": "SYSCOHADA",
+                    "desc": "Lecture comptable, reporting, obligations fiscales et pilotage de gestion."
+                },
+                "2": {
+                    "label": "IPRES / CSS",
+                    "desc": "Points de vigilance paie, déclarations sociales et organisation RH."
+                },
+                "3": {
+                    "label": "OAPI",
+                    "desc": "Protection de marque, propriété intellectuelle et sécurisation des actifs."
+                }
+            }
+        },
         "leadLabel": "Diagnostic opérationnel",
         "leadTitle": "Un premier échange qui clarifie vos priorités",
         "leadDesc": "Le formulaire et les actions rapides orientent chaque demande vers le bon pôle: fiscalité, droit, RH, comptabilité, digitalisation ou recrutement.",
@@ -157,7 +180,7 @@
             },
             "3": {
                 "name": "Pack Essentiel - 6 mois",
-                "description": "Formule semestrielle pour startups, TPE et independants qui souhaitent securiser leur conformite sur 6 mois.",
+                "description": "Formule semestrielle pour startups, TPE et indépendants qui souhaitent sécuriser leur conformité sur 6 mois.",
                 "price": "350 000",
                 "currency": "FCFA",
                 "period": "/ 6 mois",
@@ -174,7 +197,7 @@
             },
             "4": {
                 "name": "Pack Croissance - 6 mois",
-                "description": "Formule semestrielle pour PME en developpement qui veulent un accompagnement structure sur 6 mois.",
+                "description": "Formule semestrielle pour PME en développement qui veulent un accompagnement structuré sur 6 mois.",
                 "price": "500 000",
                 "currency": "FCFA",
                 "period": "/ 6 mois",
@@ -191,7 +214,7 @@
             },
             "5": {
                 "name": "Pack Prestige - 6 mois",
-                "description": "Formule semestrielle pour entreprises a fort volume qui recherchent un accompagnement renforce sur 6 mois.",
+                "description": "Formule semestrielle pour entreprises à fort volume qui recherchent un accompagnement renforcé sur 6 mois.",
                 "price": "700 000",
                 "currency": "FCFA",
                 "period": "/ 6 mois",
@@ -427,12 +450,16 @@
                     "4": "CRM et automatisation des processus",
                     "5": "Branding et identité visuelle digitale",
                     "6": "Hébergement et maintenance",
-                    "7": "Formation aux outils digitaux"
+                    "7": "Formation aux outils digitaux",
+                    "8": "Formation ERP Odoo avec accès système dédié"
                 },
                 "pricing": {
                     "0": "Plateformes comptabilité, fiscalité et RH : À partir de 150 000 FCFA / mois",
                     "1": "Site vitrine : Sur devis",
-                    "2": "Application sur mesure : Sur devis"
+                    "2": "Application sur mesure : Sur devis",
+                    "3": "Formation Odoo Initiale (1 mois) : 150 000 FCFA",
+                    "4": "Formation Odoo Intermédiaire (3 mois) : 300 000 FCFA",
+                    "5": "Formation Odoo Expert annuel (1 an) : 850 000 FCFA"
                 },
                 "cases": {
                     "0": {
@@ -603,7 +630,70 @@
                     "2": "Stratégie réseaux sociaux",
                     "3": "Contenu visuel professionnel"
                 }
+            },
+            "6": {
+                "title": "Formation ERP Odoo",
+                "description": "Un parcours pratique pour maîtriser Odoo, comprendre les flux ERP et rendre vos équipes autonomes.",
+                "features": {
+                    "0": "Théorie ERP et ateliers pratiques",
+                    "1": "Modules comptabilité, CRM, achats et RH",
+                    "2": "Accès à un environnement dédié",
+                    "3": "Support utilisateur selon la formule"
+                }
             }
+        },
+        "odooTraining": {
+            "label": "Nouveau service",
+            "title": "Formation ERP Odoo avec accès système",
+            "description": "Une proposition pensée pour les entreprises qui veulent digitaliser leur gestion avec Odoo : formation, cas pratiques, environnement de test et accompagnement utilisateur.",
+            "programLabel": "Programme opérationnel",
+            "programTitle": "Théorie, pratique et autonomie",
+            "programDescription": "Chaque session couvre l'architecture ERP, l'intégration des données et des exercices réels sur les modules clés : Comptabilité, CRM, Achats et Ressources Humaines.",
+            "benefits": {
+                "0": "Compréhension des concepts ERP",
+                "1": "Ateliers sur processus métiers",
+                "2": "Accès système 24h/24 pendant la formation",
+                "3": "Environnement dédié pour tester les acquis"
+            },
+            "plans": {
+                "0": {
+                    "name": "Pack Initial",
+                    "duration": "1 mois",
+                    "price": "150 000 FCFA",
+                    "cta": "Démarrer",
+                    "features": {
+                        "0": "Introduction aux concepts ERP",
+                        "1": "Configuration des flux de base",
+                        "2": "Accès système pendant 1 mois",
+                        "3": "Support utilisateur standard"
+                    }
+                },
+                "1": {
+                    "name": "Pack Intermédiaire",
+                    "duration": "3 mois",
+                    "price": "300 000 FCFA",
+                    "cta": "Choisir l'immersion",
+                    "features": {
+                        "0": "Maîtrise des processus métiers",
+                        "1": "Gestion des stocks et ventes",
+                        "2": "Accès système pendant 3 mois",
+                        "3": "Économie de 150 000 FCFA"
+                    }
+                },
+                "2": {
+                    "name": "Pack Annuel Expert",
+                    "duration": "1 an",
+                    "price": "850 000 FCFA",
+                    "cta": "Devenir expert",
+                    "features": {
+                        "0": "Formation avancée tous modules",
+                        "1": "Rapports personnalisés",
+                        "2": "Accès système pendant 12 mois",
+                        "3": "Meilleur rapport qualité/prix"
+                    }
+                }
+            },
+            "terms": "Tarifs par participant, ou selon accord spécifique par entreprise. Les packs courts sont réglés à l'inscription ; le pack annuel peut être organisé par échéances."
         }
     },
     "recruitment": {
@@ -728,6 +818,7 @@
             "consultation": "Demande de consultation",
             "subscription": "Offres d'abonnement",
             "digitalization": "Projet de digitalisation",
+            "odooTraining": "Formation ERP Odoo",
             "recruitment": "Recrutement & placement",
             "other": "Autre"
         },
@@ -907,7 +998,7 @@
     "legal": {
         "terms": {
             "title": "Conditions générales d'utilisation",
-            "lastUpdated": "Dernière mise à jour : 30 avril 2026",
+            "lastUpdated": "Dernière mise à jour : 22 mai 2026",
             "intro": "Les présentes conditions générales encadrent l'utilisation du site SOJIF Consulting et les demandes adressées via ses formulaires, pages d'offres et canaux de contact.",
             "section1": {
                 "title": "1. Définitions",
@@ -967,16 +1058,16 @@
         },
         "legal": {
             "title": "Mentions légales",
-            "lastUpdated": "Dernière mise à jour : 30 avril 2026",
+            "lastUpdated": "Dernière mise à jour : 22 mai 2026",
             "section1": {
                 "title": "1. Éditeur du site",
                 "company": "Société",
                 "legalForm": "Forme juridique",
                 "legalFormValue": "Entreprise de conseil",
                 "registrationNumber": "Numéro d'immatriculation",
-                "registrationValue": "RCCM Dakar [à compléter]",
+                "registrationValue": "Disponible sur demande auprès de SOJIF Consulting",
                 "taxId": "Identifiant fiscal",
-                "taxIdValue": "NIF [à compléter]",
+                "taxIdValue": "Disponible sur demande auprès de SOJIF Consulting",
                 "address": "Adresse",
                 "phone": "Téléphone",
                 "email": "Email",
@@ -994,7 +1085,7 @@
                 "intro": "Le nom de domaine et les informations associées sont gérés conformément aux règles applicables.",
                 "domain": "Nom de domaine",
                 "registrar": "Registraire",
-                "registrarValue": "[à compléter]"
+                "registrarValue": "Squarespace Domains LLC"
             },
             "section4": {
                 "title": "4. Direction du site",
@@ -1028,7 +1119,7 @@
                 "title": "9. Modification des mentions légales",
                 "intro": "SOJIF Consulting peut mettre à jour les présentes mentions légales afin de refléter l'évolution du site, des services ou du cadre réglementaire."
             },
-            "lastUpdatedFull": "Mentions légales mises à jour le 30 avril 2026."
+            "lastUpdatedFull": "Mentions légales mises à jour le 22 mai 2026."
         },
         "privacy": {
             "title": "Politique de confidentialité",

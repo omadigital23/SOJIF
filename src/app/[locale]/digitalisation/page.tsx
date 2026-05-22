@@ -13,15 +13,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const title = t('title');
     const description = locale === 'fr'
-        ? 'Accélérez votre transformation numérique avec SOJIF Consulting. Création de sites web, applications mobiles, plateformes e-commerce et solutions logicielles sur mesure à Dakar, Sénégal.'
-        : 'Accelerate your digital transformation with SOJIF Consulting. Custom website creation, mobile applications, e-commerce platforms and software solutions in Dakar, Senegal.';
+        ? 'Accélérez votre transformation numérique avec SOJIF Consulting. Création de sites web, applications mobiles, plateformes e-commerce, solutions logicielles et formation ERP Odoo à Dakar, Sénégal.'
+        : 'Accelerate your digital transformation with SOJIF Consulting. Custom website creation, mobile applications, e-commerce platforms, software solutions and Odoo ERP training in Dakar, Senegal.';
 
     return {
         title,
         description,
         keywords: locale === 'fr'
-            ? 'transformation digitale Sénégal, création site web Dakar, agence web Sénégal, développement application mobile Dakar, digitalisation entreprise Afrique, e-commerce Sénégal'
-            : 'digital transformation Senegal, website creation Dakar, web agency Senegal, mobile app development Dakar, enterprise digitalization Africa, e-commerce Senegal',
+            ? 'transformation digitale Sénégal, formation Odoo Dakar, formation ERP Odoo Sénégal, création site web Dakar, agence web Sénégal, développement application mobile Dakar, digitalisation entreprise Afrique, e-commerce Sénégal'
+            : 'digital transformation Senegal, Odoo training Dakar, Odoo ERP training Senegal, website creation Dakar, web agency Senegal, mobile app development Dakar, enterprise digitalization Africa, e-commerce Senegal',
         alternates: buildCanonicalAlternates(locale, '/digitalisation'),
     };
 }

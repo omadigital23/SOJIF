@@ -12,4 +12,5 @@ export const digitalServices: DigitalService[] = [
     { icon: 'Smartphone',    featuresCount: 4 },
     { icon: 'Settings',      featuresCount: 4 },
     { icon: 'Palette',       featuresCount: 4 },
+    { icon: 'GraduationCap', featuresCount: 4 },
 ];

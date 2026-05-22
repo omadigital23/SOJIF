@@ -37,8 +37,8 @@ export const departments: Department[] = [
     {
         slug: 'digitalisation',
         icon: 'Monitor',
-        servicesCount: 8,
-        pricingCount: 3,
+        servicesCount: 9,
+        pricingCount: 6,
         casesCount: 3,
     },
     {

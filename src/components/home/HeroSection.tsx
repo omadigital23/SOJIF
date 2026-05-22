@@ -57,7 +57,7 @@ export default function HeroSection() {
                 <div className="max-w-3xl">
                     {/* Badge */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-primary-400 text-sm font-medium mb-8 shadow-glow"
@@ -68,7 +68,7 @@ export default function HeroSection() {
 
                     {/* Title */}
                     <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.06] mb-6 tracking-tight"
@@ -78,7 +78,7 @@ export default function HeroSection() {
 
                     {/* Subtitle */}
                     <motion.p
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-xl mb-10"
@@ -88,7 +88,7 @@ export default function HeroSection() {
 
                     {/* CTAs */}
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="flex flex-col sm:flex-row sm:flex-wrap gap-4"
@@ -120,7 +120,7 @@ export default function HeroSection() {
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl"
@@ -142,7 +142,7 @@ export default function HeroSection() {
 
                     {/* Stats */}
                     <motion.div
-                        initial={{ opacity: 0 }}
+                        initial={false}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.5 }}
                         className="mt-10 flex flex-wrap gap-8 border-t border-white/10 pt-6 lg:mt-16 lg:gap-12 lg:pt-8"
@@ -162,7 +162,7 @@ export default function HeroSection() {
 
                 {/* Right Visual */}
                 <motion.div
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={false}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, delay: 0.2 }}
                     className="hidden lg:block"

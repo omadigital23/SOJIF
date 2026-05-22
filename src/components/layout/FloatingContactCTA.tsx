@@ -22,9 +22,9 @@ export default function FloatingContactCTA() {
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, [isHome]);
-    const mobileBarVisible = !isHome || showMobileBar;
+    const desktopVisible = isHome && showMobileBar;
 
-    if (pathname.startsWith('/admin') || pathname.startsWith('/contact')) {
+    if (!isHome || pathname.startsWith('/admin') || pathname.startsWith('/contact')) {
         return null;
     }
 
@@ -43,7 +43,7 @@ export default function FloatingContactCTA() {
         <>
             <div
                 className={`fixed bottom-6 right-6 z-40 hidden transition-all duration-300 md:block ${
-                    mobileBarVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-8 opacity-0'
+                    desktopVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-8 opacity-0'
                 }`}
             >
                 <a
@@ -58,24 +58,6 @@ export default function FloatingContactCTA() {
                     <span aria-hidden="true" className="pointer-events-none absolute inset-[-3px] rounded-full border border-[#25D366]/55 shadow-[0_0_22px_rgba(37,211,102,0.5)]" />
                     <WhatsAppIcon className="relative h-6 w-6 drop-shadow-sm" />
                     <span className="relative">WhatsApp</span>
-                </a>
-            </div>
-            <div
-                className={`fixed bottom-4 right-4 z-40 transition-all duration-300 md:hidden ${
-                    mobileBarVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-8 opacity-0'
-                }`}
-            >
-                <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_16px_30px_rgba(7,94,84,0.28)] ring-1 ring-white/45 transition-all hover:-translate-y-0.5 hover:bg-[#1FC45C] hover:shadow-[0_20px_38px_rgba(7,94,84,0.34)]"
-                    aria-label={labels.whatsapp}
-                >
-                    <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366] opacity-25 motion-safe:animate-ping" />
-                    <span aria-hidden="true" className="pointer-events-none absolute inset-[-6px] rounded-full bg-[#25D366]/20 blur-md" />
-                    <span aria-hidden="true" className="pointer-events-none absolute inset-[-4px] rounded-full border border-[#25D366]/55 shadow-[0_0_22px_rgba(37,211,102,0.5)]" />
-                    <WhatsAppIcon className="relative h-7 w-7 drop-shadow-sm" />
                 </a>
             </div>
         </>

@@ -15,6 +15,7 @@ import {
     ClipboardCheck,
     FileCheck2,
     Globe2,
+    GraduationCap,
     LayoutDashboard,
     Monitor,
     Palette,
@@ -91,33 +92,33 @@ const departmentVisuals: Record<DepartmentSlug, {
     },
 };
 
-const digitalIcons = [Globe2, ShoppingCart, LayoutDashboard, Smartphone, Settings, Palette];
+const digitalIcons = [Globe2, ShoppingCart, LayoutDashboard, Smartphone, Settings, Palette, GraduationCap];
 
 const visualCopy = {
     fr: {
         diagnostic: 'Diagnostic 360',
         pilotage: 'SOJIF Pilotage',
-        plan: 'Plan priorise',
-        workflows: ['Conformite', 'Tresorerie', 'Equipe', 'Digital'],
+        plan: 'Plan priorisé',
+        workflows: ['Conformité', 'Trésorerie', 'Équipe', 'Digital'],
         brief: 'Brief actif',
         stages: ['Analyse', 'Risques', 'Actions'],
         valid: 'Valide',
         digitalStack: 'Stack digitale',
         talentPipeline: 'Talent pipeline',
         hiringPipeline: 'Hiring pipeline',
-        qualifiedProfile: 'Profil qualifie',
+        qualifiedProfile: 'Profil qualifié',
         executiveNeed: 'Besoin cadre',
         active: 'Actif',
         candidateCards: ['CV', 'Score', 'Entretien', 'Base'],
         companyCards: ['Brief', 'Shortlist', 'Validation', 'Onboarding'],
         diagnosticCircuit: 'Circuit diagnostic',
-        contactSignals: ['Message recu', 'Analyse du besoin', 'Retour priorise'],
+        contactSignals: ['Message reçu', 'Analyse du besoin', 'Retour priorisé'],
         offerStudio: 'Pilotage offres',
         offerTracks: ['Juridique', 'Finance', 'Fiscal', 'RH'],
-        offerProof: ['Couverture annuelle', 'Suivi trimestriel', 'Support priorise'],
-        aboutStudio: 'Identite SOJIF',
-        aboutSignals: ['Dakar', 'Droit', 'Finance', 'Developpement'],
-        brandSystem: 'Performance structuree',
+        offerProof: ['Couverture annuelle', 'Suivi trimestriel', 'Support priorisé'],
+        aboutStudio: 'Identité SOJIF',
+        aboutSignals: ['Dakar', 'Droit', 'Finance', 'Développement'],
+        brandSystem: 'Performance structurée',
     },
     en: {
         diagnostic: '360 diagnostic',

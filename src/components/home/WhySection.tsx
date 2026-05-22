@@ -21,6 +21,7 @@ export default function WhySection() {
         { step: '02', titleKey: 'leadSteps.priority.title', descKey: 'leadSteps.priority.desc' },
         { step: '03', titleKey: 'leadSteps.action.title', descKey: 'leadSteps.action.desc' },
     ];
+    const trustProofItems = [0, 1, 2, 3];
 
     return (
         <section className="section-padding bg-gradient-to-b from-white to-light-gray relative overflow-hidden">
@@ -81,6 +82,43 @@ export default function WhySection() {
                         );
                     })}
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-16 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+                >
+                    <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.4fr]">
+                        <div className="bg-dark p-6 text-white lg:p-8">
+                            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-secondary">
+                                <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+                                {t('trustProof.label')}
+                            </div>
+                            <h3 className="mt-5 text-2xl font-black sm:text-3xl">
+                                {t('trustProof.title')}
+                            </h3>
+                            <p className="mt-4 text-sm leading-relaxed text-white/70">
+                                {t('trustProof.desc')}
+                            </p>
+                        </div>
+                        <div className="grid gap-px bg-slate-200 sm:grid-cols-2">
+                            {trustProofItems.map((item) => (
+                                <div key={item} className="bg-white p-6">
+                                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                                        <CheckCircle2 className="h-5 w-5 text-primary" aria-hidden="true" />
+                                    </div>
+                                    <h4 className="text-lg font-bold text-dark">
+                                        {t(`trustProof.items.${item}.label`)}
+                                    </h4>
+                                    <p className="mt-2 text-sm leading-relaxed text-neutral-gray">
+                                        {t(`trustProof.items.${item}.desc`)}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

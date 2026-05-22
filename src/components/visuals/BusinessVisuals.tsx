@@ -22,12 +22,10 @@ import {
     Scale,
     Search,
     Settings,
-    ShieldCheck,
     ShoppingCart,
     Smartphone,
     TrendingUp,
     UserPlus,
-    UserRoundCheck,
     Users,
     Workflow,
 } from 'lucide-react';
@@ -101,6 +99,7 @@ const visualCopy = {
         plan: 'Plan priorisé',
         workflows: ['Conformité', 'Trésorerie', 'Équipe', 'Digital'],
         brief: 'Brief actif',
+        fileTitle: 'Dossier SOJIF',
         stages: ['Analyse', 'Risques', 'Actions'],
         valid: 'Valide',
         digitalStack: 'Stack digitale',
@@ -126,6 +125,7 @@ const visualCopy = {
         plan: 'Prioritized plan',
         workflows: ['Compliance', 'Cash flow', 'Team', 'Digital'],
         brief: 'Active brief',
+        fileTitle: 'SOJIF file',
         stages: ['Analysis', 'Risks', 'Actions'],
         valid: 'Ready',
         digitalStack: 'Digital stack',
@@ -160,10 +160,15 @@ export function HeroMotionVisual({
     labels: string[];
 }) {
     const copy = useVisualCopy();
-    const tracks = [
-        { label: labels[0], value: '92%', color: 'bg-amber-400', icon: ShieldCheck },
-        { label: labels[1], value: '78%', color: 'bg-sky-400', icon: BarChart3 },
-        { label: labels[2], value: '64%', color: 'bg-emerald-400', icon: UserRoundCheck },
+    const referenceRows = [
+        { label: 'OHADA', detail: labels[0], icon: Scale, tone: 'text-amber-300', bar: '92%' },
+        { label: 'SYSCOHADA', detail: labels[1], icon: Calculator, tone: 'text-sky-300', bar: '78%' },
+        { label: 'IPRES / CSS', detail: labels[2], icon: Users, tone: 'text-emerald-300', bar: '64%' },
+    ];
+    const documentRows = [
+        { label: copy.workflows[0], value: '01', color: 'bg-amber-400' },
+        { label: copy.workflows[1], value: '02', color: 'bg-sky-400' },
+        { label: copy.workflows[2], value: '03', color: 'bg-emerald-400' },
     ];
 
     return (
@@ -180,101 +185,115 @@ export function HeroMotionVisual({
                     </div>
                 </div>
 
-                <div className="grid grid-cols-[0.8fr_1.2fr] gap-5">
-                    <div className="space-y-3">
-                        {tracks.map((track, index) => {
-                            const Icon = track.icon;
-
-                            return (
-                                <motion.div
-                                    key={track.label}
-                                    initial={{ opacity: 0, x: -18 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.2 + index * 0.12 }}
-                                    className="rounded-xl border border-white/10 bg-white/[0.06] p-4"
-                                >
-                                    <div className="mb-4 flex items-center gap-3">
-                                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
-                                            <Icon className="h-4 w-4 text-white" aria-hidden="true" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-bold text-white">{track.label}</p>
-                                            <p className="text-xs text-white/45">{track.value}</p>
-                                        </div>
-                                    </div>
-                                    <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            animate={{ width: track.value }}
-                                            transition={{ duration: 1, delay: 0.45 + index * 0.1 }}
-                                            className={`h-full rounded-full ${track.color}`}
-                                        />
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-
-                    <div className="rounded-xl border border-white/10 bg-slate-950/55 p-5">
-                        <div className="mb-5 flex items-center justify-between">
-                            <div className="flex items-center gap-2 text-sm font-bold text-white">
-                                <Workflow className="h-4 w-4 text-primary-400" aria-hidden="true" />
-                                {copy.plan}
+                <div className="grid grid-cols-[1.05fr_0.95fr] gap-5">
+                    <div className="rounded-xl bg-white p-5 text-slate-950 shadow-2xl shadow-slate-950/20">
+                        <div className="mb-5 flex items-start justify-between gap-4">
+                            <div>
+                                <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">{copy.brief}</p>
+                                <p className="mt-2 text-2xl font-black">{copy.fileTitle}</p>
                             </div>
-                            <div className="flex gap-1.5">
-                                <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                                <span className="h-2 w-2 rounded-full bg-amber-400" />
-                                <span className="h-2 w-2 rounded-full bg-sky-400" />
+                            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
+                                <Image
+                                    src="/images/sojif-mark.png"
+                                    alt=""
+                                    width={32}
+                                    height={32}
+                                    className="h-8 w-8 object-contain"
+                                    priority
+                                />
                             </div>
                         </div>
 
-                        <div className="space-y-4">
-                            {copy.workflows.map((item, index) => (
-                                <div key={item} className="grid grid-cols-[5.5rem_1fr] items-center gap-3">
-                                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-white/45">{item}</span>
-                                    <div className="relative h-8 overflow-hidden rounded-lg bg-white/[0.06]">
-                                        <motion.div
-                                            animate={{ x: ['-18%', '72%', '-18%'] }}
-                                            transition={{ duration: 4.2 + index * 0.3, repeat: Infinity, ease: 'easeInOut' }}
-                                            className="absolute top-0 h-full w-16 bg-white/10"
-                                        />
-                                        <div className="absolute inset-y-2 left-3 right-6 rounded-full bg-white/10">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">{copy.plan}</p>
+                            <p className="mt-2 text-base leading-relaxed text-slate-700">&quot;{quote}&quot;</p>
+                        </div>
+
+                        <div className="mt-5 space-y-3">
+                            {documentRows.map((item, index) => (
+                                <div key={item.label} className="grid grid-cols-[2.25rem_1fr] items-center gap-3">
+                                    <div className={`flex h-9 w-9 items-center justify-center rounded-lg text-xs font-black text-white ${item.color}`}>
+                                        {item.value}
+                                    </div>
+                                    <div>
+                                        <div className="mb-2 flex items-center justify-between gap-4">
+                                            <p className="text-sm font-black text-slate-900">{item.label}</p>
+                                            <CheckCircle2 className="h-4 w-4 text-emerald-500" aria-hidden="true" />
+                                        </div>
+                                        <div className="h-2 rounded-full bg-slate-200">
                                             <motion.div
                                                 initial={{ width: 0 }}
-                                                animate={{ width: `${58 + index * 9}%` }}
-                                                transition={{ duration: 0.9, delay: 0.65 + index * 0.12 }}
-                                                className="h-full rounded-full bg-primary-400"
+                                                animate={{ width: `${66 + index * 10}%` }}
+                                                transition={{ duration: 0.8, delay: 0.2 + index * 0.12 }}
+                                                className="h-full rounded-full bg-primary"
                                             />
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
+                    </div>
 
-                        <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.05] p-4">
-                            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">{copy.brief}</p>
-                            <p className="mt-2 text-base leading-relaxed text-white/80">&quot;{quote}&quot;</p>
+                    <div className="flex flex-col justify-between gap-4">
+                        <div className="rounded-xl border border-white/10 bg-slate-950/55 p-5">
+                            <div className="mb-5 flex items-center gap-2 text-sm font-bold text-white">
+                                <Workflow className="h-4 w-4 text-primary-400" aria-hidden="true" />
+                                {copy.plan}
+                            </div>
+
+                            <div className="space-y-4">
+                                {referenceRows.map((track, index) => {
+                                    const Icon = track.icon;
+
+                                    return (
+                                        <motion.div
+                                            key={track.label}
+                                            initial={false}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: 0.15 + index * 0.1 }}
+                                        >
+                                            <div className="mb-2 flex items-center gap-3">
+                                                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
+                                                    <Icon className={`h-4 w-4 ${track.tone}`} aria-hidden="true" />
+                                                </div>
+                                                <div className="min-w-0">
+                                                    <p className="text-sm font-black text-white">{track.label}</p>
+                                                    <p className="truncate text-xs font-medium text-white/45">{track.detail}</p>
+                                                </div>
+                                            </div>
+                                            <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                                                <motion.div
+                                                    initial={{ width: 0 }}
+                                                    animate={{ width: track.bar }}
+                                                    transition={{ duration: 0.85, delay: 0.35 + index * 0.1 }}
+                                                    className="h-full rounded-full bg-secondary"
+                                                />
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-3">
+                            {copy.stages.map((item, index) => (
+                                <motion.div
+                                    key={item}
+                                    animate={{ y: [0, -4, 0] }}
+                                    transition={{ duration: 3.2, repeat: Infinity, delay: index * 0.35 }}
+                                    className="rounded-xl border border-white/10 bg-white/[0.06] p-4"
+                                >
+                                    <p className="text-xs uppercase tracking-[0.16em] text-white/45">{item}</p>
+                                    <div className="mt-3 flex items-center gap-2">
+                                        <CheckCircle2 className="h-4 w-4 text-emerald-300" aria-hidden="true" />
+                                        <span className="text-sm font-bold text-white">{copy.valid}</span>
+                                    </div>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
                 </div>
-
-                <div className="grid grid-cols-3 gap-3">
-                    {copy.stages.map((item, index) => (
-                        <motion.div
-                            key={item}
-                            animate={{ y: [0, -4, 0] }}
-                            transition={{ duration: 3.2, repeat: Infinity, delay: index * 0.35 }}
-                            className="rounded-xl border border-white/10 bg-white/[0.06] p-4"
-                        >
-                            <p className="text-xs uppercase tracking-[0.16em] text-white/45">{item}</p>
-                            <div className="mt-3 flex items-center gap-2">
-                                <CheckCircle2 className="h-4 w-4 text-emerald-300" aria-hidden="true" />
-                                <span className="text-sm font-bold text-white">{copy.valid}</span>
                             </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
         </figure>
     );
 }

@@ -15,7 +15,7 @@ export default function TestimonialsSection() {
             <div className="container-custom relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         className="inline-block mb-4 px-4 py-1.5 rounded-full bg-primary/5 text-primary text-sm font-semibold tracking-wide uppercase"
@@ -23,16 +23,16 @@ export default function TestimonialsSection() {
                         {t('testimonialsLabel')}
                     </motion.div>
                     <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-6 tracking-tight"
+                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-6"
                     >
                         {t('testimonialsTitle')}
                     </motion.h2>
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
@@ -46,7 +46,7 @@ export default function TestimonialsSection() {
                     {testimonials.slice(0, 3).map((review, i) => (
                         <motion.div
                             key={review.name}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={false}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.15 }}

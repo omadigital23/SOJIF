@@ -30,7 +30,7 @@ export default function WhySection() {
             <div className="container-custom relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         className="inline-block mb-4 px-4 py-1.5 rounded-full bg-primary/5 text-primary text-sm font-semibold tracking-wide uppercase"
@@ -38,16 +38,16 @@ export default function WhySection() {
                         {t('whyLabel')}
                     </motion.div>
                     <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-6 tracking-tight"
+                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-6"
                     >
                         {t('whyTitle')}
                     </motion.h2>
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
@@ -63,7 +63,7 @@ export default function WhySection() {
                         return (
                             <motion.div
                                 key={reason.titleKey}
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={false}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
@@ -84,7 +84,7 @@ export default function WhySection() {
                 </div>
 
                 <motion.div
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="mt-16 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
@@ -121,7 +121,7 @@ export default function WhySection() {
                 </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="mt-16 border-t border-gray-200 pt-12"

@@ -64,6 +64,52 @@
         "pricingLabel": "Our Offers",
         "pricingSubtitle": "Packages tailored to every stage of your development",
         "pricingTerms": "Annual and 6-month plans | Condition: 50% deposit upon signing.",
+        "evidence": {
+            "label": "Mission proof",
+            "title": "A concrete preview before you commit",
+            "desc": "Each diagnostic produces a decision-ready view: risks, obligations, priorities and the recommended next step. The language stays clear and the deliverables are structured.",
+            "cta": "Get a first scope",
+            "metrics": {
+                "0": {
+                    "value": "24h",
+                    "label": "scoping response"
+                },
+                "1": {
+                    "value": "4",
+                    "label": "business frameworks"
+                },
+                "2": {
+                    "value": "1",
+                    "label": "prioritized plan"
+                }
+            },
+            "deliverableLabel": "Deliverable preview",
+            "deliverableTitle": "SOJIF diagnostic file",
+            "deliverableDesc": "A concise decision support file to frame legal, tax, HR and digital priorities without unnecessary jargon.",
+            "documents": {
+                "0": {
+                    "title": "Structuring note",
+                    "meta": "OHADA / bylaws / contracts"
+                },
+                "1": {
+                    "title": "Compliance calendar",
+                    "meta": "Tax / social / deadlines"
+                },
+                "2": {
+                    "title": "Digital & Odoo plan",
+                    "meta": "Processes / training / system access"
+                }
+            },
+            "checklistLabel": "Included checks",
+            "checklistTitle": "360° review",
+            "checks": {
+                "0": "Priorities ranked by risk and urgency.",
+                "1": "Key obligations assigned to the right expertise team.",
+                "2": "Recommended next action: advice, subscription or dedicated project."
+            },
+            "noteLabel": "Firm positioning",
+            "note": "SOJIF connects law, finance, HR and digitalization in one scope, so business decisions are not handled in isolation."
+        },
         "whyTitle": "Why SOJIF Consulting?",
         "whyLabel": "Key Benefits",
         "whySubtitle": "A structured firm to support your growth",

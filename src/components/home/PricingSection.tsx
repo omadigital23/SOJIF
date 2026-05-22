@@ -20,7 +20,7 @@ export default function PricingSection() {
                 {/* Heading */}
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         className="inline-block mb-4 px-4 py-1.5 rounded-full bg-secondary/10 text-secondary-700 text-sm font-semibold tracking-wide uppercase"
@@ -28,16 +28,16 @@ export default function PricingSection() {
                         {t('pricingLabel')}
                     </motion.div>
                     <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-6 tracking-tight"
+                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-6"
                     >
                         {t('pricingTitle')}
                     </motion.h2>
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={false}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
@@ -53,7 +53,7 @@ export default function PricingSection() {
                         return (
                             <motion.div
                                 key={pack.translationKey}
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={false}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.15 }}
@@ -80,7 +80,7 @@ export default function PricingSection() {
 
                             <div className="mb-8 pb-8 border-b border-gray-100/10">
                                 <div className="flex flex-wrap items-end gap-x-3 gap-y-1">
-                                    <span className={`text-4xl lg:text-[2.8rem] font-black leading-none tracking-tight ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
+                                    <span className={`text-4xl lg:text-[2.8rem] font-black leading-none ${pack.highlighted ? 'text-white' : 'text-dark'}`}>
                                         {t(`packs.${pack.translationKey}.price`)}
                                     </span>
                                     <span className={`pb-1 text-sm font-bold uppercase tracking-wide ${pack.highlighted ? 'text-gray-300' : 'text-neutral-gray'}`}>

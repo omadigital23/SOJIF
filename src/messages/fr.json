@@ -64,6 +64,52 @@
         "pricingLabel": "Nos Offres",
         "pricingSubtitle": "Accompagnement 360° : Juridique, Fiscal, Comptabilité & RH",
         "pricingTerms": "Formules annuelles et 6 mois | Condition : 50% d'acompte à la signature.",
+        "evidence": {
+            "label": "Preuves de mission",
+            "title": "Un aperçu concret avant de vous engager",
+            "desc": "Chaque diagnostic produit une lecture exploitable par la direction : risques, obligations, priorités et suite proposée. Le discours reste clair, les livrables sont structurés.",
+            "cta": "Recevoir un cadrage",
+            "metrics": {
+                "0": {
+                    "value": "24h",
+                    "label": "retour de cadrage"
+                },
+                "1": {
+                    "value": "4",
+                    "label": "référentiels métier"
+                },
+                "2": {
+                    "value": "1",
+                    "label": "plan priorisé"
+                }
+            },
+            "deliverableLabel": "Aperçu de livrable",
+            "deliverableTitle": "Dossier diagnostic SOJIF",
+            "deliverableDesc": "Un support de décision synthétique pour cadrer les enjeux juridiques, fiscaux, RH et digitaux sans jargon inutile.",
+            "documents": {
+                "0": {
+                    "title": "Note de structuration",
+                    "meta": "OHADA / statuts / contrats"
+                },
+                "1": {
+                    "title": "Calendrier conformité",
+                    "meta": "Fiscalité / social / échéances"
+                },
+                "2": {
+                    "title": "Plan digital & Odoo",
+                    "meta": "Processus / formation / accès système"
+                }
+            },
+            "checklistLabel": "Contrôles inclus",
+            "checklistTitle": "Lecture 360°",
+            "checks": {
+                "0": "Priorités classées par risque et urgence.",
+                "1": "Obligations clés rattachées au bon pôle d'expertise.",
+                "2": "Prochaine action proposée : conseil, abonnement ou projet dédié."
+            },
+            "noteLabel": "Positionnement cabinet",
+            "note": "SOJIF relie droit, finance, RH et digitalisation dans un même cadrage, pour éviter les décisions isolées."
+        },
         "whyTitle": "Pourquoi SOJIF Consulting ?",
         "whyLabel": "Nos Atouts",
         "whySubtitle": "Un cabinet structuré pour accompagner votre croissance",

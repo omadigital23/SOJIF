@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
+import EvidenceSection from '@/components/home/EvidenceSection';
 import DepartmentsGrid from '@/components/home/DepartmentsGrid';
 import PricingSection from '@/components/home/PricingSection';
 import WhySection from '@/components/home/WhySection';
@@ -23,6 +24,7 @@ export default function HomePage() {
     return (
         <>
             <HeroSection />
+            <EvidenceSection />
             <DepartmentsGrid />
             <PricingSection />
             <WhySection />

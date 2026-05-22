@@ -16,13 +16,13 @@ export default function CTASection() {
 
             <div className="container-custom relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center"
                 >
                     <div className="max-w-3xl">
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-5 tracking-tight leading-tight">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-5 leading-tight">
                             {t('ctaTitle')}
                         </h2>
                         <p className="text-white/80 text-lg sm:text-xl leading-relaxed">

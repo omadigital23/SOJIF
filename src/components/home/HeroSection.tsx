@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Link } from '@/i18n/navigation';
-import { ArrowRight, Shield, Clock3, ClipboardCheck, ListChecks } from 'lucide-react';
+import { ArrowRight, Shield } from 'lucide-react';
 import { COMPANY } from '@/lib/constants';
 import { HeroMotionVisual } from '@/components/visuals/BusinessVisuals';
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
@@ -22,11 +22,6 @@ export default function HeroSection() {
     ];
 
     const [currentSlide, setCurrentSlide] = useState(0);
-    const proofItems = [
-        { key: 'proof.response', icon: Clock3 },
-        { key: 'proof.diagnostic', icon: ClipboardCheck },
-        { key: 'proof.plan', icon: ListChecks },
-    ];
     const whatsappUrl = `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
         'Bonjour SOJIF Consulting, je souhaite planifier un diagnostic gratuit.'
     )}`;
@@ -39,7 +34,7 @@ export default function HeroSection() {
     }, [sliderTexts.length]);
 
     return (
-        <section className="relative flex min-h-[92svh] items-start overflow-hidden bg-dark pb-28 pt-28 md:pb-20 lg:min-h-[95vh] lg:items-center lg:pt-32">
+        <section className="relative flex items-start overflow-hidden bg-dark pb-16 pt-28 md:pb-20 lg:items-center lg:pb-14 lg:pt-28">
             <div className="absolute inset-0 bg-[linear-gradient(135deg,#0F172A_0%,#111827_48%,#1E3A8A_100%)]" />
 
             {/* Grid pattern overlay */}
@@ -71,7 +66,7 @@ export default function HeroSection() {
                         initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.06] mb-6 tracking-tight"
+                        className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.06] mb-6"
                     >
                         {t('title')}
                     </motion.h1>
@@ -119,45 +114,6 @@ export default function HeroSection() {
                         </Link>
                     </motion.div>
 
-                    <motion.div
-                        initial={false}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl"
-                    >
-                        {proofItems.map((item) => {
-                            const Icon = item.icon;
-
-                            return (
-                                <div
-                                    key={item.key}
-                                    className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-medium text-white/85"
-                                >
-                                    <Icon className="w-4 h-4 text-secondary" aria-hidden="true" />
-                                    <span>{t(item.key)}</span>
-                                </div>
-                            );
-                        })}
-                    </motion.div>
-
-                    {/* Stats */}
-                    <motion.div
-                        initial={false}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        className="mt-10 flex flex-wrap gap-8 border-t border-white/10 pt-6 lg:mt-16 lg:gap-12 lg:pt-8"
-                    >
-                        {[
-                            { valueKey: 'stats.departmentsValue', labelKey: 'stats.departments' },
-                            { valueKey: 'stats.clientsValue', labelKey: 'stats.clients' },
-                            { valueKey: 'stats.supportValue', labelKey: 'stats.support' },
-                        ].map((stat) => (
-                            <div key={stat.labelKey} className="flex flex-col">
-                                <div className="text-3xl font-bold text-white mb-1">{t(stat.valueKey)}</div>
-                                <div className="text-sm text-gray-400 font-medium">{t(stat.labelKey)}</div>
-                            </div>
-                        ))}
-                    </motion.div>
                 </div>
 
                 {/* Right Visual */}
